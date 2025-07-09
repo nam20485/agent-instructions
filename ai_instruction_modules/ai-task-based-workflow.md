@@ -50,7 +50,7 @@ For all non-trivial sized tasks you will complete the following process as you w
 
 1. As you work through the task, mark your progress using the checkboxes.
 1. This is important. **As you complete items mark the checkboxes and update the issue!**
-1. If you have to stop, then when you come back this will provide you and I the context we need to know where to pick back up thew work.
+1. If you have to stop, then when you come back this will provide you and I the context we need to know where to pick back up the work.
 1. After completion inform user and ask if resolution is acceptable.
 1. Iterate on review with stake holder until accepted.
 1. When writing commit messages including the issue's task, add to bottom of commit message.
@@ -87,6 +87,7 @@ Documenting planned work tasks will help you understand what you have completed 
 * Create feature branches for each issue using naming convention: `issues/<number>-<short-description>`
 * Example: `issues/42-fix-authentication-bug`
 * Branch should be created from `copilot` before starting work
+* Push ("publish") the branch after creating it so the remote branch is created
 * **Link the issue to the branch** when creating the feature branch (or create the branch from the issue which automatically accomplishes the link)
 * Branch should be deleted after successful merge
 * Create branch and commit any work that is ready, should you have need to switch context. **Important**. We could expose ourselves to confusion and possible code loss if we leave changes 'dangling' in the working copy. Commit frequently and often. Many small commits are always better than fewer large ones.
