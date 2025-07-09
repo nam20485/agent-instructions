@@ -10,7 +10,7 @@ For all non-trivial sized tasks you will complete the following process as you w
 
 #### Review Current State
 
-0. Before making a plan, review the current state of the workspace/codebase
+1. Before making a plan, review the current state of the workspace/codebase
 1. Especially in the area where you will be implementing your new task(s)
 1. Check for previous progress on this task:
 1. Have you already been working on this task?

@@ -18,6 +18,8 @@
 [ ] Logging
 [ ] Containeriza tion: Docker
 [ ] Containerization: Docker Compose
+[ ] Swagger/OpenAPI
+[ ] Documentation
 
 ## Language
 
