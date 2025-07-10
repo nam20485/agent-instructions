@@ -1,6 +1,6 @@
 # New Application Guidelines
 
-This document describes the technology stack that is used when creating new or updating exiting apps.
+This document describes the technology stack that is used when creating new or updating existing apps.
 
 ## Technology Stack
 
@@ -24,7 +24,8 @@ Blazor Web Assembly (Maui Hybrid if approriate)
 
 ### Desktop
 
-Avalonia UI (So Windows, Linux, and Mac support is created)
+Avalonia UI (Windows, Linux, and MacOS support)
+* Use the Avalonia Starter project/project template
 
 #### No UI
 
@@ -42,10 +43,14 @@ PostgreSql
 
 ### Testing
 
-xUnit
-FluentAssertions
-Moq
-Coverage w/ HTML Report
+* xUnit
+* FluentAssertions
+* Moq
+* Coverage w/ HTML Report
+
+* Unit Testing
+* Integration Testing
+* Substabtial Coverage % Expected
 
 ### Containerization
 
@@ -62,19 +67,27 @@ Serilog with structured logging (File, Console)
 
 ### CI/CD
 
-GitHub Actions Workflows for medium to larger projects. The following types of workflows can be included as appropritae:
+#### GitHub Actions Workflows
 
-Automated build
-Automated Tests
-Docker build and push to registry
-Package build and push to registry
+The following types of workflows should always be included:
+
+* Automated build
+* Automated Tests
+* Docker build and push to repo's GitHub registry
+
+For larger projects you can use these:
+
 Static analysis/security scanning
 Create Release
 Deployment
 
 ### Infrastructure
 
-Terraform
+
+#### Terraform
+
+* Terraform definitions should be created
+* Include providers for docker
 
 ### Scripting
 

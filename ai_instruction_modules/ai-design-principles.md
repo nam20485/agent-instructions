@@ -1,6 +1,6 @@
 # Software Design Principles
 
-These design principless, patterns, and rules should always be used when designing and writing code. Always strive to design and write your code according to these dictates. Using these principles will ensure that the code you produce will always be of high quality and easy to read and maintain.
+These design principles, patterns, and rules should always be used when designing and writing code. Always strive to design and write your code according to these dictates. Using these principles will ensure that the code you produce will always be of high quality and easy to read and maintain.
 
 ## Principles
 
@@ -39,7 +39,7 @@ Every application should always include these items.
 
 ## General Rules
 
-Always observe these rules in all applications.
+Always observe these rules in all applications you create and code you write.
 
 * Increase warning levels to higher than defualts.
 * Always turn on "Warnings as Errors" for all projects.
