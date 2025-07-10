@@ -4,7 +4,7 @@ The assignment-based workflow builds on the task-based workflow process by inclu
 
 ## Workflow Assignments
 
-* Each workflow assignment is unique and describes how to accomplish a specific task or stage of the project.
+* Each workflow assignment is unique and describes how to accomplish a specific task, start a new project/application, or stage of the project.
 * Workflow assignments are assigned to you by the orchestrator
 * When assigned, you are to perform the assignment until finished and/or assigned something new.
 * Each type of assignment is described in a workflow assignment definiton file.

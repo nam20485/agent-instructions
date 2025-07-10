@@ -4,22 +4,26 @@ This file describes your task-based workflow where you plan your task(s) out pri
 
 ## Task Workflow Overview
 
-For all non-trivial sized tasks you will complete the following process as you work through the task:
+For all tasks you will complete the following process as you work through the task:
 
 ### Task Workflow Steps
+
+#### Beginning
+
+When starting, always stop to review the current status and what work, if any, has already been completed. Before starting any work, determine where you need to start, based on what work has already been completed (if any). The instructions in the Review Current State and the Issues sections can help you with this.
 
 #### Review Current State
 
 1. Before making a plan, review the current state of the workspace/codebase
 1. Especially in the area where you will be implementing your new task(s)
 1. Check for previous progress on this task:
-1. Have you already been working on this task?
-1. Does there already exist a branch and/or an issue?
-1. If so, inspect the changes in the issue and/or branch to see what you have already accomplished.
-1. What checkboxes have been checked off? What do the previous updates say?
-1. Are there remote changes? Pull the branch
-1. Are there upstream changes? Merge any upstream changes in
-1. If no previous work/you are starting initially on the task
+    1. Have you already been working on this task?
+    1. Does there already exist a branch and/or an issue?
+    1. If so, inspect the changes in the issue and/or branch to see what you have already accomplished.
+    1. What checkboxes have been checked off? What do the previous updates say?
+    1. Are there remote changes? Pull the branch
+    1. Are there upstream changes? Merge any upstream changes in
+    1. If no previous work/you are starting initially on the task
 1. Is there already similar functionality in place to build on?
 1. When you present your plan, include a review of the current status.
 
@@ -56,6 +60,12 @@ For all non-trivial sized tasks you will complete the following process as you w
 1. When writing commit messages including the issue's task, add to bottom of commit message.
 1. Commit, push and create PR.
 1. Add stake-holder and /gemini as approvers
+
+#### Incremental Progress
+
+**IMPORTANT** Always keep your currrent progress up-to-date.
+
+**Always update your current progress after anything listed in the current issue has been completed.**
 
 ### Assignments
 
@@ -116,9 +126,9 @@ gh issue edit <issue_number> --remove-label state:in-progress
 
 * Create feature branches for each issue using naming convention: `issues/<number>-<short-description>`
 * Example: `issues/42-fix-authentication-bug`
-* Branch should be created from `copilot` before starting work
+* Branch should be created/branched off from `copilot` branch before starting work
 * Push ("publish") the branch after creating it so the remote branch is created
-* **Link the issue to the branch** when creating the feature branch (or create the branch from the issue which automatically accomplishes the link)
+* Immediately after creating the branch, **Link the issue to the branch** when creating the feature branch (or create the branch from the issue which automatically accomplishes the link)
 * Branch should be deleted after successful merge
 * Create branch and commit any work that is ready, should you have need to switch context. **Important**. We could expose ourselves to confusion and possible code loss if we leave changes 'dangling' in the working copy. Commit frequently and often. Many small commits are always better than fewer large ones.
 * Once I move us to teams plan you will have your own assigned account so you can then assign yourself as issue owner
