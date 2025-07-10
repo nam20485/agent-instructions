@@ -34,5 +34,6 @@ The format is made up of the following sections:
 Currently, the following workflow assignment definition files are available:
 
 * [pr-approval-and-merge.md](pr-approval-and-merge.md): This assignment involves resolving all pull request (PR) comments, getting the PR approved, and merging it upstream.
-* [issue-resolution.md](issue-resolution.md): This assignment focuses on resolving issues by following a systematic approach to address comments, implement changes, and communicate effectively with stakeholders.
-
+* [perform-task.md](perform-task.md): This assignment involves executing a specific task given to you by an orchestrator or stakeholder, using the task-based workflow process.  This includes understanding the task requirements, planning/gaining approval and gathering necessary resources, and delivering the expected outcome.
+* [continue-task-work.md](continue-task-work.md): This assignment provides a comprehensive guide on how to complete previously-existing tasks that have already been started but not yet finished. It includes guidance on how to determine which task to start, how to perform tasks within the task-based workflow, including detailed steps and considerations.
+* [create-application.md](create-application.md): This assignment involves creating a new application given the description from a new app template that has been filled out, including setting up the project structure, configuring necessary components, and ensuring the application meets specified requirements.
