@@ -1,6 +1,4 @@
-# Application Guidelines
-
-## Overview
+# New Application Guidelines
 
 This document describes the technology stack that is used when creating new or updating exiting apps.
 
@@ -9,24 +7,38 @@ This document describes the technology stack that is used when creating new or u
 ### Programming Language
 
 C#
-.NET: latest full release (as of 7/8/25: >= 9.0.302)
+.NET: latest full release (as of 7/8/25: >= 9.0)
 
-### Framework
+### Web
+
+#### Backend
 
 ASP.NET Core Web API (not minimal API)
-
-### Frontend
-
-#### Web
-
-Blazor Web Assembly
 Aspire
 
-#### Desktop
+ABP (for larger projects)
+
+#### Frontend
+
+Blazor Web Assembly (Maui Hybrid if approriate)
+
+### Desktop
 
 Avalonia UI (So Windows, Linux, and Mac support is created)
 
+#### No UI
+
+Consolonia w/ Spectre
+
 ### Database
+
+Depends on DB type required:
+
+Redis
+Memcache
+Neo4J
+MS SQL
+PostgreSql
 
 ### Testing
 
@@ -44,6 +56,22 @@ Docker Compose
 
 Swagger/OpenAPI
 
+### Logging
+
+Serilog with structured logging (File, Console)
+
+### CI/CD
+
+GitHub Actions Workflows for medium to larger projects. The following types of workflows can be included as appropritae:
+
+Automated build
+Automated Tests
+Docker build and push to registry
+Package build and push to registry
+Static analysis/security scanning
+Create Release
+Deployment
+
 ### Infrastructure
 
 Terraform
@@ -52,38 +80,12 @@ Terraform
 
 Powershell Core (>= v7.1.x)
 
-Framework: ASP.NET Core (.NET 9.0)
-Database: Neo4j for graph storage
-Frontend: Blazor WebAssembly
-Communication: Server-Sent Events (SSE) for MCP
-Testing: xUnit, FluentAssertions, Moq
-Logging: Serilog with structured logging
-Containerization: Docker and Docker Compose
-Infrastructure: Terraform for deployment
-Documentation: Swagger/OpenAPI
+### Packages
 
-Packages:
+These can be used as needed based on situation.
 
 Polly
-Serilog
-Serilog.Sinks.Console
-Serilog.Sinks.File
-Serilog.Sinks.Seq
-Serilog.AspNetCore
-FluentAssertions
-xUnit
-Moq
-xUnit.runner.visualstudio
-xUnit.runner.console
-
-
 ABP
 Carter
 Nancy
 CommunityToolkit
-
-### Process
-
-SOLID
-DRY
-OWASP
