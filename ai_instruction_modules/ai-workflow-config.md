@@ -1,6 +1,6 @@
-# AI Workflow Configuration for AgentAsAService
+# AI Workflow Configuration for AI Tools
 
-This configuration defines the preferred AI interaction patterns and tool usage for the AgentAsAService workspace.
+This configuration defines the preferred AI interaction patterns and tool usage for the AI Tools workspace.
 
 ## Core AI Tools - Default Usage
 

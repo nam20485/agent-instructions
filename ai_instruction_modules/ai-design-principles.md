@@ -19,7 +19,7 @@ These are the classic patterns of design that ensure high quality. Be familiar w
 
 [GoF Design Patterns](https://www.digitalocean.com/community/tutorials/gangs-of-four-gof-design-patterns#gof-design-pattern-types)
 
-## SemVer Versioning
+## Semantic Versioning (SemVer)
 
 This pattern will be used whenever you need to use a version for something. We use v2.0.0 of the Semantic Versioning specification.
 
@@ -30,10 +30,16 @@ This pattern will be used whenever you need to use a version for something. We u
 Every application should always include these items.
 
 * Automated Testing: Always include automated test cases with a substantial level of coverage.
-* Documentation: Always include a README.md or other documentation describing the application in detail, its configuration, and use.
-* Initialization Scripts:Always include initialization and startup scripts to allow for the easiest and most efficient path for users to use the app.
-* Containerization: Include Docker image definitions wherever possible.
-* Container Orchestration:Include Docker Compose definitions when you have two or more Docker images in your project, or when your project depends on another respource, e.g. a DB./
+  * Unit Testing
+  * Integration Testing
+* Documentation:
+  * Always include a README.md or other documentation describing the application in detail, its configuration, and use.
+  * Always include OpenAPI + Swagger + ReDoc documentation for all APIs.
+* API Documentation: Always include OpenAPI documentation for all APIs.
+* Initialization Scripts: Always include initialization and startup scripts to allow for the easiest and most efficient path for users to use the app.
+* Containerization:
+  * Include Docker image definitions wherever possible.
+  * Include Docker Compose definitions when you have two or more Docker images in your project, or when your project depends on another respource, e.g. a DB.
 * Logging: Always include detailed logging output to both stdout/stderr and log files.
 * Infrastructure as Code: For deployable apps, provide Terraform defintiions to simplify infrastructure deployment and provisioning.
 

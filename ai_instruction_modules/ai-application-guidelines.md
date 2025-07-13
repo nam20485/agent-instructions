@@ -7,7 +7,7 @@ This document describes the technology stack that is used when creating new or u
 ### Programming Language
 
 C#
-.NET: latest full release (as of 7/8/25: >= 9.0)
+.NET: latest full release (as of 7/8/25: >= 9.0.0)
 
 ### Web
 
@@ -25,7 +25,6 @@ Blazor Web Assembly (Maui Hybrid if approriate)
 ### Desktop
 
 Avalonia UI (Windows, Linux, and MacOS support)
-* Use the Avalonia Starter project/project template
 
 #### No UI
 
@@ -75,7 +74,7 @@ The following types of workflows should always be included:
 * Automated Tests
 * Docker build and push to repo's GitHub registry
 
-For larger projects you can use these:
+For larger projects you can add these:
 
 Static analysis/security scanning
 Create Release
@@ -87,7 +86,7 @@ Deployment
 #### Terraform
 
 * Terraform definitions should be created
-* Include providers for docker
+* Include providers for Docker
 
 ### Scripting
 

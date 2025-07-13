@@ -10,7 +10,7 @@ For all tasks you will complete the following process as you work through the ta
 
 #### Beginning
 
-When starting, always stop to review the current status and what work, if any, has already been completed. Before starting any work, determine where you need to start, based on what work has already been completed (if any). The instructions in the Review Current State and the Issues sections and your Memory Tool's "Current Task Reminder" can help you with this. Check your "current task reminder" in your memory. If it exists
+When starting, always stop to review the current status and what work, if any, has already been completed. Before starting any work, determine where you need to start, based on what work has already been completed (if any). The instructions in the Review Current State and the Issues sections and your Memory Tool's "Current Task Reminder" can help you with this. Check your "current task reminder" in your memory first to understand your previous context.
 
 #### Memory Tool "Current Task Reminder"
 
@@ -24,6 +24,25 @@ As you complete an item and then begin a new task, you can set a "current task r
 
 Each time you create a reminder, you should include the following information:
 
+You can use the following structure to create a "current task reminder" in your memory tool:
+
+```json
+{
+  "repo": "<repository_name>",
+  "branch": "<branch_name>",
+  "task": "<task_name>",
+  "issue": <issue_number>,
+  "state": "<task_state>",
+  "description": "<brief_description_of_task>",
+  "context": "<relevant_context_or_notes>",
+  "nextSteps": ["<next_step_1>", "<next_step_2>"],
+  "blockers": ["<blocker_1>", "<blocker_2>"],
+  "lastUpdated": "<timestamp>"
+}
+```
+
+Where:
+
 1. The name of the git repository you were working on
 1. The name of the branch you were working on
 1. The name of the task you were working on
@@ -31,18 +50,24 @@ Each time you create a reminder, you should include the following information:
 1. The current state of the task (e.g., "in progress", "completed", "blocked", etc.)
 1. A brief description of the task
 1. Any relevant context or notes that will help you remember what you were doing
+1. Next steps you were planning to take
+1. Any blockers or issues you encountered
+1. The last updated timestamp
 
-Example of a "Current task reminder"
+###### Example of a "Current task reminder"
 
 ```json
 {
-  "repo": "my-repo",        
-  "branch": "feature-branch",
-  "task": "Implement new feature",
-  "issue": 123,
+  "repo": "advanced-memory2",        
+  "branch": "issues/1-implement-advanced-memory2-app",
+  "task": "Complete Phase 1: Project Setup and Infrastructure",
+  "issue": 1,
   "state": "in progress",
-  "description": "Implement the new feature as described in the issue",
-  "context": "Working on this feature requires knowledge of the existing codebase and the specific requirements outlined in the issue."
+  "description": "Missing Docker/Docker Compose configuration and cross-service project references in ASP.NET Core Aspire application",
+  "context": "Phase 1 appeared complete but analysis revealed missing containerization infrastructure. Need to add Dockerfile for each service, docker-compose.yml for local dev, and configure proper project references between ApiService and backend services. Current build succeeds but service integration incomplete.",
+  "nextSteps": ["Add Dockerfile to each service project", "Create docker-compose.yml for local development", "Configure project references between services", "Test containerized deployment"],
+  "blockers": [],
+  "lastUpdated": "2025-07-10T15:30:00Z"
 }
 ```
 

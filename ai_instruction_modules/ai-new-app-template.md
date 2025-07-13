@@ -31,7 +31,7 @@ C#
 
 [x] Include global.json?
 sdk: "9.0.0"
-rollwForward: "latestFeature"
+rollForward: "latestFeature"
 
 ## Frameworks, Tools, Packages
 
