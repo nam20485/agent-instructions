@@ -10,22 +10,65 @@ For all tasks you will complete the following process as you work through the ta
 
 #### Beginning
 
-When starting, always stop to review the current status and what work, if any, has already been completed. Before starting any work, determine where you need to start, based on what work has already been completed (if any). The instructions in the Review Current State and the Issues sections can help you with this.
+When starting, always stop to review the current status and what work, if any, has already been completed. Before starting any work, determine where you need to start, based on what work has already been completed (if any). The instructions in the Review Current State and the Issues sections and your Memory Tool's "Current Task Reminder" can help you with this. Check your "current task reminder" in your memory. If it exists
+
+#### Memory Tool "Current Task Reminder"
+
+Using your memory tool, you can set a "current task reminder" to help you remember what task you were working on last. This is useful if you have to stop working before completing your planned tasks, or if you switch contexts frequently.
+
+##### Setting the "current task reminder" (writing)
+
+As you complete an item and then begin a new task, you can set a "current task reminder" to help you remember what task you were working on last. This will help you remember where to start when you come back to the task later.
+
+##### Structure of the "current task reminder"
+
+Each time you create a reminder, you should include the following information:
+
+1. The name of the git repository you were working on
+1. The name of the branch you were working on
+1. The name of the task you were working on
+1. The issue number of the task you were working on
+1. The current state of the task (e.g., "in progress", "completed", "blocked", etc.)
+1. A brief description of the task
+1. Any relevant context or notes that will help you remember what you were doing
+
+Example of a "Current task reminder"
+
+```json
+{
+  "repo": "my-repo",        
+  "branch": "feature-branch",
+  "task": "Implement new feature",
+  "issue": 123,
+  "state": "in progress",
+  "description": "Implement the new feature as described in the issue",
+  "context": "Working on this feature requires knowledge of the existing codebase and the specific requirements outlined in the issue."
+}
+```
+
+1. If you have a "current task reminder" in your memory, then read it.
+1. This will help you remember what task you were working on last.
+1. If it exists, then you can use it to help you determine where to start.
+1. If it does not exist, then you possibly have not started a task yet, or you have not set a reminder for the current task.
+1. If you are unsure, take a moment to reflect on your recent work and try to recall the task you were focused on.
+1. Continue the Review Current State section to gather more context.
+1. Based on information from the "current task reminder" and the Review Current State section, you can then proceed to plan your next steps.
 
 #### Review Current State
 
 1. Before making a plan, review the current state of the workspace/codebase
-1. Especially in the area where you will be implementing your new task(s)
-1. Check for previous progress on this task:
-    1. Have you already been working on this task?
-    1. Does there already exist a branch and/or an issue?
-    1. If so, inspect the changes in the issue and/or branch to see what you have already accomplished.
-    1. What checkboxes have been checked off? What do the previous updates say?
-    1. Are there remote changes? Pull the branch
-    1. Are there upstream changes? Merge any upstream changes in
-    1. If no previous work/you are starting initially on the task
-1. Is there already similar functionality in place to build on?
-1. When you present your plan, include a review of the current status.
+    1. Especially in the area where you will be implementing your new task(s)
+    1. Check for previous progress on this task:
+        1. Have you already been working on this task?
+        1. Does there already exist a branch and/or an issue?
+        1. If so, inspect the changes in the issue and/or branch to see what you have already accomplished.
+        1. If an issue already exists, read any sub-issues, comments, and replies in the thread.
+        1. What checkboxes have been checked off? What do the previous updates say?
+        1. Are there remote changes? Pull the branch
+        1. Are there upstream changes? Merge any upstream changes in
+        1. If no previous work/you are starting initially on the task
+    1. Is there already similar functionality in place to build on?
+    1. When you present your plan, include a review of the current status.
 
 #### Plan
 
