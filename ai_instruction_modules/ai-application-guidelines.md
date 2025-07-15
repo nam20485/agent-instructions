@@ -16,6 +16,8 @@ C#
 ASP.NET Core Web API (not minimal API)
 Aspire
 
+* **Always use full controllers and actions, not minimal APIs.**
+
 ABP (for larger projects)
 
 #### Frontend
