@@ -14,7 +14,7 @@ The assignment-based workflow builds on the task-based workflow process by inclu
 
 * Definition files are found under the `ai_instruction_modules/ai-workflow-assignments/` directory in a subdirectory named exactly as the workflow assignment definition's "short ID" (See sections below for definition of an assignment's "short ID").
 
-*<WORKSPACE-ROOT>*/
+*WORKSPACE-ROOT*/
     ai_instructions_modules/
         ai-workflow-assignments/
             *<assignment_short_id>*        // e.g. "pr-approval-and-merge"

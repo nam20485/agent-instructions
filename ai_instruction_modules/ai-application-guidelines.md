@@ -13,34 +13,61 @@ C#
 
 #### Backend
 
-ASP.NET Core Web API (not minimal API)
-Aspire
+* ASP.NET Core Web API (**Full controllers not minimal API**)
+* Aspire
 
-* **Always use full controllers and actions, not minimal APIs.**
-
-ABP (for larger projects)
+* ABP (for larger projects)
 
 #### Frontend
 
-Blazor Web Assembly (Maui Hybrid if approriate)
+* Blazor Web Assembly (Maui Hybrid if appropriate)
 
 ### Desktop
 
-Avalonia UI (Windows, Linux, and MacOS support)
+* Avalonia UI (Windows, Linux, and MacOS support)
 
-#### No UI
+### No UI
 
-Consolonia w/ Spectre
+#### TUI
+
+Smaller projects can use a TUI with:
+
+* [Spectre.Console](https://github.com/spectreconsole/spectre.console)
+* Spectre.Console.Cli
+* Spectre.Console.Testing
+
+[Spectre.Console Best Practices](https://spectreconsole.net/best-practices)
+
+Medium to larger projects w/ actual TUI elements can use:
+
+* Consolonia
+
+#### CLI Framework
+
+For the CLI, use one of the following frameworks:
+
+* CliFx
+* Commanddotnet
+<!-- * System.CommandLine -->
 
 ### Database
 
 Depends on DB type required:
 
-Redis
-Memcache
-Neo4J
-MS SQL
-PostgreSql
+* Redis
+* Memcache
+* Neo4J
+* MS SQL
+* PostgreSql
+* MongoDB
+
+* .NET Core InMemory (for testing)
+* LiteDB (for testing and smaller projects)
+
+* .NET EF Core
+
+* Fluent API
+* Code First
 
 ### Testing
 

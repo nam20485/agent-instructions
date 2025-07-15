@@ -25,6 +25,13 @@ This pattern will be used whenever you need to use a version for something. We u
 
 [SemVer v2.0.0](https://semver.org/)
 
+## Domain Driven Design (DDD)
+
+[Domain Driven Design](https://www.digitalocean.com/community/tutorials/an-introduction-to-domain-driven-design)
+
+* Fluent API
+* Code First
+
 ## Mandatory Applicaiton Requirements
 
 Every application should always include these items.
