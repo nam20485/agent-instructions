@@ -1,6 +1,6 @@
 # Google Cloud Production Deployment Configuration Guide
 
-This guide covers the complete setup process for deploying AgentAsAService to Google Cloud in production.
+This guide covers the complete setup process for deploying AgentAsAService to Google Cloud in production. It specfically only applies to that project.
 
 ## Prerequisites
 

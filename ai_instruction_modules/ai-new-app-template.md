@@ -30,8 +30,11 @@ C#
 .NET v9.0
 
 [x] Include global.json?
+
+```
 sdk: "9.0.0"
 rollForward: "latestFeature"
+```
 
 ## Frameworks, Tools, Packages
 
