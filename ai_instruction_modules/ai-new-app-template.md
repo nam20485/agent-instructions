@@ -14,12 +14,12 @@
 
 ### Features
 
-[ ] Test cases
-[ ] Logging
-[ ] Containeriza tion: Docker
-[ ] Containerization: Docker Compose
-[ ] Swagger/OpenAPI
-[ ] Documentation
+[x] Test cases
+[x] Logging
+[x] Containeriza tion: Docker
+[x] Containerization: Docker Compose
+[x] Swagger/OpenAPI
+[x] Documentation
 
 ## Language
 

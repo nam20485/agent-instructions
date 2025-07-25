@@ -6,8 +6,18 @@ This document describes the technology stack that is used when creating new or u
 
 ### Programming Language
 
-C#
-.NET: latest full release (as of 7/8/25: >= 9.0.0)
+* C#
+* .NET: latest full release (as of 7/8/25: >= 9.0.0)
+* Use `global.json` to specify the SDK version:
+  ```json
+  {
+    "sdk": {
+      "version": "9.0.102",
+      "rollForward": "latestFeature"
+    }
+  }
+  ```
+
 
 ### Web
 
@@ -15,6 +25,9 @@ C#
 
 * ASP.NET Core Web API (**Full controllers not minimal API**)
 * Aspire
+* CommunityToolkit
+* Carter
+* Nancy
 
 * ABP (for larger projects)
 
@@ -70,6 +83,14 @@ Depends on DB type required:
 * Code First
 
 ### Testing
+
+* Use Test Driven Development (TDD) and Behavior Driven Development (BDD) practices.
+* Use the TDD (Test-Driven Development) approach for all code changes.
+* Write unit tests before implementing new features or changes.
+* Iterate, cycling between writing tests and code until the feature is complete.
+* Coverage should be substantial, aiming for at least 80% coverage. 
+
+[ai-testing-validation.md](./ai-testing-validation.md)
 
 * xUnit
 * FluentAssertions

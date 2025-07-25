@@ -17,12 +17,14 @@ You will be assigned your role at the beginning of your session. If you make it 
 Once assigned a role you need to go find that role definition role file and read it. Role definition files can be found
 in the ai-workflow-roles directory. Inside the directory you will find one sub-directory for each role, named by the name of the role. Inside each named role definition sub-directory you will find a file named: ai-workflow-role.md. Read this file to understand your role-specific definition and instructions. At the end of this you may 0 or more other files linked to support that roles instructions. If given you will need to read all these files as well.
 
-AgentAsAService/
+```plaintext
+<repo root directory>/
     ai_instructions_modules/
         ai-workflow-roles/
-            *<role_name_subdir>*/        // e.g. "collaborator" or "orchestrator"
+            *<role_name_subdir>*/  // e.g. collaborator" or "orchestrator"
                 ai-workflow-role.md
                 *<any more linked files>.md*
+```                
 
 ## Expectations in your Role
 Once you have finished reading your role definition instructions you will be expected to start performing your role's workflow.
