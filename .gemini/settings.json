@@ -22,52 +22,6 @@
         "@modelcontextprotocol/server-gitlab"
       ]
     },
-    "cloudflare-observability": {
-      "command": "npx",
-      "args": [
-        "mcp-remote",
-        "https://observability.mcp.cloudflare.com/sse"
-      ]
-    },
-    "cloudflare-bindings": {
-      "command": "npx",
-      "args": [
-        "mcp-remote",
-        "https://bindings.mcp.cloudflare.com/sse"
-      ]
-    },
-    "gcloud": {
-      "type": "stdio",
-      "command": "gcloud",
-      "args": [],
-      "env": {}
-    },
-    "firebase-cli": {
-      "type": "stdio",
-      "command": "firebase",
-      "args": [],
-      "env": {
-        "FIREBASE_PROJECT": "agentasaservice-dev"
-      }
-    },
-    "git": {
-      "type": "stdio",
-      "command": "git.exe",
-      "args": [],
-      "env": {}
-    },
-    "dotnet": {
-      "type": "stdio",
-      "command": "dotnet",
-      "args": [],
-      "env": {}
-    },
-    "docker": {
-      "type": "stdio",
-      "command": "docker",
-      "args": [],
-      "env": {}
-    },
     "sequential-thinking": {
       "type": "stdio",
       "command": "npx",
@@ -85,30 +39,13 @@
       ]
     },
     "filesystem": {
-      "type": "stdio",
       "command": "npx",
       "args": [
         "-y",
         "@modelcontextprotocol/server-filesystem",
-        "$USERPROFILE"
+        "${env:USERPROFILE}",
+        "."
       ]
-    },
-    "powershell": {
-      "type": "stdio",
-      "command": "pwsh.exe",
-      "args": [
-        "-NoLogo",
-        "-NoProfile",
-        "-Command",
-        "-"
-      ],
-      "env": {}
-    },
-    "github-cli": {
-      "type": "stdio",
-      "command": "gh",
-      "args": [],
-      "env": {}
     },
     // "github-local-mcp-server": {
     //   "command": "docker",
