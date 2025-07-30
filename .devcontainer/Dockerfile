@@ -43,7 +43,7 @@ RUN apt-get update && apt-get install -y \
 
 # Set up Python 3 as default python and install latest pip
 RUN ln -sf /usr/bin/python3 /usr/bin/python \
-    && python -m pip install --upgrade pip
+    && python -m pip install --upgrade pip --break-system-packages
 
 # =============================================================================
 # NODE.JS & JAVASCRIPT DEVELOPMENT
