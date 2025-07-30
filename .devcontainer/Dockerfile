@@ -48,16 +48,13 @@ RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
 # POWERSHELL CORE INSTALLATION
 # =============================================================================
 
-# Install PowerShell Core from GitHub releases (supports both amd64 and arm64)
-RUN ARCH=$(dpkg --print-architecture) && \
-    if [ "$ARCH" = "amd64" ]; then PS_ARCH="x64"; else PS_ARCH="arm64"; fi && \
-    PS_VERSION="7.5.1" && \
-    wget -O powershell.tar.gz "https://github.com/PowerShell/PowerShell/releases/download/v${PS_VERSION}/powershell-${PS_VERSION}-linux-${PS_ARCH}.tar.gz" && \
-    mkdir -p /opt/microsoft/powershell/7 && \
-    tar zxf powershell.tar.gz -C /opt/microsoft/powershell/7 && \
-    chmod +x /opt/microsoft/powershell/7/pwsh && \
-    ln -s /opt/microsoft/powershell/7/pwsh /usr/local/bin/pwsh && \
-    rm powershell.tar.gz
+# Install PowerShell Core from Microsoft repository
+RUN wget -q "https://packages.microsoft.com/config/debian/12/packages-microsoft-prod.deb" \
+    && dpkg -i packages-microsoft-prod.deb \
+    && apt-get update \
+    && apt-get install -y powershell \
+    && rm packages-microsoft-prod.deb \
+    && rm -rf /var/lib/apt/lists/*
 
 # =============================================================================
 # CLOUD DEVELOPMENT TOOLS
@@ -104,8 +101,7 @@ USER vscode
 # GLOBAL NPM PACKAGES
 # =============================================================================
 
-# Install Firebase CLI and other global npm packages as root
-USER root
+# Install Firebase CLI and other global npm packages
 RUN npm install -g \
     firebase-tools \
     @angular/cli \
@@ -113,7 +109,6 @@ RUN npm install -g \
     typescript \
     eslint \
     prettier
-USER vscode
 
 # =============================================================================
 # DEVELOPMENT ENVIRONMENT SETUP
