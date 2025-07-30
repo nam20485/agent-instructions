@@ -32,7 +32,18 @@ RUN apt-get update && apt-get install -y \
     jq \
     tree \
     htop \
+    python3 \
+    python3-pip \
+    python3-venv \
     && rm -rf /var/lib/apt/lists/*
+
+# =============================================================================
+# PYTHON DEVELOPMENT
+# =============================================================================
+
+# Set up Python 3 as default python and install latest pip
+RUN ln -sf /usr/bin/python3 /usr/bin/python \
+    && python -m pip install --upgrade pip
 
 # =============================================================================
 # NODE.JS & JAVASCRIPT DEVELOPMENT
@@ -87,6 +98,17 @@ RUN wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor -o /usr/shar
     && rm -rf /var/lib/apt/lists/*
 
 # =============================================================================
+# AI DEVELOPMENT TOOLS
+# =============================================================================
+
+# Install Gemini CLI (latest preview)
+RUN curl -o gemini-cli.tar.gz https://ai.google.dev/gemini-api/docs/downloads/cli/gemini-cli-linux-amd64.tar.gz \
+    && tar -xzf gemini-cli.tar.gz \
+    && chmod +x gemini \
+    && mv gemini /usr/local/bin/ \
+    && rm gemini-cli.tar.gz
+
+# =============================================================================
 # .NET WORKLOADS & TOOLS
 # =============================================================================
 
@@ -138,6 +160,7 @@ RUN echo '#!/bin/bash' > /home/vscode/show-env.sh \
     && echo 'echo "- .NET SDK: $(dotnet --version)"' >> /home/vscode/show-env.sh \
     && echo 'echo "- Node.js: $(node --version)"' >> /home/vscode/show-env.sh \
     && echo 'echo "- npm: $(npm --version)"' >> /home/vscode/show-env.sh \
+    && echo 'echo "- Python: $(python --version)"' >> /home/vscode/show-env.sh \
     && echo 'echo "- PowerShell: $(pwsh --version)"' >> /home/vscode/show-env.sh \
     && echo 'echo ""' >> /home/vscode/show-env.sh \
     && echo 'echo "Cloud & DevOps Tools:"' >> /home/vscode/show-env.sh \
@@ -146,7 +169,10 @@ RUN echo '#!/bin/bash' > /home/vscode/show-env.sh \
     && echo 'echo "- GitHub CLI: $(gh --version | head -1)"' >> /home/vscode/show-env.sh \
     && echo 'echo "- Terraform: $(terraform --version | head -1)"' >> /home/vscode/show-env.sh \
     && echo 'echo ""' >> /home/vscode/show-env.sh \
-    && echo 'echo "Ready for ASP.NET Core + Blazor + Google Cloud development!"' >> /home/vscode/show-env.sh \
+    && echo 'echo "AI Development Tools:"' >> /home/vscode/show-env.sh \
+    && echo 'echo "- Gemini CLI: $(gemini --version 2>/dev/null || echo \"Available\")"' >> /home/vscode/show-env.sh \
+    && echo 'echo ""' >> /home/vscode/show-env.sh \
+    && echo 'echo "Ready for ASP.NET Core + Blazor + AI + Google Cloud development!"' >> /home/vscode/show-env.sh \
     && chmod +x /home/vscode/show-env.sh
 
 # Set the default shell to PowerShell for the vscode user

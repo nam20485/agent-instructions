@@ -57,7 +57,7 @@ Write-Step "Checking if full setup is needed..."
 
 # Quick check for essential tools
 $needsSetup = $false
-$essentialTools = @("dotnet", "node", "gh", "docker")
+$essentialTools = @("dotnet", "node", "gh", "docker", "terraform", "gemini", "gcloud", "python")
 
 foreach ($tool in $essentialTools) {
     try {

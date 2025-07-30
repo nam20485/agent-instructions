@@ -283,6 +283,104 @@ function Install-CloudTools {
     }
 }
 
+function Install-AITools {
+    Write-Section "AI DEVELOPMENT TOOLS"
+    
+    # Python 3.x LTS
+    if (Test-Command "python3" -and -not $Force) {
+        Write-Success "Python 3 is already installed"
+    }
+    elseif (Test-Command "python" -and -not $Force) {
+        # Check if it's Python 3
+        $pythonVersion = python --version 2>&1
+        if ($pythonVersion -match "Python 3\.") {
+            Write-Success "Python 3 is already installed as 'python'"
+        }
+        else {
+            Write-Host "Installing Python 3.x LTS..."
+            Install-PythonPackage
+        }
+    }
+    else {
+        Write-Host "Installing Python 3.x LTS..."
+        Install-PythonPackage
+    }
+    
+    # Gemini CLI (preview)
+    if (Test-Command "gemini" -and -not $Force) {
+        Write-Success "Gemini CLI is already installed"
+    }
+    else {
+        Write-Host "Installing Gemini CLI (preview)..."
+        
+        if ($IsWindows) {
+            # Download and install Gemini CLI for Windows
+            $geminiUrl = "https://ai.google.dev/gemini-api/docs/api-key"
+            Write-Host "Please visit $geminiUrl to get your API key after installation"
+            
+            # Create a temporary directory for Gemini CLI
+            $geminiDir = "$env:LOCALAPPDATA\gemini-cli"
+            if (-not (Test-Path $geminiDir)) {
+                New-Item -ItemType Directory -Path $geminiDir -Force | Out-Null
+            }
+            
+            # Download the latest Gemini CLI
+            try {
+                $downloadUrl = "https://github.com/google-gemini/gemini-cli/releases/latest/download/gemini-cli-windows-amd64.exe"
+                $geminiExe = "$geminiDir\gemini.exe"
+                Invoke-WebRequest -Uri $downloadUrl -OutFile $geminiExe -ErrorAction SilentlyContinue
+                
+                # Add to PATH if not already there
+                $currentPath = [Environment]::GetEnvironmentVariable("PATH", "User")
+                if ($currentPath -notlike "*$geminiDir*") {
+                    [Environment]::SetEnvironmentVariable("PATH", "$currentPath;$geminiDir", "User")
+                    $env:PATH += ";$geminiDir"
+                }
+                
+                Write-Success "Gemini CLI installed to $geminiDir"
+            }
+            catch {
+                Write-Warning "Could not download Gemini CLI automatically. Please install manually from https://github.com/google-gemini/gemini-cli"
+            }
+        }
+        elseif ($IsLinux -or $IsMacOS) {
+            # Download and install Gemini CLI for Linux/macOS
+            $arch = if ($IsMacOS) { "darwin" } else { "linux" }
+            $downloadUrl = "https://github.com/google-gemini/gemini-cli/releases/latest/download/gemini-cli-$arch-amd64"
+            
+            try {
+                curl -L $downloadUrl -o /tmp/gemini-cli
+                chmod +x /tmp/gemini-cli
+                sudo mv /tmp/gemini-cli /usr/local/bin/gemini
+                Write-Success "Gemini CLI installed to /usr/local/bin/gemini"
+            }
+            catch {
+                Write-Warning "Could not download Gemini CLI automatically. Please install manually from https://github.com/google-gemini/gemini-cli"
+            }
+        }
+    }
+}
+
+function Install-PythonPackage {
+    if ($IsWindows) {
+        if (Test-Command "choco") {
+            choco install python -y
+        }
+        else {
+            winget install Python.Python.3.12
+        }
+    }
+    elseif ($IsLinux) {
+        sudo apt update
+        sudo apt install -y python3 python3-pip python3-venv
+    }
+    elseif ($IsMacOS) {
+        brew install python@3.12
+    }
+    
+    Write-Success "Python 3.x LTS installed"
+}
+
 function Install-ContainerTools {
     Write-Section "CONTAINER & INFRASTRUCTURE TOOLS"
     
@@ -417,6 +515,35 @@ function Test-Environment {
         Write-Warning "Terraform validation failed"
     }
     
+    # Test Python
+    $pythonCmd = if (Test-Command "python3") { "python3" } elseif (Test-Command "python") { "python" } else { $null }
+    if ($pythonCmd) {
+        try {
+            $pythonVersion = & $pythonCmd --version 2>&1
+            if ($pythonVersion -match "Python 3\.") {
+                Write-Success "Python 3 available ($pythonVersion)"
+            }
+            else {
+                Write-Warning "Python found but not version 3: $pythonVersion"
+            }
+        }
+        catch {
+            Write-Warning "Python validation failed"
+        }
+    }
+    else {
+        Write-Warning "Python not found in PATH"
+    }
+    
+    # Test Gemini CLI
+    try {
+        gemini --version 2>&1 | Out-Null
+        Write-Success "Gemini CLI available"
+    }
+    catch {
+        Write-Warning "Gemini CLI validation failed"
+    }
+    
     if ($allGood) {
         Write-Section "🚀 DEVELOPMENT ENVIRONMENT READY!"
         Write-Host "Ready for:" -ForegroundColor Green
@@ -427,6 +554,7 @@ function Test-Environment {
         Write-Host "- 🔥 Firebase hosting" -ForegroundColor Green
         Write-Host "- 🧪 TDD with xUnit testing" -ForegroundColor Green
         Write-Host "- 🏗️ Terraform infrastructure as code" -ForegroundColor Green
+        Write-Host "- 🤖 AI development with Python & Gemini CLI" -ForegroundColor Green
     }
     else {
         Write-Error "Some tools failed validation. Please check the installation."
@@ -447,6 +575,7 @@ try {
     Install-NodeJS
     Install-PowerShellCore
     Install-CloudTools
+    Install-AITools
     Install-ContainerTools
     Test-Environment
     

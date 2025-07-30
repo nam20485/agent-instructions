@@ -220,6 +220,29 @@ $results += Test-Tool "Terraform" "terraform" "--version" "" {
     ($output -split "`n" | Select-Object -First 1) -replace "Terraform v", ""
 }
 
+# AI Development Tools
+$results += Test-Tool "Python 3" "python3" "--version" "" { 
+    param($output) 
+    ($output -replace "Python ", "")
+}
+
+# If python3 is not available, try python
+if (($results | Where-Object { $_.Tool -eq "Python 3" }).Status -eq "FAIL") {
+    $results += Test-Tool "Python" "python" "--version" "" { 
+        param($output) 
+        if ($output -match "Python 3\.") {
+            ($output -replace "Python ", "")
+        } else {
+            throw "Not Python 3.x"
+        }
+    }
+}
+
+$results += Test-Tool "Gemini CLI" "gemini" "--version" "" { 
+    param($output) 
+    ($output -split "`n" | Select-Object -First 1)
+}
+
 # Additional .NET workloads check
 if ($results | Where-Object { $_.Tool -eq ".NET SDK" -and $_.Status -eq "PASS" }) {
     try {
