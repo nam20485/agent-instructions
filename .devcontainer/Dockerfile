@@ -48,7 +48,7 @@ RUN apt-get update && apt-get install -y \
 # =============================================================================
 
 # Install Node.js 22.x from NodeSource
-RUN curl -fsSL https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - \
+RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
     && apt-get install -y nodejs \
     && npm install -g npm@latest \
     && rm -rf /var/lib/apt/lists/*
@@ -58,7 +58,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - \
 # =============================================================================
 
 # Install PowerShell Core from Microsoft repository
-RUN wget -q "https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb" \
+RUN wget -q "https://packages.microsoft.com/config/debian/12/packages-microsoft-prod.deb" \
     && dpkg -i packages-microsoft-prod.deb \
     && apt-get update \
     && apt-get install -y powershell \
