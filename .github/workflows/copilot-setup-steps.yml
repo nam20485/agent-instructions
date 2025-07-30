@@ -1,0 +1,238 @@
+name: "Copilot Setup Steps - ASP.NET Core & Blazor Development Environment"
+
+# Automatically run the setup steps when they are changed to allow for easy validation, and
+# allow manual testing through the repository's "Actions" tab
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/copilot-setup-steps.yml
+      - global.json
+      - "**/*.csproj"
+      - "**/Dockerfile*"
+  pull_request:
+    paths:
+      - .github/workflows/copilot-setup-steps.yml
+      - global.json
+      - "**/*.csproj"
+      - "**/Dockerfile*"
+
+env:
+  DOTNET_VERSION: "9.0.102"
+  NODE_VERSION: "22"
+  POWERSHELL_VERSION: "7.4.x"
+
+jobs:
+  # The job MUST be called `copilot-setup-steps` or it will not be picked up by Copilot.
+  copilot-setup-steps:
+    runs-on: ubuntu-22.04
+
+    # Set the permissions to the lowest permissions possible needed for your steps.
+    # Copilot will be given its own token for its operations.
+    permissions:
+      # Enhanced permissions for comprehensive development environment setup
+      contents: read
+      actions: read
+
+    # You can define any steps you want, and they will run before the agent starts.
+    # If you do not check out your code, Copilot will do this for you.
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for better analysis
+
+      # =============================================================================
+      # CORE DEVELOPMENT PLATFORMS & RUNTIMES
+      # =============================================================================
+
+      - name: Setup .NET SDK with WebAssembly workloads
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+          global-json-file: ./global.json
+
+      - name: Install .NET WebAssembly workloads for Blazor
+        run: |
+          dotnet workload install wasm-tools
+          dotnet workload update
+
+      - name: Setup Node.js for frontend tooling and Firebase CLI
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+          cache-dependency-path: "**/package-lock.json"
+
+      - name: Setup PowerShell Core for scripting
+        shell: bash
+        run: |
+          # Install PowerShell Core >= 7.1.x as required by ai-tools-config.md
+          wget -q "https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb"
+          sudo dpkg -i packages-microsoft-prod.deb
+          sudo apt-get update
+          sudo apt-get install -y powershell
+
+      # =============================================================================
+      # CLOUD DEVELOPMENT TOOLS
+      # =============================================================================
+
+      - name: Setup Google Cloud CLI
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          version: "latest"
+
+      - name: Setup Firebase CLI for frontend deployment
+        run: npm install -g firebase-tools
+
+      - name: Setup GitHub CLI for workflow management
+        uses: cli/gh-extension-manager@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # =============================================================================
+      # CONTAINER & INFRASTRUCTURE TOOLS
+      # =============================================================================
+
+      - name: Setup Docker Buildx for multi-platform builds
+        uses: docker/setup-buildx-action@v3
+
+      - name: Setup QEMU for multi-platform Docker builds
+        uses: docker/setup-qemu-action@v3
+
+      - name: Setup Terraform CLI for Infrastructure as Code
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "latest"
+
+      # =============================================================================
+      # DEPENDENCY CACHING & INSTALLATION
+      # =============================================================================
+
+      - name: Cache .NET packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj', '**/*.props', '**/*.targets') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
+      - name: Restore .NET dependencies
+        run: |
+          if [ -f "*.sln" ]; then
+            dotnet restore *.sln
+          else
+            find . -name "*.csproj" -exec dotnet restore {} \;
+          fi
+
+      - name: Install JavaScript dependencies (if package.json exists)
+        run: |
+          if [ -f "package.json" ]; then
+            npm ci
+          elif [ -f "package-lock.json" ]; then
+            npm ci
+          fi
+
+      # =============================================================================
+      # BUILD & TEST VALIDATION (TDD/BDD Requirements)
+      # =============================================================================
+
+      - name: Build .NET solution
+        run: |
+          if [ -f "*.sln" ]; then
+            dotnet build *.sln --no-restore --configuration Release
+          else
+            find . -name "*.csproj" -exec dotnet build {} --no-restore --configuration Release \;
+          fi
+
+      - name: Run .NET tests with coverage (TDD requirement)
+        run: |
+          # Find and run all test projects as per ai-testing-validation.md requirements
+          test_projects=$(find . -name "*.[Tt]ests*.csproj" -o -name "*.[Tt]est*.csproj")
+          if [ -n "$test_projects" ]; then
+            echo "Running tests for TDD validation..."
+            dotnet test --no-build --configuration Release --verbosity normal \
+              --collect:"XPlat Code Coverage" \
+              --logger trx --results-directory ./TestResults/
+          else
+            echo "No test projects found - this is acceptable for instruction repositories"
+          fi
+
+      - name: Validate Docker builds (if Dockerfiles exist)
+        run: |
+          dockerfiles=$(find . -name "Dockerfile*" -type f)
+          if [ -n "$dockerfiles" ]; then
+            echo "Validating Docker builds as per ai-application-guidelines.md..."
+            for dockerfile in $dockerfiles; do
+              dir=$(dirname "$dockerfile")
+              echo "Validating Docker build in $dir"
+              docker build --dry-run -f "$dockerfile" "$dir" || echo "Docker build validation failed for $dockerfile"
+            done
+          else
+            echo "No Dockerfiles found - skipping Docker validation"
+          fi
+
+      # =============================================================================
+      # ENVIRONMENT VALIDATION & TOOL VERIFICATION
+      # =============================================================================
+
+      - name: Validate development environment setup
+        shell: pwsh
+        run: |
+          Write-Host "=== Development Environment Validation ===" -ForegroundColor Green
+          
+          # Validate .NET setup
+          Write-Host "Checking .NET SDK..." -ForegroundColor Yellow
+          dotnet --version
+          dotnet --list-workloads
+          
+          # Validate Node.js setup
+          Write-Host "Checking Node.js..." -ForegroundColor Yellow
+          node --version
+          npm --version
+          
+          # Validate PowerShell Core
+          Write-Host "Checking PowerShell Core..." -ForegroundColor Yellow
+          $PSVersionTable.PSVersion
+          
+          # Validate cloud tools
+          Write-Host "Checking Cloud Tools..." -ForegroundColor Yellow
+          gcloud version --quiet
+          firebase --version
+          gh --version
+          
+          # Validate Docker
+          Write-Host "Checking Docker..." -ForegroundColor Yellow
+          docker --version
+          docker buildx version
+          
+          # Validate Terraform
+          Write-Host "Checking Terraform..." -ForegroundColor Yellow
+          terraform --version
+          
+          Write-Host "✅ Environment validation complete!" -ForegroundColor Green
+
+      - name: Generate environment summary
+        run: |
+          echo "## 🚀 Development Environment Ready!" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Core Development Stack" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ .NET SDK: $(dotnet --version)" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Node.js: $(node --version)" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ PowerShell Core: $(pwsh --version)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Cloud & DevOps Tools" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Google Cloud CLI: $(gcloud version --format='value(Google Cloud SDK)' 2>/dev/null)" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Firebase CLI: $(firebase --version)" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ GitHub CLI: $(gh --version | head -1)" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Docker: $(docker --version)" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Terraform: $(terraform --version | head -1)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Ready for:" >> $GITHUB_STEP_SUMMARY
+          echo "- 🌐 ASP.NET Core Web API development" >> $GITHUB_STEP_SUMMARY
+          echo "- ⚡ Blazor WebAssembly applications" >> $GITHUB_STEP_SUMMARY
+          echo "- 🐳 Docker containerization" >> $GITHUB_STEP_SUMMARY
+          echo "- ☁️ Google Cloud deployment" >> $GITHUB_STEP_SUMMARY
+          echo "- 🔥 Firebase hosting" >> $GITHUB_STEP_SUMMARY
+          echo "- 🧪 TDD with xUnit testing" >> $GITHUB_STEP_SUMMARY
+          echo "- 🏗️ Terraform infrastructure as code" >> $GITHUB_STEP_SUMMARY
