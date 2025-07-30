@@ -150,9 +150,9 @@ function Write-ResultsMarkdown {
     
     Write-Host ""
     Write-Host "## Summary"
-    $passed = ($Results | Where-Object { $_.Status -eq "PASS" }).Count
-    $warned = ($Results | Where-Object { $_.Status -eq "WARN" }).Count
-    $failed = ($Results | Where-Object { $_.Status -eq "FAIL" }).Count
+    $passed = @($Results | Where-Object { $_.Status -eq "PASS" }).Count
+    $warned = @($Results | Where-Object { $_.Status -eq "WARN" }).Count
+    $failed = @($Results | Where-Object { $_.Status -eq "FAIL" }).Count
     
     Write-Host "- ✅ Passed: $passed"
     Write-Host "- ⚠️  Warnings: $warned"
@@ -165,9 +165,9 @@ function Write-ResultsJson {
     $summary = @{
         timestamp = Get-Date -Format "yyyy-MM-ddTHH:mm:ssZ"
         total = $Results.Count
-        passed = ($Results | Where-Object { $_.Status -eq "PASS" }).Count
-        warned = ($Results | Where-Object { $_.Status -eq "WARN" }).Count
-        failed = ($Results | Where-Object { $_.Status -eq "FAIL" }).Count
+        passed = @($Results | Where-Object { $_.Status -eq "PASS" }).Count
+        warned = @($Results | Where-Object { $_.Status -eq "WARN" }).Count
+        failed = @($Results | Where-Object { $_.Status -eq "FAIL" }).Count
         tools = $Results
     }
     
@@ -255,9 +255,9 @@ switch ($OutputFormat) {
         }
         
         # Summary
-        $passed = ($results | Where-Object { $_.Status -eq "PASS" }).Count
-        $warned = ($results | Where-Object { $_.Status -eq "WARN" }).Count
-        $failed = ($results | Where-Object { $_.Status -eq "FAIL" }).Count
+        $passed = @($results | Where-Object { $_.Status -eq "PASS" }).Count
+        $warned = @($results | Where-Object { $_.Status -eq "WARN" }).Count
+        $failed = @($results | Where-Object { $_.Status -eq "FAIL" }).Count
         $total = $results.Count
         
         Write-Host "Tools validated: $passed/$total" -ForegroundColor White
