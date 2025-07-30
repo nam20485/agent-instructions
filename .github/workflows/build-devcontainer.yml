@@ -1,0 +1,154 @@
+name: "Build and Push Devcontainer Image"
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.devcontainer/**'
+      - '.github/workflows/build-devcontainer.yml'
+    branches:
+      - main
+      - development
+  pull_request:
+    paths:
+      - '.devcontainer/**'
+      - '.github/workflows/build-devcontainer.yml'
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}-devcontainer
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=sha,prefix={{branch}}-
+            type=raw,value=latest,enable={{is_default_branch}}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: .devcontainer/Dockerfile
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            DOTNET_VERSION=9.0.102
+            NODE_VERSION=22
+            POWERSHELL_VERSION=7.4
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Generate build summary
+        run: |
+          echo "## 🐳 Devcontainer Image Built Successfully!" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Image Details" >> $GITHUB_STEP_SUMMARY
+          echo "- **Registry**: ${{ env.REGISTRY }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Image**: ${{ env.IMAGE_NAME }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Tags**: ${{ steps.meta.outputs.tags }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Included Tools" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ .NET SDK 9.0.102 with WebAssembly workloads" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Node.js 22.x with npm" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ PowerShell Core 7.4" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Google Cloud CLI" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Firebase CLI" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ GitHub CLI" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Terraform CLI" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Docker-in-Docker support" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ VS Code extensions for ASP.NET Core + Blazor development" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Usage" >> $GITHUB_STEP_SUMMARY
+          echo "To use this devcontainer image:" >> $GITHUB_STEP_SUMMARY
+          echo "1. Open VS Code in your repository" >> $GITHUB_STEP_SUMMARY
+          echo "2. Use 'Dev Containers: Reopen in Container'" >> $GITHUB_STEP_SUMMARY
+          echo "3. The environment will be ready for development!" >> $GITHUB_STEP_SUMMARY
+
+      - name: Test devcontainer image
+        if: github.event_name != 'pull_request'
+        run: |
+          echo "🧪 Testing the built devcontainer image..."
+          
+          # Pull the image
+          docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.ref_name }}-${{ github.sha }}
+          
+          # Run basic tests
+          docker run --rm ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.ref_name }}-${{ github.sha }} \
+            sh -c "dotnet --version && node --version && pwsh --version && gcloud version --quiet && firebase --version && gh --version && terraform --version"
+          
+          echo "✅ Devcontainer image tests passed!"
+
+  update-prebuild-config:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/development'
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update prebuild configuration
+        run: |
+          # Create or update the prebuild configuration
+          mkdir -p .github
+          
+          cat > .github/dependabot.yml << EOF
+          version: 2
+          updates:
+            - package-ecosystem: "github-actions"
+              directory: "/"
+              schedule:
+                interval: "weekly"
+            - package-ecosystem: "docker"
+              directory: "/.devcontainer"
+              schedule:
+                interval: "weekly"
+          EOF
+          
+          echo "✅ Updated prebuild configuration"
+
+      - name: Commit prebuild configuration
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          if [[ `git status --porcelain` ]]; then
+            git add .github/dependabot.yml
+            git commit -m "chore: Update devcontainer prebuild configuration [skip ci]"
+            git push
+            echo "✅ Committed prebuild configuration updates"
+          else
+            echo "ℹ️  No changes to prebuild configuration"
+          fi
