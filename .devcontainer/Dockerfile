@@ -101,7 +101,8 @@ USER vscode
 # GLOBAL NPM PACKAGES
 # =============================================================================
 
-# Install Firebase CLI and other global npm packages
+# Install Firebase CLI and other global npm packages as root
+USER root
 RUN npm install -g \
     firebase-tools \
     @angular/cli \
@@ -109,6 +110,7 @@ RUN npm install -g \
     typescript \
     eslint \
     prettier
+USER vscode
 
 # =============================================================================
 # DEVELOPMENT ENVIRONMENT SETUP
