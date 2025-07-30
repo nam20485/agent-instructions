@@ -86,9 +86,10 @@ jobs:
         run: npm install -g firebase-tools
 
       - name: Setup GitHub CLI for workflow management
-        uses: cli/gh-extension-manager@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # GitHub CLI is typically pre-installed on GitHub runners
+          # Verify it's available and working
+          gh --version
 
       # =============================================================================
       # CONTAINER & INFRASTRUCTURE TOOLS
