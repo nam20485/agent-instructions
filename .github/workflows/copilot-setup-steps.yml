@@ -61,8 +61,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: "npm"
-          cache-dependency-path: "**/package-lock.json"
+          # Only enable caching if package-lock.json exists
+          cache: ${{ hashFiles('**/package-lock.json') != '' && 'npm' || '' }}
 
       - name: Setup PowerShell Core for scripting
         shell: bash
