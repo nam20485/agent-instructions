@@ -2,17 +2,8 @@
 # This Dockerfile replicates all the tools from the GitHub Actions workflow
 # for a consistent development environment
 
-ARG DOTNET_VERSION=9.0.102
-ARG NODE_VERSION=22
-ARG POWERSHELL_VERSION=7.4
-
 # Use the official .NET devcontainer base image
 FROM mcr.microsoft.com/devcontainers/dotnet:1.3.7-9.0-bookworm-slim
-
-# Set build arguments as environment variables
-ENV DOTNET_VERSION=${DOTNET_VERSION}
-ENV NODE_VERSION=${NODE_VERSION}
-ENV POWERSHELL_VERSION=${POWERSHELL_VERSION}
 
 # Configure environment for optimal .NET development
 ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
@@ -99,12 +90,12 @@ RUN wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor -o /usr/shar
 # .NET WORKLOADS & TOOLS
 # =============================================================================
 
-# Switch to vscode user for .NET operations
-USER vscode
-
-# Install .NET WebAssembly workloads for Blazor development
+# Install .NET WebAssembly workloads for Blazor development as root
 RUN dotnet workload update \
     && dotnet workload install wasm-tools
+
+# Switch to vscode user for remaining operations
+USER vscode
 
 # =============================================================================
 # GLOBAL NPM PACKAGES
