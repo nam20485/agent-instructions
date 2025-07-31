@@ -1,0 +1,71 @@
+---
+name: Pre-build dev container image
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: nam20485/agent-instructions-prebuild  
+  VERSION_IMAGE_TAG: "${{ vars.VERSION_PREFIX }}.${{ github.run_number }}"
+
+jobs:
+  prebuild:
+    permissions:
+      contents: read
+      packages: write
+      id-token: write     
+      attestations: write
+
+    runs-on: ubuntu-22.04
+    steps:
+        
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@74a5d142397b4f367a81961eba4e8cd7edddf772
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Pre-build dev container image
+        uses: devcontainers/ci@8bf61b26e9c3a98f69cb6ce2f88d24ff59b785c6
+        id: prebuild        
+        with:
+          subFolder: .github
+          imageName: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}          
+          cacheFrom: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          imageTag: latest, ${{ env.VERSION_IMAGE_TAG }}
+          push: always
+
+      # - name: Output Image Digest
+      #   id: get-image-digest
+      #   env:
+      #     VERSIONED_IMAGE_FULL: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION_IMAGE_TAG }}
+      #   run: echo "IMAGE_DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' ${{ env.VERSIONED_IMAGE_FULL }})" >> "$GITHUB_OUTPUT"
+
+      # - name: Attest
+      #   uses: actions/attest-build-provenance@v2
+      #   id: attest
+      #   with:
+      #     subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+      #     subject-digest: ${{ steps.get-image-digest.outputs.IMAGE_DIGEST }}
+      #     push-to-registry: true
+
+      # - name: Run Trivy vulnerability scanner
+      #   uses: aquasecurity/trivy-action@7b7aa264d83dc58691451798b4d117d53d21edfe
+      #   with:
+      #     image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION_IMAGE_TAG }}
+      #     format: 'template'
+      #     template: '@/contrib/sarif.tpl'
+      #     output: 'trivy-results.sarif'
+      #     severity: 'CRITICAL,HIGH'
+  
+      # - name: Upload Trivy scan results to GitHub Security tab
+      #   uses: github/codeql-action/upload-sarif@v3
+      #   with:
+      #     sarif_file: 'trivy-results.sarif'

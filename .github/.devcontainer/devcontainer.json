@@ -1,0 +1,131 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/dotnet
+{
+	"name": "agent-instructions-prebuild-image",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	//"image": "mcr.microsoft.com/devcontainers/dotnet:1-8.0-noble",
+	"build": {
+		// Path is relative to the devcontainer.json file.
+		"dockerfile": "Dockerfile",
+		"context": ".",
+		"cacheFrom": "ghcr.io/nam20485/agent-instructions:latest"
+	},
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	"features": {
+		//"ghcr.io/devcontainers/features/node:1" : {},
+		"ghcr.io/devcontainers/features/python:1": {},
+		//"ghcr.io/devcontainers/features/github-cli:1": {},		
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {
+			"enableNonRootDocker": "true"
+		},
+		//"ghcr.io/devcontainers-extra/features/firebase-cli:2": {},
+		"ghcr.io/devcontainers/features/sshd:1": {}
+	},
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [5000, 5001],
+	// "portsAttributes": {
+	// 		"5001": {
+	// 			"protocol": "https"
+	// 		}
+	// },
+	// Use 'postCreateCommand' to run commands after the container is created.
+	//"postCreateCommand": "./scripts/onPostCreateCommand.ps1",
+	// Configure tool-specific properties.
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-dotnettools.csharp",
+				"ms-dotnettools.csharp-devkit",
+				"ms-dotnettools.csharp-extensions",
+				"ms-dotnettools.vscodeintellicode-csharp",
+				"github.copilot",
+				"github.copilot-chat",
+				"github.vscode-pull-request-github",
+				"42crunch.vscode-openapi",
+				"ahmadalli.vscode-nginx-conf",
+				"christian-kohler.npm-intellisense",
+				"dbaeumer.vscode-eslint",
+				//   "docsmsft.docs-article-templates",
+				//   "docsmsft.docs-authoring-pack",
+				//   "docsmsft.docs-build",
+				//   "docsmsft.docs-images",
+				//   "docsmsft.docs-markdown",
+				//   "docsmsft.docs-preview",
+				//   "docsmsft.docs-scaffolding",
+				//   "docsmsft.docs-yaml",
+				"ms-dotnettools.csharp-extensions",
+				"ms-dotnettools.dotnet-maui",
+				"aliasadidev.nugetpackagemanagergui",
+				"github.vscode-github-actions",
+				"googlecloudtools.cloudcode",
+				"hbenl.vscode-test-explorer",
+				"usernamehw.errorlens",
+				"google.geminicodeassist",
+				"ms-vscode.powershell",
+				"aliasadidev.nugetpackagemanagergui",
+				"pspester.pester-test",
+				"ms-windows-ai-studio.windows-ai-studio",
+				"visualstudioexptteam.intellicode-api-usage-examples",
+				"visualstudioexptteam.vscodeintellicode",
+				"visualstudioexptteam.vscodeintellicode-completions",
+				"visualstudioexptteam.vscodeintellicode-insiders"
+				//    "unoplatform.vscode"
+			],
+            "settings": {
+                "dotnet.defaultSolution": "disable",
+                "omnisharp.enableEditorConfigSupport": true,
+                "omnisharp.enableRoslynAnalyzers": true,
+                "files.exclude": {
+                    "**/bin": true,
+                    "**/obj": true
+                },
+                "terminal.integrated.defaultProfile.linux": "pwsh",
+                "terminal.integrated.profiles.linux": {
+                    "pwsh": {
+                        "path": "/usr/bin/pwsh"
+                    }
+                }
+            }
+        }
+    },
+    "forwardPorts": [
+        5000,
+        5001,
+        8080,
+        3000,
+        4200
+    ],
+    "portsAttributes": {
+        "5000": {
+            "label": "ASP.NET Core HTTP",
+            "protocol": "http"
+        },
+        "5001": {
+            "label": "ASP.NET Core HTTPS",
+            "protocol": "https"
+        },
+        "8080": {
+            "label": "Web Server",
+            "protocol": "http"
+        },
+        "3000": {
+            "label": "React/Node.js",
+            "protocol": "http"
+        },
+        "4200": {
+            "label": "Angular",
+            "protocol": "http"
+        }
+    },
+    "postCreateCommand": "bash .devcontainer/post-create.sh",
+    "remoteUser": "vscode",
+    "containerEnv": {
+        "DOTNET_CLI_TELEMETRY_OPTOUT": "1",
+        "DOTNET_SKIP_FIRST_TIME_EXPERIENCE": "1",
+        "DOTNET_NOLOGO": "1",
+        "ASPNETCORE_ENVIRONMENT": "Development"
+    },
+    "mounts": [
+        "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
+    ]
+}
