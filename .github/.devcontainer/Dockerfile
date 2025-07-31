@@ -102,11 +102,13 @@ RUN wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor -o /usr/shar
 # =============================================================================
 
 # Install Gemini CLI (latest preview)
-RUN curl -o gemini-cli.tar.gz https://ai.google.dev/gemini-api/docs/downloads/cli/gemini-cli-linux-amd64.tar.gz \
-    && tar -xzf gemini-cli.tar.gz \
-    && chmod +x gemini \
-    && mv gemini /usr/local/bin/ \
-    && rm gemini-cli.tar.gz
+# RUN curl -o gemini-cli.tar.gz https://ai.google.dev/gemini-api/docs/downloads/cli/gemini-cli-linux-amd64.tar.gz \
+#     && tar -xzf gemini-cli.tar.gz \
+#     && chmod +x gemini \
+#     && mv gemini /usr/local/bin/ \
+#     && rm gemini-cli.tar.gz
+
+RUN npm install -g @google/gemini-cli
 
 # =============================================================================
 # .NET WORKLOADS & TOOLS
@@ -116,6 +118,8 @@ RUN curl -o gemini-cli.tar.gz https://ai.google.dev/gemini-api/docs/downloads/cl
 RUN dotnet workload update \
     && dotnet workload install wasm-tools
 
+RUN dotnet new install Aspire.ProjectTemplates
+
 # Switch to vscode user for remaining operations
 USER vscode
 
@@ -123,9 +127,10 @@ USER vscode
 # GLOBAL NPM PACKAGES
 # =============================================================================
 
-# Install Firebase CLI and other global npm packages
+# Install Firebase CLI
+RUN npm install -g firebase-tools
+# and other global npm packages
 RUN npm install -g \
-    firebase-tools \
     @angular/cli \
     create-react-app \
     typescript \

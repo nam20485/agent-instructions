@@ -1,5 +1,5 @@
 {
-    "name": "AI Agent Instructions Development Environment",
+    "name": "AI Agent Instructions Dev Environment",
     "image": "ghcr.io/nam20485/agent-instructions:latest",
     // // "DOTNET_VERSION": "9.0.102",
     // // "NODE_VERSION": "22",
