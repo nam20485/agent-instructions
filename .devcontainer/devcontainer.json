@@ -1,6 +1,6 @@
 {
-    "name": "AI Agent Instructions Dev Environment",
-    "image": "ghcr.io/nam20485/agent-instructions:latest",
+    "name": "AI Agent Instructions DevContainer",
+    "image": "ghcr.io/nam20485/agent-instructions-devcontainer:latest",
     // // "DOTNET_VERSION": "9.0.102",
     // // "NODE_VERSION": "22",
     // // "POWERSHELL_VERSION": "7.4"		
@@ -93,7 +93,7 @@
             "protocol": "http"
         }
     },
-    "postCreateCommand": "bash .devcontainer/post-create.sh",
+    //"postCreateCommand": "bash .devcontainer/post-create.sh",
     "remoteUser": "vscode",
     "containerEnv": {
         "DOTNET_CLI_TELEMETRY_OPTOUT": "1",

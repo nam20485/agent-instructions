@@ -108,7 +108,19 @@ RUN wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor -o /usr/shar
 #     && mv gemini /usr/local/bin/ \
 #     && rm gemini-cli.tar.gz
 
-RUN npm install -g @google/gemini-cli
+#RUN npm install -g @google/gemini-cli
+# Install nvm for the current user (no sudo required)
+ENV NVM_DIR=/root/.nvm
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+
+# Add nvm to PATH and install Node.js LTS
+RUN export NVM_DIR="$HOME/.nvm" \
+    && [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" \
+    && nvm install --lts \
+    && nvm use --lts
+
+ENV NVM_DIR=/root/.nvm
+ENV PATH="$NVM_DIR/versions/node/$(ls $NVM_DIR/versions/node)/bin/:$PATH"
 
 # =============================================================================
 # .NET WORKLOADS & TOOLS
@@ -121,7 +133,7 @@ RUN dotnet workload update \
 RUN dotnet new install Aspire.ProjectTemplates
 
 # Switch to vscode user for remaining operations
-USER vscode
+#USER vscode
 
 # =============================================================================
 # GLOBAL NPM PACKAGES
@@ -142,7 +154,7 @@ RUN npm install -g \
 # =============================================================================
 
 # Switch back to root for final setup
-USER root
+#USER root
 
 # Create development directories
 RUN mkdir -p /workspace \
@@ -152,7 +164,7 @@ RUN mkdir -p /workspace \
 WORKDIR /workspace
 
 # Switch back to vscode user
-USER vscode
+#USER vscode
 
 # =============================================================================
 # VALIDATION & INFORMATION
