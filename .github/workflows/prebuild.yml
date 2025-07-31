@@ -5,10 +5,11 @@ on:
   push:
     branches:
       - main
+      - development
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: nam20485/agent-instructions-prebuild  
+  IMAGE_NAME: nam20485/agent-instructions-devcontainer
   VERSION_IMAGE_TAG: "${{ vars.VERSION_PREFIX }}.${{ github.run_number }}"
 
 jobs:
