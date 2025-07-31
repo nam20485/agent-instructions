@@ -21,6 +21,8 @@ jobs:
       attestations: write
 
     runs-on: ubuntu-22.04
+    # only build the prebuild in agent-instructions repo
+    if: github.repository == 'nam20485/agent-instructions' 
     steps:
         
       - name: Checkout repository
