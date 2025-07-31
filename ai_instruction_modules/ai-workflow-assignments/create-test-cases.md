@@ -32,9 +32,10 @@ You will be responsbile for adding automated test case pipline to projects if th
 You will create test coverage reports as part of the build or automated test case pipeline. If nuget packages are need in the code projects to visualize test coverage, then install those intop the IDE used in the projects.
 
 ## Detailed Steps
-1. Aanalyze existing projects and test coverage and cases, and any existing CI automated test pipleines.
+
+1. Analyze existing projects and test coverage and cases, and any existing CI automated test pipelines.
 2. Create an issue documenting your plan.
-3. Ask for approval for your plan. If the user wants anu changes, update the document and then ask for approval again. Yo will iterate making changes until you receive approval.
+3. Ask for approval for your plan. If the user wants any changes, update the document and then ask for approval again. You will iterate making changes until you receive approval.
 
 ** You will not make any changes until approval is obtained.**
 4. Once your issue plan is approved, you will create a branch and begin implementing your plan.
