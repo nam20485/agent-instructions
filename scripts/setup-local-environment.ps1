@@ -163,7 +163,7 @@ function Install-NodeJS {
         
         if ($IsWindows) {
             if (Test-Command "choco") {
-                choco install nodejs --version $NODE_VERSION.* -y
+                choco install nodejs --version "${NODE_VERSION}.*" -y
             }
             else {
                 winget install OpenJS.NodeJS --version $NODE_VERSION
@@ -271,7 +271,7 @@ function Install-CloudTools {
         }
         elseif ($IsLinux) {
             curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
-            echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+            Write-Output "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
             sudo apt update
             sudo apt install gh
         }
@@ -313,50 +313,23 @@ function Install-AITools {
     else {
         Write-Host "Installing Gemini CLI (preview)..."
         
-        if ($IsWindows) {
-            # Download and install Gemini CLI for Windows
+        # Check if Node.js and npm are available
+        if (-not (Test-Command "npm")) {
+            Write-Warning "npm is required to install Gemini CLI. Installing Node.js first..."
+            Install-NodeJs -Force:$Force
+        }
+        
+        try {
+            # Install Gemini CLI via npm globally
+            npm install -g @google/gemini-cli@latest
+            Write-Success "Gemini CLI installed via npm"
+            
+            # Provide API key information
             $geminiUrl = "https://ai.google.dev/gemini-api/docs/api-key"
             Write-Host "Please visit $geminiUrl to get your API key after installation"
-            
-            # Create a temporary directory for Gemini CLI
-            $geminiDir = "$env:LOCALAPPDATA\gemini-cli"
-            if (-not (Test-Path $geminiDir)) {
-                New-Item -ItemType Directory -Path $geminiDir -Force | Out-Null
-            }
-            
-            # Download the latest Gemini CLI
-            try {
-                $downloadUrl = "https://github.com/google-gemini/gemini-cli/releases/latest/download/gemini-cli-windows-amd64.exe"
-                $geminiExe = "$geminiDir\gemini.exe"
-                Invoke-WebRequest -Uri $downloadUrl -OutFile $geminiExe -ErrorAction SilentlyContinue
-                
-                # Add to PATH if not already there
-                $currentPath = [Environment]::GetEnvironmentVariable("PATH", "User")
-                if ($currentPath -notlike "*$geminiDir*") {
-                    [Environment]::SetEnvironmentVariable("PATH", "$currentPath;$geminiDir", "User")
-                    $env:PATH += ";$geminiDir"
-                }
-                
-                Write-Success "Gemini CLI installed to $geminiDir"
-            }
-            catch {
-                Write-Warning "Could not download Gemini CLI automatically. Please install manually from https://github.com/google-gemini/gemini-cli"
-            }
         }
-        elseif ($IsLinux -or $IsMacOS) {
-            # Download and install Gemini CLI for Linux/macOS
-            $arch = if ($IsMacOS) { "darwin" } else { "linux" }
-            $downloadUrl = "https://github.com/google-gemini/gemini-cli/releases/latest/download/gemini-cli-$arch-amd64"
-            
-            try {
-                curl -L $downloadUrl -o /tmp/gemini-cli
-                chmod +x /tmp/gemini-cli
-                sudo mv /tmp/gemini-cli /usr/local/bin/gemini
-                Write-Success "Gemini CLI installed to /usr/local/bin/gemini"
-            }
-            catch {
-                Write-Warning "Could not download Gemini CLI automatically. Please install manually from https://github.com/google-gemini/gemini-cli"
-            }
+        catch {
+            Write-Warning "Could not install Gemini CLI via npm. Please install manually: npm install -g @google/gemini-cli"
         }
     }
 }
@@ -398,7 +371,7 @@ function Install-ContainerTools {
             curl -fsSL https://get.docker.com -o get-docker.sh
             sudo sh get-docker.sh
             sudo usermod -aG docker $USER
-            rm get-docker.sh
+            Remove-Item get-docker.sh
         }
         elseif ($IsMacOS) {
             brew install docker
@@ -424,7 +397,7 @@ function Install-ContainerTools {
         }
         elseif ($IsLinux) {
             wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
-            echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+            Write-Output "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
             sudo apt update && sudo apt install terraform
         }
         elseif ($IsMacOS) {
