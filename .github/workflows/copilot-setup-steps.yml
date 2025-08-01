@@ -2,19 +2,7 @@ name: "Copilot Setup Steps - Using Devcontainer Prebuild"
 
 # This workflow now uses the prebuild devcontainer image for faster setup
 on:
-  workflow_dispatch:
-  push:
-    paths:
-      - ".github/workflows/*"
-      - global.json
-      - "**/*.csproj"
-      - "**/Dockerfile*"
-  pull_request:
-    paths:
-      - ".github/workflows/*"      
-      - global.json
-      - "**/*.csproj"
-      - "**/Dockerfile*"
+  workflow_dispatch:  
 
 # env:
 #   DOTNET_VERSION: "9.0.102"
@@ -26,13 +14,12 @@ jobs:
   # The job MUST be called `copilot-setup-steps` or it will not be picked up by Copilot.
   copilot-setup-steps:
     runs-on: ubuntu-22.04
-    container:
-      image: ghcr.io/${{ github.repository }}-devcontainer:latest
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+    # container:
+    #   image: ghcr.io/agent-instructions-devcontainer:latest
+    #   credentials:
+    #     username: ${{ github.actor }}
+    #     password: ${{ secrets.GITHUB_TOKEN }}
       
-
     # Set the permissions to the lowest permissions possible needed for your steps.
     # Copilot will be given its own token for its operations.
     permissions:
@@ -49,10 +36,11 @@ jobs:
         with:
           fetch-depth: 0  # Full history for better analysis
 
+      # container doesn't work- setup environment via script
       - name: Setup Script
         shell: pwsh
         run: |
           echo "Running script..."
-          ./scripts/copilot-setup-steps.ps1
+          ./scripts/copilot-setup-steps-linux.ps1
 
      
