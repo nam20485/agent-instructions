@@ -44,31 +44,3 @@ jobs:
           cacheFrom: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           imageTag: latest, ${{ env.VERSION_IMAGE_TAG }}
           push: always
-
-      # - name: Output Image Digest
-      #   id: get-image-digest
-      #   env:
-      #     VERSIONED_IMAGE_FULL: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION_IMAGE_TAG }}
-      #   run: echo "IMAGE_DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' ${{ env.VERSIONED_IMAGE_FULL }})" >> "$GITHUB_OUTPUT"
-
-      # - name: Attest
-      #   uses: actions/attest-build-provenance@v2
-      #   id: attest
-      #   with:
-      #     subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-      #     subject-digest: ${{ steps.get-image-digest.outputs.IMAGE_DIGEST }}
-      #     push-to-registry: true
-
-      # - name: Run Trivy vulnerability scanner
-      #   uses: aquasecurity/trivy-action@7b7aa264d83dc58691451798b4d117d53d21edfe
-      #   with:
-      #     image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION_IMAGE_TAG }}
-      #     format: 'template'
-      #     template: '@/contrib/sarif.tpl'
-      #     output: 'trivy-results.sarif'
-      #     severity: 'CRITICAL,HIGH'
-  
-      # - name: Upload Trivy scan results to GitHub Security tab
-      #   uses: github/codeql-action/upload-sarif@v3
-      #   with:
-      #     sarif_file: 'trivy-results.sarif'
