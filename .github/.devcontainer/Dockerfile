@@ -3,7 +3,7 @@
 # for a consistent development environment
 
 # Use the official .NET devcontainer base image
-FROM mcr.microsoft.com/devcontainers/dotnet:1.3.7-9.0-bookworm-slim
+FROM mcr.microsoft.com/devcontainers/dotnet:dev-9.0-noble
 
 # Configure environment for optimal .NET development
 ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
@@ -110,16 +110,16 @@ RUN wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor -o /usr/shar
 
 #RUN npm install -g @google/gemini-cli
 # Install nvm for the current user (no sudo required)
-ENV NVM_DIR=/root/.nvm
+#ENV NVM_DIR=/root/.nvm
+RUN export NVM_DIR="$HOME/.nvm"
+ENV NVM_DIR=${NVM_DIR}
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 
-# Add nvm to PATH and install Node.js LTS
-RUN export NVM_DIR="$HOME/.nvm" \
-    && [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" \
+# install Node.js LTS
+RUN [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" \
     && nvm install --lts \
     && nvm use --lts
 
-ENV NVM_DIR=/root/.nvm
 ENV PATH="$NVM_DIR/versions/node/$(ls $NVM_DIR/versions/node)/bin/:$PATH"
 
 # =============================================================================
