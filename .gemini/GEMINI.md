@@ -40,8 +40,9 @@ Any (uncommented) file linked below should be read in fully and considered a par
 [ai-application-guidelines.md](../ai_instruction_modules/ai-application-guidelines.md)
 [ai-new-app-template.md](../ai_instruction_modules/ai-new-app-template.md)
 [ai-design-principles.md](../ai_instruction_modules/ai-design-principles.md)
-[ai-instructions-aspnet-abp.md](../ai_instruction_modules/ai-instructions-aspnet-abp.md)
+[ai-instructions-aspnet-guidelines.md](../ai_instruction_modules/ai-instructions-aspnet-guidelines.md)
 <!--
+[ai-instructions-aspnet-abp.md](../ai_instruction_modules/ai-instructions-aspnet-abp.md)
 [ai-retrospective-evolving-memory.md](../ai_instruction_modules/ai-retrospective-evolving-memory.md)
 [ai-deployment-process.md](/ai_instruction_modules/ai-deployment-process.md)
  -->
