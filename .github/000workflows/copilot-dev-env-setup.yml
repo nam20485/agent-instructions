@@ -1,0 +1,94 @@
+name: GitHub Copilot Agent Dev Environment Setup
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, development]
+    paths:
+      - 'scripts/copilot-setup-steps-linux.ps1'
+      - '.github/workflows/copilot-dev-env-setup.yml'
+  pull_request:
+    branches: [main, development]
+    paths:
+      - 'scripts/copilot-setup-steps-linux.ps1'
+      - '.github/workflows/copilot-dev-env-setup.yml'
+
+jobs:
+  setup-copilot-dev-environment:
+    name: Setup Copilot Development Environment
+    runs-on: ubuntu-22.04
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+          
+      - name: Install PowerShell Core
+        shell: bash
+        run: |
+          # Install PowerShell Core for Ubuntu 22.04
+          wget -q "https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb"
+          sudo dpkg -i packages-microsoft-prod.deb
+          sudo apt-get update
+          sudo apt-get install -y powershell
+          rm packages-microsoft-prod.deb
+          
+      - name: Verify PowerShell installation
+        shell: bash
+        run: |
+          pwsh --version
+          
+      - name: Run Copilot Dev Environment Setup
+        shell: bash
+        run: |
+          chmod +x ./scripts/copilot-setup-steps-linux.ps1
+          pwsh -File ./scripts/copilot-setup-steps-linux.ps1
+          
+      - name: Validate Environment Setup
+        shell: bash
+        run: |
+          echo "=== Validation Results ==="
+          
+          # Check core tools
+          echo "Core Development Stack:"
+          dotnet --version && echo "✅ .NET SDK: $(dotnet --version)" || echo "❌ .NET SDK: Not found"
+          node --version && echo "✅ Node.js: $(node --version)" || echo "❌ Node.js: Not found"
+          npm --version && echo "✅ npm: $(npm --version)" || echo "❌ npm: Not found"
+          python --version && echo "✅ Python: $(python --version)" || echo "❌ Python: Not found"
+          pwsh --version && echo "✅ PowerShell: $(pwsh --version)" || echo "❌ PowerShell: Not found"
+          
+          echo ""
+          echo "Cloud & DevOps Tools:"
+          gcloud version --format="value(Google Cloud SDK)" 2>/dev/null && echo "✅ Google Cloud CLI: $(gcloud version --format="value(Google Cloud SDK)" 2>/dev/null)" || echo "❌ Google Cloud CLI: Not found"
+          firebase --version 2>/dev/null && echo "✅ Firebase CLI: $(firebase --version)" || echo "❌ Firebase CLI: Not found" 
+          gh --version 2>/dev/null | head -1 && echo "✅ GitHub CLI: $(gh --version | head -1)" || echo "❌ GitHub CLI: Not found"
+          terraform --version 2>/dev/null | head -1 && echo "✅ Terraform: $(terraform --version | head -1)" || echo "❌ Terraform: Not found"
+          
+          echo ""
+          echo "Environment validation complete!"
+          
+      - name: Test .NET Workloads
+        shell: bash
+        run: |
+          echo "=== Testing .NET Workloads ==="
+          dotnet workload list
+          
+      - name: Test Global NPM Packages
+        shell: bash
+        run: |
+          echo "=== Testing Global NPM Packages ==="
+          npm list -g --depth=0 | grep -E "(firebase-tools|typescript|eslint|prettier)" || echo "Some packages may not be installed"
+          
+      - name: Display Environment Summary
+        shell: bash
+        run: |
+          if [ -f "$HOME/show-env.sh" ]; then
+            echo "=== Environment Summary ==="
+            bash "$HOME/show-env.sh"
+          else
+            echo "Environment validation script not found"
+          fi
