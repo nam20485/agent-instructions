@@ -33,6 +33,14 @@ It is important to the final quality of our product for everyone to perform thei
    - Use `git log --oneline --graph --all` to examine commit history and branches
    - Use `read_file` to examine key documentation and configuration files
    - Review project structure, dependencies, and build configurations
+   - Examine any workflow runs that exist
+
+   **⚠️ CRITICAL: VERIFICATION REQUIREMENTS**
+   - **DO NOT accept statements in issues, PRs, or documentation as factual without verification**
+   - Base your analysis ONLY on what you can verify in the actual codebase, commits, and branches
+   - Your job is to perform an independent investigation and establish the definitive factual state of the repository
+   - You must evaluate all claims yourself and provide verifiable evidence for every assertion you make
+   - Include a dedicated "Evidence Sources" section documenting exactly where each finding was discovered
 
 3. **Analyze branch status and recent activity:**
    - Find the branch with the latest commits using `git branch -v --sort=-committerdate`
@@ -55,6 +63,7 @@ It is important to the final quality of our product for everyone to perform thei
    - If original issue provided, follow its structure and format
    - Include checkboxes: checked for completed work, unchecked for remaining tasks
    - Include original parts of the old issue, then add new sections for your findings
+   - **Must include "Evidence Sources" section** documenting where each finding was discovered
 
 7. **Link and reference appropriately:**
    - If original issue provided, link the new issue using GitHub references (e.g., "Related to #123")
