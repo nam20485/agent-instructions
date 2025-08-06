@@ -4,16 +4,19 @@
 
 ### Goal
 
-Rigorously interrogate the provided repo to analyze the progress made and identify any gaps or areas that need further work. Determine what exactly has been completed and what is still needed. If an issue is provided, then relate the findings using the issue as the basis. Document your findings in a new issue.
+Rigorously interrogate the provided repository to analyze the progress made and identify any gaps or areas that need further work. Determine what exactly has been completed and what is still needed. If an issue is provided, then relate the findings using the issue as the basis. Document your findings in a new issue.
 
 ### Acceptance Criteria
 
-1. New issue created documenting findings.
-1. Entire codebase analyzed.
+1. New issue created documenting findings with clear analysis and recommendations.
+2. Entire codebase analyzed using systematic approach and appropriate tools.
+3. All branches and recent commits reviewed for progress assessment.
+4. Gap analysis completed with prioritized recommendations.
+5. Stakeholder approval obtained for the analysis and recommendations.
 
 ### Assignment
 
-You will analyze the provided repo to determine the progress made and identify any gaps or areas that need further work. You will then document your findings in a new issue. If you are provided an issue, then you will use that as the basis for your analysis.
+You will analyze the provided repository (current workspace or specified repository) to determine the progress made and identify any gaps or areas that need further work. You will then document your findings in a new issue. If you are provided an issue, then you will use that as the basis for your analysis.
 
 **Always follow instructions exactly as listed here.**
 
@@ -21,29 +24,68 @@ It is important to the final quality of our product for everyone to perform thei
 
 ### Detailed Steps
 
-1. Start by reading the issue if provided.
-2. You will then use all information at your disposal to determine a.) the progress made, and b.) identify any gaps or areas that need further work. This includes:
-    1. Reading all code
-    1. Reading all documentation
-    1. Reading all comments
-    1. Reading all issues
-    1. Reading all pull requests
-    1. Reading all commits
-    1. Reading all branches
-    1. Reading all tags
-    1. Reading all releases
-3. Find the branch that the latest work was done on.
-4. Find the branch that has the most work completed.
-5. If the issue was provided, detail the progress made and identify any gaps or areas that need further work based on what was outlined in the issue.
-6. Create a new issue documenting your findings.
-7. if the issue was provided, then use the issue as a guide for how to structure your new issue.
-   1. If the issue used checkboxes, the place those in the new issue, with checkboxes checked off for completed work and unchecked for work that is still needed.
-   2. Include original parts of the old issue in the new one. Then add more sections below that to document your new findings.
-8. If the issue was provided, then link the new issue to the original issue.
-9. Provide a list of items that you used to make your determination.
-10. List the branch with the latest commits and the branch with the most work completed.
+1. **Start by reading the issue if provided.**
 
+2. **Conduct systematic repository analysis using all available tools and information:**
+   - Use `semantic_search` and `grep_search` for comprehensive code analysis
+   - Use `mcp_github_list_issues` to review all existing issues
+   - Use `mcp_github_search_pull_requests` to analyze pull request history
+   - Use `git log --oneline --graph --all` to examine commit history and branches
+   - Use `read_file` to examine key documentation and configuration files
+   - Review project structure, dependencies, and build configurations
+
+3. **Analyze branch status and recent activity:**
+   - Find the branch with the latest commits using `git branch -v --sort=-committerdate`
+   - Identify the branch with the most work completed
+   - Compare branches to understand development flow and current state
+
+4. **If an issue was provided, perform targeted analysis:**
+   - Detail the progress made against each item in the original issue
+   - Identify any gaps or areas that need further work based on what was outlined
+   - Cross-reference issue requirements with actual implementation
+
+5. **Create comprehensive findings documentation:**
+   - Document all completed work with evidence (commits, files, features)
+   - Identify specific gaps and missing components
+   - Prioritize recommendations by importance and effort required
+   - Include risk assessment for incomplete items
+
+6. **Create a new issue documenting your findings:**
+   - Use clear, structured format with sections for completed work, gaps, and recommendations
+   - If original issue provided, follow its structure and format
+   - Include checkboxes: checked for completed work, unchecked for remaining tasks
+   - Include original parts of the old issue, then add new sections for your findings
+
+7. **Link and reference appropriately:**
+   - If original issue provided, link the new issue using GitHub references (e.g., "Related to #123")
+   - Reference specific commits, files, and branches in your analysis
+   - Include links to relevant documentation or external resources
+
+8. **Provide evidence and methodology:**
+   - List all tools and sources used to make your determination
+   - Include specific commands run and files analyzed
+   - Document the branch with latest commits and the branch with most work completed
+   - Include any assumptions or limitations in your analysis
+
+9. **Quality validation:**
+   - Review your analysis for completeness and accuracy
+   - Ensure all major project components have been examined
+   - Verify that recommendations are actionable and specific
+   - Confirm that the new issue follows proper formatting and standards
 
 ### Completion
 
-Inform the stake-holder that the issue is ready and present the new issue. Ask if they approve or need more changes.
+1. **Present findings to stakeholder:**
+   - Inform the stakeholder that the analysis is complete
+   - Present the new issue with issue number and summary
+   - Provide direct link to the issue for review
+
+2. **Stakeholder review process:**
+   - Ask if they approve the analysis and recommendations
+   - Address any questions or requests for clarification
+   - Make revisions if needed based on feedback
+
+3. **Finalization:**
+   - Mark the analysis as complete once approved
+   - Update any related project tracking or documentation
+   - Prepare for next steps based on the identified gaps and recommendations
