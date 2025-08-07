@@ -24,9 +24,13 @@ It is important to the final quality of our product for everyone to perform thei
 
 ### Detailed Steps
 
-1. **Start by reading the issue if provided.**
+1. Determine what application is supposed to be being built
+   1. **Start by reading the issue if provided.**
+   2. Also read the [docs/ai-new-app-template.md](../../docs/ai-new-app-template.md) and included files.
 
-2. **Conduct systematic repository analysis using all available tools and information:**
+   **Once you know what the specification of the application is supposed to be, you can analyze how much of that is complete, and what is still missing.**
+   
+   **Conduct systematic repository analysis using all available tools and information:**
    - Use `semantic_search` and `grep_search` for comprehensive code analysis
    - Use `mcp_github_list_issues` to review all existing issues
    - Use `mcp_github_search_pull_requests` to analyze pull request history
@@ -42,41 +46,41 @@ It is important to the final quality of our product for everyone to perform thei
    - You must evaluate all claims yourself and provide verifiable evidence for every assertion you make
    - Include a dedicated "Evidence Sources" section documenting exactly where each finding was discovered
 
-3. **Analyze branch status and recent activity:**
+2. **Analyze branch status and recent activity:**
    - Find the branch with the latest commits using `git branch -v --sort=-committerdate`
    - Identify the branch with the most work completed
    - Compare branches to understand development flow and current state
 
-4. **If an issue was provided, perform targeted analysis:**
+3. **If an issue was provided, perform targeted analysis:**
    - Detail the progress made against each item in the original issue
    - Identify any gaps or areas that need further work based on what was outlined
    - Cross-reference issue requirements with actual implementation
 
-5. **Create comprehensive findings documentation:**
+4. **Create comprehensive findings documentation:**
    - Document all completed work with evidence (commits, files, features)
    - Identify specific gaps and missing components
    - Prioritize recommendations by importance and effort required
    - Include risk assessment for incomplete items
 
-6. **Create a new issue documenting your findings:**
+5. **Create a new issue documenting your findings:**
    - Use clear, structured format with sections for completed work, gaps, and recommendations
    - If original issue provided, follow its structure and format
    - Include checkboxes: checked for completed work, unchecked for remaining tasks
    - Include original parts of the old issue, then add new sections for your findings
    - **Must include "Evidence Sources" section** documenting where each finding was discovered
 
-7. **Link and reference appropriately:**
+6. **Link and reference appropriately:**
    - If original issue provided, link the new issue using GitHub references (e.g., "Related to #123")
    - Reference specific commits, files, and branches in your analysis
    - Include links to relevant documentation or external resources
 
-8. **Provide evidence and methodology:**
+7.  **Provide evidence and methodology:**
    - List all tools and sources used to make your determination
    - Include specific commands run and files analyzed
    - Document the branch with latest commits and the branch with most work completed
    - Include any assumptions or limitations in your analysis
 
-9. **Quality validation:**
+8.  **Quality validation:**
    - Review your analysis for completeness and accuracy
    - Ensure all major project components have been examined
    - Verify that recommendations are actionable and specific
