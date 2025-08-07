@@ -1,0 +1,53 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "AI Context: General Coding",
+      "type": "shell",
+      "command": "code",
+      "args": [
+        ".gemini/GEMINI.md",
+        "ai_instruction_modules/ai-task-based-workflow.md",
+        "ai_instruction_modules/ai-application-guidelines.md",
+        "ai_instruction_modules/ai-instructions-aspnet-guidelines.md"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "never"
+      },
+      "detail": "Opens the core instruction files for a general coding task."
+    },
+    {
+      "label": "AI Context: Testing",
+      "type": "shell",
+      "command": "code",
+      "args": [
+        ".gemini/GEMINI.md",
+        "ai_instruction_modules/ai-testing-validation.md",
+        "ai_instruction_modules/ai-task-based-workflow.md"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "never"
+      },
+      "detail": "Opens instruction files relevant to writing and validating tests."
+    },
+    {
+      "label": "AI Context: New Application",
+      "type": "shell",
+      "command": "code",
+      "args": [
+        ".gemini/GEMINI.md",
+        "ai_instruction_modules/ai-new-app-template.md",
+        "ai_instruction_modules/ai-design-principles.md"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "never"
+      },
+      "detail": "Opens instruction files for creating a new application from scratch."
+    }
+  ]
+}
