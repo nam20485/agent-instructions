@@ -1,0 +1,13 @@
+{
+  "name": "agent-instructions",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Dummy package manifest to enable CI caching of Node tooling; replace with real dependencies when needed.",
+  "license": "UNLICENSED",
+  "scripts": {
+    "env:summary": "node -e \"console.log('Environment OK')\""
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
