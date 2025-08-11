@@ -63,5 +63,6 @@ body: |
 ### Done Definition
 - All phases represented
 - Each sub-issue actionable, unambiguous, testable
- - Parent reflects structure & links
+- Parent reflects structure & links
+
 
