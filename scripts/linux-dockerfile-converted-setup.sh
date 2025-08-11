@@ -137,7 +137,7 @@ fi
 if ! echo "$DOTNET_VER" | grep -q '^9\.'; then
   echo "Installing .NET 9 SDK locally (dotnet-install script)"
   curl -sSL https://dot.net/v1/dotnet-install.sh -o /tmp/dotnet-install.sh
-  bash /tmp/dotnet-install.sh --channel 9.0 --install-dir "$HOME/.dotnet" --no-path || true
+  bash /tmp/dotnet-install.sh --channel 9.0 --install-dir "$HOME/.dotnet" --no-path
   export PATH="$HOME/.dotnet:$PATH"
 fi
 if command -v dotnet >/dev/null 2>&1; then

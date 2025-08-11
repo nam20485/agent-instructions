@@ -39,4 +39,11 @@
 - **Labels**: `assigned:copilot`, `state:in-progress` 
 - **Branches**: `issues/<number>-<description>` from `copilot` branch
 - **PR Requirements**: Assign nam20485 as reviewer, add `/Closes #<issue_number>` and `/gemini review`
-- **Commits**: Include issue reference, use format: `type: description \n\n- changes\n\n/Closes #<number>`
+- **Commits**: Include issue reference, use format:
+  ```markdown
+  type: description
+
+  - changes
+
+  /Closes #<number>
+  ```
