@@ -19,7 +19,7 @@ Resolve **ALL (100%)** PR comments and get the PR approved. You must ensure that
 
 1. All PR comments resolved by fixing the respective issue described.
 2. All code changes made to resolve PR comments.
-3. All code chages committed to the PR branch. (**DON"T FORGET TO CHECKOUT THE PR BRANCH (BEFORE MAKING ANY CHANGES)!**)
+3. All code changes committed to the PR branch. (**DON'T FORGET TO CHECKOUT THE PR BRANCH (BEFORE MAKING ANY CHANGES)!**)
 4. Comment added to PR describing each review comment you fixed and how.
 5. All PR Review Comment Threads marked as resolved.
 
