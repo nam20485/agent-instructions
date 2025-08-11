@@ -11,8 +11,8 @@ Your goal is to create a plan for application based on a filled-out application 
 1. Application template has been thoroughly analyzed and understood
 2. Plan's project structure has been created according to established guidelines and plan
 3. Plan contains detailed breakdown of all phases required to achieve complete implementation.
-4. All phases list important steps required to achieve completion fo that phase.
-4. All required components and dependencies have been planned.
+4. All phases list important steps required to achieve completion of that phase.
+5. All required components and dependencies have been planned.
 5. Application plan follows the specified technology stack and design principles
 6. All mandatory application requirements have been addressed in plan. (testing, documentation, containerization, etc.)
 7. All acceptance criteria from the template have been addressed in the plan.
