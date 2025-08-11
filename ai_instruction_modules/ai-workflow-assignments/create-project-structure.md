@@ -110,5 +110,5 @@ It is important to the final quality of our product for everyone to perform thei
 3. **Finalization:**
    - Mark the project structure creation as complete once approved
    - Ensure all team members have access to the repository
-   <!-- - After approval, assign a copilot the breakdown-issue.md assignment to each 
+   <!-- - After approval, assign a copilot the breakdown-issue.md assignment to each -->
    - Ask the stakeholder for your next assignment 

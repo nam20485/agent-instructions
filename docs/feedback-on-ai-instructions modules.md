@@ -49,8 +49,5 @@ Here are specific points to consider for your modules.
 By applying this structured analysis, you can further enhance your already impressive AI instruction framework, leading to even more consistent and high-quality results.
 
 I have created the two feedback documents. Please let me know if you'd like me to apply any of the suggested changes to your instruction files.
-<!--
-[PROMPT_SUGGESTION]Apply the suggested improvements to my `GEMINI.md` file.[/PROMPT_SUGGESTION]
-[PROMPT_SUGGESTION]Based on your feedback, how would you rewrite the `ai-application-guidelines.md` file to be more effective?[/PROMPT_SUGGESTION]
 
 Gemini Code Assist supports plain-text files. Other file types, like PDFs and images, are not directly supported at this time. If a version of the file is available in a plain text format, please use that instead, or copy the relevant contents from the file into your prompt.

@@ -9,7 +9,7 @@ I have systematically addressed all unresolved PR review comments from the revie
 4. **tasks.json** - Fixed broken file references (.gemini/GEMINI.md → .github/copilot-instructions.md)
 5. **.github/copilot-instructions.md** - Fixed formatting (trailing spaces, repos→repo)
 6. **ai_instruction_modules/ai-chat-assistant-specific-pointer.md** - Fixed same formatting issues
-7. **ai_instruction_modules/ai-core-instructions.md** - Fixed 'create-applicaiton'→'create-application'
+7. **ai_instruction_modules/ai-core-instructions.md** - Fixed 'create-application'→'create-application'
 
 ### Process:
 - Each fix was committed individually with descriptive commit messages

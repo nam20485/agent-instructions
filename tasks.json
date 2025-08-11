@@ -47,8 +47,8 @@
       "presentation": {
         "reveal": "never"
       },
-	      "detail": "Opens instruction files for creating a new application from scratch."
-	    },
+	    "detail": "Opens instruction files for creating a new application from scratch."      
+    },
     {
       "label": "PR Threads: Summarize (No Resolve)",
       "type": "shell",

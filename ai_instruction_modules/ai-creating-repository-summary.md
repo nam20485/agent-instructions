@@ -119,3 +119,4 @@ This project is a web application that allows users to manage their tasks and to
 - React and Tailwind CSS for the frontend.
 - Node.js and Express for the backend.
 - MongoDB for data storage.
+```
