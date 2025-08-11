@@ -13,12 +13,12 @@ Your goal is to create a plan for application based on a filled-out application 
 3. Plan contains detailed breakdown of all phases required to achieve complete implementation.
 4. All phases list important steps required to achieve completion of that phase.
 5. All required components and dependencies have been planned.
-5. Application plan follows the specified technology stack and design principles
-6. All mandatory application requirements have been addressed in plan. (testing, documentation, containerization, etc.)
-7. All acceptance criteria from the template have been addressed in the plan.
-8. All risks and mitigations identified.
-9. Code quality standards and best practices have been followed
-10. Application plan is ready for development and implementation.
+6. Application plan follows the specified technology stack and design principles
+7. All mandatory application requirements have been addressed in plan. (testing, documentation, containerization, etc.)
+8. All acceptance criteria from the template have been addressed in the plan.
+9. All risks and mitigations identified.
+10. Code quality standards and best practices have been followed
+11. Application plan is ready for development and implementation.
    
 ### Assignment
 

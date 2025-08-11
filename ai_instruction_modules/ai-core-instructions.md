@@ -114,7 +114,7 @@ These sections describe modules to use when you have been given an assignemtn or
 ##### Workflow Processes
 - Read these when assigned a specific workflow process.
 - Also read these when assigned a specific workflow role.
-- In the context of a workflow role assigbnment:
+- In the context of a workflow role assignment:
   - You are expected to follow these rules as a general guide. 
   - The rules from your workflow role assignment take precedence.
 - [ai-task-based-workflow.md](./ai-task-based-workflow.md)
