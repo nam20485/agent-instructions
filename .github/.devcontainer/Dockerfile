@@ -43,7 +43,7 @@ RUN apt-get update && apt-get install -y \
 
 # Set up Python 3 as default python and install latest pip
 RUN ln -sf /usr/bin/python3 /usr/bin/python \
-    && python -m pip install --upgrade pip --break-system-packages
+    && python -m pip install --upgrade --user pip
 
 # =============================================================================
 # NODE.JS & JAVASCRIPT DEVELOPMENT
@@ -128,7 +128,8 @@ ENV PATH="$NVM_DIR/versions/node/$(ls $NVM_DIR/versions/node)/bin/:$PATH"
 
 # Install .NET WebAssembly workloads for Blazor development as root
 RUN dotnet workload update \
-    && dotnet workload install wasm-tools
+    && dotnet workload install wasm-tools \
+    && dotnet workload install aspire
 
 RUN dotnet new install Aspire.ProjectTemplates
 

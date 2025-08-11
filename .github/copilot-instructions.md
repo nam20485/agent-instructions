@@ -11,7 +11,7 @@
 - Then follow the links from the core instructions to the other instruction files
 - Some files are **REQUIRED** and some are **OPTIONAL**
 - Files marked **REQUIRED** are ALWAYS active and so must be followed and read
-- Othewise files are optionally active based on user needs and your assigned roles and workflow assignments
+- Otherwise files are optionally active based on user needs and your assigned roles and workflow assignments
 
 ## Core Instructions (**REQUIRED**)
 [ai-core-instructions.md](https://github.com/nam20485/agent-instructions/blob/main/ai_instruction_modules/ai-core-instructions.md)
