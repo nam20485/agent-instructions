@@ -30,29 +30,29 @@ function Install-ChocoPackage {
     }
 }
 
-# Node.js 22.x (Chocolatey package may lag; use official installer if needed)
-function Install-Node22 {
-    if (Get-Command node -ErrorAction SilentlyContinue) {
-        $current = (node -v)
-        if ($current -like 'v22*') {
-            Write-Host "Node $current present."
-            return
-        } else {
-            Write-Host "Updating Node to v22 (current $current)."
-        }
-    } else {
-        Write-Host 'Installing Node v22.'
-    }
-    $installer = "$env:TEMP\node-v22-x64.msi"
-    Invoke-WebRequest -Uri "https://nodejs.org/dist/latest-v22.x/node-v22.2.0-x64.msi" -OutFile $installer
-    Start-Process msiexec.exe -Wait -ArgumentList "/i `"$installer`" /qn /norestart"
-    Remove-Item $installer -Force
-}
+# # Node.js 22.x (Chocolatey package may lag; use official installer if needed)
+# function Install-Node22 {
+#     if (Get-Command node -ErrorAction SilentlyContinue) {
+#         $current = (node -v)
+#         if ($current -like 'v22*') {
+#             Write-Host "Node $current present."
+#             return
+#         } else {
+#             Write-Host "Updating Node to v22 (current $current)."
+#         }
+#     } else {
+#         Write-Host 'Installing Node v22.'
+#     }
+#     $installer = "$env:TEMP\node-v22-x64.msi"
+#     Invoke-WebRequest -Uri "https://nodejs.org/dist/latest-v22.x/node-v22.2.0-x64.msi" -OutFile $installer
+#     Start-Process msiexec.exe -Wait -ArgumentList "/i `"$installer`" /qn /norestart"
+#     Remove-Item $installer -Force
+# }
 
-Write-Host '[1/8] Ensuring Node.js 22.x'
-Install-Node22
-Write-Host 'Upgrading npm to latest'
-try { npm install -g npm@latest --no-audit --no-fund | Out-Null } catch { Write-Warning $_ }
+# Write-Host '[1/8] Ensuring Node.js 22.x'
+# Install-Node22
+# Write-Host 'Upgrading npm to latest'
+# try { npm install -g npm@latest --no-audit --no-fund | Out-Null } catch { Write-Warning $_ }
 
 Write-Host 'Enabling Corepack (pnpm & yarn)'
 if (Get-Command corepack -ErrorAction SilentlyContinue) {

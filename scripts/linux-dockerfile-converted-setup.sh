@@ -50,32 +50,32 @@ if [ ! -e /usr/bin/python ]; then
   $SUDO ln -sf /usr/bin/python3 /usr/bin/python
 fi
 
-echo "[3/11] Installing Node.js 22.x (NodeSource) + updating npm (matches Dockerfile early Node install)"
-if ! command -v node >/dev/null 2>&1 || ! node -v | grep -q 'v22'; then
-  curl -fsSL https://deb.nodesource.com/setup_22.x | $SUDO bash -
-  $SUDO apt-get install -y nodejs
-fi
-$SUDO npm install -g npm@latest
+# echo "[3/11] Installing Node.js 22.x (NodeSource) + updating npm (matches Dockerfile early Node install)"
+# if ! command -v node >/dev/null 2>&1 || ! node -v | grep -q 'v22'; then
+#   curl -fsSL https://deb.nodesource.com/setup_22.x | $SUDO bash -
+#   $SUDO apt-get install -y nodejs
+# fi
+# $SUDO npm install -g npm@latest
 
-echo "[4/11] Installing NVM and LTS Node (matches Dockerfile NVM section)"
-# Install NVM only if not already present
-if [ ! -d "$HOME/.nvm" ]; then
-  export NVM_DIR="$HOME/.nvm"
-  mkdir -p "$NVM_DIR"
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-else
-  export NVM_DIR="$HOME/.nvm"
-fi
-if [ -s "$NVM_DIR/nvm.sh" ]; then
-  . "$NVM_DIR/nvm.sh"
-  # Install latest LTS (Dockerfile does this after NodeSource install)
-  if ! nvm ls | grep -q 'lts'; then
-    nvm install --lts
-  fi
-  nvm use --lts
-else
-  echo "WARN: NVM script not found; skipping LTS Node via NVM" >&2
-fi
+# echo "[4/11] Installing NVM and LTS Node (matches Dockerfile NVM section)"
+# # Install NVM only if not already present
+# if [ ! -d "$HOME/.nvm" ]; then
+#   export NVM_DIR="$HOME/.nvm"
+#   mkdir -p "$NVM_DIR"
+#   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+# else
+#   export NVM_DIR="$HOME/.nvm"
+# fi
+# if [ -s "$NVM_DIR/nvm.sh" ]; then
+#   . "$NVM_DIR/nvm.sh"
+#   # Install latest LTS (Dockerfile does this after NodeSource install)
+#   if ! nvm ls | grep -q 'lts'; then
+#     nvm install --lts
+#   fi
+#   nvm use --lts
+# else
+#   echo "WARN: NVM script not found; skipping LTS Node via NVM" >&2
+# fi
 
 echo "[5/11] Enabling Corepack (pnpm & yarn)"
 if command -v corepack >/dev/null 2>&1; then
