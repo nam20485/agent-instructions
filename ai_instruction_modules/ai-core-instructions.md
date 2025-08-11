@@ -1,13 +1,14 @@
 # Core Instructions
 
 ## Persona & Scope
-* Expert engineer:
+* You are an Expert engineer in the following technologies:
   * C# 
   * ASP.NET Core APIs
   * Blazor WASM
   * Google Cloud (deployment + config)
   * Docker
-  * VS Code 
+  * VS Code
+  * REST API 
 * Cite authoritative docs for non-trivial recommendations.
 
 ## Hierarchy (Conflict Resolution)
@@ -26,33 +27,6 @@
 - Large refactors or new major deps without approval
 - Speculative features outside scope
 - Skip validation steps
-
-## More Core Modules (required: always read!)
-- [ai-executive-summary.md](../ai_instruction_modules/ai-executive-summary.md)
-- [ai-personal-preferences.md](../ai_instruction_modules/ai-personal-preferences.md)
-
-## Active Modules (uncommented required)
-- [ai-quick-reference.md](../ai_instruction_modules/ai-quick-reference.md) 
-- [ai-terminal-management.md](../ai_instruction_modules/ai-terminal-management.md)
-- [ai-workflow-config.md](../ai_instruction_modules/ai-workflow-config.md)
-- [ai-task-based-workflow.md](../ai_instruction_modules/ai-task-based-workflow.md)
-- [ai-workflow-roles.md](../ai_instruction_modules/ai-workflow-roles.md)
-- [ai-workflow-assignments.md](../ai_instruction_modules/ai-workflow-assignments.md)
-- [ai-testing-validation.md](../ai_instruction_modules/ai-testing-validation.md)
-- [ai-application-guidelines.md](../ai_instruction_modules/ai-application-guidelines.md)
-- [ai-instructions-aspnet-guidelines.md](../ai_instruction_modules/ai-instructions-aspnet-guidelines.md)
-- [ai-design-principles.md](../ai_instruction_modules/ai-design-principles.md)
-- [ai-deployment-environment.md](../ai_instruction_modules/ai-deployment-environment.md)
-- [ai-tools-config.md](../ai_instruction_modules/ai-tools-config.md)
-- [ai-local-environment.md](../ai_instruction_modules/ai-local-environment.md)
-
-<!-- 
-Optional (enable when uncommented)
-- ai-instructions-aspnet-abp.md
-- ai-retrospective-evolving-memory.md
-- ai-deployment-process.md
--->
-
 ## Change Flow
 1. Context gather (search/read)
 2. Plan (bullets)
@@ -85,5 +59,86 @@ Optional (enable when uncommented)
 
 ## Documentation
 - Update README / issues when behavior or setup changes
+
+## More AI Instructions Modules
+
+### Required Modules (always read!)
+
+#### More Core Modules (**REQUIRED**: always read!)
+- [ai-executive-summary.md](./ai-executive-summary.md)
+- [ai-personal-preferences.md](./ai-personal-preferences.md)
+- [ai-quick-reference.md](./ai-quick-reference.md)
+- [ai-workflow-config.md](./ai-workflow-config.md)
+
+### Optional Modules
+
+#### Terminal Management
+Use this when working with the terminal
+- [ai-terminal-management.md](.ai-terminal-management.md)
+
+#### Test and Validation
+Use this when:
+- writing or running tests
+- validating builds
+- validating Docker builds
+- creating CI / CD pipelines
+- [ai-testing-validation.md](./ai-testing-validation.md)
+
+#### Application Development
+Use these when creating a new application or updating an existing one.
+This includes:
+- creating a new application from scratch
+- adding new features to an existing application
+- refactoring an existing application
+- creating a new application or feature plan
+
+##### General Application Development
+- [ai-application-guidelines.md](./ai-application-guidelines.md)
+- [ai-design-principles.md](./ai-design-principles.md)
+
+##### ASP.NET Core Application Development
+- [ai-instructions-aspnet-guidelines.md](./ai-instructions-aspnet-guidelines.md)
+
+#### Deployment
+Use this as an example of how to configure a deployment environment.
+- It uses a specific application called `AgentAsAService`, but you can use it as a template for your own application.
+- [ai-deployment-environment.md](./ai-deployment-environment.md)
+
+#### Tools and Environment Setup
+Use this when setting up a local development environment or configuring a deployment environment, or when working with tools and their configuration, or when determining what tools you have avaiallble to comlete a task.
+- [ai-tools-config.md](./ai-tools-config.md)
+- [ai-local-environment.md](./ai-local-environment.md)
+- 
+#### Workflows
+These sections describe modules to use when you have been given an assignemtn or role.
+
+##### Workflow Processes
+- Read these when assigned a specific workflow process.
+- Also read these when assigned a specific workflow role.
+- In the context of a workflow role assigbnment:
+  - You are expected to follow these rules as a general guide. 
+  - The rules from your workflow role assignment take precedence.
+- [ai-task-based-workflow.md](./ai-task-based-workflow.md)
+
+##### Workflow Roles
+Read these when assigned a specific workflow role.
+- [ai-workflow-roles.md](./ai-workflow-roles.md)
+
+##### Workflow Assignments
+Read these when assigned a specific workflow assignment.
+- [ai-workflow-assignments.md](./ai-workflow-assignments.md)
+
+#### New application
+This section describes your new application template used when assigned the `create-applicaiton` assignment.
+- [ai-new-app-template.md](./ai-new-app-template.md)
+
+
+
+<!-- 
+Optional (enable when uncommented)
+- ai-instructions-aspnet-abp.md
+- ai-retrospective-evolving-memory.md
+- ai-deployment-process.md
+-->
 
 End of file.

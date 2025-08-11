@@ -28,4 +28,14 @@
 - [ ] Updated memory with new insights?
 - [ ] Considered ASP.NET Core + Google Cloud context?
 
+## Testing & Validation
+- Use the TDD (Test-Driven Development) approach for all code changes.
+- Write unit tests before implementing new features or changes.
+- Iterate, cycling between writing tests and code until the feature is complete.
+- Coverage should be substantial, aiming for at least 80% coverage.
+- Always run `dotnet build` before suggesting changes are complete
+- Use `dotnet test` for unit test validation  
+Refer to [ai-testing-validation.md](./ai-testing-validation.md) for more details.
+
+
 *Reference: See `.ai-workflow-config.md` for complete guidelines*
