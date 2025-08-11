@@ -8,6 +8,7 @@ This is an AI instruction modules repository containing comprehensive guidance f
 
 ## Technology Stack & Architecture
 
+
 ### Core Technologies
 - **.NET 9.0.102** (specified in global.json) with WebAssembly workloads
 - **ASP.NET Core Web API** (full controllers, not minimal API)
