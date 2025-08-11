@@ -1,0 +1,95 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "AI Context: General Coding",
+      "type": "shell",
+      "command": "code",
+      "args": [
+        ".github/copilot-instructions.md",
+        "ai_instruction_modules/ai-task-based-workflow.md",
+        "ai_instruction_modules/ai-application-guidelines.md",
+        "ai_instruction_modules/ai-instructions-aspnet-guidelines.md"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "never"
+      },
+      "detail": "Opens the core instruction files for a general coding task."
+    },
+    {
+      "label": "AI Context: Testing",
+      "type": "shell",
+      "command": "code",
+      "args": [
+        ".github/copilot-instructions.md",
+        "ai_instruction_modules/ai-testing-validation.md",
+        "ai_instruction_modules/ai-task-based-workflow.md"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "never"
+      },
+      "detail": "Opens instruction files relevant to writing and validating tests."
+    },
+    {
+      "label": "AI Context: New Application",
+      "type": "shell",
+      "command": "code",
+      "args": [
+        ".github/copilot-instructions.md",
+        "ai_instruction_modules/ai-new-app-template.md",
+        "ai_instruction_modules/ai-design-principles.md"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "never"
+      },
+	    "detail": "Opens instruction files for creating a new application from scratch."      
+    },
+    {
+      "label": "PR Threads: Summarize (No Resolve)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy","Bypass",
+        "-File","query.ps1",
+        "-NoResolve",
+        "-VerboseLogging"
+      ],
+      "problemMatcher": [],
+      "presentation": { "reveal": "always" },
+      "detail": "Generates a markdown summary of current PR review threads without resolving them."
+    },
+    {
+      "label": "PR Threads: Resolve All",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy","Bypass",
+        "-File","query.ps1"
+      ],
+      "problemMatcher": [],
+      "presentation": { "reveal": "always" },
+      "detail": "Resolves all unresolved threads on the default PR (#3) and updates summary file."
+    },
+    {
+      "label": "PR Threads: Dry Run IDs",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy","Bypass",
+        "-File","query.ps1",
+        "-DryRun"
+      ],
+      "problemMatcher": [],
+      "presentation": { "reveal": "always" },
+      "detail": "Lists unresolved thread IDs without resolving them."
+    }
+  ]
+}
