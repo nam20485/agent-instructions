@@ -25,7 +25,7 @@ else
   SUDO=""
 fi
 
-echo "[1/9] Installing base system packages"
+echo "[1/11] Installing base system packages"
 $SUDO apt-get update -y
 $SUDO apt-get install -y \
   build-essential \
@@ -45,19 +45,39 @@ $SUDO apt-get install -y \
   python3-pip \
   python3-venv
 
-echo "[2/9] Ensuring 'python' points to python3"
+echo "[2/11] Ensuring 'python' points to python3"
 if [ ! -e /usr/bin/python ]; then
   $SUDO ln -sf /usr/bin/python3 /usr/bin/python
 fi
 
-echo "[3/9] Installing Node.js 22.x (NodeSource) + updating npm"
+echo "[3/11] Installing Node.js 22.x (NodeSource) + updating npm (matches Dockerfile early Node install)"
 if ! command -v node >/dev/null 2>&1 || ! node -v | grep -q 'v22'; then
   curl -fsSL https://deb.nodesource.com/setup_22.x | $SUDO bash -
   $SUDO apt-get install -y nodejs
 fi
 $SUDO npm install -g npm@latest
 
-echo "Enabling Corepack (pnpm & yarn)"
+echo "[4/11] Installing NVM and LTS Node (matches Dockerfile NVM section)"
+# Install NVM only if not already present
+if [ ! -d "$HOME/.nvm" ]; then
+  export NVM_DIR="$HOME/.nvm"
+  mkdir -p "$NVM_DIR"
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+else
+  export NVM_DIR="$HOME/.nvm"
+fi
+if [ -s "$NVM_DIR/nvm.sh" ]; then
+  . "$NVM_DIR/nvm.sh"
+  # Install latest LTS (Dockerfile does this after NodeSource install)
+  if ! nvm ls | grep -q 'lts'; then
+    nvm install --lts
+  fi
+  nvm use --lts
+else
+  echo "WARN: NVM script not found; skipping LTS Node via NVM" >&2
+fi
+
+echo "[5/11] Enabling Corepack (pnpm & yarn)"
 if command -v corepack >/dev/null 2>&1; then
   corepack enable || true
   corepack prepare pnpm@latest --activate || true
@@ -70,7 +90,7 @@ else
   echo "corepack not found; skipping pnpm/yarn activation" >&2
 fi
 
-echo "[4/9] Installing PowerShell"
+echo "[6/11] Installing PowerShell"
 if ! command -v pwsh >/dev/null 2>&1; then
   wget -q "https://packages.microsoft.com/config/debian/12/packages-microsoft-prod.deb" -O packages-microsoft-prod.deb
   $SUDO dpkg -i packages-microsoft-prod.deb
@@ -79,7 +99,7 @@ if ! command -v pwsh >/dev/null 2>&1; then
   $SUDO apt-get install -y powershell
 fi
 
-echo "[5/9] Installing Google Cloud CLI"
+echo "[7/11] Installing Google Cloud CLI"
 if ! command -v gcloud >/dev/null 2>&1; then
   echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | $SUDO tee /etc/apt/sources.list.d/google-cloud-sdk.list
   curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor | $SUDO tee /usr/share/keyrings/cloud.google.gpg >/dev/null
@@ -87,7 +107,7 @@ if ! command -v gcloud >/dev/null 2>&1; then
   $SUDO apt-get install -y google-cloud-cli
 fi
 
-echo "[6/9] Installing GitHub CLI (gh)"
+echo "[8/11] Installing GitHub CLI (gh)"
 if ! command -v gh >/dev/null 2>&1; then
   curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | $SUDO dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
   $SUDO chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
@@ -96,7 +116,7 @@ if ! command -v gh >/dev/null 2>&1; then
   $SUDO apt-get install -y gh
 fi
 
-echo "[7/9] Installing Terraform"
+echo "[9/11] Installing Terraform"
 if ! command -v terraform >/dev/null 2>&1; then
   wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | $SUDO tee /usr/share/keyrings/hashicorp-archive-keyring.gpg >/dev/null
   echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | $SUDO tee /etc/apt/sources.list.d/hashicorp.list
@@ -104,10 +124,22 @@ if ! command -v terraform >/dev/null 2>&1; then
   $SUDO apt-get install -y terraform
 fi
 
-echo "[8/9] Installing global npm CLI tools"
+echo "[10/11] Installing global npm CLI tools (firebase-tools, angular, CRA, typescript, eslint, prettier)"
 $SUDO npm install -g firebase-tools @angular/cli create-react-app typescript eslint prettier
 
-echo "[9/9] (Optional) Installing .NET workloads (wasm-tools, aspire)"
+echo "[11/11] Ensuring .NET 9 SDK and workloads (wasm-tools, aspire)"
+# If dotnet missing or major version < 9, install via dotnet-install script
+if command -v dotnet >/dev/null 2>&1; then
+  DOTNET_VER=$(dotnet --version || echo "0")
+else
+  DOTNET_VER="0"
+fi
+if ! echo "$DOTNET_VER" | grep -q '^9\.'; then
+  echo "Installing .NET 9 SDK locally (dotnet-install script)"
+  curl -sSL https://dot.net/v1/dotnet-install.sh -o /tmp/dotnet-install.sh
+  bash /tmp/dotnet-install.sh --channel 9.0 --install-dir "$HOME/.dotnet" --no-path || true
+  export PATH="$HOME/.dotnet:$PATH"
+fi
 if command -v dotnet >/dev/null 2>&1; then
   set +e
   dotnet workload update || true

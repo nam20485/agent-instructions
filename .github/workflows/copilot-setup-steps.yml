@@ -1,115 +1,28 @@
 name: "Copilot Setup Steps - Using Devcontainer Prebuild"
 
-# This workflow now uses the prebuild devcontainer image for faster setup
 on:
-  workflow_dispatch:  
-
-# env:
-#   DOTNET_VERSION: "9.0.102"
-#   NODE_VERSION: "22"
-#   POWERSHELL_VERSION: "7.4.x"
-#   DEVCONTAINER_IMAGE: "ghcr.io/${{ github.repository }}-devcontainer:latest"
+  workflow_dispatch:
 
 jobs:
-  # The job MUST be called `copilot-setup-steps` or it will not be picked up by Copilot.
   copilot-setup-steps:
     runs-on: ubuntu-22.04
-    # container:
-    #   image: ghcr.io/agent-instructions-devcontainer:latest
-    #   credentials:
-    #     username: ${{ github.actor }}
-    #     password: ${{ secrets.GITHUB_TOKEN }}
-      
-    # Set the permissions to the lowest permissions possible needed for your steps.
-    # Copilot will be given its own token for its operations.
     permissions:
-      # Enhanced permissions for comprehensive development environment setup
       contents: read
       actions: read
       packages: read
-
-    # The devcontainer image already has all tools installed
-    # We only need to validate and perform project-specific setup
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Full history for better analysis
-
-      - name: Cache pip
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/pip
-          key: pip-${{ runner.os }}-${{ hashFiles('**/requirements.txt', '**/pyproject.toml') }}
-          restore-keys: |
-            pip-${{ runner.os }}-
-
-      - name: Setup Node 22 & enable npm cache
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-          cache: 'npm'
-
-      - name: Setup Yarn cache
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-          cache: 'yarn'
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: latest
-          run_install: false
-
-      - name: Cache pnpm store
-        uses: actions/cache@v4
-        with:
-          path: ~/.local/share/pnpm/store
-          key: pnpm-store-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            pnpm-store-${{ runner.os }}-
-
-      - name: Cache npm (fallback for global installs)
-        uses: actions/cache@v4
-        with:
-          path: ~/.npm
-          key: npm-${{ runner.os }}-${{ hashFiles('**/package-lock.json', '**/pnpm-lock.yaml', '**/yarn.lock') }}
-          restore-keys: |
-            npm-${{ runner.os }}-
-
-      - name: Cache NuGet
-        uses: actions/cache@v4
-        with:
-          path: ~/.nuget/packages
-          key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj', '**/*.fsproj', '**/packages.lock.json') }}
-          restore-keys: |
-            nuget-${{ runner.os }}-
-
-      - name: Cache Terraform plugins
-        uses: actions/cache@v4
-        with:
-          path: ~/.terraform.d/plugin-cache
-          key: terraform-${{ runner.os }}
-          restore-keys: |
-            terraform-${{ runner.os }}
-
-      # container doesn't work- setup environment via script
-      - name: Convert Dockerfile environment (Linux setup)
+          fetch-depth: 0
+      - name: Convert Dockerfile environment (Linux setup script)
         shell: bash
         run: |
           chmod +x scripts/linux-dockerfile-converted-setup.sh
           scripts/linux-dockerfile-converted-setup.sh
-
-      - name: Setup .NET 9 SDK
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '9.0.x'
-
-      - name: Setup Script
+      - name: Post-setup PowerShell script
         shell: pwsh
         run: |
-          echo "Running script..."
           ./scripts/copilot-setup-steps-linux.ps1
 
   windows-setup:
@@ -119,63 +32,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - name: Setup Node 22 & cache
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-          cache: 'npm'
-
-      - name: Setup Yarn cache (Windows)
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-          cache: 'yarn'
-
-      - name: Setup pnpm (Windows)
-        uses: pnpm/action-setup@v4
-        with:
-          version: latest
-          run_install: false
-
-      - name: Cache pnpm store (Windows)
-        uses: actions/cache@v4
-        with:
-          path: ~\AppData\Local\pnpm\store
-          key: pnpm-store-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            pnpm-store-${{ runner.os }}-
-
-      - name: Cache npm (global installs)
-        uses: actions/cache@v4
-        with:
-          path: ~\AppData\Roaming\npm-cache
-          key: npm-${{ runner.os }}-${{ hashFiles('**/package-lock.json', '**/pnpm-lock.yaml', '**/yarn.lock') }}
-          restore-keys: |
-            npm-${{ runner.os }}-
-
-      - name: Cache NuGet
-        uses: actions/cache@v4
-        with:
-          path: ~\AppData\Local\NuGet\v3-cache
-          key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj', '**/*.fsproj', '**/packages.lock.json') }}
-          restore-keys: |
-            nuget-${{ runner.os }}-
-
-      - name: Cache Terraform plugins
-        uses: actions/cache@v4
-        with:
-          path: ~\AppData\Roaming\terraform.d\plugin-cache
-          key: terraform-${{ runner.os }}
-          restore-keys: |
-            terraform-${{ runner.os }}
-
-      - name: Setup .NET 9 SDK
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '9.0.x'
-
-      - name: Run Windows environment setup
+      - name: Run Windows environment setup script
         shell: pwsh
         run: |
           Set-ExecutionPolicy Bypass -Scope Process -Force

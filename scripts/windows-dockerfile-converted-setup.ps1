@@ -86,13 +86,24 @@ foreach ($pkg in $globalTools) {
 }
 
 Write-Host '[7/8] Optional .NET workloads'
-if (Get-Command dotnet -ErrorAction SilentlyContinue) {
-    try { dotnet workload update } catch { Write-Warning $_ }
-    foreach ($wl in 'wasm-tools','aspire') {
-        try { dotnet workload install $wl } catch { Write-Warning "Workload $wl install warning: $_" }
-    }
-} else {
-    Write-Warning 'dotnet not found; skipping workloads.'
+if (-not (Get-Command dotnet -ErrorAction SilentlyContinue)) {
+    Write-Host 'dotnet not found; installing .NET 9 SDK (user-local)' -ForegroundColor Yellow
+    $dotnetInstall = Join-Path $env:TEMP 'dotnet-install.ps1'
+    Invoke-WebRequest -Uri 'https://dot.net/v1/dotnet-install.ps1' -OutFile $dotnetInstall
+    & powershell -ExecutionPolicy Bypass -File $dotnetInstall -Channel 9.0 -InstallDir "$env:USERPROFILE\.dotnet" -NoPath || Write-Warning 'dotnet install script encountered issues.'
+    $env:PATH = "$env:USERPROFILE\.dotnet;$env:PATH"
+}
+try { $ver = (dotnet --version) } catch { $ver = '0' }
+if ($ver -notlike '9.*') {
+    Write-Host "Ensuring .NET 9 SDK via installer (current: $ver)" -ForegroundColor Yellow
+    $dotnetInstall = Join-Path $env:TEMP 'dotnet-install.ps1'
+    Invoke-WebRequest -Uri 'https://dot.net/v1/dotnet-install.ps1' -OutFile $dotnetInstall
+    & powershell -ExecutionPolicy Bypass -File $dotnetInstall -Channel 9.0 -InstallDir "$env:USERPROFILE\.dotnet" -NoPath || Write-Warning 'dotnet upgrade script encountered issues.'
+    $env:PATH = "$env:USERPROFILE\.dotnet;$env:PATH"
+}
+try { dotnet workload update } catch { Write-Warning $_ }
+foreach ($wl in 'wasm-tools','aspire') {
+    try { dotnet workload install $wl } catch { Write-Warning "Workload $wl install warning: $_" }
 }
 
 Write-Host '[8/8] Environment summary'
