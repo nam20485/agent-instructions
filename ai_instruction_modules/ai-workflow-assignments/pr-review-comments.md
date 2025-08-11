@@ -27,7 +27,7 @@ Resolve **ALL (100%)** PR comments and get the PR approved. You must ensure that
 
 You will provide a fix for each PR Review comment, commit the changes, reply to the comment with a description of the issue and the changes you made to fix it, and then mark it resolved. You will iterate on all of the comments doing this, until all PR Review Comments are resolved in this manner.
 
-*Note: If you find comments marked resolved when you start, this is OK. It just means that the comment was resolved in a previous iteration. More comments to address caould have been added in a new iteration. So, on ebery iteration, ignore previously-resolved comments and only address the ones that are not resolved. Make sure to address all comments that are not resolved.*
+*Note: If you find comments marked resolved when you start, this is OK. It just means that the comment was resolved in a previous iteration. More comments to address could have been added in a new iteration. So, on every iteration, ignore previously-resolved comments and only address the ones that are not resolved. Make sure to address all comments that are not resolved.*
 
 *Note: If you encounter comment thread marked as **OUTDATED**, then mark it resolved.*
 
