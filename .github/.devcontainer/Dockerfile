@@ -130,7 +130,7 @@ RUN dotnet workload update \
     && dotnet workload install wasm-tools \
     && dotnet workload install aspire
 
-RUN dotnet new install Aspire.ProjectTemplates
+#RUN dotnet new install Aspire.ProjectTemplates
 
 # Switch to vscode user for remaining operations
 #USER vscode
