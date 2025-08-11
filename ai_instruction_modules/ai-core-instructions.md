@@ -128,7 +128,7 @@ Read these when assigned a specific workflow assignment.
 - [ai-workflow-assignments.md](./ai-workflow-assignments.md)
 
 #### New application
-This section describes your new application template used when assigned the `create-applicaiton` assignment.
+This section describes your new application template used when assigned the `create-application` assignment.
 This section describes your new application template used when assigned the `create-application` assignment.
 
 
