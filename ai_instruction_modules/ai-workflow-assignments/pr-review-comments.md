@@ -115,7 +115,7 @@ Use this format for each individual reply:
 
 ### Completion
 
-Inform the stake-holder that the PR is ready for review and approval. Show them the comment you added summarizing the changes made and the comments resolved. Ask if they approve or need more changes on any of the comments you reolved. THERE SHOULD BE NO UNRESOVLED COMMENTS WHEN YOU ARE FINISHED!
+Inform the stake-holder that the PR is ready for review and approval. Show them the comment you added summarizing the changes made and the comments resolved. Ask if they approve or need more changes on any of the comments you resolved. THERE SHOULD BE NO UNRESOLVED COMMENTS WHEN YOU ARE FINISHED!
 
 ## Comment Resolution Method
 
