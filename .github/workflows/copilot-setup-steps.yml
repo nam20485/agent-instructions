@@ -5,34 +5,122 @@ on:
 
 jobs:
   copilot-setup-steps:
-    runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-22.04, windows-latest]
+    runs-on: ${{ matrix.os }}
     permissions:
       contents: read
       actions: read
       packages: read
+    env:
+      # Set a generic env var used only on Linux; Windows sets path inline
+      TF_PLUGIN_CACHE_DIR: ~/.terraform.d/plugin-cache
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Convert Dockerfile environment (Linux setup script)
+
+      # --- Language & tool caches (conditional per OS) ---
+      - name: Cache pip (Linux)
+        if: runner.os == 'Linux'
+        uses: actions/cache@v4
+        with:
+            path: ~/.cache/pip
+            key: pip-${{ runner.os }}-${{ hashFiles('**/requirements.txt', '**/pyproject.toml') }}
+            restore-keys: |
+              pip-${{ runner.os }}-
+
+      - name: Setup Node 22 with npm cache
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Setup Yarn cache
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'yarn'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
+          run_install: false
+
+      - name: Cache pnpm store (Linux)
+        if: runner.os == 'Linux'
+        uses: actions/cache@v4
+        with:
+          path: ~/.local/share/pnpm/store
+          key: pnpm-store-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            pnpm-store-${{ runner.os }}-
+
+      - name: Cache pnpm store (Windows)
+        if: runner.os == 'Windows'
+        uses: actions/cache@v4
+        with:
+          path: C:\Users\runneradmin\AppData\Local\pnpm\store
+          key: pnpm-store-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            pnpm-store-${{ runner.os }}-
+
+      - name: Cache NuGet packages (Linux)
+        if: runner.os == 'Linux'
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj', '**/*.fsproj', '**/packages.lock.json') }}
+          restore-keys: |
+            nuget-${{ runner.os }}-
+
+      - name: Cache NuGet packages (Windows)
+        if: runner.os == 'Windows'
+        uses: actions/cache@v4
+        with:
+          path: C:\Users\runneradmin\AppData\Local\NuGet\v3-cache
+          key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj', '**/*.fsproj', '**/packages.lock.json') }}
+          restore-keys: |
+            nuget-${{ runner.os }}-
+
+      - name: Cache Terraform plugins (Linux)
+        if: runner.os == 'Linux'
+        uses: actions/cache@v4
+        with:
+          path: ~/.terraform.d/plugin-cache
+          key: terraform-${{ runner.os }}
+          restore-keys: |
+            terraform-${{ runner.os }}
+
+      - name: Cache Terraform plugins (Windows)
+        if: runner.os == 'Windows'
+        uses: actions/cache@v4
+        with:
+          path: C:\Users\runneradmin\AppData\Roaming\terraform.d\plugin-cache
+          key: terraform-${{ runner.os }}
+          restore-keys: |
+            terraform-${{ runner.os }}
+
+      # --- Environment provisioning (scripts mirror Dockerfile) ---
+      - name: Run Linux environment setup script
+        if: runner.os == 'Linux'
         shell: bash
         run: |
           chmod +x scripts/linux-dockerfile-converted-setup.sh
           scripts/linux-dockerfile-converted-setup.sh
-      - name: Post-setup PowerShell script
+
+      - name: Post-setup PowerShell script (Linux ancillary)
+        if: runner.os == 'Linux'
         shell: pwsh
         run: |
           ./scripts/copilot-setup-steps-linux.ps1
 
-  windows-setup:
-    runs-on: windows-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
       - name: Run Windows environment setup script
+        if: runner.os == 'Windows'
         shell: pwsh
         run: |
           Set-ExecutionPolicy Bypass -Scope Process -Force
