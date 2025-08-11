@@ -1,20 +1,22 @@
 # Creating Repository Custom Instructions
 
-This file contains instructions for creating custom instructions for a repository.
+This file contains instructions for creating custom summary of a repository.
 
 ## Goal
 
-- Create custom instructions for a repository.
-- Place the custom instructions in the .github/copilot-instructions.md file.
+- Create custom summary of a repository.
+- Place the custom instructions in the `ai-repository-summary.md` file, located at the root of the repository.
 - Link to other instruction files as needed.
 
 ## Documentation
 
 - [Writing effective repository custom instructions](https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions?tool=webui#creating-a-repository-custom-instructions-file)
 
-## Instructions for Creating Repository Custom Instructions
+* Note: You are to write instructrions, but to use the instrucitons from the documentaiotn that are relevant to creating a summary of the properties of a repository.
 
-Your task is to "onboard" this repository to Copilot coding agent by adding a .github/copilot-instructions.md file in the repository that contains information describing how a coding agent seeing it for the first time can work most efficiently.
+## Instructions for Creating Repository Summary
+
+Your task is to "onboard" this repository to Copilot coding agent by adding a .`ai-repository-summary.md` file in the repository that contains information describing how a coding agent seeing it for the first time can work most efficiently.
 
 You will do this task only one time per repository and doing a good job can SIGNIFICANTLY improve the quality of the agent's work, so take your time, think carefully, and search thoroughly before writing the instructions.
 
@@ -119,15 +121,3 @@ This project is a web application that allows users to manage their tasks and to
 - React and Tailwind CSS for the frontend.
 - Node.js and Express for the backend.
 - MongoDB for data storage.
-
-## Coding Standards
-
-- Use semicolons at the end of each statement.
-- Use single quotes for strings.
-- Use function based components in React.
-- Use arrow functions for callbacks.
-
-## UI guidelines
-
-- A toggle is provided to switch between light and dark mode.
-- Application should have a modern and clean design.

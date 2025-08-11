@@ -107,7 +107,7 @@ Use this as an example of how to configure a deployment environment.
 #### Tools and Environment Setup
 Use this when setting up a local development environment or configuring a deployment environment, or when working with tools and their configuration, or when determining what tools you have avaiallble to comlete a task.
 - [ai-tools-config.md](./ai-tools-config.md)
-- [ai-local-environment.md](./ai-local-environment.md)
+<!-- - [ai-local-environment.md](./ai-local-environment.md) -->
 - 
 #### Workflows
 These sections describe modules to use when you have been given an assignemtn or role.
