@@ -36,6 +36,44 @@ jobs:
         with:
           fetch-depth: 0  # Full history for better analysis
 
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: pip-${{ runner.os }}-${{ hashFiles('**/requirements.txt', '**/pyproject.toml') }}
+          restore-keys: |
+            pip-${{ runner.os }}-
+
+      - name: Setup Node 22 & enable npm cache
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Cache npm (fallback for global installs)
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: npm-${{ runner.os }}-${{ hashFiles('**/package-lock.json', '**/pnpm-lock.yaml', '**/yarn.lock') }}
+          restore-keys: |
+            npm-${{ runner.os }}-
+
+      - name: Cache NuGet
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj', '**/*.fsproj', '**/packages.lock.json') }}
+          restore-keys: |
+            nuget-${{ runner.os }}-
+
+      - name: Cache Terraform plugins
+        uses: actions/cache@v4
+        with:
+          path: ~/.terraform.d/plugin-cache
+          key: terraform-${{ runner.os }}
+          restore-keys: |
+            terraform-${{ runner.os }}
+
       # container doesn't work- setup environment via script
       - name: Convert Dockerfile environment (Linux setup)
         shell: bash
@@ -53,5 +91,54 @@ jobs:
         run: |
           echo "Running script..."
           ./scripts/copilot-setup-steps-linux.ps1
+
+  windows-setup:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node 22 & cache
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Cache npm (global installs)
+        uses: actions/cache@v4
+        with:
+          path: ~\AppData\Roaming\npm-cache
+          key: npm-${{ runner.os }}-${{ hashFiles('**/package-lock.json', '**/pnpm-lock.yaml', '**/yarn.lock') }}
+          restore-keys: |
+            npm-${{ runner.os }}-
+
+      - name: Cache NuGet
+        uses: actions/cache@v4
+        with:
+          path: ~\AppData\Local\NuGet\v3-cache
+          key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj', '**/*.fsproj', '**/packages.lock.json') }}
+          restore-keys: |
+            nuget-${{ runner.os }}-
+
+      - name: Cache Terraform plugins
+        uses: actions/cache@v4
+        with:
+          path: ~\AppData\Roaming\terraform.d\plugin-cache
+          key: terraform-${{ runner.os }}
+          restore-keys: |
+            terraform-${{ runner.os }}
+
+      - name: Setup .NET 9 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Run Windows environment setup
+        shell: pwsh
+        run: |
+          Set-ExecutionPolicy Bypass -Scope Process -Force
+          ./scripts/windows-dockerfile-converted-setup.ps1
 
      
