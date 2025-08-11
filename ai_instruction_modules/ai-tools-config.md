@@ -21,7 +21,7 @@ Specific tools already installed include:
 
 In powershell you can also create ps1 scripts and run them. You can also create and run batch files. You can also run python and node scripts.
 
-You can also expand your capabilities by installing additional python, and node packages and powershell scripts and powershell modules.
+You can also expand your capabilities by installing additional python, and node packages and PowerShell modules.
 
 ## MCP  
 
