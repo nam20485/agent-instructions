@@ -8,6 +8,10 @@ This file contains instructions for creating custom instructions for a repositor
 - Place the custom instructions in the .github/copilot-instructions.md file.
 - Link to other instruction files as needed.
 
+## Documentation
+
+- [Writing effective repository custom instructions](https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions?tool=webui#creating-a-repository-custom-instructions-file)
+
 ## Instructions for Creating Repository Custom Instructions
 
 Your task is to "onboard" this repository to Copilot coding agent by adding a .github/copilot-instructions.md file in the repository that contains information describing how a coding agent seeing it for the first time can work most efficiently.

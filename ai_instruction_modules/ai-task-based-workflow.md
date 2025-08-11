@@ -194,6 +194,7 @@ gh issue edit <issue_number> --remove-label state:in-progress
 
 * Create feature branches for each issue using naming convention: `issues/<number>-<short-description>`
 * Example: `issues/42-fix-authentication-bug`
+* `copilot` branch should already exist.
 * Branch should be created/branched off from `copilot` branch before starting work
 * Push ("publish") the branch after creating it so the remote branch is created
 * Immediately after creating the branch, **Link the issue to the branch** when creating the feature branch (or create the branch from the issue which automatically accomplishes the link)
