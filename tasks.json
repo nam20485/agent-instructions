@@ -8,7 +8,7 @@
       "type": "shell",
       "command": "code",
       "args": [
-        ".gemini/GEMINI.md",
+        ".github/copilot-instructions.md",
         "ai_instruction_modules/ai-task-based-workflow.md",
         "ai_instruction_modules/ai-application-guidelines.md",
         "ai_instruction_modules/ai-instructions-aspnet-guidelines.md"
@@ -24,7 +24,7 @@
       "type": "shell",
       "command": "code",
       "args": [
-        ".gemini/GEMINI.md",
+        ".github/copilot-instructions.md",
         "ai_instruction_modules/ai-testing-validation.md",
         "ai_instruction_modules/ai-task-based-workflow.md"
       ],
@@ -39,7 +39,7 @@
       "type": "shell",
       "command": "code",
       "args": [
-        ".gemini/GEMINI.md",
+        ".github/copilot-instructions.md",
         "ai_instruction_modules/ai-new-app-template.md",
         "ai_instruction_modules/ai-design-principles.md"
       ],
