@@ -88,8 +88,6 @@ contents of the README, the contents of any key source files, the list of files 
 - Document any other steps or information that the agent can use to reduce time spent exploring or trying and failing to run bash commands.
 - Finally, explicitly instruct the agent to trust the instructions and only perform a search if the information in the instructions is incomplete or found to be in error.
 </StepsToFollow>
-   - Document any errors encountered as well as the steps taken to work-around them.
-
 
 ## Writing effective repository custom instructions
 The instructions you add to your custom instruction file(s) should be short, self-contained statements that provide Copilot with relevant information to help it work in this repository. Because the instructions are sent with every chat message, they should be broadly applicable to most requests you will make in the context of the repository.

@@ -70,8 +70,8 @@ As an AI assistant for this workspace, always prioritize:
 When conflicting guidance exists between modules, follow this priority order:
 1. User's explicit instructions in the current session
 2. Project-specific guidelines (if established)
-3. Technology-specific best practices from [`ai_instruction_modules/ai-instructions-aspnet-guidelines.md`](ai_instruction_modules/ai-instructions-aspnet-guidelines.md )
-4. General design principles from [`ai_instruction_modules/ai-design-principles.md`](ai_instruction_modules/ai-design-principles.md )
+3. Technology-specific best practices from [`ai_instruction_modules/ai-instructions-aspnet-guidelines.md`](ai_instruction_modules/ai-instructions-aspnet-guidelines.md)
+4. General design principles from [`ai_instruction_modules/ai-design-principles.md`](ai_instruction_modules/ai-design-principles.md)
 ```
 
 ### 2. Clean Up the Active File

@@ -14,6 +14,6 @@
 - Othewise files are optionally active based on user needs and your assigned roles and workflow assignments
 
 ## Core Instructions (**REQUIRED**)
-[ai-core-instructions.md](https://github.com/nam20485/agent-instructions/blob/instructions-v2/ai_instruction_modules/ai-core-instructions.md)
+[ai-core-instructions.md](https://github.com/nam20485/agent-instructions/blob/main/ai_instruction_modules/ai-core-instructions.md)
 
 End of file.

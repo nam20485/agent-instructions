@@ -74,7 +74,7 @@
 
 #### Terminal Management
 Use this when working with the terminal
-- [ai-terminal-management.md](.ai-terminal-management.md)
+- [ai-terminal-management.md](./ai-terminal-management.md)
 
 #### Test and Validation
 Use this when:
@@ -108,7 +108,6 @@ Use this as an example of how to configure a deployment environment.
 Use this when setting up a local development environment or configuring a deployment environment, or when working with tools and their configuration, or when determining what tools you have avaiallble to comlete a task.
 - [ai-tools-config.md](./ai-tools-config.md)
 <!-- - [ai-local-environment.md](./ai-local-environment.md) -->
-- 
 #### Workflows
 These sections describe modules to use when you have been given an assignemtn or role.
 
@@ -130,7 +129,7 @@ Read these when assigned a specific workflow assignment.
 
 #### New application
 This section describes your new application template used when assigned the `create-applicaiton` assignment.
-- [ai-new-app-template.md](./ai-new-app-template.md)
+This section describes your new application template used when assigned the `create-application` assignment.
 
 
 
