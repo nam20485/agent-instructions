@@ -22,7 +22,9 @@ param(
 	[string]$Owner,
 	[string]$Repo,
 	[switch]$DryRun,
-	[switch]$VerboseLogging
+	[switch]$VerboseLogging,
+	[switch]$NoResolve,              # Generate summary only (overrides resolve step)
+	[string]$SummaryPath = 'pr-review-threads-summary.md'  # Output markdown summary path
 )
 
 function Write-Info($msg){ Write-Host "[info] $msg" -ForegroundColor Cyan }
@@ -50,23 +52,85 @@ $query = @'
 query($owner:String!,$name:String!,$number:Int!,$cursor:String){
 	repository(owner:$owner,name:$name){
 		pullRequest(number:$number){
+			title
+			url
 			reviewThreads(first:100, after:$cursor){
 				pageInfo{ hasNextPage endCursor }
-				nodes{ id isResolved }
+				nodes{ id isResolved isOutdated path line originalLine }
 			}
+			reviews(last:20){ nodes { author { login } state submittedAt } }
 		}
 	}
 }
 '@
 
+function New-ThreadsMarkdown {
+		param(
+				[Parameter(Mandatory)][array]$Threads,
+				[Parameter(Mandatory)][string]$Owner,
+				[Parameter(Mandatory)][string]$Repo,
+				[Parameter(Mandatory)][int]$PrNumber,
+				[Parameter()][hashtable]$Meta,
+				[Parameter()][switch]$PostResolution
+		)
+
+		$ts = (Get-Date).ToString('u')
+		$total = $Threads.Count
+		$unresolved = ($Threads | Where-Object { -not $_.isResolved }).Count
+		$resolved = $total - $unresolved
+		$pct = if($total -gt 0){ [math]::Round(($resolved / $total) * 100,2) } else { 100 }
+
+		$mode = if($PostResolution){ 'Post-Resolution' } else { 'Pre-Resolution' }
+		$lines = @()
+		$lines += "# PR Review Threads Summary ($mode)"
+		$lines += ""
+		$lines += "- Generated: $ts"
+		$lines += "- Repository: $Owner/$Repo"
+		$lines += "- PR: #$PrNumber"
+		if($Meta){
+				if($Meta.title){ $lines += "- Title: $($Meta.title)" }
+				if($Meta.url){ $lines += "- URL: $($Meta.url)" }
+		}
+		$lines += ""
+		$lines += "| Metric | Value |"
+		$lines += "| ------ | ----- |"
+		$lines += "| Total Threads | $total |"
+		$lines += "| Resolved | $resolved |"
+		$lines += "| Unresolved | $unresolved |"
+		$lines += "| Resolution % | $pct% |"
+		$lines += ""
+
+		$unresolvedThreads = $Threads | Where-Object { -not $_.isResolved }
+		if($unresolvedThreads){
+				$lines += "## Unresolved Threads"
+				$lines += ""
+				$lines += "| Thread ID | Path | Current Line | Original Line | Outdated? |"
+				$lines += "| --------- | ---- | ----------- | ------------- | --------- |"
+				foreach($t in $unresolvedThreads){
+						$lines += "| $($t.id) | $($t.path) | $($t.line) | $($t.originalLine) | $($t.isOutdated) |"
+				}
+				$lines += ""
+		} else {
+				$lines += "All threads are resolved."
+				$lines += ""
+		}
+
+		return ($lines -join [Environment]::NewLine)
+}
+
 $threads = @()
 $cursor = $null
+$meta = @{}
 do {
 	$args = @('-f',"query=$query",'-f',"owner=$Owner",'-f',"name=$Repo",'-F',"number=$PrNumber")
 	if($cursor){ $args += @('-f',"cursor=$cursor") }
 	$respRaw = gh api graphql @args 2>$null
 	if(-not $respRaw){ Write-ErrMsg "GraphQL query failed."; exit 2 }
 	$resp = $respRaw | ConvertFrom-Json
+	if(-not $meta.title){
+		$meta.title = $resp.data.repository.pullRequest.title
+		$meta.url   = $resp.data.repository.pullRequest.url
+	}
 	$chunk = $resp.data.repository.pullRequest.reviewThreads.nodes
 	$threads += $chunk
 	$pageInfo = $resp.data.repository.pullRequest.reviewThreads.pageInfo
@@ -80,9 +144,25 @@ if(-not $unresolved){
 }
 
 Write-Info ("Found {0} unresolved thread(s)." -f $unresolved.Count)
+
+# Generate pre-resolution summary
+try {
+	$preSummary = New-ThreadsMarkdown -Threads $threads -Owner $Owner -Repo $Repo -PrNumber $PrNumber -Meta $meta
+	$preHeader = "<!-- AUTO-GENERATED: DO NOT EDIT (Pre-Resolution Snapshot) -->"
+	Set-Content -Path $SummaryPath -Value ($preHeader + [Environment]::NewLine + $preSummary) -Encoding UTF8
+	Write-Info "Wrote pre-resolution summary to $SummaryPath"
+} catch {
+	Write-Warn "Failed to write pre-resolution summary: $_"
+}
+
+if($NoResolve){
+	Write-Info "NoResolve specified. Exiting after summary generation."
+	exit 0
+}
 if($DryRun){
 	Write-Warn "DryRun specified. Listing thread IDs only:" 
 	$unresolved | ForEach-Object { Write-Host "  $($_.id)" }
+	Write-Info "Skipping resolution due to DryRun flag."
 	exit 0
 }
 
@@ -101,6 +181,31 @@ foreach($t in $unresolved){
 }
 
 Write-Info "Resolved $resolvedCount thread(s). Done."
+
+# Post-resolution fetch (only if something was resolved) and append summary
+if($resolvedCount -gt 0){
+	Write-Info "Refreshing thread state for post-resolution summary..."
+	$threads2 = @()
+	$cursor = $null
+	do {
+		$args = @('-f',"query=$query",'-f',"owner=$Owner",'-f',"name=$Repo",'-F',"number=$PrNumber")
+		if($cursor){ $args += @('-f',"cursor=$cursor") }
+		$respRaw = gh api graphql @args 2>$null
+		if(-not $respRaw){ Write-Warn "GraphQL refresh failed; skipping post summary."; break }
+		$resp = $respRaw | ConvertFrom-Json
+		$chunk = $resp.data.repository.pullRequest.reviewThreads.nodes
+		$threads2 += $chunk
+		$pageInfo = $resp.data.repository.pullRequest.reviewThreads.pageInfo
+		$cursor = if($pageInfo.hasNextPage){ $pageInfo.endCursor } else { $null }
+	} while($cursor)
+	try {
+		$postSummary = New-ThreadsMarkdown -Threads $threads2 -Owner $Owner -Repo $Repo -PrNumber $PrNumber -Meta $meta -PostResolution
+		Add-Content -Path $SummaryPath -Value ([Environment]::NewLine + '<!-- AUTO-GENERATED: POST-RESOLUTION -->' + [Environment]::NewLine + $postSummary)
+		Write-Info "Appended post-resolution summary to $SummaryPath"
+	} catch {
+		Write-Warn "Failed to append post-resolution summary: $_"
+	}
+}
 
 # Optional: show remaining (should be zero)
 if($VerboseLogging){

@@ -47,7 +47,49 @@
       "presentation": {
         "reveal": "never"
       },
-      "detail": "Opens instruction files for creating a new application from scratch."
+	      "detail": "Opens instruction files for creating a new application from scratch."
+	    },
+    {
+      "label": "PR Threads: Summarize (No Resolve)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy","Bypass",
+        "-File","query.ps1",
+        "-NoResolve",
+        "-VerboseLogging"
+      ],
+      "problemMatcher": [],
+      "presentation": { "reveal": "always" },
+      "detail": "Generates a markdown summary of current PR review threads without resolving them."
+    },
+    {
+      "label": "PR Threads: Resolve All",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy","Bypass",
+        "-File","query.ps1"
+      ],
+      "problemMatcher": [],
+      "presentation": { "reveal": "always" },
+      "detail": "Resolves all unresolved threads on the default PR (#3) and updates summary file."
+    },
+    {
+      "label": "PR Threads: Dry Run IDs",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy","Bypass",
+        "-File","query.ps1",
+        "-DryRun"
+      ],
+      "problemMatcher": [],
+      "presentation": { "reveal": "always" },
+      "detail": "Lists unresolved thread IDs without resolving them."
     }
   ]
 }
