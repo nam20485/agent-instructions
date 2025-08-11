@@ -27,7 +27,8 @@
 - Large refactors or new major deps without approval
 - Speculative features outside scope
 - Skip validation steps
- 
+
+## Change Flow
 ## Change Flow
 1. Context gather (search/read)
 2. Plan (bullets)
