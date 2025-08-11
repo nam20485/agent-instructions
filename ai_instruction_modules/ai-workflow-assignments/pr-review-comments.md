@@ -17,16 +17,20 @@ Resolve **ALL (100%)** PR comments and get the PR approved. You must ensure that
 
 ### Acceptance Criteria
 
-2. PR Review started.
 1. All PR comments resolved by fixing the respective issue described.
+2. Individual replies posted to each PR review comment thread (no general PR comment) describing the fix.
 3. All code changes made to resolve PR comments.
-4. All code chages committed to the PR branch. (**DON"T FORGET TO CHECKOUT THE PR BRANCH (BEFORE MAKING ANY CHANGES)!**)
-4. Comment added to PR describing each review comment you fixed and how.
-5. All PR Review Comment Threads marked as resolved.
+4. All code changes committed to the PR branch. (**DON'T FORGET TO CHECKOUT THE PR BRANCH (BEFORE MAKING ANY CHANGES)!**)
+5. Comment added to PR describing each review comment you fixed and how.
+6. All PR Review Comment Threads marked as resolved.
 
 ### Assignment
 
-You will provide a fix for each PR Review commnt, commit the changes, reply to the comment with a description of the issue and trhe changes you made to fix it, and then mark  it resolved. You will iterate on all of the comments doing this, until all PR Review Comments are resolved in this manner.
+You will provide a fix for each PR Review comment, commit the changes, reply to the comment with a description of the issue and the changes you made to fix it, and then mark it resolved. You will iterate on all of the comments doing this, until all PR Review Comments are resolved in this manner.
+
+*Note: If you find comments marked resolved when you start, this is OK. It just means that the comment was resolved in a previous iteration. More comments to address could have been added in a new iteration. So, on every iteration, ignore previously-resolved comments and only address the ones that are not resolved. Make sure to address all comments that are not resolved.*
+
+*Note: If you encounter comment thread marked as **OUTDATED**, then mark it resolved.*
 
 **Always follow instructions exactly as listed here.**
 
@@ -112,7 +116,7 @@ Use this format for each individual reply:
 
 ### Completion
 
-Inform the stake-holder that the PR is ready for review and approval. Show them the comment you added summarizing the changes made and the comments resolved. Ask if they approve or need more changes on any of the comments you reolved.
+Inform the stake-holder that the PR is ready for review and approval. Show them the comment you added summarizing the changes made and the comments resolved. Ask if they approve or need more changes on any of the comments you resolved. THERE SHOULD BE NO UNRESOLVED COMMENTS WHEN YOU ARE FINISHED!
 
 ## Comment Resolution Method
 

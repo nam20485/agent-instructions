@@ -8,7 +8,7 @@
 		// Path is relative to the devcontainer.json file.
 		"dockerfile": "Dockerfile",
 		"context": ".",
-		"cacheFrom": "ghcr.io/nam20485/agent-instructions:latest"
+		"cacheFrom": "ghcr.io/nam20485/agent-instructions-devcontainer:latest"
 	},
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	"features": {

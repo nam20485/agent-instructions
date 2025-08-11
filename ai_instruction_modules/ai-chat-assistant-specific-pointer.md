@@ -1,4 +1,4 @@
-# Instructions (Copilot)
+# Instructions (<*CHAT ASSISTANT*>)
 
 ## Where to Find Your Instructions
 - Your custom instructions are located in the files inside of the [nam20485/agent-instructions](https://github.com/nam20485/agent-instructions) repository
@@ -17,3 +17,4 @@
 [ai-core-instructions.md](https://github.com/nam20485/agent-instructions/blob/main/ai_instruction_modules/ai-core-instructions.md)
 
 End of file.
+ 

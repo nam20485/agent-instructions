@@ -1,0 +1,22 @@
+query($owner:String!,$name:String!,$number:Int!,$cursor:String){
+  repository(owner:$owner,name:$name){
+    pullRequest(number:$number){
+      id
+      title
+      reviewThreads(first:100, after:$cursor){
+        pageInfo { hasNextPage endCursor }
+        nodes {
+          id
+          isResolved
+          isOutdated
+          path
+          line
+          originalLine
+          comments(first:20){
+            nodes { id body author { login } }
+          }
+        }
+      }
+    }
+  }
+}
