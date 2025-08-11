@@ -95,7 +95,7 @@ if (-not (Test-CommandExists "python")) {
     Invoke-BashCommand "sudo ln -sf /usr/bin/python3 /usr/bin/python"
 }
 
-Invoke-BashCommand "python -m pip install --upgrade pip --break-system-packages"
+#Invoke-BashCommand "python -m pip install --upgrade pip --break-system-packages"
 
 Write-Host "✅ Python development environment configured" -ForegroundColor Green
 
@@ -103,14 +103,14 @@ Write-Host "✅ Python development environment configured" -ForegroundColor Gree
 # NODE.JS & JAVASCRIPT DEVELOPMENT
 # =============================================================================
 
-Write-Host "Installing Node.js 22.x..." -ForegroundColor Cyan
+# Write-Host "Installing Node.js 22.x..." -ForegroundColor Cyan
 
-# Install Node.js 22.x from NodeSource
-Invoke-BashCommand "curl -fsSL https://deb.nodesource.com/setup_22.x | sudo bash -"
-Invoke-BashCommand "sudo apt-get install -y nodejs"
-Invoke-BashCommand "sudo npm install -g npm@latest"
+# # Install Node.js 22.x from NodeSource
+# Invoke-BashCommand "curl -fsSL https://deb.nodesource.com/setup_22.x | sudo bash -"
+# Invoke-BashCommand "sudo apt-get install -y nodejs"
+# Invoke-BashCommand "sudo npm install -g npm@latest"
 
-Write-Host "✅ Node.js and npm installed" -ForegroundColor Green
+# Write-Host "✅ Node.js and npm installed" -ForegroundColor Green
 
 # =============================================================================
 # POWERSHELL CORE INSTALLATION
