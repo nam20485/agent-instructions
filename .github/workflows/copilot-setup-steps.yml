@@ -37,6 +37,17 @@ jobs:
           fetch-depth: 0  # Full history for better analysis
 
       # container doesn't work- setup environment via script
+      - name: Convert Dockerfile environment (Linux setup)
+        shell: bash
+        run: |
+          chmod +x scripts/linux-dockerfile-converted-setup.sh
+          scripts/linux-dockerfile-converted-setup.sh
+
+      - name: Setup .NET 9 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
       - name: Setup Script
         shell: pwsh
         run: |
