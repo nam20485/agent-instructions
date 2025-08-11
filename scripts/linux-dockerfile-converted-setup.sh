@@ -57,6 +57,19 @@ if ! command -v node >/dev/null 2>&1 || ! node -v | grep -q 'v22'; then
 fi
 $SUDO npm install -g npm@latest
 
+echo "Enabling Corepack (pnpm & yarn)"
+if command -v corepack >/dev/null 2>&1; then
+  corepack enable || true
+  corepack prepare pnpm@latest --activate || true
+  corepack prepare yarn@stable --activate || true
+  echo "Package managers:"
+  (npm -v 2>/dev/null || true) | sed 's/^/ - npm /'
+  (pnpm -v 2>/dev/null || true) | sed 's/^/ - pnpm /'
+  (yarn -v 2>/dev/null || true) | sed 's/^/ - yarn /'
+else
+  echo "corepack not found; skipping pnpm/yarn activation" >&2
+fi
+
 echo "[4/9] Installing PowerShell"
 if ! command -v pwsh >/dev/null 2>&1; then
   wget -q "https://packages.microsoft.com/config/debian/12/packages-microsoft-prod.deb" -O packages-microsoft-prod.deb

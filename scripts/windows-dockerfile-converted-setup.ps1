@@ -54,6 +54,19 @@ Install-Node22
 Write-Host 'Upgrading npm to latest'
 try { npm install -g npm@latest --no-audit --no-fund | Out-Null } catch { Write-Warning $_ }
 
+Write-Host 'Enabling Corepack (pnpm & yarn)'
+if (Get-Command corepack -ErrorAction SilentlyContinue) {
+    try { corepack enable } catch { Write-Warning $_ }
+    try { corepack prepare pnpm@latest --activate } catch { Write-Warning $_ }
+    try { corepack prepare yarn@stable --activate } catch { Write-Warning $_ }
+    Write-Host 'Package manager versions:'
+    try { Write-Host (" - npm " + (npm -v)) } catch {}
+    try { Write-Host (" - pnpm " + (pnpm -v)) } catch {}
+    try { Write-Host (" - yarn " + (yarn -v)) } catch {}
+} else {
+    Write-Warning 'corepack not available; skipping pnpm/yarn.'
+}
+
 Write-Host '[2/8] Installing Google Cloud CLI (gcloud)'
 Install-ChocoPackage -Name googlecloudsdk
 
