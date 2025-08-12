@@ -17,6 +17,7 @@ export DOTNET_CLI_TELEMETRY_OPTOUT=1
 export DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1
 export DOTNET_NOLOGO=1
 export ASPNETCORE_ENVIRONMENT=Development
+export DEBIAN_FRONTEND=noninteractive
 
 # Detect sudo availability (GitHub runners have it by default)
 if command -v sudo >/dev/null 2>&1; then
@@ -27,7 +28,7 @@ fi
 
 echo "[1/11] Installing base system packages"
 $SUDO apt-get update -y
-$SUDO apt-get install -y \
+$SUDO apt-get install -y --no-install-recommends \
   build-essential \
   apt-transport-https \
   ca-certificates \
@@ -50,32 +51,14 @@ if [ ! -e /usr/bin/python ]; then
   $SUDO ln -sf /usr/bin/python3 /usr/bin/python
 fi
 
-# echo "[3/11] Installing Node.js 22.x (NodeSource) + updating npm (matches Dockerfile early Node install)"
-# if ! command -v node >/dev/null 2>&1 || ! node -v | grep -q 'v22'; then
-#   curl -fsSL https://deb.nodesource.com/setup_22.x | $SUDO bash -
-#   $SUDO apt-get install -y nodejs
-# fi
-# $SUDO npm install -g npm@latest
+echo "[3/11] Installing Node.js 22.x (NodeSource) + updating npm (matches Dockerfile early Node install)"
+if ! command -v node >/dev/null 2>&1 || ! node -v | grep -q 'v22'; then
+  curl -fsSL https://deb.nodesource.com/setup_22.x | $SUDO bash -
+  $SUDO apt-get install -y --no-install-recommends nodejs
+fi
+$SUDO npm install -g npm@latest
 
-# echo "[4/11] Installing NVM and LTS Node (matches Dockerfile NVM section)"
-# # Install NVM only if not already present
-# if [ ! -d "$HOME/.nvm" ]; then
-#   export NVM_DIR="$HOME/.nvm"
-#   mkdir -p "$NVM_DIR"
-#   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-# else
-#   export NVM_DIR="$HOME/.nvm"
-# fi
-# if [ -s "$NVM_DIR/nvm.sh" ]; then
-#   . "$NVM_DIR/nvm.sh"
-#   # Install latest LTS (Dockerfile does this after NodeSource install)
-#   if ! nvm ls | grep -q 'lts'; then
-#     nvm install --lts
-#   fi
-#   nvm use --lts
-# else
-#   echo "WARN: NVM script not found; skipping LTS Node via NVM" >&2
-# fi
+echo "[4/11] Skipping NVM: using NodeSource Node 22 only (simplified)"
 
 echo "[5/11] Enabling Corepack (pnpm & yarn)"
 if command -v corepack >/dev/null 2>&1; then
@@ -92,19 +75,19 @@ fi
 
 echo "[6/11] Installing PowerShell"
 if ! command -v pwsh >/dev/null 2>&1; then
-  wget -q "https://packages.microsoft.com/config/debian/12/packages-microsoft-prod.deb" -O packages-microsoft-prod.deb
+  wget -q "https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb" -O packages-microsoft-prod.deb
   $SUDO dpkg -i packages-microsoft-prod.deb
-  rm packages-microsoft-prod.deb
+  rm -f packages-microsoft-prod.deb
   $SUDO apt-get update -y
-  $SUDO apt-get install -y powershell
+  $SUDO apt-get install -y --no-install-recommends powershell
 fi
 
 echo "[7/11] Installing Google Cloud CLI"
 if ! command -v gcloud >/dev/null 2>&1; then
-  echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | $SUDO tee /etc/apt/sources.list.d/google-cloud-sdk.list
-  curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor | $SUDO tee /usr/share/keyrings/cloud.google.gpg >/dev/null
+  echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | $SUDO tee /etc/apt/sources.list.d/google-cloud-sdk.list >/dev/null
+  curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | $SUDO gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
   $SUDO apt-get update -y
-  $SUDO apt-get install -y google-cloud-cli
+  $SUDO apt-get install -y --no-install-recommends google-cloud-cli
 fi
 
 echo "[8/11] Installing GitHub CLI (gh)"
@@ -113,19 +96,19 @@ if ! command -v gh >/dev/null 2>&1; then
   $SUDO chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
   echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | $SUDO tee /etc/apt/sources.list.d/github-cli.list >/dev/null
   $SUDO apt-get update -y
-  $SUDO apt-get install -y gh
+  $SUDO apt-get install -y --no-install-recommends gh
 fi
 
 echo "[9/11] Installing Terraform"
 if ! command -v terraform >/dev/null 2>&1; then
-  wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | $SUDO tee /usr/share/keyrings/hashicorp-archive-keyring.gpg >/dev/null
+  curl -fsSL https://apt.releases.hashicorp.com/gpg | $SUDO gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
   echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | $SUDO tee /etc/apt/sources.list.d/hashicorp.list
   $SUDO apt-get update -y
-  $SUDO apt-get install -y terraform
+  $SUDO apt-get install -y --no-install-recommends terraform
 fi
 
 echo "[10/11] Installing global npm CLI tools (firebase-tools, angular, CRA, typescript, eslint, prettier)"
-$SUDO npm install -g firebase-tools @angular/cli create-react-app typescript eslint prettier
+$SUDO npm install -g --no-audit --no-fund firebase-tools @angular/cli create-react-app typescript eslint prettier
 
 echo "[11/11] Ensuring .NET 9 SDK and workloads (wasm-tools, aspire)"
 # If dotnet missing or major version < 9, install via dotnet-install script
@@ -145,6 +128,7 @@ if command -v dotnet >/dev/null 2>&1; then
   dotnet workload update || true
   dotnet workload install wasm-tools || true
   dotnet workload install aspire || true
+  dotnet new install Aspire.ProjectTemplates || true
   set -e
 else
   echo "dotnet not found on PATH; skipping workload installation (consider using actions/setup-dotnet)." >&2
