@@ -90,6 +90,30 @@
       "problemMatcher": [],
       "presentation": { "reveal": "always" },
       "detail": "Lists unresolved thread IDs without resolving them."
+    },
+    {
+      "label": "Env: Provision (Windows)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy","Bypass",
+  "-File","scripts/setup-environment.ps1"
+      ],
+      "problemMatcher": [],
+      "presentation": { "reveal": "always" },
+      "detail": "Provision local env on Windows via NVM-only script (exact Node pin)."
+    },
+    {
+      "label": "Env: Provision (Linux)",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+  "scripts/setup-environment.sh"
+      ],
+      "problemMatcher": [],
+      "presentation": { "reveal": "always" },
+      "detail": "Provision local env on Linux using the consolidated script."
     }
   ]
 }

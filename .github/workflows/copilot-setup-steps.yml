@@ -74,7 +74,7 @@ jobs:
       - name: Provision environment (single Linux script)
         shell: bash
         run: |
-          chmod +x scripts/linux-dockerfile-converted-setup.sh
-          scripts/linux-dockerfile-converted-setup.sh
+          chmod +x scripts/setup-environment.sh
+          scripts/setup-environment.sh
 
      
