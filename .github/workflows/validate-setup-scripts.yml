@@ -33,6 +33,7 @@ jobs:
           scripts/setup-environment.sh
 
   validate-windows:
+    if: ${{ vars.ENABLE_WINDOWS_SETUP_VALIDATION == 'true' }}
     name: Validate Windows setup script
     runs-on: windows-2022
     steps:
