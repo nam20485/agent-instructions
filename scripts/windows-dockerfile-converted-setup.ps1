@@ -1,4 +1,15 @@
 <#
+===============================================================================
+DEPRECATED (2025-08-12)
+-------------------------------------------------------------------------------
+This script is retained for reference but is no longer used by CI.
+Preferred setup path: scripts/linux-dockerfile-converted-setup.sh (Linux-only)
+Notes:
+- Workflow now calls the Linux bash script exclusively.
+- This PowerShell script may lag behind and is not guaranteed to be updated.
+===============================================================================
+#>
+<#
 .SYNOPSIS
   Windows environment setup replicating the devcontainer Dockerfile toolchain.
 .DESCRIPTION
@@ -8,6 +19,8 @@
 #>
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
+
+Write-Warning 'DEPRECATED: This script is kept for reference. CI uses scripts/linux-dockerfile-converted-setup.sh.'
 
 Write-Host '=== Starting Windows environment setup (Dockerfile -> PowerShell) ==='
 

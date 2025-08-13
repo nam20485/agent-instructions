@@ -1,6 +1,14 @@
 #!/usr/bin/env pwsh
 
 <#
+===============================================================================
+DEPRECATED (2025-08-12)
+-------------------------------------------------------------------------------
+This helper script has been superseded by scripts/linux-dockerfile-converted-setup.sh
+and is no longer invoked by the workflow. It remains for historical context only.
+===============================================================================
+#>
+<#
 .SYNOPSIS
     AI Agent Instructions Development Environment Setup for GitHub Actions
     
@@ -24,6 +32,8 @@ param()
 
 $ErrorActionPreference = "Stop"
 Set-StrictMode -Version Latest
+
+Write-Warning 'DEPRECATED: Use scripts/linux-dockerfile-converted-setup.sh. This script is no longer used by CI.'
 
 Write-Host "=== AI Agent Instructions Development Environment Setup ===" -ForegroundColor Cyan
 Write-Host "Setting up GitHub Copilot agent dev environment on Ubuntu 22.04..." -ForegroundColor Green
