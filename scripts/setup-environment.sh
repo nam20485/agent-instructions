@@ -23,8 +23,9 @@ else
 fi
 
 # -----------------------------------------------------------------------------
-# Node.js: NVM everywhere with exact version pinning
+# Node.js: NVM everywhere with exact version pinning (required)
 # - Reads exact version from .nvmrc or NODE_VERSION_PIN (e.g., 22.18.0)
+# - Exits with error if no exact version provided to ensure determinism
 # - npm stays pinned to the version bundled with Node, unless NPM_VERSION_PIN is set
 # -----------------------------------------------------------------------------
 install_node_via_nvm() {
@@ -43,7 +44,8 @@ install_node_via_nvm() {
 	elif [ -f .nvmrc ]; then
 		DESIRED_NODE_VERSION="$(cat .nvmrc)"
 	else
-		DESIRED_NODE_VERSION="lts/*"
+		echo "ERROR: No exact Node version specified. Set NODE_VERSION_PIN or add .nvmrc." >&2
+		exit 1
 	fi
 	echo "[nvm] Ensuring Node $DESIRED_NODE_VERSION"
 	nvm install "$DESIRED_NODE_VERSION" --no-progress

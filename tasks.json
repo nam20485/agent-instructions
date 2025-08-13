@@ -96,9 +96,11 @@
       "type": "shell",
       "command": "pwsh",
       "args": [
-        "-NoProfile",
-        "-ExecutionPolicy","Bypass",
-  "-File","scripts/setup-environment.ps1"
+  "-NoProfile",
+  "-ExecutionPolicy",
+  "Bypass",
+  "-File",
+  "scripts/setup-environment.ps1"
       ],
       "problemMatcher": [],
       "presentation": { "reveal": "always" },

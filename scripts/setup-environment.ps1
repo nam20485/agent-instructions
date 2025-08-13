@@ -45,7 +45,7 @@ function Install-Git {
 # -----------------------------------------------------------------------------
 function Install-NvmWindows {
     if (Test-Command nvm) { return }
-    $mgr = Ensure-ChocoOrWinget
+    $mgr = Get-PackageManager
     if ($mgr -eq 'winget') {
         try { winget install --id CoreyButler.NVMforWindows --silent --accept-source-agreements --accept-package-agreements } catch {}
     } elseif ($mgr -eq 'choco') {
@@ -158,7 +158,7 @@ function Install-DotNet9 {
 function Install-GlobalNpmCLIs {
     $pkgs = @('firebase-tools','@angular/cli','create-react-app','typescript','eslint','prettier','cdktf-cli')
     foreach ($p in $pkgs) {
-        try { npm install -g --no-audit --no-fund $p | Out-Null } catch { Write-Warning ("Failed to install {0}: {1}" -f $p, $_.Exception.Message) }
+        try { npm install -g --no-audit --no-fund $p | Out-Null } catch { Write-Warning "Failed to install ${p}: $($_.Exception.Message)" }
     }
 }
 
