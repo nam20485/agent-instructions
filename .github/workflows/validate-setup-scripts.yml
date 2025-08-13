@@ -1,0 +1,51 @@
+name: Validate setup scripts (Linux & Windows)
+
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - '**'
+  workflow_dispatch:
+
+jobs:
+  validate-linux:
+    name: Validate Linux setup script
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Ensure executable bit
+        run: chmod +x scripts/setup-environment.sh
+
+      - name: Run Linux setup script
+        shell: bash
+        run: |
+          # Prefer repository .nvmrc; fail if neither .nvmrc nor env pin present
+          if [ ! -f .nvmrc ] && [ -z "${NODE_VERSION_PIN}" ]; then
+            echo "No .nvmrc found and NODE_VERSION_PIN not set; failing to keep determinism." >&2
+            exit 1
+          fi
+          scripts/setup-environment.sh
+
+  validate-windows:
+    name: Validate Windows setup script
+    runs-on: windows-2022
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run Windows setup script
+        shell: pwsh
+        run: |
+          if (!(Test-Path ".nvmrc") -and [string]::IsNullOrWhiteSpace($env:NODE_VERSION_PIN)) {
+            Write-Error "No .nvmrc found and NODE_VERSION_PIN not set; failing to keep determinism."
+            exit 1
+          }
+          pwsh -NoProfile -ExecutionPolicy Bypass -File scripts/setup-environment.ps1
