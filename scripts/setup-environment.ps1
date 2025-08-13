@@ -53,10 +53,14 @@ function Install-NvmWindows {
     } else {
         Write-Warning 'No package manager found (winget/choco). Download and install NVM for Windows manually from https://github.com/coreybutler/nvm-windows/releases'
     }
+
+    # Ensure current session can find nvm.exe even if PATH/env vars were set at machine scope
+    Ensure-NvmInCurrentSession
 }
 
 function Install-Node-With-Nvm {
     Install-NvmWindows
+    Ensure-NvmInCurrentSession
     if (-not (Test-Command nvm)) { throw 'nvm (Windows) is not available after install.' }
 
     # Determine desired Node version
@@ -94,6 +98,30 @@ function Install-Node-With-Nvm {
 # -----------------------------------------------------------------------------
 # Base tools (Git, Python)
 # -----------------------------------------------------------------------------
+function Ensure-NvmInCurrentSession {
+    # If nvm already resolves, nothing to do
+    if (Test-Command nvm) { return }
+
+    # Candidate install locations for nvm.exe (winget/choco defaults)
+    $candidates = @()
+    if (-not [string]::IsNullOrWhiteSpace($env:NVM_HOME)) { $candidates += $env:NVM_HOME }
+    $candidates += @(
+        Join-Path $env:ProgramFiles 'nvm'),
+        'C:\ProgramData\chocolatey\bin',
+        (Join-Path $env:LOCALAPPDATA 'Programs\nvm')
+
+    foreach ($dir in $candidates | Where-Object { $_ -and (Test-Path $_) }) {
+        $exe = Join-Path $dir 'nvm.exe'
+        if (Test-Path $exe) {
+            if ($env:PATH -notmatch [regex]::Escape($dir)) { $env:PATH = "$dir;$env:PATH" }
+            if ([string]::IsNullOrWhiteSpace($env:NVM_HOME)) { $env:NVM_HOME = $dir }
+            if ([string]::IsNullOrWhiteSpace($env:NVM_SYMLINK)) { $env:NVM_SYMLINK = Join-Path $env:ProgramFiles 'nodejs' }
+            # Ensure symlink directory exists to avoid failures on first nvm use
+            if (-not (Test-Path $env:NVM_SYMLINK)) { New-Item -ItemType Directory -Path $env:NVM_SYMLINK -Force | Out-Null }
+            break
+        }
+    }
+}
 function Install-Python3 {
     if (Test-Command python3) { return }
         $mgr = Get-PackageManager
