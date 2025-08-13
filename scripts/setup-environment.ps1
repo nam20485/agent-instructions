@@ -28,8 +28,9 @@ function Test-Command {
 }
 
 function Get-PackageManager {
-    if (Test-Command choco) { return 'choco' }
+    # Prefer winget on hosted runners; fall back to choco
     if (Test-Command winget) { return 'winget' }
+    if (Test-Command choco) { return 'choco' }
     return $null
 }
 
@@ -45,23 +46,38 @@ function Install-Git {
 # -----------------------------------------------------------------------------
 function Install-NvmWindows {
     if (Test-Command nvm) { return }
-    $mgr = Get-PackageManager
-    if ($mgr -eq 'winget') {
-        try { winget install --id CoreyButler.NVMforWindows --silent --accept-source-agreements --accept-package-agreements } catch {}
-    } elseif ($mgr -eq 'choco') {
-        choco install nvm -y --no-progress
-    } else {
-        Write-Warning 'No package manager found (winget/choco). Download and install NVM for Windows manually from https://github.com/coreybutler/nvm-windows/releases'
+    $wingetAvailable = Test-Command winget
+    $chocoAvailable = Test-Command choco
+
+    if ($wingetAvailable) {
+        try { winget install --id CoreyButler.NVMforWindows --silent --accept-source-agreements --accept-package-agreements } catch { Write-Warning "winget install of NVM failed: $($_.Exception.Message)" }
+        Ensure-NvmInCurrentSession
+        if (Test-Command nvm) { return }
     }
 
-    # Ensure current session can find nvm.exe even if PATH/env vars were set at machine scope
-    Ensure-NvmInCurrentSession
+    if ($chocoAvailable) {
+        try { choco install nvm -y --no-progress } catch { Write-Warning "choco install of nvm failed: $($_.Exception.Message)" }
+        # Also ensure the Chocolatey bin folder is on PATH for the current session
+        if ($env:ChocolateyInstall -and (Test-Path $env:ChocolateyInstall)) {
+            $chocoBin = Join-Path $env:ChocolateyInstall 'bin'
+            if (Test-Path $chocoBin -and $env:PATH -notmatch [regex]::Escape($chocoBin)) { $env:PATH = "$chocoBin;$env:PATH" }
+        }
+        Ensure-NvmInCurrentSession
+        if (Test-Command nvm) { return }
+    }
+
+    if (-not ($wingetAvailable -or $chocoAvailable)) {
+        Write-Warning 'No package manager found (winget/choco). Download and install NVM for Windows manually from https://github.com/coreybutler/nvm-windows/releases'
+    }
 }
 
 function Install-Node-With-Nvm {
     Install-NvmWindows
     Ensure-NvmInCurrentSession
-    if (-not (Test-Command nvm)) { throw 'nvm (Windows) is not available after install.' }
+    if (-not (Test-Command nvm)) {
+        # Wait briefly for installer/shims to settle on hosted runners
+        if (-not (Wait-ForNvm -Seconds 30)) { throw 'nvm (Windows) is not available after install.' }
+    }
 
     # Determine desired Node version
     $nodeVersion = $env:NODE_VERSION_PIN
@@ -104,23 +120,78 @@ function Ensure-NvmInCurrentSession {
 
     # Candidate install locations for nvm.exe (winget/choco defaults)
     $candidates = @()
-    if (-not [string]::IsNullOrWhiteSpace($env:NVM_HOME)) { $candidates += $env:NVM_HOME }
-    $candidates += @(
-        Join-Path $env:ProgramFiles 'nvm'),
-        'C:\ProgramData\chocolatey\bin',
-        (Join-Path $env:LOCALAPPDATA 'Programs\nvm')
 
+    # Read machine-scoped environment variables set by installers
+    $machineNvmHome = [Environment]::GetEnvironmentVariable('NVM_HOME','Machine')
+    $machineNvmSymlink = [Environment]::GetEnvironmentVariable('NVM_SYMLINK','Machine')
+    if (-not [string]::IsNullOrWhiteSpace($machineNvmHome)) { $env:NVM_HOME = $env:NVM_HOME ?? $machineNvmHome }
+    if (-not [string]::IsNullOrWhiteSpace($machineNvmSymlink)) { $env:NVM_SYMLINK = $env:NVM_SYMLINK ?? $machineNvmSymlink }
+
+    if (-not [string]::IsNullOrWhiteSpace($env:NVM_HOME)) { $candidates += $env:NVM_HOME }
+    if (-not [string]::IsNullOrWhiteSpace($env:ChocolateyInstall)) {
+        $candidates += @(
+            (Join-Path $env:ChocolateyInstall 'bin'),
+            (Join-Path $env:ChocolateyInstall 'lib\nvm'),
+            (Join-Path $env:ChocolateyInstall 'lib\nvm\tools')
+        )
+    }
+    $candidates += @(
+        (Join-Path $env:ProgramFiles 'nvm'),
+        (Join-Path ${env:ProgramFiles(x86)} 'nvm'),
+        'C:\tools\nvm',
+        'C:\nvm',
+        'C:\ProgramData\chocolatey\bin',
+        'C:\ProgramData\chocolatey\lib\nvm\tools',
+        'C:\ProgramData\chocolatey\lib\nvm',
+        (Join-Path $env:LOCALAPPDATA 'Programs\nvm'),
+        (Join-Path $env:APPDATA 'nvm')
+    )
+
+    $found = $false
     foreach ($dir in $candidates | Where-Object { $_ -and (Test-Path $_) }) {
         $exe = Join-Path $dir 'nvm.exe'
         if (Test-Path $exe) {
             if ($env:PATH -notmatch [regex]::Escape($dir)) { $env:PATH = "$dir;$env:PATH" }
             if ([string]::IsNullOrWhiteSpace($env:NVM_HOME)) { $env:NVM_HOME = $dir }
             if ([string]::IsNullOrWhiteSpace($env:NVM_SYMLINK)) { $env:NVM_SYMLINK = Join-Path $env:ProgramFiles 'nodejs' }
-            # Ensure symlink directory exists to avoid failures on first nvm use
             if (-not (Test-Path $env:NVM_SYMLINK)) { New-Item -ItemType Directory -Path $env:NVM_SYMLINK -Force | Out-Null }
+            $found = $true
             break
         }
     }
+
+    if (-not $found) {
+        # Fallback: scan common Chocolatey root for nvm.exe as last resort
+        $roots = @('C:\ProgramData\chocolatey', $env:ChocolateyInstall) | Where-Object { $_ -and (Test-Path $_) }
+        foreach ($root in $roots) {
+            $hit = Get-ChildItem -Path $root -Filter 'nvm.exe' -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1
+            if ($hit) {
+                $dir = Split-Path -Parent $hit.FullName
+                if ($env:PATH -notmatch [regex]::Escape($dir)) { $env:PATH = "$dir;$env:PATH" }
+                if ([string]::IsNullOrWhiteSpace($env:NVM_HOME)) { $env:NVM_HOME = $dir }
+                if ([string]::IsNullOrWhiteSpace($env:NVM_SYMLINK)) { $env:NVM_SYMLINK = Join-Path $env:ProgramFiles 'nodejs' }
+                if (-not (Test-Path $env:NVM_SYMLINK)) { New-Item -ItemType Directory -Path $env:NVM_SYMLINK -Force | Out-Null }
+                $found = $true
+                break
+            }
+        }
+    }
+
+    # If Chocolatey bin exists, ensure it's present on PATH (shims live here)
+    if ($env:ChocolateyInstall -and (Test-Path $env:ChocolateyInstall)) {
+        $chocoBin = Join-Path $env:ChocolateyInstall 'bin'
+        if (Test-Path $chocoBin -and $env:PATH -notmatch [regex]::Escape($chocoBin)) { $env:PATH = "$chocoBin;$env:PATH" }
+    }
+}
+
+function Wait-ForNvm {
+    param([int]$Seconds = 30)
+    for ($i = 0; $i -lt $Seconds; $i++) {
+        Ensure-NvmInCurrentSession
+        if (Test-Command nvm) { return $true }
+        Start-Sleep -Seconds 1
+    }
+    return $false
 }
 function Install-Python3 {
     if (Test-Command python3) { return }
