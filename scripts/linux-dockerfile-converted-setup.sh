@@ -60,7 +60,7 @@ install_node_via_nvm() {
   fi
 }
 
-echo "[1/11] Installing base system packages"
+echo "[1/12] Installing base system packages"
 $SUDO apt-get update -y
 $SUDO apt-get install -y --no-install-recommends \
   build-essential \
@@ -78,16 +78,18 @@ $SUDO apt-get install -y --no-install-recommends \
   htop \
   python3 \
   python3-pip \
-  python3-venv
+  python3-venv \
+  software-properties-common \
+  lsb-release
 
-echo "[2/11] Ensuring 'python' points to python3"
+echo "[2/12] Ensuring 'python' points to python3"
 if [ ! -e /usr/bin/python ]; then
   $SUDO ln -sf /usr/bin/python3 /usr/bin/python
 fi
 
-echo "[3/11] Installing Node.js via NVM (exact pin)"
+echo "[3/12] Installing Node.js via NVM (exact pin)"
 install_node_via_nvm
-echo "[4/11] NVM installed and active"
+echo "[4/12] NVM installed and active"
 
 echo "[5/11] Enabling Corepack (pnpm & yarn)"
 if command -v corepack >/dev/null 2>&1; then
@@ -102,7 +104,7 @@ else
   echo "corepack not found; skipping pnpm/yarn activation" >&2
 fi
 
-echo "[6/11] Installing PowerShell"
+echo "[6/12] Installing PowerShell"
 if ! command -v pwsh >/dev/null 2>&1; then
   wget -q "https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb" -O packages-microsoft-prod.deb
   $SUDO dpkg -i packages-microsoft-prod.deb
@@ -111,7 +113,7 @@ if ! command -v pwsh >/dev/null 2>&1; then
   $SUDO apt-get install -y --no-install-recommends powershell
 fi
 
-echo "[7/11] Installing Google Cloud CLI"
+echo "[7/12] Installing Google Cloud CLI"
 if ! command -v gcloud >/dev/null 2>&1; then
   echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | $SUDO tee /etc/apt/sources.list.d/google-cloud-sdk.list >/dev/null
   curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | $SUDO gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
@@ -119,7 +121,7 @@ if ! command -v gcloud >/dev/null 2>&1; then
   $SUDO apt-get install -y --no-install-recommends google-cloud-cli
 fi
 
-echo "[8/11] Installing GitHub CLI (gh)"
+echo "[8/12] Installing GitHub CLI (gh)"
 if ! command -v gh >/dev/null 2>&1; then
   curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | $SUDO dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
   $SUDO chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
@@ -128,7 +130,7 @@ if ! command -v gh >/dev/null 2>&1; then
   $SUDO apt-get install -y --no-install-recommends gh
 fi
 
-echo "[9/11] Installing Terraform"
+echo "[9/12] Installing Terraform"
 if ! command -v terraform >/dev/null 2>&1; then
   curl -fsSL https://apt.releases.hashicorp.com/gpg | $SUDO gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
   echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | $SUDO tee /etc/apt/sources.list.d/hashicorp.list
@@ -136,11 +138,18 @@ if ! command -v terraform >/dev/null 2>&1; then
   $SUDO apt-get install -y --no-install-recommends terraform
 fi
 
-echo "[10/11] Installing global npm CLI tools (firebase-tools, angular, CRA, typescript, eslint, prettier)"
-# With NVM-managed Node, install globals without sudo to the user scope
-npm install -g --no-audit --no-fund firebase-tools @angular/cli create-react-app typescript eslint prettier
+echo "[10/12] Installing Ansible"
+if ! command -v ansible >/dev/null 2>&1; then
+  $SUDO apt-get update -y
+  $SUDO add-apt-repository --yes --update ppa:ansible/ansible
+  $SUDO apt-get install -y --no-install-recommends ansible
+fi
 
-echo "[11/11] Ensuring .NET 9 SDK and workloads (wasm-tools, aspire)"
+echo "[11/12] Installing global npm CLI tools (firebase-tools, angular, CRA, typescript, eslint, prettier, cdktf)"
+# With NVM-managed Node, install globals without sudo to the user scope
+npm install -g --no-audit --no-fund firebase-tools @angular/cli create-react-app typescript eslint prettier cdktf-cli
+
+echo "[12/12] Ensuring .NET 9 SDK and workloads (wasm-tools, aspire)"
 # If dotnet missing or major version < 9, install via dotnet-install script
 if command -v dotnet >/dev/null 2>&1; then
   DOTNET_VER=$(dotnet --version || echo "0")
@@ -180,6 +189,8 @@ echo "- Google Cloud CLI: $(gcloud version --format='value(Google Cloud SDK)' 2>
 echo "- Firebase CLI: $(firebase --version 2>/dev/null || echo 'Not Installed')"
 echo "- GitHub CLI: $(gh --version 2>/dev/null | head -1 || echo 'Not Installed')"
 echo "- Terraform: $(terraform --version 2>/dev/null | head -1 || echo 'Not Installed')"
+echo "- Ansible: $(ansible --version 2>/dev/null | head -1 || echo 'Not Installed')"
+echo "- CDKTF: $(cdktf --version 2>/dev/null || echo 'Not Installed')"
 echo
 echo "Ready for ASP.NET Core + Blazor + AI + Google Cloud development!"
 EOF
