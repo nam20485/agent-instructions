@@ -18,40 +18,58 @@ jobs:
         with:
           fetch-depth: 0
 
-      # Caching intentionally disabled for now
-      # - name: Cache pip
-      #   uses: actions/cache@v4
-      #   with:
-      #     path: ~/.cache/pip
-      #     key: pip-${{ runner.os }}-${{ hashFiles('**/requirements.txt', '**/pyproject.toml') }}
-      #     restore-keys: |
-      #       pip-${{ runner.os }}-
-      # - name: Setup Node with npm cache
-      #   uses: actions/setup-node@v4
-      #   with:
-      #     node-version: '22'
-      #     cache: 'npm'
-      # - name: Cache pnpm store
-      #   uses: actions/cache@v4
-      #   with:
-      #     path: ~/.local/share/pnpm/store
-      #     key: pnpm-store-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-      #     restore-keys: |
-      #       pnpm-store-${{ runner.os }}-
-      # - name: Cache NuGet packages
-      #   uses: actions/cache@v4
-      #   with:
-      #     path: ~/.nuget/packages
-      #     key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj', '**/*.fsproj', '**/packages.lock.json') }}
-      #     restore-keys: |
-      #       nuget-${{ runner.os }}-
-      # - name: Cache Terraform plugins
-      #   uses: actions/cache@v4
-      #   with:
-      #     path: ~/.terraform.d/plugin-cache
-      #     key: terraform-${{ runner.os }}
-      #     restore-keys: |
-      #       terraform-${{ runner.os }}
+      # Standard caches for package managers and tooling
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: pip-${{ runner.os }}-${{ hashFiles('**/requirements.txt', '**/pyproject.toml') }}
+          restore-keys: |
+            pip-${{ runner.os }}-
+
+      - name: Cache npm (global cache)
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: npm-global-${{ runner.os }}-v1
+          restore-keys: |
+            npm-global-${{ runner.os }}-
+
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.pnpm-store
+            ~/.local/share/pnpm/store
+          key: pnpm-store-${{ runner.os }}-v1
+          restore-keys: |
+            pnpm-store-${{ runner.os }}-
+
+      - name: Cache Yarn cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/yarn
+            ~/.yarn/berry/cache
+          key: yarn-cache-${{ runner.os }}-v1
+          restore-keys: |
+            yarn-cache-${{ runner.os }}-
+
+      - name: Cache NuGet packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj', '**/*.fsproj', '**/packages.lock.json') }}
+          restore-keys: |
+            nuget-${{ runner.os }}-
+
+      - name: Cache Terraform plugins
+        uses: actions/cache@v4
+        with:
+          path: ~/.terraform.d/plugin-cache
+          key: terraform-${{ runner.os }}
+          restore-keys: |
+            terraform-${{ runner.os }}
 
       - name: Provision environment (single Linux script)
         shell: bash

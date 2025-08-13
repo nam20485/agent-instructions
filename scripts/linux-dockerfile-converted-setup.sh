@@ -26,6 +26,40 @@ else
   SUDO=""
 fi
 
+# -----------------------------------------------------------------------------
+# Node.js: NVM everywhere with exact version pinning
+# - Reads exact version from .nvmrc or NODE_VERSION_PIN (e.g., 22.18.0)
+# - npm stays pinned to the version bundled with Node, unless NPM_VERSION_PIN is set
+# -----------------------------------------------------------------------------
+install_node_via_nvm() {
+  # Install NVM if missing
+  export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
+  if [ ! -s "$NVM_DIR/nvm.sh" ]; then
+    echo "[nvm] Installing NVM to $NVM_DIR"
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+  fi
+  # shellcheck disable=SC1090
+  . "$NVM_DIR/nvm.sh"
+
+  # Choose desired version: from NODE_VERSION_PIN, or .nvmrc, else fallback to lts/* (not truly pinned)
+  if [ -n "${NODE_VERSION_PIN:-}" ]; then
+    DESIRED_NODE_VERSION="$NODE_VERSION_PIN"
+  elif [ -f .nvmrc ]; then
+    DESIRED_NODE_VERSION="$(cat .nvmrc)"
+  else
+    DESIRED_NODE_VERSION="lts/*"
+  fi
+  echo "[nvm] Ensuring Node $DESIRED_NODE_VERSION"
+  nvm install "$DESIRED_NODE_VERSION" --no-progress
+  nvm alias default "$DESIRED_NODE_VERSION"
+  nvm use default
+
+  # npm pinning: if NPM_VERSION_PIN is set, install that exact version; otherwise keep the bundled one
+  if [ -n "${NPM_VERSION_PIN:-}" ]; then
+    npm install -g --no-audit --no-fund "npm@${NPM_VERSION_PIN}" || true
+  fi
+}
+
 echo "[1/11] Installing base system packages"
 $SUDO apt-get update -y
 $SUDO apt-get install -y --no-install-recommends \
@@ -51,14 +85,9 @@ if [ ! -e /usr/bin/python ]; then
   $SUDO ln -sf /usr/bin/python3 /usr/bin/python
 fi
 
-echo "[3/11] Installing Node.js 22.x (NodeSource) + updating npm (matches Dockerfile early Node install)"
-if ! command -v node >/dev/null 2>&1 || ! node -v | grep -q 'v22'; then
-  curl -fsSL https://deb.nodesource.com/setup_22.x | $SUDO bash -
-  $SUDO apt-get install -y --no-install-recommends nodejs
-fi
-$SUDO npm install -g npm@latest
-
-echo "[4/11] Skipping NVM: using NodeSource Node 22 only (simplified)"
+echo "[3/11] Installing Node.js via NVM (exact pin)"
+install_node_via_nvm
+echo "[4/11] NVM installed and active"
 
 echo "[5/11] Enabling Corepack (pnpm & yarn)"
 if command -v corepack >/dev/null 2>&1; then
@@ -108,7 +137,8 @@ if ! command -v terraform >/dev/null 2>&1; then
 fi
 
 echo "[10/11] Installing global npm CLI tools (firebase-tools, angular, CRA, typescript, eslint, prettier)"
-$SUDO npm install -g --no-audit --no-fund firebase-tools @angular/cli create-react-app typescript eslint prettier
+# With NVM-managed Node, install globals without sudo to the user scope
+npm install -g --no-audit --no-fund firebase-tools @angular/cli create-react-app typescript eslint prettier
 
 echo "[11/11] Ensuring .NET 9 SDK and workloads (wasm-tools, aspire)"
 # If dotnet missing or major version < 9, install via dotnet-install script
