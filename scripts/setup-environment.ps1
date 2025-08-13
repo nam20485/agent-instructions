@@ -58,9 +58,9 @@ function Install-NvmWindows {
     if ($chocoAvailable) {
         try { choco install nvm -y --no-progress } catch { Write-Warning "choco install of nvm failed: $($_.Exception.Message)" }
         # Also ensure the Chocolatey bin folder is on PATH for the current session
-        if ($env:ChocolateyInstall -and (Test-Path $env:ChocolateyInstall)) {
+        if (($env:ChocolateyInstall) -and (Test-Path $env:ChocolateyInstall)) {
             $chocoBin = Join-Path $env:ChocolateyInstall 'bin'
-            if (Test-Path $chocoBin -and $env:PATH -notmatch [regex]::Escape($chocoBin)) { $env:PATH = "$chocoBin;$env:PATH" }
+            if ((Test-Path $chocoBin) -and ($env:PATH -notmatch [regex]::Escape($chocoBin))) { $env:PATH = "$chocoBin;$env:PATH" }
         }
         Ensure-NvmInCurrentSession
         if (Test-Command nvm) { return }
@@ -148,7 +148,7 @@ function Ensure-NvmInCurrentSession {
     )
 
     $found = $false
-    foreach ($dir in $candidates | Where-Object { $_ -and (Test-Path $_) }) {
+    foreach ($dir in $candidates | Where-Object { ($_) -and (Test-Path $_) }) {
         $exe = Join-Path $dir 'nvm.exe'
         if (Test-Path $exe) {
             if ($env:PATH -notmatch [regex]::Escape($dir)) { $env:PATH = "$dir;$env:PATH" }
@@ -162,7 +162,7 @@ function Ensure-NvmInCurrentSession {
 
     if (-not $found) {
         # Fallback: scan common Chocolatey root for nvm.exe as last resort
-        $roots = @('C:\ProgramData\chocolatey', $env:ChocolateyInstall) | Where-Object { $_ -and (Test-Path $_) }
+        $roots = @('C:\ProgramData\chocolatey', $env:ChocolateyInstall) | Where-Object { ($_) -and (Test-Path $_) }
         foreach ($root in $roots) {
             $hit = Get-ChildItem -Path $root -Filter 'nvm.exe' -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1
             if ($hit) {
@@ -178,9 +178,9 @@ function Ensure-NvmInCurrentSession {
     }
 
     # If Chocolatey bin exists, ensure it's present on PATH (shims live here)
-    if ($env:ChocolateyInstall -and (Test-Path $env:ChocolateyInstall)) {
+    if (($env:ChocolateyInstall) -and (Test-Path $env:ChocolateyInstall)) {
         $chocoBin = Join-Path $env:ChocolateyInstall 'bin'
-        if (Test-Path $chocoBin -and $env:PATH -notmatch [regex]::Escape($chocoBin)) { $env:PATH = "$chocoBin;$env:PATH" }
+        if ((Test-Path $chocoBin) -and ($env:PATH -notmatch [regex]::Escape($chocoBin))) { $env:PATH = "$chocoBin;$env:PATH" }
     }
 }
 
