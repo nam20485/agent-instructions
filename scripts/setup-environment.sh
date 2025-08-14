@@ -44,7 +44,7 @@ install_node_via_nvm() {
 	elif [ -f .nvmrc ]; then
 		DESIRED_NODE_VERSION="$(cat .nvmrc)"
 	else
-		echo "ERROR: No exact Node version specified. Set NODE_VERSION_PIN or add .nvmrc." >&2
+		echo "ERROR: No exact Node version specified. Set NODE_VERSION_PIN or add .nvmrc. Expected format: e.g., '22.18.0'" >&2
 		exit 1
 	fi
 	echo "[nvm] Ensuring Node $DESIRED_NODE_VERSION"
@@ -89,17 +89,49 @@ echo "[3/12] Installing Node.js via NVM (exact pin)"
 install_node_via_nvm
 echo "[4/12] NVM installed and active"
 
-echo "[5/12] Enabling Corepack (pnpm & yarn)"
+echo "[5/12] Enabling Corepack (pnpm & yarn) deterministically"
 if command -v corepack >/dev/null 2>&1; then
-	corepack enable || true
-	corepack prepare pnpm@latest --activate || true
-	corepack prepare yarn@stable --activate || true
-	echo "Package managers:"
-	(npm -v 2>/dev/null || true) | sed 's/^/ - npm /'
-	(pnpm -v 2>/dev/null || true) | sed 's/^/ - pnpm /'
-	(yarn -v 2>/dev/null || true) | sed 's/^/ - yarn /'
+    corepack enable || true
+    # Determine pnpm version: PNPM_VERSION_PIN > package.json packageManager field > package.json pnpm field
+    PNPM_VER=""
+    if [ -n "${PNPM_VERSION_PIN:-}" ]; then
+        PNPM_VER="$PNPM_VERSION_PIN"
+    elif [ -f package.json ]; then
+        PM_FIELD=$(grep -o '"packageManager"[^\n]*' package.json || true)
+        if echo "$PM_FIELD" | grep -q 'pnpm@'; then
+            PNPM_VER=$(echo "$PM_FIELD" | sed -E 's/.*"packageManager" *: *"pnpm@([^"]+)".*/\1/')
+        else
+            PNPM_VER=$(grep -o '"pnpm" *: *"[^"]*"' package.json | sed -E 's/.*"pnpm" *: *"([^"]+)".*/\1/' || true)
+        fi
+    fi
+    if [ -n "$PNPM_VER" ]; then
+        corepack prepare "pnpm@$PNPM_VER" --activate || true
+    else
+        echo "pnpm version not specified; skipping pnpm activation (set PNPM_VERSION_PIN or packageManager)." >&2
+    fi
+
+    # Determine yarn version: YARN_VERSION_PIN > package.json packageManager field
+    YARN_VER=""
+    if [ -n "${YARN_VERSION_PIN:-}" ]; then
+        YARN_VER="$YARN_VERSION_PIN"
+    elif [ -f package.json ]; then
+        PM_FIELD=$(grep -o '"packageManager"[^\n]*' package.json || true)
+        if echo "$PM_FIELD" | grep -q 'yarn@'; then
+            YARN_VER=$(echo "$PM_FIELD" | sed -E 's/.*"packageManager" *: *"yarn@([^"]+)".*/\1/')
+        fi
+    fi
+    if [ -n "$YARN_VER" ]; then
+        corepack prepare "yarn@$YARN_VER" --activate || true
+    else
+        echo "yarn version not specified; skipping yarn activation (set YARN_VERSION_PIN or packageManager)." >&2
+    fi
+
+    echo "Package managers:"
+    (npm -v 2>/dev/null || true) | sed 's/^/ - npm /'
+    (pnpm -v 2>/dev/null || true) | sed 's/^/ - pnpm /'
+    (yarn -v 2>/dev/null || true) | sed 's/^/ - yarn /'
 else
-	echo "corepack not found; skipping pnpm/yarn activation" >&2
+    echo "corepack not found; skipping pnpm/yarn activation" >&2
 fi
 
 echo "[6/12] Installing PowerShell"

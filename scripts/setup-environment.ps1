@@ -88,7 +88,7 @@ function Install-Node-With-Nvm {
         }
     }
     if ([string]::IsNullOrWhiteSpace($nodeVersion)) {
-        throw 'No exact Node version specified. Set NODE_VERSION_PIN or add .nvmrc (e.g., 22.18.0).'
+        throw 'No exact Node version specified. Set NODE_VERSION_PIN (e.g., NODE_VERSION_PIN=22.18.0) or add a .nvmrc file with the desired version (e.g., 22.18.0).'
     }
 
     Write-Host "[nvm] Installing Node $nodeVersion"
@@ -107,8 +107,35 @@ function Install-Node-With-Nvm {
 
     Write-Host '[corepack] Enabling'
     try { corepack enable | Out-Null } catch {}
-    try { corepack prepare pnpm@latest --activate | Out-Null } catch {}
-    try { corepack prepare yarn@stable --activate | Out-Null } catch {}
+
+    # Resolve pnpm version from PNPM_VERSION_PIN or package.json's packageManager/pnpm fields
+    $pnpmVersion = $env:PNPM_VERSION_PIN
+    if ([string]::IsNullOrWhiteSpace($pnpmVersion) -and (Test-Path 'package.json')) {
+        try {
+            $pkg = Get-Content package.json -Raw | ConvertFrom-Json
+            if ($pkg.packageManager -and ($pkg.packageManager -match '^pnpm@(.+)$')) { $pnpmVersion = $Matches[1] }
+            if ([string]::IsNullOrWhiteSpace($pnpmVersion) -and $pkg.pnpm) { $pnpmVersion = $pkg.pnpm }
+        } catch {}
+    }
+    if (-not [string]::IsNullOrWhiteSpace($pnpmVersion)) {
+        try { corepack prepare "pnpm@$pnpmVersion" --activate | Out-Null } catch {}
+    } else {
+        Write-Warning 'pnpm version not specified; skipping pnpm activation (set PNPM_VERSION_PIN or packageManager in package.json).'
+    }
+
+    # Resolve yarn version from YARN_VERSION_PIN or package.json's packageManager
+    $yarnVersion = $env:YARN_VERSION_PIN
+    if ([string]::IsNullOrWhiteSpace($yarnVersion) -and (Test-Path 'package.json')) {
+        try {
+            $pkg2 = Get-Content package.json -Raw | ConvertFrom-Json
+            if ($pkg2.packageManager -and ($pkg2.packageManager -match '^yarn@(.+)$')) { $yarnVersion = $Matches[1] }
+        } catch {}
+    }
+    if (-not [string]::IsNullOrWhiteSpace($yarnVersion)) {
+        try { corepack prepare "yarn@$yarnVersion" --activate | Out-Null } catch {}
+    } else {
+        Write-Warning 'yarn version not specified; skipping yarn activation (set YARN_VERSION_PIN or packageManager in package.json).'
+    }
 }
 
 # -----------------------------------------------------------------------------
@@ -257,7 +284,7 @@ function Install-DotNet9 {
 function Install-GlobalNpmCLIs {
     $pkgs = @('firebase-tools','@angular/cli','create-react-app','typescript','eslint','prettier','cdktf-cli')
     foreach ($p in $pkgs) {
-        try { npm install -g --no-audit --no-fund $p | Out-Null } catch { Write-Warning "Failed to install ${p}: $($_.Exception.Message)" }
+        try { npm install -g --no-audit --no-fund $p | Out-Null } catch { Write-Warning "Failed to install $p: $($_.Exception.Message)" }
     }
 }
 
