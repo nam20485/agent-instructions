@@ -2,6 +2,15 @@
 
 ## Technology Stack
 
+- Always use latest verions:
+- 
+  .NET 9.0.102
+
+- https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-9/overview
+
+- Alwys use latest technologies listed in recent Whats New?
+- https://devblogs.microsoft.com/dotnet/announcing-net-9-0/
+
 ### Core
 - **Language**: C# + .NET ≥9.0.0 with global.json:
   ```json
@@ -9,7 +18,11 @@
   ```
 
 ### Web Applications
-- **Backend**: ASP.NET Core Web API (full controllers), Aspire, CommunityToolkit, Carter, Nancy, ABP (large projects)
+
+#### Web Backend
+
+[ai-application-type-stacks\ai-app-stack-web-backend.md](./ai-application-stack-types/ai-app-stack-web-backend.md)
+- **Backend**: 
 - **Frontend**: Blazor WASM (Maui Hybrid if appropriate)
 
 ### Desktop
