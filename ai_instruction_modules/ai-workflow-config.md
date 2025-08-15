@@ -33,10 +33,3 @@
 
 ## Success Metrics
 Consistency, context awareness, learning from accumulated knowledge, systematic thinking, knowledge retention
-
-## Context usage discipline (streamlined)
-- Prefer repo summary first: treat `ai-repo-summary.md` as the primary source. Only search if incomplete or incorrect.
-- Minimize reads: batch small, read-only lookups; open larger files only when necessary and in larger chunks.
-- Avoid redundant searches: don’t re-scan the same paths; reuse prior findings from this session.
-- Checkpoint cadence: after ~3–5 tool calls, summarize findings and decide the next minimal step.
-- Scope to impact: gather only what’s needed to implement/validate the current change.

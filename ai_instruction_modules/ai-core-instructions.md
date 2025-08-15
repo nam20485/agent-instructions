@@ -29,6 +29,7 @@
 - Skip validation steps
 
 ## Change Flow
+## Change Flow
 1. Context gather (search/read)
 2. Plan (bullets)
 3. Diff proposals
@@ -70,9 +71,6 @@
 - [ai-personal-preferences.md](./ai-personal-preferences.md)
 - [ai-quick-reference.md](./ai-quick-reference.md)
 - [ai-workflow-config.md](./ai-workflow-config.md)
-- [ai-creating-repository-summary.md](./ai-creating-repository-summary.md)
-
-> Repository onboarding: When you first work in a repository, ensure there is an up-to-date `ai-repo-summary.md` at the repo root. If missing, follow `ai-creating-repository-summary.md` to generate it. If it exists, follow the regenerate-and-backup flow described there.
 
 ### Optional Modules
 
