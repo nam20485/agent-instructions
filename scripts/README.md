@@ -184,3 +184,20 @@ When modifying scripts:
 ---
 
 *These scripts ensure your local development environment matches the production GitHub Actions environment for consistent development experience.*
+
+## CI/devcontainer provisioning wrappers (standardized names)
+
+To mirror the CI/devcontainer provisioning locally with consistent naming, use the new wrapper entry points:
+
+- Windows (PowerShell):
+   - pwsh -NoProfile -ExecutionPolicy Bypass -File scripts/setup-environment.ps1
+
+- Linux (bash):
+   - bash scripts/setup-environment.sh
+
+Notes:
+- These wrappers delegate to the existing platform scripts and keep behavior unchanged.
+- Node.js is installed via NVM with an exact pin from .nvmrc (currently 22.18.0). You can override via environment variables:
+   - NODE_VERSION_PIN to override the Node version pin (e.g., 22.18.0)
+   - NPM_VERSION_PIN to optionally pin npm globally
+- The GitHub Actions workflow calls scripts/setup-environment.sh so local runs match CI.

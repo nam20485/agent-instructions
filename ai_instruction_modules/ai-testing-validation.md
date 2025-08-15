@@ -37,7 +37,7 @@
 - Include workflows for:
   - Automated builds
   - Automated tests
-  - Docker image builds and pushes to the repository's GitHub registry
+  - Docker image builds and pushes to the repository's GitHub package registry
 
 ## Links for TDD with AI Agents:
 - [Test-Driven Development with AI Agents](https://www.flowhunt.io/blog/test-driven-development-with-ai-agents/)
