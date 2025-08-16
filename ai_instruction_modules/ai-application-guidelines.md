@@ -21,14 +21,19 @@
 
 #### Web Backend
 
-[ai-application-type-stacks\ai-app-stack-web-backend.md](./ai-application-stack-types/ai-app-stack-web-backend.md)
-- **Backend**: 
-- **Frontend**: Blazor WASM (Maui Hybrid if appropriate)
+- ASP.NET Core Web API (use full controllers/not Minimal APIs)
+- Docker
+- Aspire
+- CommunityToolkit
+- ABP (large projects)  
+
+#### Web Frontend Blazor
+Blazor WASM (MAUI Hybrid if mobile support needed)
 
 ### Desktop
 - **UI**: Avalonia UI (cross-platform)
 
-### CLI Applications
+### Console
 - **TUI**: Spectre.Console + Cli + Testing ([best practices](https://spectreconsole.net/best-practices))
 - **Advanced TUI**: Consolonia
 - **CLI Frameworks**: CliFx, Commanddotnet
