@@ -2,13 +2,12 @@
 
 ## Technology Stack
 
-- Always use latest verions:
-- 
-  .NET 9.0.102
+- Always use latest versions:
+  - .NET 9.0.102
 
 - https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-9/overview
 
-- Alwys use latest technologies listed in recent Whats New?
+- Always use latest technologies listed in recent What's New?
 - https://devblogs.microsoft.com/dotnet/announcing-net-9-0/
 
 ### Core

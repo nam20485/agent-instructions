@@ -39,7 +39,7 @@ body: |
   ## Validation Commands
   - Run: dotnet run
   - Build: dotnet build
-  - Tests: dotnet test <Project.Tests>0
+  - Tests: dotnet test <Project.Tests>
   
   ## Dependencies
   - Issue #
