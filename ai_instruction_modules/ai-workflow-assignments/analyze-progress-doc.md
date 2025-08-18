@@ -68,6 +68,9 @@ It is important to the final quality of our product for everyone to perform thei
    - Include checkboxes: checked for completed work, unchecked for remaining tasks
    - Include original parts of the old issue, then add new sections for your findings
    - **Must include "Evidence Sources" section** documenting where each finding was discovered
+   - Good examples of completed analyses:
+       - https://github.com/nam20485/advanced-memory3/issues/17
+       - https://github.com/nam20485/advanced-memory3/issues/20
 
 6. **Link and reference appropriately:**
    - If original issue provided, link the new issue using GitHub references (e.g., "Related to #123")

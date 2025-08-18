@@ -34,6 +34,12 @@ Specifically, you will:
 
 It is important to the final quality of our product for everyone to perform their assignment exactly as specified.
 
+### References:
+
+* Excellent examples of a previously-completed plan created for a different application: 
+    * https://github.com/nam20485/advanced-memory3/issues/12
+    * https://github.com/nam20485/support-assistant/issues/2
+
 ### Detailed Steps
 
 1. **Analyze the Application Template**
