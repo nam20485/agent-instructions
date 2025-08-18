@@ -1,6 +1,6 @@
-## Assignment: Breakdown Issue
+## Assignment: Breakdown Epic
 
-Goal: Convert a high-level multi-phase issue into granular, executable sub-issues.
+Goal: Convert a high-level multi-phase epic issue into granular, executable (sub)-issues.
 
 ### Steps
 1. Identify phases / major work streams from parent.
@@ -35,6 +35,9 @@ body: |
   ## Acceptance Criteria
   - AC1
   - AC2
+
+  ## Validation Commands
+  - Run: dotnet run
   - Build: dotnet build
   - Tests: dotnet test <Project.Tests>
   
@@ -48,6 +51,7 @@ body: |
   ## Test Strategy
   - Unit: new cases in <Project.Tests>
   - Integration: endpoints A,B via TestServer
+  
   
   ## Rollback
   - Revert PR or commits <hash..hash>
