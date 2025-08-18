@@ -39,7 +39,7 @@ It is important to the final quality of our product for everyone to perform thei
 
 ### Detailed Steps
 
-1. **Setup Repository Administration**   
+1. **Setup Repository Administration**
    1. Create GitHub Project for issue tracking
    2. Create Milestones based on application plan phases
    3. Create labels for issue management (assigned:copilot, type:*, priority:*, etc.)
