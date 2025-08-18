@@ -24,11 +24,11 @@
 - Docker
 - Aspire
 - CommunityToolkit
-- ABP (large projects)  
+- ABP (large projects)
 
 #### Web Frontend Blazor
 Blazor WASM (MAUI Hybrid if mobile support needed)
-
+- Blazor WASM (MAUI Hybrid if mobile support needed)
 ### Desktop
 - **UI**: Avalonia UI (cross-platform)
 

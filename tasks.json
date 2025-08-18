@@ -10,7 +10,7 @@
       "args": [
         ".github/copilot-instructions.md",
         "ai_instruction_modules/ai-task-based-workflow.md",
-        "ai_instruction_modules/ai-application-guidelines.md"        
+        "ai_instruction_modules/ai-application-guidelines.md"
       ],
       "problemMatcher": [],
       "presentation": {
