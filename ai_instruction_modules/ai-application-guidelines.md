@@ -28,8 +28,10 @@
 
 #### Web Frontend Blazor
 - Blazor WASM (MAUI Hybrid if mobile support needed)
+  
 ### Desktop
-- **UI**: Avalonia UI (cross-platform)
+- **UI**: Avalonia UI (cross-platform), Fluent UI
+- 
 
 ### Console
 - **TUI**: Spectre.Console + Cli + Testing ([best practices](https://spectreconsole.net/best-practices))

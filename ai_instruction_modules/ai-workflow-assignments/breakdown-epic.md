@@ -1,6 +1,6 @@
 ## Assignment: Breakdown Epic
 
-Goal: Convert a high-level multi-phase epic issue into granular, executable (sub)-issues.
+Goal: Convert a high-level multi-phase epic issue into granular, executable sub-issues.
 
 ### Steps
 1. Identify phases / major work streams from parent.
