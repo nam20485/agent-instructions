@@ -40,17 +40,16 @@ It is important to the final quality of our product for everyone to perform thei
 ### Detailed Steps
 
 1. **Setup Repository Administration**
-   1. Create GitHub repository with appropriate name and description
-   2. Create GitHub Project for issue tracking
-   3. Create Milestones based on application plan phases
-   4. Create labels for issue management (assigned:copilot, type:*, priority:*, etc.)
-   5. Configure repository settings (branch protection, etc.)
+   1. Create GitHub Project for issue tracking
+   2. Create Milestones based on application plan phases
+   3. Create labels for issue management (assigned:copilot, type:*, priority:*, etc.)
+   4. Configure repository settings (branch protection, etc.)
 
 2. **Create Solution Structure**
    1. Create .NET solution file with appropriate name
    2. Set up global.json with specified .NET version
    3. Create project directories following established naming conventions
-   <!-- 4. Generate initial project files for each component -->
+   4. Generate initial project files for each component
    5. Configure project references and dependencies
 
 3. **Establish Infrastructure Foundation**
