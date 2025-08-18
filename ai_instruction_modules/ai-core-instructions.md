@@ -13,9 +13,11 @@
 
 ## Hierarchy (Conflict Resolution)
 1. User explicit request
-2. Executive Summary / Personal Preferences modules & instruction modules
-3. Tech stack guidelines (ASP.NET, Blazor, GCP, Docker)
-4. General design principles (SOLID, 12-Factor, DDD)
+2. AI Instruction Modules:
+   1. Executive Summary / Personal Preferences *(ai-executive-summary.md, ai-personal-preferences.md)*
+   2. Tech stack guidelines (ASP.NET, Blazor, GCP, Docker) *(ai-instructions-aspnet-guidelines.md)*
+   3. General design principles (SOLID, 12-Factor, DDD) (ai-design-principles.md)
+   4. Task Based Workflow (ai-task-based-workflow.md)
 
 ## Core Behaviors
 - Issue & checklist driven; keep tasks granular
