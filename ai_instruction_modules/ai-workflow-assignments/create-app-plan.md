@@ -20,6 +20,10 @@ Your goal is to create a plan for application, using the template in Appendix A,
 10. All risks and mitigations identified.
 11. Code quality standards and best practices have been followed
 12. Application plan is ready for development and implementation.
+13. Issue labels have been imported.
+14. Phase Sub-issues have been created.
+15. Milesotones have been created.
+16. Phase sub-issues have been assigned to milestones.
    
 ### Assignment
 
@@ -54,6 +58,9 @@ It is important to the final quality of our product for everyone to perform thei
    - Identify necessary frameworks, tools, and packages to be used
    - Plan for testing, documentation, containerization, and other mandatory requirements
    - Create Issue documenting plan from the Appendix A plan template and iterate to gain approval from the orchestrator or stakeholders
+   - Create a detaile sub-issue subordinate from the main plan issue for each phase of the plan.
+   - Import the issue labels using the `import-labels.ps1` and `.labels.json` files.
+   - Milestones have been created and issues linked to the appropriate milestone.
 
 
 ### Completion
