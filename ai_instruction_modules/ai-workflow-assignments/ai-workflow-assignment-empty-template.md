@@ -21,7 +21,7 @@
    
 ### Assignment
 
-
+*assignment description*...
 
 ### Detailed Steps
 
@@ -34,7 +34,6 @@
    - 
    - 
    - 
-   
 
 ### Completion
 

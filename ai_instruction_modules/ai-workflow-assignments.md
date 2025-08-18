@@ -13,10 +13,12 @@
 ## Workflow Assignment Files
 * Definition files are found under the `ai_instruction_modules/ai-workflow-assignments/` directory in a subdirectory named exactly as the workflow assignment definition's "short ID" (See sections below for definition of an assignment's "short ID").
 
-*<WORKSPACE-ROOT>*/
+```
+<WORKSPACE-ROOT>/
     ai_instructions_modules/
         ai-workflow-assignments/
             *<assignment_short_id>*        // e.g. "pr-approval-and-merge"
+```
 
 ## Workflow Assignment Definition Format
 
@@ -38,7 +40,7 @@ The format is made up of the following sections:
 ## Available Assignments
 * [pr-approval-and-merge.md](ai-workflow-assignments/pr-approval-and-merge.md): This assignment involves resolving all pull request (PR) comments, getting the PR approved, and merging it upstream.
 * [perform-task.md](ai-workflow-assignments/perform-task.md): This assignment involves executing a specific task given to you by an orchestrator or stakeholder, using the task-based workflow process.  This includes understanding the task requirements, planning/gaining approval and gathering necessary resources, and delivering the expected outcome.
-* [continue-task-work.md](ai-workflow-assignments/continue-task-work.md): This assignment provides a comprehensive guide on how to complete previously-existing tasks that have already been started but not yet finished. It includes guidance on how to determine which task to start, how to perform tasks within the task-based workflow, including detailed steps and considerations.
+* [create-test-cases.md](ai-workflow-assignments/create-test-cases.md): This assignment involves creating test cases for the application, ensuring that all critical functionality is covered and that the tests are properly integrated into the build process. You will create a plan, document it in an issue, and once gaining approval, you will implement the plan. You will also create (or upgrade, if necessary) an automated test pipeline.
 * [create-application.md](ai-workflow-assignments/create-application.md): This assignment involves creating a new application given the description from a new app template that has been filled out, including setting up the project structure, configuring necessary components, and ensuring the application meets specified requirements.
 * [create-test-cases.md](ai-workflow-assignments/create-test-cases.md): This assignment involves creating test cases for the application, ensuring that all critical functionality is covered and that the tests are properly integrated into the build process. You will create a plan, document it in an issue, and once gaining approval, you will implement the plan. You will also create (or upgrade, if necessary) an auomated test pipeline.
 * [pr-review-comments.md](ai-workflow-assignments/pr-review-comments.md): This assignment involves reviewing and addressing comments on a pull request (PR). You will systematically resolve each comment, commit changes, reply with a description of changes, and mark the comment resolved. You need to ensure the PR is ready for approval and merge.
@@ -48,4 +50,4 @@ The format is made up of the following sections:
 * [convert-vs-color-theme-to-vscode.md](ai-workflow-assignments/convert-vs-color-theme-to-vscode.md): This assignment involves converting a Visual Studio color theme to a Visual Studio Code color theme. You will create a plan, document it in an issue, and once gaining approval, you will implement the plan.
 * [create-app-plan.md](ai-workflow-assignments/create-app-plan.md): This assignment involves creating a plan for a new application based on a filled-out application template. You will create a plan, document it in an issue, and once gaining approval, you will implement the plan.
 * [create-project-structure.md](ai-workflow-assignments/create-project-structure.md): This assignment involves creating the actual project structure and scaffolding for a new application based on a comprehensive application plan. This involves setting up the repository, creating the solution structure, configuring initial project files, and establishing the development environment foundation.
-]
+  
