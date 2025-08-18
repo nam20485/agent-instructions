@@ -4,7 +4,7 @@
 
 ### Goal
 
-Your goal is to create a plan for application based on a filled-out application template.
+Your goal is to create a plan for application, using the template in Appendix A, based on a filled-out new application template.
 
 ### Acceptance Criteria
 
@@ -49,11 +49,11 @@ It is important to the final quality of our product for everyone to perform thei
    - Understand the technology stack and design principles to be followed
 
 2. **Design Plan**
-   - Create a detailed design plan based on the template
+   - Create a detailed design plan based on the new app template
    - Define the project structure, including directories, files, and naming conventions
    - Identify necessary frameworks, tools, and packages to be used
    - Plan for testing, documentation, containerization, and other mandatory requirements
-   - Create Issue documenting plan and iterate to gain approval from the orchestrator or stakeholders
+   - Create Issue documenting plan from the Appendix A plan template and iterate to gain approval from the orchestrator or stakeholders
 
 
 ### Completion
