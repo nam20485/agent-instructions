@@ -1,0 +1,6 @@
+# Normalize text files by default
+* text=auto
+
+# Always use LF for shell scripts (required on Linux/macOS and CI)
+*.sh text eol=lf
+scripts/*.sh text eol=lf
