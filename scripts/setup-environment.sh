@@ -29,14 +29,37 @@ fi
 # - npm stays pinned to the version bundled with Node, unless NPM_VERSION_PIN is set
 # -----------------------------------------------------------------------------
 install_node_via_nvm() {
-	# Install NVM if missing
+	# Install NVM if missing (clone repo directly to avoid installer non-zero exits in CI)
 	export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
+	# Ensure parent exists, but let git create the final directory to avoid clone errors
+	mkdir -p "$(dirname "$NVM_DIR")"
 	if [ ! -s "$NVM_DIR/nvm.sh" ]; then
-		echo "[nvm] Installing NVM to $NVM_DIR"
-		curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+		# If the directory exists but is empty, remove it so git can create it
+		if [ -d "$NVM_DIR" ] && [ -z "$(ls -A "$NVM_DIR" 2>/dev/null)" ]; then rmdir "$NVM_DIR" || true; fi
+		echo "[nvm] Cloning NVM to $NVM_DIR (v0.39.7)"
+		git clone --depth=1 -b v0.39.7 https://github.com/nvm-sh/nvm.git "$NVM_DIR" || true
 	fi
 	# shellcheck disable=SC1090
-	. "$NVM_DIR/nvm.sh"
+	if [ -s "$NVM_DIR/nvm.sh" ]; then
+		# Some nvm versions attempt an automatic `nvm use` on sourcing when an .nvmrc is present,
+		# which may exit non-zero before the desired version is installed. Temporarily disable -e.
+		set +e
+		. "$NVM_DIR/nvm.sh"
+		source_rc=$?
+		set -e
+		if [ ${source_rc} -ne 0 ]; then
+			echo "[nvm] Sourcing nvm.sh returned non-zero (${source_rc}); continuing with explicit install" >&2
+		fi
+	else
+		echo "ERROR: NVM not found at $NVM_DIR/nvm.sh after clone" >&2
+		exit 1
+	fi
+
+	# Verify nvm is available after sourcing
+	if ! command -v nvm >/dev/null 2>&1; then
+		echo "ERROR: 'nvm' command not found after sourcing $NVM_DIR/nvm.sh" >&2
+		exit 1
+	fi
 
 	# Choose desired version: from NODE_VERSION_PIN, or .nvmrc, else fallback to lts/* (not truly pinned)
 	if [ -n "${NODE_VERSION_PIN:-}" ]; then
@@ -48,7 +71,7 @@ install_node_via_nvm() {
 		exit 1
 	fi
 	echo "[nvm] Ensuring Node $DESIRED_NODE_VERSION"
-	nvm install "$DESIRED_NODE_VERSION" --no-progress
+	nvm install "$DESIRED_NODE_VERSION"
 	nvm alias default "$DESIRED_NODE_VERSION"
 	nvm use default
 
@@ -90,7 +113,9 @@ install_node_via_nvm
 echo "[4/12] NVM installed and active"
 
 echo "[5/12] Enabling Corepack (pnpm & yarn) deterministically"
-if command -v corepack >/dev/null 2>&1; then
+if [ -n "${SETUP_MINIMAL:-}" ]; then
+	echo "SETUP_MINIMAL=1: Skipping Corepack activation"
+elif command -v corepack >/dev/null 2>&1; then
     corepack enable || true
     # Determine pnpm version: PNPM_VERSION_PIN > package.json packageManager field > package.json pnpm field
     PNPM_VER=""
@@ -135,7 +160,9 @@ else
 fi
 
 echo "[6/12] Installing PowerShell"
-if ! command -v pwsh >/dev/null 2>&1; then
+if [ -n "${SETUP_MINIMAL:-}" ]; then
+	echo "SETUP_MINIMAL=1: Skipping PowerShell install"
+elif ! command -v pwsh >/dev/null 2>&1; then
 	wget -q "https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb" -O packages-microsoft-prod.deb
 	$SUDO dpkg -i packages-microsoft-prod.deb
 	rm -f packages-microsoft-prod.deb
@@ -144,7 +171,9 @@ if ! command -v pwsh >/dev/null 2>&1; then
 fi
 
 echo "[7/12] Installing Google Cloud CLI"
-if ! command -v gcloud >/dev/null 2>&1; then
+if [ -n "${SETUP_MINIMAL:-}" ]; then
+	echo "SETUP_MINIMAL=1: Skipping Google Cloud CLI install"
+elif ! command -v gcloud >/dev/null 2>&1; then
 	echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | $SUDO tee /etc/apt/sources.list.d/google-cloud-sdk.list >/dev/null
 	curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | $SUDO gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
 	$SUDO apt-get update -y
@@ -152,7 +181,9 @@ if ! command -v gcloud >/dev/null 2>&1; then
 fi
 
 echo "[8/12] Installing GitHub CLI (gh)"
-if ! command -v gh >/dev/null 2>&1; then
+if [ -n "${SETUP_MINIMAL:-}" ]; then
+	echo "SETUP_MINIMAL=1: Skipping GitHub CLI install"
+elif ! command -v gh >/dev/null 2>&1; then
 	curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | $SUDO dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
 	$SUDO chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
 	echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | $SUDO tee /etc/apt/sources.list.d/github-cli.list >/dev/null
@@ -161,7 +192,9 @@ if ! command -v gh >/dev/null 2>&1; then
 fi
 
 echo "[9/12] Installing Terraform"
-if ! command -v terraform >/dev/null 2>&1; then
+if [ -n "${SETUP_MINIMAL:-}" ]; then
+	echo "SETUP_MINIMAL=1: Skipping Terraform install"
+elif ! command -v terraform >/dev/null 2>&1; then
 	curl -fsSL https://apt.releases.hashicorp.com/gpg | $SUDO gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
 	echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | $SUDO tee /etc/apt/sources.list.d/hashicorp.list
 	$SUDO apt-get update -y
@@ -169,35 +202,54 @@ if ! command -v terraform >/dev/null 2>&1; then
 fi
 
 echo "[10/12] Installing Ansible"
-if ! command -v ansible >/dev/null 2>&1; then
+if [ -n "${SETUP_MINIMAL:-}" ]; then
+	echo "SETUP_MINIMAL=1: Skipping Ansible install"
+elif ! command -v ansible >/dev/null 2>&1; then
 	$SUDO apt-get update -y
 	$SUDO add-apt-repository --yes --update ppa:ansible/ansible
 	$SUDO apt-get install -y --no-install-recommends ansible
 fi
 
 echo "[11/12] Installing global npm CLI tools (firebase-tools, angular, CRA, typescript, eslint, prettier, cdktf)"
-# With NVM-managed Node, install globals without sudo to the user scope
-npm install -g --no-audit --no-fund firebase-tools @angular/cli create-react-app typescript eslint prettier cdktf-cli
+if [ -n "${SETUP_MINIMAL:-}" ]; then
+	echo "SETUP_MINIMAL=1: Skipping global npm CLI tool installs"
+else
+	# With NVM-managed Node, install globals without sudo to the user scope
+	npm install -g --no-audit --no-fund firebase-tools @angular/cli create-react-app typescript eslint prettier cdktf-cli
+fi
 
-echo "[12/12] Ensuring .NET 9 SDK and workloads (wasm-tools, aspire)"
-# If dotnet missing or major version < 9, install via dotnet-install script
+echo "[12/12] Ensuring .NET 10 Preview SDK and workloads (wasm-tools)"
+# If dotnet missing or major version < 10, install via dotnet-install script
 if command -v dotnet >/dev/null 2>&1; then
 	DOTNET_VER=$(dotnet --version || echo "0")
 else
 	DOTNET_VER="0"
 fi
-if ! echo "$DOTNET_VER" | grep -q '^9\.'; then
-	echo "Installing .NET 9 SDK locally (dotnet-install script)"
+if ! echo "$DOTNET_VER" | grep -q '^10\.'; then
+	# Allow override via env:
+	#   DOTNET_VERSION_PIN: exact SDK version (e.g., 10.0.100-preview.7.XXXXX)
+	#   DOTNET_CHANNEL: channel family (default 10.0)
+	#   DOTNET_QUALITY: desired quality (default preview)
+	DOTNET_CHANNEL_VAL="${DOTNET_CHANNEL:-10.0}"
+	DOTNET_QUALITY_VAL="${DOTNET_QUALITY:-preview}"
+	echo "Installing .NET ${DOTNET_CHANNEL_VAL} (${DOTNET_QUALITY_VAL}) SDK locally (dotnet-install script)"
 	curl -sSL https://dot.net/v1/dotnet-install.sh -o /tmp/dotnet-install.sh
-	bash /tmp/dotnet-install.sh --channel 9.0 --install-dir "$HOME/.dotnet" --no-path
+	if [ -n "${DOTNET_VERSION_PIN:-}" ]; then
+		bash /tmp/dotnet-install.sh --version "$DOTNET_VERSION_PIN" --install-dir "$HOME/.dotnet" --no-path
+	else
+		bash /tmp/dotnet-install.sh --channel "$DOTNET_CHANNEL_VAL" --quality "$DOTNET_QUALITY_VAL" --install-dir "$HOME/.dotnet" --no-path
+	fi
 	export PATH="$HOME/.dotnet:$PATH"
 fi
 if command -v dotnet >/dev/null 2>&1; then
+	# Run dotnet commands outside the repo to avoid global.json pinning to an older SDK
 	set +e
-	dotnet workload update || true
-	dotnet workload install wasm-tools || true
-	dotnet workload install aspire || true
-	dotnet new install Aspire.ProjectTemplates || true
+	(
+		cd /tmp || exit 0
+		dotnet workload update || true
+		dotnet workload install wasm-tools || true
+		dotnet new install Aspire.ProjectTemplates || true
+	)
 	set -e
 else
 	echo "dotnet not found on PATH; skipping workload installation (consider using actions/setup-dotnet)." >&2
@@ -208,7 +260,7 @@ cat <<'EOF' >/tmp/show-env.sh
 #!/usr/bin/env bash
 echo "=== AI Agent Instructions Development Environment (Script Install) ==="
 echo "Core Development Stack:"
-echo "- .NET SDK: $(command -v dotnet >/dev/null 2>&1 && dotnet --version || echo 'Not Installed')"
+echo "- .NET SDK: $(command -v dotnet >/dev/null 2>&1 && (cd /tmp && dotnet --version) || echo 'Not Installed')"
 echo "- Node.js: $(node --version 2>/dev/null || echo 'Not Installed')"
 echo "- npm: $(npm --version 2>/dev/null || echo 'Not Installed')"
 echo "- Python: $(python --version 2>/dev/null || echo 'Not Installed')"
