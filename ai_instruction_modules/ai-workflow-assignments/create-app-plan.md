@@ -33,7 +33,7 @@ The application template can be found in the `docs/` directory in a file called 
 
 Specifically, you will:
 
-1. Analyze the filled-out application template and linked supporting documents to understand requirements and expectations and then create a comprehensive plan, documented as an issue (use the template in Appendix A), for the development of the application.
+1. Analyze the filled-out application template and linked supporting documents to understand requirements and expectations and then create a comprehensive plan, documented as an issue (use the template in Appendix A), for the development of the application. There is no coding in this assignment. It is strictly planning.
 
 **Always follow instructions given here (generally) and specifically as described in the task-based workflow process.**
 
@@ -65,7 +65,7 @@ It is important to the final quality of our product for everyone to perform thei
 
 ### Completion
 
-Ask the stake-holder if they are happy with the plan and can approve it. If not then make the requested changes and iterate asking for approval and making changes until approval is gained.
+Ask the stake-holder if they are happy with the plan and can approve it. If not then make the requested changes and iterate asking for approval and making changes until approval is gained. **DO NOT IMPLEMENT OR WRITE ANY CODE.** This assignment is planning only.
 Ask the stake-holder for your next assignment.
 
 ## Appendix: Application Plan Issue Template (Copy-Paste)
