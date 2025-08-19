@@ -12,7 +12,7 @@ This file contains instructions for creating a custom summary of a repository.
 
 - [Writing effective repository custom instructions](https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions?tool=webui#creating-a-repository-custom-instructions-file)
 
-* Note: You are to write instructions, but to only use the instructions from the documentation that are relevant to creating a summary of the properties of a repository.
+* Note: You are not to write or include any instructions in this file, but to only use the instructions from the documentation that are relevant to creating a summary of the properties of a repository.
 
 ## Instructions for Creating Repository Summary
 
