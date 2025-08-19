@@ -17,6 +17,11 @@ Create the actual project structure and scaffolding for a new application based 
   * Risks & Mitigations
   * Technology stack specifications
 
+- These documents can be found in `docs/` folder:
+  * `docs/ai-new-app-template.md`
+  * *supporting documents linked from the new app template*
+  
+
 ### Acceptance Criteria
 
 1. GitHub repository created with proper configuration
