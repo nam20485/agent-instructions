@@ -18,7 +18,8 @@
 - **Infrastructure**: Terraform definitions for deployable apps
 
 ## Code Standards
-- Warnings as errors (disable specific warnings only when necessary)
-- XML documentation for all public members (description, parameters, return, exceptions)
+- Warnings as errors (disable specific warnings only when necessary)  **MANDATORY on all projects. Exceptions ONLY WITH EXPLANATION & APPROVAL**
+- XML documentation for **ALL** members (description, parameters, return, exceptions)
+- XML documentation on **ALL** types: classes, interfaces, fields, properties, and methods (including non-public)
 - Environment variables for configuration
-- Pin dependency versions precisely
+- Pin dependency versions precisely **NO RANGES**
