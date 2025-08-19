@@ -26,7 +26,14 @@
         "@modelcontextprotocol/server-filesystem",
         "."
       ],
-      "tools": ["*"]
+      "tools": [
+        "list_directory",
+        "read_directory",
+        "stat",
+        "glob",
+        "read_file",
+        "read_text_file"
+      ]
     },
     "gemini-cli": {
       "type": "local",

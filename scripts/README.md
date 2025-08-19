@@ -201,3 +201,19 @@ Notes:
    - NODE_VERSION_PIN to override the Node version pin (e.g., 22.18.0)
    - NPM_VERSION_PIN to optionally pin npm globally
 - The GitHub Actions workflow calls scripts/setup-environment.sh so local runs match CI.
+
+## MCP configuration for Copilot coding agent
+
+This repo includes `mcp-github.json` to extend the GitHub Copilot coding agent with safe, useful MCP servers.
+
+- Filesystem server is restricted to read-only tools: `list_directory`, `read_directory`, `stat`, `glob`, `read_file`, `read_text_file`.
+- Notion server requires an environment secret in Copilot mapped to `OPENAPI_MCP_HEADERS` (recommended) or `NOTION_TOKEN` (alternative):
+   - Preferred: set a Copilot secret named `COPILOT_MCP_NOTION_OPENAPI_HEADERS` with value:
+      `{ "Authorization": "Bearer ntn_***", "Notion-Version": "2022-06-28" }`
+   - Alternative: set `COPILOT_MCP_NOTION_TOKEN` and update the Notion env to include `NOTION_TOKEN`.
+   - Use a read-only Notion integration token whenever possible.
+- Microsoft Docs and Deepwiki are read-only; other servers are sandboxed. If you need stricter allowlists, update `mcp-github.json` accordingly.
+
+Environment provisioning notes:
+- `scripts/setup-environment.sh` installs uv and Playwright CLI plus browsers (chromium, firefox, webkit). On Ubuntu, `--with-deps` pulls required system libraries.
+- The summary at the end prints versions so you can validate installs quickly.

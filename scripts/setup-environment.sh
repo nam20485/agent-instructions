@@ -81,7 +81,7 @@ install_node_via_nvm() {
 	fi
 }
 
-echo "[1/12] Installing base system packages"
+echo "[1/14] Installing base system packages"
 $SUDO apt-get update -y
 $SUDO apt-get install -y --no-install-recommends \
 	build-essential \
@@ -103,16 +103,16 @@ $SUDO apt-get install -y --no-install-recommends \
 	software-properties-common \
 	lsb-release
 
-echo "[2/12] Ensuring 'python' points to python3"
+echo "[2/14] Ensuring 'python' points to python3"
 if [ ! -e /usr/bin/python ]; then
 	$SUDO ln -sf /usr/bin/python3 /usr/bin/python
 fi
 
-echo "[3/12] Installing Node.js via NVM (exact pin)"
+echo "[3/14] Installing Node.js via NVM (exact pin)"
 install_node_via_nvm
-echo "[4/12] NVM installed and active"
+echo "[4/14] NVM installed and active"
 
-echo "[5/12] Enabling Corepack (pnpm & yarn) deterministically"
+echo "[5/14] Enabling Corepack (pnpm & yarn) deterministically"
 if [ -n "${SETUP_MINIMAL:-}" ]; then
 	echo "SETUP_MINIMAL=1: Skipping Corepack activation"
 elif command -v corepack >/dev/null 2>&1; then
@@ -159,7 +159,26 @@ else
     echo "corepack not found; skipping pnpm/yarn activation" >&2
 fi
 
-echo "[6/12] Installing PowerShell"
+echo "[6/14] Installing uv (Python package/dependency manager)"
+if [ -n "${SETUP_MINIMAL:-}" ]; then
+	echo "SETUP_MINIMAL=1: Skipping uv install"
+elif ! command -v uv >/dev/null 2>&1; then
+	curl -LsSf https://astral.sh/uv/install.sh -o /tmp/uv-install.sh
+	sh /tmp/uv-install.sh >/dev/null 2>&1 || sh /tmp/uv-install.sh
+	export PATH="$HOME/.local/bin:$PATH"
+fi
+
+echo "[7/14] Installing Playwright CLI and browsers (chromium, firefox, webkit)"
+if [ -n "${SETUP_MINIMAL:-}" ]; then
+	echo "SETUP_MINIMAL=1: Skipping Playwright install"
+else
+	# Install Playwright CLI and browsers. --with-deps installs required system libraries on Ubuntu runners.
+	npx -y playwright@latest install --with-deps chromium firefox webkit || \
+	npx -y playwright@latest install chromium firefox webkit || true
+	npx -y playwright@latest --version || true
+fi
+
+echo "[8/14] Installing PowerShell"
 if [ -n "${SETUP_MINIMAL:-}" ]; then
 	echo "SETUP_MINIMAL=1: Skipping PowerShell install"
 elif ! command -v pwsh >/dev/null 2>&1; then
@@ -170,7 +189,7 @@ elif ! command -v pwsh >/dev/null 2>&1; then
 	$SUDO apt-get install -y --no-install-recommends powershell
 fi
 
-echo "[7/12] Installing Google Cloud CLI"
+echo "[9/14] Installing Google Cloud CLI"
 if [ -n "${SETUP_MINIMAL:-}" ]; then
 	echo "SETUP_MINIMAL=1: Skipping Google Cloud CLI install"
 elif ! command -v gcloud >/dev/null 2>&1; then
@@ -180,7 +199,7 @@ elif ! command -v gcloud >/dev/null 2>&1; then
 	$SUDO apt-get install -y --no-install-recommends google-cloud-cli
 fi
 
-echo "[8/12] Installing GitHub CLI (gh)"
+echo "[10/14] Installing GitHub CLI (gh)"
 if [ -n "${SETUP_MINIMAL:-}" ]; then
 	echo "SETUP_MINIMAL=1: Skipping GitHub CLI install"
 elif ! command -v gh >/dev/null 2>&1; then
@@ -191,7 +210,7 @@ elif ! command -v gh >/dev/null 2>&1; then
 	$SUDO apt-get install -y --no-install-recommends gh
 fi
 
-echo "[9/12] Installing Terraform"
+echo "[11/14] Installing Terraform"
 if [ -n "${SETUP_MINIMAL:-}" ]; then
 	echo "SETUP_MINIMAL=1: Skipping Terraform install"
 elif ! command -v terraform >/dev/null 2>&1; then
@@ -201,7 +220,7 @@ elif ! command -v terraform >/dev/null 2>&1; then
 	$SUDO apt-get install -y --no-install-recommends terraform
 fi
 
-echo "[10/12] Installing Ansible"
+echo "[12/14] Installing Ansible"
 if [ -n "${SETUP_MINIMAL:-}" ]; then
 	echo "SETUP_MINIMAL=1: Skipping Ansible install"
 elif ! command -v ansible >/dev/null 2>&1; then
@@ -210,7 +229,7 @@ elif ! command -v ansible >/dev/null 2>&1; then
 	$SUDO apt-get install -y --no-install-recommends ansible
 fi
 
-echo "[11/12] Installing global npm CLI tools (firebase-tools, angular, CRA, typescript, eslint, prettier, cdktf)"
+echo "[13/14] Installing global npm CLI tools (firebase-tools, angular, CRA, typescript, eslint, prettier, cdktf)"
 if [ -n "${SETUP_MINIMAL:-}" ]; then
 	echo "SETUP_MINIMAL=1: Skipping global npm CLI tool installs"
 else
@@ -218,7 +237,7 @@ else
 	npm install -g --no-audit --no-fund firebase-tools @angular/cli create-react-app typescript eslint prettier cdktf-cli
 fi
 
-echo "[12/12] Ensuring .NET 10 Preview SDK and workloads (wasm-tools)"
+echo "[14/14] Ensuring .NET 10 Preview SDK and workloads (wasm-tools)"
 # If dotnet missing or major version < 10, install via dotnet-install script
 if command -v dotnet >/dev/null 2>&1; then
 	DOTNET_VER=$(dotnet --version || echo "0")
@@ -265,6 +284,7 @@ echo "- Node.js: $(node --version 2>/dev/null || echo 'Not Installed')"
 echo "- npm: $(npm --version 2>/dev/null || echo 'Not Installed')"
 echo "- Python: $(python --version 2>/dev/null || echo 'Not Installed')"
 echo "- PowerShell: $(pwsh --version 2>/dev/null || echo 'Not Installed')"
+echo "- uv: $(uv --version 2>/dev/null || echo 'Not Installed')"
 echo
 
 echo "Cloud & DevOps Tools:"
@@ -274,6 +294,7 @@ echo "- GitHub CLI: $(gh --version 2>/dev/null | head -1 || echo 'Not Installed'
 echo "- Terraform: $(terraform --version 2>/dev/null | head -1 || echo 'Not Installed')"
 echo "- Ansible: $(ansible --version 2>/dev/null | head -1 || echo 'Not Installed')"
 echo "- CDKTF: $(cdktf --version 2>/dev/null || echo 'Not Installed')"
+echo "- Playwright: $(npx -y playwright@latest --version 2>/dev/null || echo 'Not Installed')"
 echo
 
 echo "Ready for ASP.NET Core + Blazor + AI + Google Cloud development!"
