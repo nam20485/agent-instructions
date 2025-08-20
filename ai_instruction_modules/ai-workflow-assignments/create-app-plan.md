@@ -57,14 +57,15 @@ It is important to the final quality of our product for everyone to perform thei
    - Define the project structure, including directories, files, and naming conventions
    - Identify necessary frameworks, tools, and packages to be used
    - Plan for testing, documentation, containerization, and other mandatory requirements
-   - Create Issue documenting plan from the # #Appendix A plan template and iterate to gain approval from the orchestrator or stakeholders
-   - Create a detailed sub-issue subordinate from the main plan issue for each phase of the plan.
+   - Create Issue documenting plan from the # #Appendix A plan template and iterate to gain approval from the orchestrator or stakeholders   
+   - Import the issue labels using the `import-labels.ps1` and `.labels.json` files.
+   - Milestones have been created and issues linked to the appropriate milestone.
+3. **Create Epic Sub-Issues for Each Phase**
+    -Create a detailed sub-issue subordinate from the main plan issue for each phase of the plan.
     - These sub-issues are epics.
     - The sub-issue title should be the phase name.
     - The per-phase epic sub-issues should contain all of the sub-tasks (called Stories therein) listed in that phase
     - Use the template in # #Appendix B below, as a template for the sub-issue epics. 
-   - Import the issue labels using the `import-labels.ps1` and `.labels.json` files.
-   - Milestones have been created and issues linked to the appropriate milestone.
 
 
 ### Completion
@@ -235,10 +236,11 @@ Key assumptions, adaptations, and references to technical docs or ADRs.
 ````
 
 ---
+---
 
 ## Appendix B: Application Plan Phases's Epic Sub-Issue Template (Copy-Paste)
 
-Use the template below when you create a sub-issue for each phase in the application plan in step 2. It aligns with the Phases and covers all mandatory areas (testing, docs, containerization, CI/CD, security, risks, etc.). Create a sub-issue off of the main plan issue for each phase, using the template below, and then fill in the placeholders.
+Use the template below when you create a sub-issue for each phase in the application plan in step 4. It aligns with the Phases and covers all mandatory areas (testing, docs, containerization, CI/CD, security, risks, etc.). Create a sub-issue off of the main plan issue for each phase, using the template below, and then fill in the placeholders.
 
 ````markdown
 Title: [ProjectName] – [PhaseName] - Epic
