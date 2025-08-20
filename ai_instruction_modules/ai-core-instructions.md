@@ -84,6 +84,8 @@
 
 ### Required Modules (always read!)
 
+Required modules are always active and so must always be read and followed.
+
 #### Repository Summary
 
 Contains high-level information about the repository and its structure.
