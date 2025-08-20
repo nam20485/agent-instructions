@@ -5,66 +5,83 @@
   "autoAccept": "true",
   "contextFileName": "GEMINI.md",
   "mcpServers": {
-    "github": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-github"
-      ],
-      "env": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": "${input:github_token}"
-      }
-    },
-    "gitlab": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-gitlab"
-      ]
-    },
-    "sequential-thinking": {
-      "type": "stdio",
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-sequential-thinking"
-      ]
-    },
-    "memory": {
-      "type": "stdio",
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-memory"
-      ]
-    },
-    "filesystem": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-filesystem",
-        "${env:USERPROFILE}",
-        "."
-      ]
-    },
-    // "github-local-mcp-server": {
-    //   "command": "docker",
-    //   "args": [
-    //     "run",
-    //     "-i",
-    //     "--rm",
-    //     "-e",
-    //     "GITHUB_PERSONAL_ACCESS_TOKEN",
-    //     "ghcr.io/github/github-mcp-server"
-    //   ],
-    //   "env": {
-    //     "GITHUB_PERSONAL_ACCESS_TOKEN": "${input:github_token}"
-    //   }
-    // },
-    "github-remote-mcp-server": {
-      "type": "http",
-      "url": "https://api.githubcopilot.com/mcp/"
-    },
+   "sequential-thinking": {
+			"type": "stdio",
+			"command": "npx",
+			"args": [
+				"-y",
+				"@modelcontextprotocol/server-sequential-thinking"
+			],
+			"version": "0.0.1"
+		},
+		"memory": {
+			"type": "stdio",
+			"command": "npx",
+			"args": [
+				"-y",
+				"@modelcontextprotocol/server-memory"
+			],
+			"version": "0.0.1"
+		},
+		"github": {
+			"type": "http",
+			"url": "https://api.githubcopilot.com/mcp",
+			"version": "0.0.1"
+		},
+		"filesystem": {
+			"command": "npx",
+			"args": [
+				"-y",
+				"@modelcontextprotocol/server-filesystem",
+				"${env:USERPROFILE}",
+				"."
+			],
+			"type": "stdio"
+		},
+		"gemini-cli": {
+			"command": "npx",
+			"args": [
+				"-y",
+				"gemini-mcp-tool"
+			],
+			"type": "stdio"
+		},
+		"notion": {
+			"command": "npx",
+			"args": [
+				"-y",
+				"@notionhq/notion-mcp-server"
+			],
+			"env": {
+				"OPENAPI_MCP_HEADERS": {
+					"Authorization": "Bearer ${input:NOTION_TOKEN}",
+					"Notion-Version": "2022-06-28"
+				}
+			},
+			"type": "stdio"
+		},
+		"context7": {
+			"command": "npx",
+			"args": [
+				"-y",
+				"@upstash/context7-mcp@latest"
+			],
+			"type": "stdio"
+		},
+		"microsoft-docs": {
+			"url": "https://learn.microsoft.com/api/mcp",
+			"type": "http"
+		},
+		"deepwiki": {
+			"url": "https://mcp.deepwiki.com/sse",
+			"type": "http"
+		},
+		"playwright": {
+			"command": "npx",
+			"args": [
+				"@playwright/mcp@latest"
+			]
+		},
     "puppeteer": {
       "command": "npx",
       "args": [
@@ -72,29 +89,6 @@
         "@modelcontextprotocol/server-puppeteer"
       ],
       "env": {}
-    },
-    "mcp-playwright": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@executeautomation/playwright-mcp-server"
-      ],
-      "env": {}
-    },
-    "microsoft-docs": {
-      "id": "microsoft-docs",
-      "name": "microsoft-docs",
-      "version": "0.0.1",
-      "type": "http",
-      "url": "https://learn.microsoft.com/api/mcp"
-    },
-    "context7": {
-      "type": "stdio",
-      "command": "npx",
-      "args": [
-        "-y",
-        "@upstash/context7-mcp@latest"
-      ]
     },
     "web-browser": {
       "type": "stdio",
@@ -107,11 +101,11 @@
     }
   },
   "inputs": [
-    {
-      "id": "github_token",
-      "description": "GitHub personal access token",
-      "type": "promptString",
-      "password": true
-    }
-  ]
+		{
+			"id": "NOTION_TOKEN",
+			"type": "promptString",
+			"description": "Notion API Token (https://www.notion.so/profile/integrations)",
+			"password": true
+		}
+	]
 }
