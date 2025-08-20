@@ -151,7 +151,11 @@ These sections describe modules to use when you have been given an assignment or
   - The rules from your workflow role assignment take precedence.
 - [ai-task-based-workflow.md](./ai-workflow-processes/ai-task-based-workflow.md)
 - [ai-iterative-guardrails-workflow.md](./ai-workflow-processes/ai-iterative-guardrails-workflow.md)
-- [ai-current-task-reminder.md](./ai-current-task-reminder.md)
+
+##### Workflow Utilities
+
+- Memory Tool Current Tasl Reminder: [ai-current-task-reminder.md](./ai-current-task-reminder.md)
+- PR Comment Protocol: [ai-pr-comment-protocol.md](./ai-pr-comment-protocol.md)
 
 ##### Workflow Roles
 Read these when assigned a specific workflow role.

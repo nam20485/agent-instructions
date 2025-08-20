@@ -19,6 +19,12 @@ In this stage your assignment will be to iterate on the PR comments until they
 are all resolved and the PR is approved. Once PR comments are available
 you will work systematically to resolve each comment, one after another.
 
+### Resolving Threads, Reply Content, and Commit Hygiene Protocol
+
+Reference the following documents for details on resolving threads, reply content, commit hygiene, and the script used to manage PR review threads:
+
+- [PR Comment Protocols](../ai-pr-comment-protocol.md)
+
 **Always follow instructions exactly as listed here.**
 
 It is important to the final quality of our product for everyone to perform their assignment exactly as specified.
@@ -31,7 +37,7 @@ It is important to the final quality of our product for everyone to perform thei
 
 1. For each unresolved, non-outdated review comment:
 
-    1. If you have already submitted a reply with a plan, then you must wait for the stake holder to review your plan and appro it before you can move any further to implement the changes.
+    1. If you have already submitted a reply with a plan, then you must wait for the stake holder to review your plan and approve it before you can move any further to implement the changes.
         1. Move on to the next comment.
     1. If you have not yet submitted a reply, then you will need to review and address the comment.
         1. This involves reading the comment and the entire context of this comment to gain a full understanding.
@@ -50,9 +56,10 @@ It is important to the final quality of our product for everyone to perform thei
             4. Move on the next comment.
             5. If you are unsure how to proceed, then ask for help in the chat or reply.
             6. If the stake-holder reply contains approval for a previously submitted plan, then you will be able to implement the changes now.
+               1. After implementing the changes, commit your work, update the issue, and reply with a comment explaining the outcome on the original review comment. Then mark the comment resolved.
             7. If the stake-holder reply contains a request for changes, then you will need to review the comment and ensure that you understand the feedback provided.
             8. Address the feedback and update your implementation accordingly.
-            9. Communicate your changes and seek further clarification if needed.
+            9.  Communicate your changes and seek further clarification if needed.
 
 Once you have addressed all of the comments to the degree with which you can for this round, then notify the orchestrator and reviewer that you are ready for them to look at your replies and then wait for them to noify you again.
 
