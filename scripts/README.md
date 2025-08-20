@@ -1,219 +1,80 @@
-# Development Environment Scripts
+scripts/setup-environment.sh (Linux / WSL / devcontainer)
+------------------------------------------------------
 
-This directory contains PowerShell scripts for setting up and validating the local development environment for ASP.NET Core + Blazor + Google Cloud development.
+What it does
+- Installs minimal system packages used by development and CI (git, python3, build tools, curl, jq, tree, htop, etc.).
+- Installs NVM and pins Node.js from `.nvmrc` or `NODE_VERSION_PIN`.
+- Enables Corepack and prepares pnpm/yarn when possible (reads `package.json` packageManager field or PNPM/YARN version pins).
+- Installs optional developer tooling: Playwright (and browsers), Google Cloud CLI, GitHub CLI, Terraform, Ansible, global npm CLIs and .NET SDK workloads.
 
-## Scripts Overview
-
-### 🚀 [quick-setup.ps1](quick-setup.ps1)
-**One-command setup for fast development environment initialization**
-
-```powershell
-# Quick setup and validation
-.\quick-setup.ps1
-
-# Validation only
-.\quick-setup.ps1 -ValidateOnly
-
-# Force reinstall
-.\quick-setup.ps1 -Force
+Run it
+```bash
+bash scripts/setup-environment.sh
 ```
 
-### 🔧 [setup-local-environment.ps1](setup-local-environment.ps1)
-**Comprehensive development environment setup**
+Quick minimal run (skip large optional installs such as Playwright browsers):
 
-```powershell
-# Full setup
-.\setup-local-environment.ps1
-
-# Skip validation
-.\setup-local-environment.ps1 -SkipValidation
-
-# Force reinstall all tools
-.\setup-local-environment.ps1 -Force
-
-# Windows: Skip Chocolatey installation
-.\setup-local-environment.ps1 -SkipChocolatey
+```bash
+SETUP_MINIMAL=1 bash scripts/setup-environment.sh
 ```
 
-### ✅ [validate-local-environment.ps1](validate-local-environment.ps1)
-**Environment validation and tool verification**
-
-```powershell
-# Basic validation
-.\validate-local-environment.ps1
-
-# Detailed version information
-.\validate-local-environment.ps1 -Detailed
-
-# Output formats
-.\validate-local-environment.ps1 -OutputFormat Json
-.\validate-local-environment.ps1 -OutputFormat Markdown
+Verification
+```bash
+/tmp/show-env.sh
+# or check individually
+node --version
+npm --version
+python --version
+pwsh --version
+gcloud --version
+gh --version
+terraform --version
+ansible --version
+dotnet --version
+npx -y playwright@latest --version
 ```
 
-## Tools Installed & Validated
+Notes & troubleshooting
+- Node pinning: the script prefers `NODE_VERSION_PIN` then `.nvmrc` in repository root. This repo includes `.nvmrc` pinned to `22.18.0`.
+- Corepack/pnpm: The script will try to enable Corepack and prepare pnpm/yarn. If pnpm is not available, set `PNPM_VERSION_PIN` or add `"packageManager": "pnpm@<version>"` to `package.json`.
+- If `nvm` isn't found after install, re-open your shell or source it:
 
-### Core Development Stack
-- **.NET SDK 9.0.102** with WebAssembly workloads
-- **Node.js 22.x** for frontend tooling
-- **PowerShell Core 7.x** for scripting
-
-### Cloud & DevOps Tools
-- **Google Cloud CLI** for GCP deployment
-- **Firebase CLI** for frontend hosting
-- **GitHub CLI** for workflow management
-
-### Container & Infrastructure
-- **Docker** for containerization
-- **Terraform** for infrastructure as code
-
-## Platform Support
-
-| Platform | Support Level | Package Manager |
-|----------|---------------|-----------------|
-| Windows  | ✅ Full       | Chocolatey, winget |
-| Linux    | ✅ Full       | apt, curl |
-| macOS    | ✅ Full       | Homebrew |
-
-## Quick Start
-
-1. **For new environments:**
-   ```powershell
-   .\quick-setup.ps1
-   ```
-
-2. **For existing environments:**
-   ```powershell
-   .\validate-local-environment.ps1
-   ```
-
-3. **For CI/CD validation:**
-   ```powershell
-   .\validate-local-environment.ps1 -OutputFormat Json
-   ```
-
-## Integration with GitHub Actions
-
-These scripts mirror the [copilot-setup-steps.yml](../.github/workflows/copilot-setup-steps.yml) workflow to ensure consistency between local development and CI/CD environments.
-
-## Requirements
-
-- **PowerShell Core 7.0+** (the scripts will install this if missing)
-- **Internet connection** for downloading installers
-- **Administrative privileges** (recommended for system-wide installations)
-
-### Platform-Specific Requirements
-
-#### Windows
-- **Chocolatey** (optional, auto-installed)
-- **winget** (Windows 10/11 built-in)
-
-#### Linux (Ubuntu/Debian)
-- **curl, wget** (usually pre-installed)
-- **sudo access**
-
-#### macOS
-- **Homebrew** (auto-installed if missing)
-- **Xcode Command Line Tools**
-
-## Error Handling
-
-All scripts include comprehensive error handling and validation:
-
-- **Fail-fast behavior** with clear error messages
-- **Cross-platform compatibility** checks
-- **Tool version validation** against expected versions
-- **Detailed logging** for troubleshooting
-- **Graceful degradation** for optional components
-
-## Exit Codes
-
-| Code | Meaning |
-|------|---------|
-| 0    | Success |
-| 1    | Validation or installation failure |
-
-## Troubleshooting
-
-### Common Issues
-
-1. **Permission denied errors:**
-   ```powershell
-   # Run as Administrator (Windows) or with sudo (Linux/macOS)
-   ```
-
-2. **PowerShell execution policy:**
-   ```powershell
-   Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-   ```
-
-3. **Tool not found after installation:**
-   ```powershell
-   # Restart terminal or refresh PATH
-   $env:PATH = [Environment]::GetEnvironmentVariable("PATH", "Machine") + ";" + [Environment]::GetEnvironmentVariable("PATH", "User")
-   ```
-
-### Logs and Debugging
-
-Scripts provide verbose output during execution. For additional debugging:
-
-```powershell
-# Enable verbose output
-.\setup-local-environment.ps1 -Verbose
-
-# Check individual tool installations
-Get-Command dotnet, node, docker, gcloud, firebase, gh, terraform
+```bash
+. $HOME/.nvm/nvm.sh
+nvm use
 ```
 
-## Alignment with AI Instructions
+- For permission errors on Linux run the script with sudo (the script auto-uses `sudo` when available for system package installs).
+- On Windows use `scripts/setup-environment.ps1` with an elevated PowerShell session when necessary.
 
-These scripts implement the requirements from:
-- [ai-application-guidelines.md](../ai_instruction_modules/ai-application-guidelines.md)
-- [ai-tools-config.md](../ai_instruction_modules/ai-tools-config.md)
-- [ai-testing-validation.md](../ai_instruction_modules/ai-testing-validation.md)
-- [copilot-instructions.md](../.github/copilot-instructions.md)
+Using `.env.tools` (repo-level pins)
+-----------------------------------
 
-## Contributing
+The repository supports a canonical `.env.tools` file at the repo root that contains exact, patch-level pins for tools used by the setup scripts. The setup scripts will load this file early and export the variables so installs are deterministic.
 
-When modifying scripts:
-1. **Test on all supported platforms**
-2. **Update version requirements** in script headers
-3. **Maintain consistency** with GitHub Actions workflow
-4. **Add comprehensive error handling**
-5. **Update this documentation**
+Examples of keys the scripts look for:
+- `NODE_VERSION_PIN` — exact Node.js version (e.g., `22.18.0`)
+- `NPM_VERSION_PIN` — optional exact npm version
+- `PNPM_VERSION_PIN`, `YARN_VERSION_PIN` — versions Corepack will prepare
+- `DOTNET_VERSION_PIN`, `DOTNET_CHANNEL`, `DOTNET_QUALITY` — for `dotnet-install` behavior
 
----
+You can either commit a canonical `.env.tools` file (recommended for reproducibility) or commit `.env.tools.example` and have developers copy it to `.env.tools` locally. See the repo root `.env.tools` for the current pinned values.
 
-*These scripts ensure your local development environment matches the production GitHub Actions environment for consistent development experience.*
+Why is `uv` marked optional?
+--------------------------------
+The `uv` tool (https://astral.sh/uv/) is a small Python-based helper/dependency manager the scripts may install into the user's local bin. It's marked optional for a few reasons:
 
-## CI/devcontainer provisioning wrappers (standardized names)
+- `uv` is not required for the core language runtimes (Node, .NET, Python) or essential cloud CLIs; it's a convenience tool that some workflows use to manage small package installs.
+- `uv` installation can be skipped for minimal or CI-focused setups to save time and avoid adding extra user-local binaries when they are unnecessary. Set `SETUP_MINIMAL=1` to skip it.
+- The installer is a single-file script that may fail on very locked-down environments; leaving it optional prevents the whole setup from failing in those cases.
 
-To mirror the CI/devcontainer provisioning locally with consistent naming, use the new wrapper entry points:
+If you want `uv` always installed, remove the `SETUP_MINIMAL` guard or ensure `SETUP_MINIMAL` is not set in your environment. The script installs `uv` into `$HOME/.local/bin` when enabled.
 
-- Windows (PowerShell):
-   - pwsh -NoProfile -ExecutionPolicy Bypass -File scripts/setup-environment.ps1
+If you'd like I can make `uv` a required install by default (i.e., remove the `SETUP_MINIMAL` guard), but I left it optional to keep quick bootstraps small and predictable.
 
-- Linux (bash):
-   - bash scripts/setup-environment.sh
+Windows entrypoint
+- Run the PowerShell script for Windows (winget/choco paths are used when available):
 
-Notes:
-- These wrappers delegate to the existing platform scripts and keep behavior unchanged.
-- Node.js is installed via NVM with an exact pin from .nvmrc (currently 22.18.0). You can override via environment variables:
-   - NODE_VERSION_PIN to override the Node version pin (e.g., 22.18.0)
-   - NPM_VERSION_PIN to optionally pin npm globally
-- The GitHub Actions workflow calls scripts/setup-environment.sh so local runs match CI.
-
-## MCP configuration for Copilot coding agent
-
-This repo includes `mcp-github.json` to extend the GitHub Copilot coding agent with safe, useful MCP servers.
-
-- Filesystem server is restricted to read-only tools: `list_directory`, `read_directory`, `stat`, `glob`, `read_file`, `read_text_file`.
-- Notion server requires an environment secret in Copilot mapped to `OPENAPI_MCP_HEADERS` (recommended) or `NOTION_TOKEN` (alternative):
-   - Preferred: set a Copilot secret named `COPILOT_MCP_NOTION_OPENAPI_HEADERS` with value:
-      `{ "Authorization": "Bearer ntn_***", "Notion-Version": "2022-06-28" }`
-   - Alternative: set `COPILOT_MCP_NOTION_TOKEN` and update the Notion env to include `NOTION_TOKEN`.
-   - Use a read-only Notion integration token whenever possible.
-- Microsoft Docs and Deepwiki are read-only; other servers are sandboxed. If you need stricter allowlists, update `mcp-github.json` accordingly.
-
-Environment provisioning notes:
-- `scripts/setup-environment.sh` installs uv and Playwright CLI plus browsers (chromium, firefox, webkit). On Ubuntu, `--with-deps` pulls required system libraries.
-- The summary at the end prints versions so you can validate installs quickly.
+```powershell
+pwsh -NoProfile -ExecutionPolicy Bypass -File scripts/setup-environment.ps1
+```

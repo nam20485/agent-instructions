@@ -22,6 +22,25 @@ $env:DOTNET_SKIP_FIRST_TIME_EXPERIENCE = '1'
 $env:DOTNET_NOLOGO = '1'
 $env:ASPNETCORE_ENVIRONMENT = 'Development'
 
+# Load repo-level tool pins if present (.env.tools)
+$envFile = Join-Path (Get-Location) '.env.tools'
+if (Test-Path $envFile) {
+        Write-Host "[env] Loading .env.tools"
+        Get-Content $envFile |
+            ForEach-Object {
+                if ($_ -match '^[\s#]*$') { return }
+                if ($_ -match '^\s*#') { return }
+                if ($_ -match '^\s*([^=]+)=(.*)$') {
+                        $name = $matches[1].Trim()
+                        $value = $matches[2].Trim()
+                        # Strip surrounding quotes if present
+                        if ($value -match '^"(.*)"$') { $value = $Matches[1] }
+                        if ($value -match "^'(.*)'$") { $value = $Matches[1] }
+                        $Env:$name = $value
+                }
+            }
+}
+
 function Test-Command {
     param([Parameter(Mandatory)][string]$Name)
     try { Get-Command $Name -ErrorAction Stop | Out-Null; $true } catch { $false }
