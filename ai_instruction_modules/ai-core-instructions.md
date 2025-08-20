@@ -5,10 +5,17 @@
   * C# 
   * ASP.NET Core APIs
   * Blazor WASM
+  * Aspire
   * Google Cloud (deployment + config)
   * Docker
   * VS Code
   * REST API 
+  * Terraform
+  * Python
+  * bash/sh
+  * Linux
+  * Powershell
+  * uv (https://astral.sh/uv/)
 * Cite authoritative docs for non-trivial recommendations.
 
 ## Hierarchy (Conflict Resolution)
@@ -17,18 +24,22 @@
    1. Executive Summary / Personal Preferences *(ai-executive-summary.md, ai-personal-preferences.md)*
    2. Tech stack guidelines (ASP.NET, Blazor, GCP, Docker) *(ai-instructions-aspnet-guidelines.md)*
    3. General design principles (SOLID, 12-Factor, DDD) *(ai-design-principles.md)*
-  4. Task Based Workflow *([ai-task-based-workflow.md](./ai-workflow-processes/ai-task-based-workflow.md))*
+   4. Workflow assignments (create app, perform task, review PR, etc.) *(ai-workflow-assignments.md)*
+   5. Workflow processes (task-based, iterative guardrails) *(ai-task-based-workflow.md)*   
+   
 
 ## Core Behaviors
 - Issue & checklist driven; keep tasks granular
 - Propose diff chunks → explain → ask to apply
 - After apply: build/test validate; report PASS/FAIL; iterate on failure
 - Surface: assumptions, risks, alternatives (concise)
+- After completing a task in the chat window, only offer options that are directly related to the task at hand.
 
 ## Constraints (Do Not)
 - Large refactors or new major deps without approval
 - Speculative features outside scope
 - Skip validation steps
+- Offer too many options at once.
 
 ## Change Flow
 1. Context gather (search/read)
@@ -62,21 +73,40 @@
 
 ## Documentation
 - Update README / issues when behavior or setup changes
+- Always add xml doc comments to all APIs
+- Even non-public types should have xml doc comments
+- Classes/Interfaces/Structs: summary, purpose, usage
+- Methods: summary, params, return, exceptions
+- Properties: summary, purpose
+- Update OpenAPI/Swagger when APIs change
 
 ## More AI Instructions Modules
 
 ### Required Modules (always read!)
 
+#### Repository Summary
+
+Contains high-level information about the repository and its structure.
+
+- [.ai-repository-summary.md](../ai-repo-summary.md)
+
+- This may not exist at the beginning
+- Always create it after creating the project/solution structure
+- Creating: [ai-creating-repository-summary.md](./ai-workflow-assignments/ai-creating-repository-summary.md)
+
 #### More Core Modules (**REQUIRED**: always read!)
+
+Contains high-level information about development processes and guidelines
 - [ai-executive-summary.md](./ai-executive-summary.md)
 - [ai-personal-preferences.md](./ai-personal-preferences.md)
 - [ai-quick-reference.md](./ai-quick-reference.md)
 - [ai-workflow-config.md](./ai-workflow-config.md)
- - [ai-creating-repository-summary.md](./ai-workflow-assignments/ai-creating-repository-summary.md)
-
-> Repository onboarding: When you first work in a repository, ensure there is an up-to-date `ai-repo-summary.md` at the repo root. If missing, follow `ai-creating-repository-summary.md` to generate it. If it exists, follow the regenerate-and-backup flow described there.
+- [ai-local-environment.md](./ai-local-environment.md)
 
 ### Optional Modules
+
+#### After Creating Projects/Structures
+- [ai-workflow-assignments/create-project-structure.md](./ai-workflow-assignments/create-project-structure.md)
 
 #### Terminal Management
 Use this when working with the terminal
@@ -110,10 +140,6 @@ Use this as an example of how to configure a deployment environment.
 - It uses a specific application called `AgentAsAService`, but you can use it as a template for your own application.
 - [ai-deployment-environment.md](./ai-deployment-environment.md)
 
-#### Tools and Environment Setup
-Use this when setting up a local development environment or configuring a deployment environment, or when working with tools and their configuration, or when determining what tools you have available to complete a task.
-- [ai-tools-config.md](./ai-tools-config.md)
-<!-- - [ai-local-environment.md](./ai-local-environment.md) -->
 #### Workflows
 These sections describe modules to use when you have been given an assignment or role.
 
@@ -124,6 +150,8 @@ These sections describe modules to use when you have been given an assignment or
   - You are expected to follow these rules as a general guide. 
   - The rules from your workflow role assignment take precedence.
 - [ai-task-based-workflow.md](./ai-workflow-processes/ai-task-based-workflow.md)
+- [ai-iterative-guardrails-workflow.md](./ai-workflow-processes/ai-iterative-guardrails-workflow.md)
+- [ai-current-task-reminder.md](./ai-current-task-reminder.md)
 
 ##### Workflow Roles
 Read these when assigned a specific workflow role.
@@ -136,11 +164,10 @@ Read these when assigned a specific workflow assignment.
 #### New application
 This section describes your new application template used when assigned the `create-application` assignment.
 
-<!-- 
-Optional (enable when uncommented)
-- ai-instructions-aspnet-abp.md
-- ai-retrospective-evolving-memory.md
-- ai-deployment-process.md
--->
+### `.wip` Directory
+The `.wip` directory contains files that are still in development and may not be fully functional or accurate. 
+
+- They are included for reference and potential future use.
+- No files in this directory need to be read.
 
 End of file.

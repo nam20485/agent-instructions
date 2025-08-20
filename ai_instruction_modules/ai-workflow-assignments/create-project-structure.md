@@ -25,6 +25,7 @@ Create the actual project structure and scaffolding for a new application based 
 7. Development environment properly configured and validated
 8. Initial commit made with complete project scaffolding
 9. Stakeholder approval obtained for the project structure
+10. Repository summary document is created.
 
 ### Assignment
 
@@ -78,7 +79,13 @@ It is important to the final quality of our product for everyone to perform thei
    4. Verify all documentation is accessible
    5. Ensure project follows established guidelines
 
-7. **Initial Commit and Documentation**
+7. **Respository Summary Document**
+   1. Respository summary document is committed to the repository.
+   2. Respository summary document is linked to from the README.md file.
+   3. The repository summary is located at the root of the repository in a file called `.ai-repository-summary.md`.
+   4. The repository summary is created by following the instructions in the [ai-creating-repository-summary.md](https://github.com/nam20485/agent-instructions/blob/main/ai_instruction_modules/ai-workflow-assignments/ai-creating-repository-summary.md) file.
+
+8. **Initial Commit and Documentation**
    1. Make initial commit with complete structure
    2. Create project status documentation
    3. Document setup and development procedures
