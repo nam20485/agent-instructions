@@ -17,7 +17,7 @@
    1. Executive Summary / Personal Preferences *(ai-executive-summary.md, ai-personal-preferences.md)*
    2. Tech stack guidelines (ASP.NET, Blazor, GCP, Docker) *(ai-instructions-aspnet-guidelines.md)*
    3. General design principles (SOLID, 12-Factor, DDD) *(ai-design-principles.md)*
-   4. Task Based Workflow *(ai-task-based-workflow.md)*
+  4. Task Based Workflow *([ai-task-based-workflow.md](./ai-workflow-processes/ai-task-based-workflow.md))*
 
 ## Core Behaviors
 - Issue & checklist driven; keep tasks granular
@@ -72,7 +72,7 @@
 - [ai-personal-preferences.md](./ai-personal-preferences.md)
 - [ai-quick-reference.md](./ai-quick-reference.md)
 - [ai-workflow-config.md](./ai-workflow-config.md)
-- [ai-creating-repository-summary.md](./ai-creating-repository-summary.md)
+ - [ai-creating-repository-summary.md](./ai-workflow-assignments/ai-creating-repository-summary.md)
 
 > Repository onboarding: When you first work in a repository, ensure there is an up-to-date `ai-repo-summary.md` at the repo root. If missing, follow `ai-creating-repository-summary.md` to generate it. If it exists, follow the regenerate-and-backup flow described there.
 
@@ -123,7 +123,7 @@ These sections describe modules to use when you have been given an assignment or
 - In the context of a workflow role assignment:
   - You are expected to follow these rules as a general guide. 
   - The rules from your workflow role assignment take precedence.
-- [ai-task-based-workflow.md](./ai-task-based-workflow.md)
+- [ai-task-based-workflow.md](./ai-workflow-processes/ai-task-based-workflow.md)
 
 ##### Workflow Roles
 Read these when assigned a specific workflow role.
