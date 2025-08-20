@@ -1,6 +1,8 @@
-## Assignment: Breakdown Epic
+## Assignment: Breakdown Epic and Plan
 
-Goal: Convert a high-level multi-phase epic issue into granular, executable sub-issues.
+Goal: Convert a higher-level multi-task sub-phaseepic sub-issue into granular, executable sub-issues.
+
+>NOTE: The high-level plans and epic issues are created by other workflow assignments, e.g. the `create-app-plan` assignment. The main plan is broken down into phases. Each phases is considered an epic. These sub-phase epic isseus are then broken down into granular, executable sub-issues by this assignment. 
 
 ### Steps
 1. Identify phases / major work streams from parent.
