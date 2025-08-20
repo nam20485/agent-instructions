@@ -43,6 +43,9 @@ It is important to the final quality of our product for everyone to perform thei
    3. Create project directories following established naming conventions
    4. Generate initial project files for each component
    5. Configure project references and dependencies
+   6. Configure projects settings and options 
+      a."Treat warnings as errors": true
+      b. "Create XML documentation files": true
 
 2. **Establish Infrastructure Foundation**
    1. Create Dockerfile for each service/component

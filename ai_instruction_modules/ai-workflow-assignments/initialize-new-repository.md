@@ -22,7 +22,7 @@ Your goal is to initialize a new repository for a project. This involves creatin
 
 ### Assignment
 
-Your assignment is to initialize and setup a new repository for a project. This involves creating the repository, configuring the necessary settings. You will copy the provided app creation documents to the `docs/` directory. You wil create a new issue-trackng project, import labels, and create milestones. You will rename workspace and devcontainer files to match the project name. You will 
+Your assignment is to initialize and setup a new repository for a project. This involves creating the repository, configuring the necessary settings. You will copy the provided app creation documents to the `docs/` directory. You wil create a new issue-trackng project, import labels, and create milestones. You will rename workspace and devcontainer files to match the project name.
 
 ### Detailed Steps
 

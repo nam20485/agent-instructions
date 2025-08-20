@@ -18,16 +18,15 @@ Your goal is to create a plan for application, using the template in Appendix A,
 8. All mandatory application requirements have been addressed in plan. (testing, documentation, containerization, etc.)
 9. All acceptance criteria from the template have been addressed in the plan.
 10. All risks and mitigations identified.
-11. Code quality standards and best practices have been followed
+11. Code quality standards and best practices have been followed.
 12. Application plan is ready for development and implementation.
-13. Issue labels have been imported.
+13. Application plan has been documented in an issue using the template in #Appendix A.
 14. Epic sub-issue have been created for each and every phase. (Use template in #Appendix B)
-15. Milesotones have been created.
-16. Phase sub-issues have been assigned to milestones.
-   
+15. Phase sub-issues have been assigned to milestones.
+
 ### Assignment
 
-Your assignment is to create a new application plan based on a filled-out application template. This involves systematic analysis of requirements, careful implementation following established guidelines, and delivery of a application plan that meets all specified criteria. You will use the template in #Appendix A as a template for the plan, and then fil in the details for the specific application.
+Your assignment is to create a new application plan based on a filled-out application template. This involves systematic analysis of requirements, careful implementation following established guidelines, and delivery of a application plan that meets all specified criteria. You will use the template in #Appendix A as a template for the plan, and then fill in the details for the specific application.
 
 The application template can be found in the `docs/` directory in a file called `ai-new-app-template.md`. The supporting files are linked to in that file and are also included in the same directory. These files contain all the necessary details about the application you need to create the plan for, including features, components, and requirements.
 
