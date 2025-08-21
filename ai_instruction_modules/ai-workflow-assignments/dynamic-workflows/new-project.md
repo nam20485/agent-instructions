@@ -9,10 +9,11 @@ This dynamic workflow file specifies the workflow for creating a new project. It
 ### Legend
 
 * `$variable` = *<value>*: Define the variable `$variable` to have the value *<value>*
-* `$variable`: use of a previously-defined variable `$variable`
+* `$variable`: use of a previously defined variable `$variable`
 * `#<step>`: reference to the output of the `<step>`
 * `#<step>.<substep>`: reference to the output of the `<substep>` in the `<step>`
 * `get-function-name(<parameters>)`: call to a function with the specified parameters (name of function indicates its behavior)
+* See canonical legend: [orchestrate-dynamic-workflow](../orchestrate-dynamic-workflow.md#legend-for-dynamic-workflow-file-syntax)
 
 ### create-project-and-plan
 
@@ -23,31 +24,31 @@ This dynamic workflow file specifies the workflow for creating a new project. It
                  ]
 
 For each `$assignment_name` in `$assignments`, you will:
-    - "assign the copilot the `$assignment_name` assignment"
-    - wait until sub-agent finishes the task
-    - review the work and approve it
+   - assign the copilot the `$assignment_name` assignment
+   - wait until the agent finishes the task
+   - review the work and approve it
   
 ### iteratively-breakdown-epics-and-plan
 
 `$sub_issues` = get-sub-issues-from-previous-step(`#create-project-and-plan.create-app-plan`)
 
 For each `$sub_issue_name` in `$sub_issues`, you will:
-     - "assign the copilot the `breakdown-epic-and-plan` assignment"
-     - wait until sub-agent finishes the task.
-     - review the work and approve it.
+   - assign the copilot the `breakdown-epic-and-plan` assignment
+   - wait until the agent finishes the task
+   - review the work and approve it
 
-### Iteratively Implement and Validate
+### iteratively-implement-and-validate
 
-   - For each sub-issue created in the previous `breakdown-epic-and-plan` step:
-     - You will assign the copilot the `perform-task` assignment.
-     - You will wait until sub-agent finishes the task.
-     - You will review the work and approve it.
-     - Upon approval, you will move on to the next sub-issue.
-   - Upon approval, you will move on to the next stage.
+    - For each sub-issue created in the previous `breakdown-epic-and-plan` step:
+       - assign the copilot the `perform-task` assignment
+       - wait until the agent finishes the task
+       - review the work and approve it
+       - upon approval, move on to the next sub-issue
+    - upon approval, move on to the next stage
 
-### Final Validation and Delivery
+### final-validation-and-delivery
 
-   - You will assign the copilot the `validate-and-deliver` assignment.
-   - You will wait until sub-agent finishes the task.
-   - You will review the work and approve it.
-   - Upon approval, you will move on to the next stage.
+   - assign the copilot the `validate-and-deliver` assignment
+   - wait until the agent finishes the task
+   - review the work and approve it
+   - upon approval, move on to the next stage

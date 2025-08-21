@@ -4,43 +4,55 @@
 
 ### Overview
 
-The dynamic workflow orchestration assignment is different than the other static workflow assignments, in that it must orchstrate the workflows for a dynamically-specified list of workflow assignments, as specified in a dynamic workflow file. The dynamic workflow file specifies assignments to be performed in the #Script section of the file.
+The dynamic workflow orchestration assignment is different than the other static workflow assignments, in that it must orchestrate the workflows for a dynamically specified list of workflow assignments, as specified in a dynamic workflow file. The dynamic workflow file specifies assignments to be performed in the "Script" section of the file.
 
 ### Goal
 
-Your goal is to orchestrate systematically through the assignments as specified in the provided dynamic workflow file's #Script section, performing the steps in each one to completion in turn. Assignments are specified by short id.
+Your goal is to orchestrate systematically through the assignments as specified in the provided dynamic workflow file's "Script" section, performing the steps in each one to completion in turn. Assignments are specified by short ID.
 
 ### Acceptance Criteria
 
 1. All specified assignments are completed and approved.
 2. All specified assignments are completed in the order specified in the file.
-3. All specified assignments are completed according to the instructions givenin the dynamic workflow file.
+3. All specified assignments are completed according to the instructions given in the dynamic workflow file.
 4. All acceptance criteria for each specified assignment are met.
-5. All directives in the #Script section of the dynamic workflow file are executed.
+5. All directives in the "Script" section of the dynamic workflow file are executed.
 6. Approval is obtained for the final product.
+7. No unresolved items remain at completion; results are documented and cross-linked as appropriate.
 
 ### Assignment
 
-Your assignment is to orchestrate the workflow assignment as specified by name and instructions in the provided dynamic workflow file. This involves systematically iterating through each specified assignment, orchestrating and overseeing the work until completion, according to the instructions specified in the #Script section in the dynamic workflow file.
+Your assignment is to orchestrate the workflow assignment as specified by name and instructions in the provided dynamic workflow file. This involves systematically iterating through each specified assignment, orchestrating and overseeing the work until completion, according to the instructions specified in the "Script" section in the dynamic workflow file.
 
 #### Dynamic Workflow File Conventions
 - The list of sub-workflow assignments resides in a file whose name is provided as input to this assignment.
-- The name provided indicates a dynamic workflow file located in the [./ai_instruction_modules/ai-workflow-assignments/dynamic](./dynamic) directory.
-- The format for naming the dynamic worklow files is `dynamic-workflow_<name>.md`. 
+- The name provided indicates a dynamic workflow file located in the [./ai_instruction_modules/ai-workflow-assignments/dynamic-workflows](./dynamic-workflows) directory.
+- The format for naming the dynamic workflow files may be standardized; see repository conventions.
 
-> **Example:** Specifying *`new-project`* as input, when invoking the `orchestrate-dynamic-workflow` assignment, will invoke orchestration of a dynamic workflow specified in the file named `dynamic-workflow_new-project.md,` located in the `./ai_instruction_modules/ai-workflow-assignments/dynamic/` directory.
+> Example: Specifying "new-project" as input, when invoking the orchestrate-dynamic-workflow assignment, will look for a dynamic workflow file at `./ai_instruction_modules/ai-workflow-assignments/dynamic-workflows/new-project.md`.
 
 ##### Legend for Dynamic Workflow File Syntax
 
 * `$variable` = *<value>*: Define the variable `$variable` to have the value *<value>*
-* `$variable`: use of a previously-defined variable `$variable`
+* `$variable`: use of a previously defined variable `$variable`
 * `#<step>`: reference to the output of the `<step>`
 * `#<step>.<substep>`: reference to the output of the `<substep>` in the `<step>`
 * `get-function-name(<parameters>)`: call to a function with the specified parameters (name of function indicates its behavior)
+* Quoting conventions: Use backticks for assignment short IDs and step identifiers (e.g., `perform-task`), and single quotes for free-form strings. Do not quote keywords or variables.
 
 ### Detailed Steps
 
-The detailed steps are specified in the #Script section of the dynamic workflow file. Essentially you will iterate through each assignment specified in the file, orchestrating and overseeing the work until completion, according to the instructions provided in the #Script section of the dynamic workflow file.
+The detailed steps are specified in the "Script" section of the dynamic workflow file. Essentially, you will iterate through each assignment specified in the file, orchestrating and overseeing the work until completion, according to the instructions provided in the "Script" section of the dynamic workflow file.
+
+### How to Run (Quick Start)
+
+1. Place your workflow file under `./ai_instruction_modules/ai-workflow-assignments/dynamic-workflows/<name>.md`.
+2. Ensure the file contains a "## Script" section with one or more third-level step headings (e.g., "### create-project-and-plan").
+3. Run the orchestrate-dynamic-workflow assignment with input `<name>`.
+4. Monitor progress, approve each step upon review, and proceed to the next until completion.
+
+Related:
+- Validate first: [validate-dynamic-workflow-script](./validate-dynamic-workflow-script.md)
 
 ### Completion
 

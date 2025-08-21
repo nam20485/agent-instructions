@@ -4,7 +4,7 @@
 
 ### Overview
 
-This assignment involves validating the syntax and logical correctness of a dynamic workflow script. The script is written in a custom domain-specific language (DSL) designed for specifying dynamic workflows. Your task is to ensure that the script adheres to the language's syntax rules and logical structure  and provide feedback on the validity of the script.
+This assignment involves validating the syntax and logical correctness of a dynamic workflow script. The script is written in a custom domain-specific language (DSL) designed for specifying dynamic workflows. Your task is to ensure that the script adheres to the language's syntax rules and logical structure, and to provide feedback on the validity of the script.
 
 ### Goal
 
@@ -23,22 +23,22 @@ Your assignment is to validate the provided dynamic workflow script. This involv
 
 ##### Legend for Dynamic Workflow File Syntax
 
-- The syntax for dynamic workflow file syntax files is defined in the `orchestrate-dynamic-workflow` assignment.
-- This file is located at [ai_instruction_modules/ai-workflow-assignments/orchestrate-dynamic-workflow.md](./orchestrate-dynamic-workflow.md)
-- 
-- The `orchestrate-dynamic-workflow` assignment file is located in the [ai_instruction_modules/ai-workflow-assignments/](./ai-workflow-assignments/) .
-- The definition there is the canaonical source of truth for the syntax of dynamic workflow files.
+- The syntax for dynamic workflow files is defined in the `orchestrate-dynamic-workflow` assignment.
+- Canonical reference: [orchestrate-dynamic-workflow.md](./orchestrate-dynamic-workflow.md)
+- That definition is the canonical source of truth for the syntax of dynamic workflow files.
 
 ### Detailed Steps
 
 1. Review the provided dynamic workflow script.
-2. Check the script against the syntax rules of the custom DSL.
+2. Check the script against the syntax rules of the custom DSL (see canonical legend).
 3. Verify the logical structure of the script is correct and coherent.
 4. Ensure all variables and functions used in the script are properly defined and referenced.
-5. Check the script for any logical errors or contradictions.
-6. If the script is found to be valid, provide reassurance of its validity.
-7. If any issues are found, provide feedback on the nature of the issues and how they can be resolved.
+5. Verify that all referenced assignment short IDs exist in this repository (e.g., `create-app-plan`, `perform-task`).
+6. Verify that any referenced files/paths resolve (e.g., dynamic workflow file location and name).
+7. Check the script for any logical errors or contradictions.
+8. If the script is found to be valid, provide reassurance of its validity.
+9. If any issues are found, provide feedback on the nature of the issues and how they can be resolved.
 
 ### Completion
 
-After completing the above steps, you will have validated the provided dynamic workflow script.
+After completing the above steps, you will have validated the provided dynamic workflow script. You may then proceed to orchestrate it using [orchestrate-dynamic-workflow](./orchestrate-dynamic-workflow.md).
