@@ -6,7 +6,9 @@
   "description": "Dummy package manifest to enable CI caching of Node tooling; replace with real dependencies when needed.",
   "license": "UNLICENSED",
   "scripts": {
-    "env:summary": "node -e \"console.log('Environment OK')\""
+  "env:summary": "node -e \"console.log('Environment OK')\"",
+  "orchestrate:dry": "node ./scripts/orchestrator.mjs --dry-run --workflow sample-minimal",
+  "orchestrate:dry:file": "node ./scripts/orchestrator.mjs --dry-run --file"
   },
   "engines": {
     "node": ">=22"

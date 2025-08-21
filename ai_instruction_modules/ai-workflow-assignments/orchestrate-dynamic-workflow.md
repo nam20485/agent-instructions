@@ -55,6 +55,32 @@ The detailed steps are specified in the "Script" section of the dynamic workflow
 Related:
 - Validate first: [validate-dynamic-workflow-script](./validate-dynamic-workflow-script.md)
 
+### Dry Run (Plan → Emit)
+
+To preview what would execute without performing any actions, use dry-run:
+
+- Inputs: `--workflow <name>` or `--file <path>`, optional `--fixtures <file.json>`, `--log <path>`, `--strict`
+- Behavior: Parses and plans the workflow (variables, loops, functions) and emits a JSONL log of the actions instead of executing
+- Output: One action per line in JSONL with fields like `type`, `step`, `action`, `outputKey` (for assignments), `args`/`simulatedOutput` (for functions), and `timestamp`
+
+Example commands:
+- pnpm run orchestrate:dry  (uses the `sample-minimal` workflow)
+- node ./scripts/orchestrator.mjs --dry-run --workflow new-project --fixtures fixtures/new-project.json --strict
+
+Fixtures format example:
+```json
+{
+	"get-sub-issues-from-previous-step": {
+		"#create-project-and-plan.create-app-plan": ["issue-101", "issue-102"],
+		"*": []
+	}
+}
+```
+
+Notes:
+- With `--strict`, missing fixtures for required function outputs will error instead of warn
+- Output recording convention is applied for looped assignments as documented in the Legend
+
 ### Completion
 
 After all steps have been completed, notify the user that the workflow is complete and obtain approval. Upon obtaining approval, the workflow is complete and the orchestrator's assignment is finished.
