@@ -42,3 +42,15 @@ Your assignment is to validate the provided dynamic workflow script. This involv
 ### Completion
 
 After completing the above steps, you will have validated the provided dynamic workflow script. You may then proceed to orchestrate it using [orchestrate-dynamic-workflow](./orchestrate-dynamic-workflow.md).
+
+## Appendix: Quick DSL Validation Checklist
+
+- File location and name align with repository convention (dynamic-workflows/<name>.md)
+- Contains a "## Script" section with one or more third-level step headings (### <step-id>)
+- Step IDs use kebab-case and are unique within the file
+- Uses approved quoting conventions (backticks for assignment short IDs/step identifiers; single quotes for free strings; no quotes for variables/keywords)
+- Variables are defined before use and not redefined inconsistently
+- When iterating, outputs are recorded per assignment using the output recording convention (e.g., `#step.assignment-short-id`) if later referenced
+- All referenced assignment short IDs exist in the repository
+- Any referenced paths resolve from this file’s location
+- No contradictory or unreachable instructions; steps proceed in a logical order
