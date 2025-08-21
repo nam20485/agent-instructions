@@ -64,6 +64,9 @@ To preview what would execute without performing any actions, use dry-run:
 - Output: One action per line in JSONL with fields like `type`, `step`, `action`, `outputKey` (for assignments), `args`/`simulatedOutput` (for functions), and `timestamp`
 - Console logging: add `--console` (or `--verbose`) to also print actions/warnings to the console while writing the JSONL file
 
+Real execution
+- Even without real executors wired, the runner emits start/end events for planned actions to the same JSONL file (and console if enabled). This ensures consistent logging in both modes. When executors are added later, they will plug into these events.
+
 Example commands:
 - pnpm run orchestrate:dry  (uses the `sample-minimal` workflow)
 - node ./scripts/orchestrator.mjs --dry-run --workflow new-project --fixtures fixtures/new-project.json --strict

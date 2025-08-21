@@ -350,7 +350,22 @@ function main() {
     return;
   }
 
-  console.log('Real execution is not implemented yet. Use --dry-run to preview.');
+  // Real mode: iterate plan and log start/end events (no-op execution stub)
+  for (const step of plan.steps) {
+    for (const a of step.actions) {
+      if (a.type === 'assignment') {
+        logger.action({ type: 'assignment-start', step: step.id, action: a.assignmentId, outputKey: a.outputKey });
+        // TODO: integrate real assignment executors here
+        logger.action({ type: 'assignment-end', step: step.id, action: a.assignmentId, outputKey: a.outputKey });
+      } else if (a.type === 'function') {
+        logger.action({ type: 'function-start', step: step.id, action: a.functionName, args: a.args });
+        // TODO: integrate real function execution here
+        logger.action({ type: 'function-end', step: step.id, action: a.functionName, args: a.args });
+      }
+    }
+  }
+  logger.close();
+  if (out) console.log(`Execution log written: ${out}`);
 }
 
 main();
