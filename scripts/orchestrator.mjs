@@ -26,6 +26,8 @@ function parseArgs(argv) {
         args.file = next; i++; break;
       case '--fixtures':
         args.fixtures = next; i++; break;
+      case '--params':
+        args.params = next; i++; break;
       case '--log':
         args.log = next; i++; break;
       default:
@@ -51,6 +53,15 @@ function loadFixtures(p) {
     return JSON.parse(fs.readFileSync(p, 'utf8'));
   } catch (e) {
     throw new Error(`Failed to read fixtures ${p}: ${e.message}`);
+  }
+}
+
+function loadParams(p) {
+  if (!p) return null;
+  try {
+    return JSON.parse(fs.readFileSync(p, 'utf8'));
+  } catch (e) {
+    throw new Error(`Failed to read params ${p}: ${e.message}`);
   }
 }
 
@@ -340,6 +351,55 @@ function makeRefs(outputs) {
 
 function nowMs() { return Date.now(); }
 
+function isPlainObject(o) { return o && typeof o === 'object' && !Array.isArray(o); }
+function deepMerge(a, b) {
+  if (!isPlainObject(a)) a = {};
+  if (!isPlainObject(b)) return { ...a };
+  const out = { ...a };
+  for (const k of Object.keys(b)) {
+    if (isPlainObject(b[k]) && isPlainObject(out[k])) out[k] = deepMerge(out[k], b[k]);
+    else out[k] = b[k];
+  }
+  return out;
+}
+
+function interpolateRefs(value, refs) {
+  if (typeof value === 'string') {
+    const m = value.match(/^\$\{([^}]+)\}$/);
+    if (m) {
+      const v = refs.get(m[1]);
+      return v === undefined ? value : v;
+    }
+    return value.replace(/\$\{([^}]+)\}/g, (_, expr) => {
+      const v = refs.get(expr);
+      return v === undefined ? '${' + expr + '}' : String(v);
+    });
+  }
+  if (Array.isArray(value)) return value.map(v => interpolateRefs(v, refs));
+  if (isPlainObject(value)) {
+    const out = {};
+    for (const [k, v] of Object.entries(value)) out[k] = interpolateRefs(v, refs);
+    return out;
+  }
+  return value;
+}
+
+function resolveParams(paramsCfg, stepId, assignmentId, refs) {
+  if (!paramsCfg) return undefined;
+  const specificKey = `#${stepId}.${assignmentId}`;
+  const merged = deepMerge(
+    paramsCfg.defaults || {},
+    deepMerge(
+      (paramsCfg.assignments && paramsCfg.assignments[assignmentId]) || {},
+      deepMerge(
+        (paramsCfg.steps && paramsCfg.steps[stepId]) || {},
+        (paramsCfg.actions && paramsCfg.actions[specificKey]) || {}
+      )
+    )
+  );
+  return interpolateRefs(merged, refs);
+}
+
 async function main() {
   const cwd = process.cwd();
   const args = parseArgs(process.argv);
@@ -358,6 +418,7 @@ async function main() {
 
   // Phase 1: plan
   const fixtures = args.fixtures ? loadFixtures(args.fixtures) : null;
+  const paramsCfg = args.params ? loadParams(args.params) : null;
   const plan = planFromScript(scriptLines, offset, { fixtures, strict: args.strict });
   if (args.strict && plan.errors.length) {
     for (const e of plan.errors) console.error(`ERROR [${e.stepId}] ${e.message} (line ${e.line})`);
@@ -410,6 +471,8 @@ async function main() {
         }
         try {
           const ctx = { meta, env, refs, logger, config: process.env };
+          const params = resolveParams(paramsCfg, step.id, actionId, refs);
+          if (params !== undefined) ctx.params = params;
           const result = await execFn(ctx);
           const output = result?.output;
           const artifacts = result?.artifacts;

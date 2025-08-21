@@ -70,6 +70,11 @@ Example commands:
 - pnpm run orchestrate:dry  (uses the `sample-minimal` workflow)
 - node ./scripts/orchestrator.mjs --dry-run --workflow new-project --fixtures fixtures/new-project.json --strict
 
+Parameters (inputs to assignments/functions)
+- Provide a params JSON file with `--params fixtures/sample-params.json`
+- Shapes can be layered and are resolved with precedence: defaults < assignments[assignmentId] < steps[stepId] < actions[#step.action]
+- Values support ref interpolation using `${#step.action}` where appropriate
+
 Fixtures format example:
 ```json
 {

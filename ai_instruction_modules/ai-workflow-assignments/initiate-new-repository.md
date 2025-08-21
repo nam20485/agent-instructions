@@ -4,12 +4,12 @@
 
 ### Goal
 
-Your goal is to initiate a new repository for a project. This involves creating the repository, copying the provided files to the repository, configuring the necessary settings, and creating the intitial administrative structure.
+Your goal is to initiate a new repository for a project. This involves creating the repository, copying the provided files to the repository, configuring the necessary settings, and creating the initial administrative structure.
 
 ### Inputs
 
 1. New repository name (string)
-2. App creation plan documents (list, file)
+2. App creation plan documents (list of file paths)
 
 ### Acceptance Criteria
 
@@ -22,14 +22,14 @@ Your goal is to initiate a new repository for a project. This involves creating 
 
 ### Assignment
 
-Your assignment is to initiate and setup a new repository for a project. This involves creating the repository, configuring the necessary settings. You will copy the provided app creation documents to the `docs/` directory. You wil create a new issue-trackng project, import labels, and create milestones. You will rename workspace and devcontainer files to match the project name.
+Your assignment is to initiate and set up a new repository for a project. This involves creating the repository and configuring the necessary settings. You will copy the provided app creation documents to the `docs/` directory. You will create a new issue-tracking project, import labels, and create milestones. You will rename workspace and devcontainer files to match the project name.
 
 ### Detailed Steps
 
 1. **Create Repository**
    - Create a new repository with the provided name
    - New repository will be created from the `nam20485/ai-new-app-template` template repository
-   - New repository wil be created under the `nam20485` organization
+   - New repository will be created under the `nam20485` organization
    - Public visibility
    - GNU Affero license
 
@@ -51,8 +51,8 @@ Your assignment is to initiate and setup a new repository for a project. This in
    - Use the `create-milestones.ps1` script to create the milestones
 
 6. **Rename Workspace and Devcontainer Files**
-   - Inside the `.devcontainer/devcontainer.json` file rename the `name` property to use the new repository name as the prefix,preseving the "devcontainer" suffix. Template: `<repo-name>-devcontainer`
-   -  Rename the `ai-new-app-template.code-workspace` file to use the new repository name as the prefix, preseving the ".workspace" extension. Template: `<repo-name>.code-workspace`
+   - Inside the `.devcontainer/devcontainer.json` file rename the `name` property to use the new repository name as the prefix, preserving the "devcontainer" suffix. Template: `<repo-name>-devcontainer`
+   - Rename the `ai-new-app-template.code-workspace` file to use the new repository name as the prefix, preserving the ".code-workspace" extension. Template: `<repo-name>.code-workspace`
 
 ### Completion
 After all steps have been completed, notify the orchestrator that the repository and obtain approval to move to the next step. The repository has been initiated and is ready for the next step.
