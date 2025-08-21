@@ -66,4 +66,8 @@ The format is made up of the following sections:
 
 ### Specialized Tasks
 * [convert-vs-color-theme-to-vscode.md](ai-workflow-assignments/convert-vs-color-theme-to-vscode.md) (convert-vs-color-theme-to-vscode): This assignment involves converting a Visual Studio color theme to a Visual Studio Code color theme. You will create a plan, document it in an issue, and once gaining approval, you will implement the plan.
+
+### Dynamic Workflows
+* [orchestrate-dynamic-workflow.md](ai-workflow-assignments/orchestrate-dynamic-workflow.md) (orchestrate-dynamic-workflow): Orchestrate a dynamic workflow as defined in a dynamic workflow file under the “Script” section—iterate through each specified assignment (by short ID) in order, oversee execution to completion, and obtain approval.
+* [validate-dynamic-workflow-script.md](ai-workflow-assignments/validate-dynamic-workflow-script.md) (validate-dynamic-workflow-script): Validate a dynamic workflow script against the canonical DSL: check syntax, logical structure, existence of referenced assignment short IDs, and path correctness; provide pass/fail feedback with fixes if needed.
   

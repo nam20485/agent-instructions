@@ -39,6 +39,7 @@ Your assignment is to orchestrate the workflow assignment as specified by name a
 * `#<step>.<substep>`: reference to the output of the `<substep>` in the `<step>`
 * `get-function-name(<parameters>)`: call to a function with the specified parameters (name of function indicates its behavior)
 * Quoting conventions: Use backticks for assignment short IDs and step identifiers (e.g., `perform-task`), and single quotes for free-form strings. Do not quote keywords or variables.
+* Output recording convention for loops: When iterating over a list of assignment short IDs, record outputs under the current step using the assignment short ID as a subkey (e.g., after running `create-app-plan` inside step `create-project-and-plan`, record as `#create-project-and-plan.create-app-plan`). This enables later references like `#create-project-and-plan.create-app-plan`.
 
 ### Detailed Steps
 
