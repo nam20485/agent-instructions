@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import fs from 'node:fs';
 import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 function parseArgs(argv) {
   const args = { dryRun: false, strict: false, console: false, verbose: false };
@@ -77,8 +78,8 @@ class Logger {
     const rec = { ...obj, timestamp: obj.timestamp ?? timestamp() };
     if (this.writer) this.writer.write(rec);
     if (this.toConsole) {
-      const { type, step, action } = rec;
-      console.log(`[${type}] ${step} :: ${action}`);
+  const { type, step, action } = rec;
+  console.log(`[${type}] ${step} :: ${action}`);
     }
   }
   warn(obj) {
@@ -303,7 +304,43 @@ function emitJsonl(plan, outPath) {
   }
 }
 
-function main() {
+// --- Real mode execution helpers ---
+async function loadExecutor(modulePath) {
+  try {
+    if (!fs.existsSync(modulePath)) return null;
+    const mod = await import(pathToFileURL(modulePath).href);
+    if (!mod || typeof mod.default !== 'function') return null;
+    return mod.default;
+  } catch (e) {
+    return null;
+  }
+}
+
+function makeRefs(outputs) {
+  return {
+    get(ref) {
+      if (!ref || typeof ref !== 'string') return undefined;
+      // allow nested property lookup using dot path beyond first two tokens
+      // ref format: #step.action[.path.to.leaf]
+      if (!ref.startsWith('#')) return undefined;
+      const parts = ref.slice(1).split('.');
+      if (parts.length < 2) return outputs['#' + parts[0]]; // fallback if only step
+      const baseKey = `#${parts[0]}.${parts[1]}`;
+      let val = outputs[baseKey];
+      if (val === undefined) return undefined;
+      if (parts.length > 2) {
+        for (let i = 2; i < parts.length && val != null; i++) {
+          val = val[parts[i]];
+        }
+      }
+      return val;
+    }
+  };
+}
+
+function nowMs() { return Date.now(); }
+
+async function main() {
   const cwd = process.cwd();
   const args = parseArgs(process.argv);
   const repoRoot = cwd; // assume invoked at repo root
@@ -351,16 +388,68 @@ function main() {
   }
 
   // Real mode: iterate plan and log start/end events (no-op execution stub)
+  const outputs = {}; // key: #step.action -> value: executor output
+  const env = {}; // runtime variables if executors set any
+  const refs = makeRefs(outputs);
+  const runId = `run-${Date.now()}`;
   for (const step of plan.steps) {
     for (const a of step.actions) {
       if (a.type === 'assignment') {
-        logger.action({ type: 'assignment-start', step: step.id, action: a.assignmentId, outputKey: a.outputKey });
-        // TODO: integrate real assignment executors here
-        logger.action({ type: 'assignment-end', step: step.id, action: a.assignmentId, outputKey: a.outputKey });
+        const actionId = a.assignmentId;
+        const modPath = path.join(repoRoot, 'scripts', 'executors', 'assignments', `${actionId}.mjs`);
+  const execFn = await loadExecutor(modPath);
+        const meta = { stepId: step.id, actionId, source: a.source, runId };
+        const start = nowMs();
+        logger.action({ type: 'assignment-start', step: step.id, action: actionId, outputKey: a.outputKey });
+        if (!execFn) {
+          const errMsg = `Missing assignment executor: ${modPath}`;
+          logger.error({ step: step.id, message: errMsg, line: a.source?.line });
+          logger.action({ type: 'assignment-end', step: step.id, action: actionId, outputKey: a.outputKey, status: 'error', durationMs: nowMs() - start });
+          logger.close();
+          fail(errMsg);
+        }
+        try {
+          const ctx = { meta, env, refs, logger, config: process.env };
+          const result = await execFn(ctx);
+          const output = result?.output;
+          const artifacts = result?.artifacts;
+          const outKey = `#${step.id}.${actionId}`;
+          outputs[outKey] = output ?? null;
+          if (result?.vars && typeof result.vars === 'object') Object.assign(env, result.vars);
+          logger.action({ type: 'assignment-end', step: step.id, action: actionId, outputKey: a.outputKey, status: 'ok', durationMs: nowMs() - start, artifacts });
+        } catch (e) {
+          logger.error({ step: step.id, message: e?.message ?? String(e) });
+          logger.action({ type: 'assignment-end', step: step.id, action: actionId, outputKey: a.outputKey, status: 'error', durationMs: nowMs() - start });
+          logger.close();
+          fail(`Executor failed for ${actionId}: ${e?.message ?? e}`);
+        }
       } else if (a.type === 'function') {
-        logger.action({ type: 'function-start', step: step.id, action: a.functionName, args: a.args });
-        // TODO: integrate real function execution here
-        logger.action({ type: 'function-end', step: step.id, action: a.functionName, args: a.args });
+        const funcName = a.functionName;
+        const modPath = path.join(repoRoot, 'scripts', 'executors', 'functions', `${funcName}.mjs`);
+  const execFn = await loadExecutor(modPath);
+        const meta = { stepId: step.id, functionName: funcName, source: a.source, runId };
+        const start = nowMs();
+        logger.action({ type: 'function-start', step: step.id, action: funcName, args: a.args });
+        if (!execFn) {
+          const errMsg = `Missing function executor: ${modPath}`;
+          logger.error({ step: step.id, message: errMsg, line: a.source?.line });
+          logger.action({ type: 'function-end', step: step.id, action: funcName, status: 'error', durationMs: nowMs() - start });
+          logger.close();
+          fail(errMsg);
+        }
+        try {
+          const ctx = { meta, env, refs, logger, config: process.env, args: a.args };
+          const result = await execFn(ctx);
+          const output = result?.output;
+          // functions currently do not have implicit output keys; they should set vars
+          if (result?.vars && typeof result.vars === 'object') Object.assign(env, result.vars);
+          logger.action({ type: 'function-end', step: step.id, action: funcName, status: 'ok', durationMs: nowMs() - start, output });
+        } catch (e) {
+          logger.error({ step: step.id, message: e?.message ?? String(e) });
+          logger.action({ type: 'function-end', step: step.id, action: funcName, status: 'error', durationMs: nowMs() - start });
+          logger.close();
+          fail(`Function executor failed for ${funcName}: ${e?.message ?? e}`);
+        }
       }
     }
   }
@@ -368,4 +457,4 @@ function main() {
   if (out) console.log(`Execution log written: ${out}`);
 }
 
-main();
+await main();

@@ -25,21 +25,20 @@ Your goal is to orchestrate systematically through the assignments as specified 
 Your assignment is to orchestrate the workflow assignment as specified by name and instructions in the provided dynamic workflow file. This involves systematically iterating through each specified assignment, orchestrating and overseeing the work until completion, according to the instructions specified in the "Script" section in the dynamic workflow file.
 
 #### Dynamic Workflow File Conventions
+
 - The list of sub-workflow assignments resides in a file whose name is provided as input to this assignment.
 - The name provided indicates a dynamic workflow file located in the [./ai_instruction_modules/ai-workflow-assignments/dynamic-workflows](./dynamic-workflows) directory.
 - The format for naming the dynamic workflow files may be standardized; see repository conventions.
 
 > Example: Specifying "new-project" as input, when invoking the orchestrate-dynamic-workflow assignment, will look for a dynamic workflow file at `./ai_instruction_modules/ai-workflow-assignments/dynamic-workflows/new-project.md`.
 
-##### Legend for Dynamic Workflow File Syntax
+##### Syntax reference (canonical)
 
-* `$variable` = *<value>*: Define the variable `$variable` to have the value *<value>*
-* `$variable`: use of a previously defined variable `$variable`
-* `#<step>`: reference to the output of the `<step>`
-* `#<step>.<substep>`: reference to the output of the `<substep>` in the `<step>`
-* `get-function-name(<parameters>)`: call to a function with the specified parameters (name of function indicates its behavior)
-* Quoting conventions: Use backticks for assignment short IDs and step identifiers (e.g., `perform-task`), and single quotes for free-form strings. Do not quote keywords or variables.
-* Output recording convention for loops: When iterating over a list of assignment short IDs, record outputs under the current step using the assignment short ID as a subkey (e.g., after running `create-app-plan` inside step `create-project-and-plan`, record as `#create-project-and-plan.create-app-plan`). This enables later references like `#create-project-and-plan.create-app-plan`.
+See the canonical syntax: [dynamic-workflow-synatx.md](./dynamic-workflows/dynamic-workflow-synatx.md)
+
+Highlights:
+- Backticks for assignment short IDs and step identifiers (e.g., `perform-task`); single quotes for free-form strings; no quotes for variables/keywords.
+- Output recording convention for loops: record as `#<step>.<assignmentShortId>` so later references like `#create-project-and-plan.create-app-plan` resolve.
 
 ### Detailed Steps
 

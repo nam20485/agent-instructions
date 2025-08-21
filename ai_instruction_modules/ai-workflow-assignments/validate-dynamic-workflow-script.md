@@ -21,11 +21,10 @@ Your goal is to validate the provided dynamic workflow script to ensure it meets
 
 Your assignment is to validate the provided dynamic workflow script. This involves systematically checking the script against the syntax and logical rules of the custom DSL to ensure it is correct and coherent. If the script is found to be valid, you will provide reassurance of its validity. If any issues are found, you will provide feedback on the nature of the issues and how they can be resolved. 
 
-##### Legend for Dynamic Workflow File Syntax
+##### Syntax reference (canonical)
 
-- The syntax for dynamic workflow files is defined in the `orchestrate-dynamic-workflow` assignment.
-- Canonical reference: [orchestrate-dynamic-workflow.md](./orchestrate-dynamic-workflow.md)
-- That definition is the canonical source of truth for the syntax of dynamic workflow files.
+- Canonical syntax: [dynamic-workflow-synatx.md](./dynamic-workflows/dynamic-workflow-synatx.md)
+- Orchestration instructions: [orchestrate-dynamic-workflow.md](./orchestrate-dynamic-workflow.md)
 
 ### Detailed Steps
 
