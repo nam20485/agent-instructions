@@ -4,7 +4,7 @@
 
 ### Goal
 
-Your goal is to orchestrate the initilation of a new repository, creating the project plan, creating the project structure, breaking down the work into epics and issues, and overseeing the implementation process.
+Your goal is to orchestrate the initiation of a new repository, creating the project plan, creating the project structure, breaking down the work into epics and issues, and overseeing the implementation process.
 
 ### Acceptance Criteria
 
@@ -30,12 +30,12 @@ Your goal is to orchestrate the initilation of a new repository, creating the pr
 
 ### Assignment
 
-Your assignment is to orchestrate the initilation of a new repository, creating the project plan, creating the project structure, breaking down the work into epics and issues, and overseeing the implementation process. This involves systematic analysis of requirements, careful implementation following established guidelines, and delivery of a production-ready application that meets all specified criteria. You will be the orchestrator for the project, and will be responsible for all aspects of the project from start to finish. You will be the one to assign issues to the copilot, and will be responsible for reviewing and approving all work. For each stage, you will assign the copilot to perform the task, and then you will review and approve the work. You will iterate on each stage until it is approved.
+Your assignment is to orchestrate the initiation of a new repository, creating the project plan, creating the project structure, breaking down the work phases into epics and sub-issues, and overseeing the implementation process. This involves systematic analysis of requirements, careful implementation following established guidelines, and delivery of a production-ready application that meets all specified criteria. You will be the orchestrator for the project, and will be responsible for all aspects of the project from start to finish. You will be the one to assign issues to the copilot, and will be responsible for reviewing and approving all work. For each stage, you will assign the copilot to perform the task, and then you will review and approve the work. You will iterate on each stage until it is approved.
 
 ### Detailed Steps
 
-1. **Initialize Repository**
-   -  You will assign the copilot the `initiaize-repository` assignment.
+1. **Initiate New Repository**
+   -  You will assign the copilot the `initiate-new-repository` assignment.
    -  You will wait until sub-agent finishes the task.
    -  You will review the work and approve it.
    -  Upon approval, you will move on to the next stage.

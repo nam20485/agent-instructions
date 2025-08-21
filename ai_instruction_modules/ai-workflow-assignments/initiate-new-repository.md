@@ -1,10 +1,10 @@
-# Assignment: Initialize Repository
+# Assignment: Initiate New Repository
 
-## (initialize-repository)
+## (initiate-new-repository)
 
 ### Goal
 
-Your goal is to initialize a new repository for a project. This involves creating the repository, copying the provided files to the repository, configuring the necessary settings, and creating the intitial administrative structure.
+Your goal is to initiate a new repository for a project. This involves creating the repository, copying the provided files to the repository, configuring the necessary settings, and creating the intitial administrative structure.
 
 ### Inputs
 
@@ -22,7 +22,7 @@ Your goal is to initialize a new repository for a project. This involves creatin
 
 ### Assignment
 
-Your assignment is to initialize and setup a new repository for a project. This involves creating the repository, configuring the necessary settings. You will copy the provided app creation documents to the `docs/` directory. You wil create a new issue-trackng project, import labels, and create milestones. You will rename workspace and devcontainer files to match the project name.
+Your assignment is to initiate and setup a new repository for a project. This involves creating the repository, configuring the necessary settings. You will copy the provided app creation documents to the `docs/` directory. You wil create a new issue-trackng project, import labels, and create milestones. You will rename workspace and devcontainer files to match the project name.
 
 ### Detailed Steps
 
@@ -55,4 +55,4 @@ Your assignment is to initialize and setup a new repository for a project. This 
    -  Rename the `ai-new-app-template.code-workspace` file to use the new repository name as the prefix, preseving the ".workspace" extension. Template: `<repo-name>.code-workspace`
 
 ### Completion
-After all steps have been completed, notify the orchestrator that the repository and obtain approval to move to the next step. The repository has been initialized and is ready for the next step.
+After all steps have been completed, notify the orchestrator that the repository and obtain approval to move to the next step. The repository has been initiated and is ready for the next step.
