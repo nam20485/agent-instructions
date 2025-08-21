@@ -62,6 +62,7 @@ To preview what would execute without performing any actions, use dry-run:
 - Inputs: `--workflow <name>` or `--file <path>`, optional `--fixtures <file.json>`, `--log <path>`, `--strict`
 - Behavior: Parses and plans the workflow (variables, loops, functions) and emits a JSONL log of the actions instead of executing
 - Output: One action per line in JSONL with fields like `type`, `step`, `action`, `outputKey` (for assignments), `args`/`simulatedOutput` (for functions), and `timestamp`
+- Console logging: add `--console` (or `--verbose`) to also print actions/warnings to the console while writing the JSONL file
 
 Example commands:
 - pnpm run orchestrate:dry  (uses the `sample-minimal` workflow)

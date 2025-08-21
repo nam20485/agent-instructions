@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 function parseArgs(argv) {
-  const args = { dryRun: false, strict: false };
+  const args = { dryRun: false, strict: false, console: false, verbose: false };
   for (let i = 2; i < argv.length; i++) {
     const a = argv[i];
     const next = argv[i + 1];
@@ -13,6 +13,10 @@ function parseArgs(argv) {
         args.dryRun = true; break;
       case '--strict':
         args.strict = true; break;
+      case '--console':
+        args.console = true; break;
+      case '--verbose':
+        args.verbose = true; break;
       case '--workflow':
       case '-w':
         args.workflow = next; i++; break;
@@ -62,6 +66,33 @@ function jsonlWriter(filePath) {
 }
 
 function timestamp() { return new Date().toISOString(); }
+
+// --- Unified logger (console + JSONL file) ---
+class Logger {
+  constructor({ filePath, toConsole = false }) {
+    this.toConsole = toConsole;
+    this.writer = filePath ? jsonlWriter(filePath) : null;
+  }
+  action(obj) {
+    const rec = { ...obj, timestamp: obj.timestamp ?? timestamp() };
+    if (this.writer) this.writer.write(rec);
+    if (this.toConsole) {
+      const { type, step, action } = rec;
+      console.log(`[${type}] ${step} :: ${action}`);
+    }
+  }
+  warn(obj) {
+    const rec = { type: 'warning', ...obj, timestamp: obj.timestamp ?? timestamp() };
+    if (this.writer) this.writer.write(rec);
+    console.warn(`WARN${rec.step ? ' [' + rec.step + ']' : ''} ${rec.message}${rec.line ? ' (line ' + rec.line + ')' : ''}`);
+  }
+  error(obj) {
+    const rec = { type: 'error', ...obj, timestamp: obj.timestamp ?? timestamp() };
+    if (this.writer) this.writer.write(rec);
+    console.error(`ERROR${rec.step ? ' [' + rec.step + ']' : ''} ${rec.message}${rec.line ? ' (line ' + rec.line + ')' : ''}`);
+  }
+  close() { if (this.writer) this.writer.close(); }
+}
 
 // --- Simple DSL parsing helpers ---
 const reStep = /^###\s+([a-z0-9-]+)\s*$/i;
@@ -295,14 +326,27 @@ function main() {
     for (const e of plan.errors) console.error(`ERROR [${e.stepId}] ${e.message} (line ${e.line})`);
     process.exit(2);
   }
-  for (const w of plan.warnings) console.warn(`WARN [${w.stepId}] ${w.message} (line ${w.line})`);
+  // Initialize logger for actions and warnings/errors
+  const wfName = args.workflow ?? path.basename(filePath, '.md');
+  const out = args.log ?? (args.dryRun ? path.join(repoRoot, 'logs', `${wfName}-dryrun-${Date.now()}.jsonl`) : null);
+  if (out) ensureDir(path.dirname(out));
+  const logger = new Logger({ filePath: out, toConsole: !!args.console || !!args.verbose });
+  for (const w of plan.warnings) logger.warn({ step: w.stepId, message: w.message, line: w.line });
 
   // Phase 2: execute or emit
   if (args.dryRun) {
-    const wfName = args.workflow ?? path.basename(filePath, '.md');
-    const out = args.log ?? path.join(repoRoot, 'logs', `${wfName}-dryrun-${Date.now()}.jsonl`);
-    emitJsonl(plan, out);
-    console.log(`Dry-run plan written: ${out}`);
+    // Emit actions to logger (file and/or console)
+    for (const step of plan.steps) {
+      for (const a of step.actions) {
+        if (a.type === 'assignment') {
+          logger.action({ type: 'assignment', step: step.id, action: a.assignmentId, outputKey: a.outputKey });
+        } else if (a.type === 'function') {
+          logger.action({ type: 'function', step: step.id, action: a.functionName, args: a.args, simulatedOutput: a.simulatedOutput });
+        }
+      }
+    }
+    logger.close();
+    if (out) console.log(`Dry-run plan written: ${out}`);
     return;
   }
 
