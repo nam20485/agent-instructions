@@ -88,13 +88,13 @@ Required modules are always active and so must always be read and followed.
 
 #### Repository Summary
 
-Contains high-level information about the repository and its structure.
+Contains high-level information about the repository, building, projects, and structure.
 
 - [.ai-repository-summary.md](../ai-repo-summary.md)
 
-- This may not exist at the beginning
+- This file will not exist until after the project structure has been created
 - Always create it after creating the project/solution structure
-- Creating: [ai-creating-repository-summary.md](./ai-workflow-assignments/ai-creating-repository-summary.md)
+- Creating: [ai-creating-repository-summary.md](./ai-creating-repository-summary.md)
 
 #### More Core Modules (**REQUIRED**: always read!)
 
