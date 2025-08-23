@@ -1,0 +1,17 @@
+{
+  "name": "ai-workflow-orchestrator",
+  "version": "0.1.0-private",
+  "private": true,
+  "type": "module",
+  "description": "Standalone CLI for the AI workflow orchestrator (scaffolded inside agent-instructions).",
+  "bin": {
+    "ai-orchestrator": "./bin/orchestrator.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --version"
+  },
+  "license": "UNLICENSED"
+}

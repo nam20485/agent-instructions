@@ -190,6 +190,48 @@
       "presentation": { "reveal": "always" },
       "detail": "Execute actions from a specific file; prompts for file path and optional params/log."
     }
+    ,
+    {
+      "label": "Orchestrate (Scaffold CLI): Dry Run (workflow)",
+      "type": "shell",
+      "command": "node",
+      "args": [
+        "./scaffold/ai-workflow-orchestrator/bin/orchestrator.mjs",
+        "--dry-run",
+        "--workflow",
+        "${input:orchestrator.workflow}",
+        "--workflows-path",
+        "ai_instruction_modules/ai-workflow-assignments/dynamic-workflows",
+        "--log",
+        "logs/${input:orchestrator.workflow}-dryrun-scaffold.jsonl",
+        "--console"
+      ],
+      "problemMatcher": [],
+      "presentation": { "reveal": "always" },
+      "detail": "Plan with the scaffold CLI; prompts for workflow name."
+    },
+    {
+      "label": "Orchestrate (Scaffold CLI): Real (workflow)",
+      "type": "shell",
+      "command": "node",
+      "args": [
+        "./scaffold/ai-workflow-orchestrator/bin/orchestrator.mjs",
+        "--workflow",
+        "${input:orchestrator.workflow}",
+        "--workflows-path",
+        "ai_instruction_modules/ai-workflow-assignments/dynamic-workflows",
+        "--exec-paths",
+        "scripts/executors",
+        "--params",
+        "${input:orchestrator.params}",
+        "--log",
+        "logs/${input:orchestrator.workflow}-exec-scaffold.jsonl",
+        "--console"
+      ],
+      "problemMatcher": [],
+      "presentation": { "reveal": "always" },
+      "detail": "Execute with the scaffold CLI; prompts for workflow and params."
+    }
   ]
   ,
   "inputs": [
