@@ -1,5 +1,9 @@
 # Dynamic Workflow Real Mode: Implementation Plan
 
+Note: The canonical version of this document now lives in the standalone orchestrator repository:
+https://github.com/nam20485/ai-workflow-orchestrator/blob/main/docs/real-mode-plan.md
+
+
 This document captures the concrete plan to take the dynamic workflow runner from dry-run to fully executing assignments and functions in real mode while keeping the DSL unchanged.
 
 ## Goals

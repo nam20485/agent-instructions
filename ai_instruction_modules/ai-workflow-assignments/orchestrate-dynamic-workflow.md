@@ -42,7 +42,7 @@ Your assignment is to orchestrate the workflow assignment as specified by name a
 
 ##### Syntax reference (canonical)
 
-See the canonical syntax: [dynamic-workflow-synatx.md](./dynamic-workflows/dynamic-workflow-synatx.md)
+See the canonical syntax: [dynamic-workflow-syntax.md](./dynamic-workflows/dynamic-workflow-syntax.md)
 
 Highlights:
 - Backticks for assignment short IDs and step identifiers (e.g., `perform-task`); single quotes for free-form strings; no quotes for variables/keywords.

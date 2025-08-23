@@ -15,6 +15,7 @@ In-scope:
 - New flags for repo-agnostic integration: --exec-paths, --workflows-path
 - Move canonical docs (syntax + real-mode plan) to the new repo
 - Update agent-instructions tasks to call the new CLI; keep executors and workflows here
+  - Add VS Code tasks to run the published CLI via npx (done)
 
 Out-of-scope (for this issue; can be follow-ups):
 - VS Code extension exposing /orchestrate command (tracked in a follow-up issue after repo creation)
@@ -68,6 +69,6 @@ Out-of-scope (for this issue; can be follow-ups):
 
 ## References
 - Current engine: scripts/orchestrator.mjs
-- Canonical syntax: ai_instruction_modules/ai-workflow-assignments/dynamic-workflows/dynamic-workflow-synatx.md
+- Canonical syntax: ai_instruction_modules/ai-workflow-assignments/dynamic-workflows/dynamic-workflow-syntax.md (local copy). Canonical upstream now in the orchestrator repo.
 - Real-mode plan: ai_instruction_modules/ai-workflow-assignments/dynamic-workflow-real-mode-plan.md
 - Chat tasks: tasks.json

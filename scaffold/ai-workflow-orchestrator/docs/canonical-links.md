@@ -1,7 +1,7 @@
 # Canonical Documents to Move Here
 
 - Dynamic Workflow Syntax (Canonical)
-  - Source: ai_instruction_modules/ai-workflow-assignments/dynamic-workflows/dynamic-workflow-synatx.md
+  - Source: ai_instruction_modules/ai-workflow-assignments/dynamic-workflows/dynamic-workflow-syntax.md
 - Real Mode Implementation Plan
   - Source: ai_instruction_modules/ai-workflow-assignments/dynamic-workflows/dynamic-workflow-real-mode-plan.md
 - Usage: CLI and Tasks
