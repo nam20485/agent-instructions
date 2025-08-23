@@ -6,6 +6,11 @@
 
 The dynamic workflow orchestration assignment is different than the other static workflow assignments, in that it must orchestrate the workflows for a dynamically specified list of workflow assignments, as specified in a dynamic workflow file. The dynamic workflow file specifies assignments to be performed in the "Script" section of the file.
 
+### Inputs
+
+$workflow_name: the workflow assignment to execute
+$context: an object to pass to the workflow assignment to execute
+
 ### Goal
 
 Your goal is to orchestrate systematically through the assignments as specified in the provided dynamic workflow file's "Script" section, performing the steps in each one to completion in turn. Assignments are specified by short ID.
@@ -31,6 +36,9 @@ Your assignment is to orchestrate the workflow assignment as specified by name a
 - The format for naming the dynamic workflow files may be standardized; see repository conventions.
 
 > Example: Specifying "new-project" as input, when invoking the orchestrate-dynamic-workflow assignment, will look for a dynamic workflow file at `./ai_instruction_modules/ai-workflow-assignments/dynamic-workflows/new-project.md`.
+
+- The $context variable is an object containing variables. 
+- This object contains input variables that are to be passed to the underlying workflow assignment that will be executed (i.e. the $workflow_name workflow assignment)
 
 ##### Syntax reference (canonical)
 
