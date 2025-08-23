@@ -71,6 +71,15 @@ jobs:
           restore-keys: |
             terraform-${{ runner.os }}
 
+      - name: Fetch Remote Script
+        shell: pwsh
+        run: |
+          # overwrite local script with remote script
+          Invoke-WebRequest -Uri "https://raw.githubusercontent.com/nam20485/agent-instructions/main/scripts/setup-environment.sh" \
+            -OutFile "scripts/setup-environment.sh" \
+            -Headers @{"Accept"="application/vnd.github.raw"} \
+            -Authorization "Bearer ${{ secrets.GITHUB_TOKEN }}"
+
       - name: Provision environment (single Linux script)
         shell: bash
         run: |
