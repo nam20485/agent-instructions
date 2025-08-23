@@ -4,7 +4,7 @@
 
 ### Overview
 
-The dynamic workflow orchestration assignment is different than the other static workflow assignments, in that it must orchstrate the workflows for a dynamically-specified list of subordinate workflow assignments, which are orchestrated and performed in the order specified in the file, systematically iterating serially through each one until completion.
+The dynamic workflow orchestration assignment is different than the other static workflow assignments, in that it must orchestrate the workflows for a dynamically-specified list of subordinate workflow assignments, which are orchestrated and performed in the order specified in the file, systematically iterating serially through each one until completion.
 
 ### Goal
 
