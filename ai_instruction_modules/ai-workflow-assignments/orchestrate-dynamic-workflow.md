@@ -37,7 +37,7 @@ Your assignment is to orchestrate the workflow assignment as specified by name a
 
 > Example: Specifying "new-project" as input, when invoking the orchestrate-dynamic-workflow assignment, will look for a dynamic workflow file at `./ai_instruction_modules/ai-workflow-assignments/dynamic-workflows/new-project.md`.
 
-- The $context variable is an object containing variables. 
+- The $context variable is an object containing variables.
 - This object contains input variables that are to be passed to the underlying workflow assignment that will be executed (i.e. the $workflow_name workflow assignment)
 
 ##### Syntax reference (canonical)
