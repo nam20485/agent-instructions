@@ -119,6 +119,51 @@
     }
     ,
     {
+      "label": "Orchestrate (npx): Dry Run (workflow)",
+      "type": "shell",
+      "command": "npx",
+      "args": [
+        "-y",
+        "ai-workflow-orchestrator",
+        "--dry-run",
+        "--workflow",
+        "${input:orchestrator.workflow}",
+        "--workflows-path",
+        "ai_instruction_modules/ai-workflow-assignments/dynamic-workflows",
+        "--fixtures",
+        "${input:orchestrator.fixtures}",
+        "--log",
+        "logs/${input:orchestrator.workflow}-dryrun-npx.jsonl",
+        "--console"
+      ],
+      "problemMatcher": [],
+      "presentation": { "reveal": "always" },
+      "detail": "Plan using the published CLI via npx; prompts for workflow name and optional fixtures."
+    },
+    {
+      "label": "Orchestrate (npx): Real (workflow)",
+      "type": "shell",
+      "command": "npx",
+      "args": [
+        "-y",
+        "ai-workflow-orchestrator",
+        "--workflow",
+        "${input:orchestrator.workflow}",
+        "--workflows-path",
+        "ai_instruction_modules/ai-workflow-assignments/dynamic-workflows",
+        "--exec-paths",
+        "scripts/executors",
+        "--params",
+        "${input:orchestrator.params}",
+        "--log",
+        "logs/${input:orchestrator.workflow}-exec-npx.jsonl",
+        "--console"
+      ],
+      "problemMatcher": [],
+      "presentation": { "reveal": "always" },
+      "detail": "Execute using the published CLI via npx; prompts for workflow and params."
+    },
+    {
       "label": "Orchestrate: Dry Run (workflow)",
       "type": "shell",
       "command": "node",
