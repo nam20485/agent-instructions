@@ -78,3 +78,14 @@ Windows entrypoint
 ```powershell
 pwsh -NoProfile -ExecutionPolicy Bypass -File scripts/setup-environment.ps1
 ```
+
+Using the published orchestrator via npx
+---------------------------------------
+
+Once the standalone orchestrator is published to npm, you can run it against this repo’s workflows and executors without cloning its repo:
+
+```powershell
+npx -y ai-workflow-orchestrator@latest --workflow sample-minimal --workflows-path ai_instruction_modules/ai-workflow-assignments/dynamic-workflows --exec-paths scripts/executors --log logs/sample-minimal-exec-npx.jsonl --console
+```
+
+VS Code tasks labeled "Orchestrate (npx): …" are provided for convenience.

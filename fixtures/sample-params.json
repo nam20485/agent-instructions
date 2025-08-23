@@ -1,0 +1,19 @@
+{
+  "defaults": {},
+  "assignments": {
+    "initiate-new-repository": {
+      "repoName": "example-repo",
+      "docs": ["docs/plan.md", "docs/architecture.md"]
+    }
+  },
+  "steps": {
+    "create-project-and-plan": {
+      "owner": "nam20485"
+    }
+  },
+  "actions": {
+    "#create-project-and-plan.create-app-plan": {
+      "planTitle": "Initial App Plan"
+    }
+  }
+}

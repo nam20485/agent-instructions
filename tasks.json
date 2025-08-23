@@ -117,5 +117,153 @@
       "presentation": { "reveal": "always" },
       "detail": "Provision local env on Linux using the consolidated script."
     }
+    ,
+    {
+      "label": "Orchestrate: Dry Run (workflow)",
+      "type": "shell",
+      "command": "node",
+      "args": [
+        "./scripts/orchestrator.mjs",
+        "--dry-run",
+        "--workflow",
+        "${input:orchestrator.workflow}",
+        "--log",
+        "logs/${input:orchestrator.workflow}-dryrun.jsonl",
+        "--console"
+      ],
+      "problemMatcher": [],
+      "presentation": { "reveal": "always" },
+      "detail": "Plan and emit JSONL without executing; prompts for workflow name."
+    },
+    {
+      "label": "Orchestrate: Dry Run (file)",
+      "type": "shell",
+      "command": "node",
+      "args": [
+        "./scripts/orchestrator.mjs",
+        "--dry-run",
+        "--file",
+        "${input:orchestrator.file}",
+        "--fixtures",
+        "${input:orchestrator.fixtures}",
+        "--log",
+        "${input:orchestrator.log}",
+        "--console"
+      ],
+      "problemMatcher": [],
+      "presentation": { "reveal": "always" },
+      "detail": "Plan and emit JSONL for a specific file; prompts for file path, fixtures, and log path."
+    },
+    {
+      "label": "Orchestrate: Real (workflow)",
+      "type": "shell",
+      "command": "node",
+      "args": [
+        "./scripts/orchestrator.mjs",
+        "--workflow",
+        "${input:orchestrator.workflow}",
+        "--params",
+        "${input:orchestrator.params}",
+        "--log",
+        "logs/${input:orchestrator.workflow}-exec.jsonl",
+        "--console"
+      ],
+      "problemMatcher": [],
+      "presentation": { "reveal": "always" },
+      "detail": "Execute planned actions with real executors; prompts for workflow and optional params file."
+    },
+    {
+      "label": "Orchestrate: Real (file)",
+      "type": "shell",
+      "command": "node",
+      "args": [
+        "./scripts/orchestrator.mjs",
+        "--file",
+        "${input:orchestrator.file}",
+        "--params",
+        "${input:orchestrator.params}",
+        "--log",
+        "${input:orchestrator.log}",
+        "--console"
+      ],
+      "problemMatcher": [],
+      "presentation": { "reveal": "always" },
+      "detail": "Execute actions from a specific file; prompts for file path and optional params/log."
+    }
+    ,
+    {
+      "label": "Orchestrate (Scaffold CLI): Dry Run (workflow)",
+      "type": "shell",
+      "command": "node",
+      "args": [
+        "./scaffold/ai-workflow-orchestrator/bin/orchestrator.mjs",
+        "--dry-run",
+        "--workflow",
+        "${input:orchestrator.workflow}",
+        "--workflows-path",
+        "ai_instruction_modules/ai-workflow-assignments/dynamic-workflows",
+        "--log",
+        "logs/${input:orchestrator.workflow}-dryrun-scaffold.jsonl",
+        "--console"
+      ],
+      "problemMatcher": [],
+      "presentation": { "reveal": "always" },
+      "detail": "Plan with the scaffold CLI; prompts for workflow name."
+    },
+    {
+      "label": "Orchestrate (Scaffold CLI): Real (workflow)",
+      "type": "shell",
+      "command": "node",
+      "args": [
+        "./scaffold/ai-workflow-orchestrator/bin/orchestrator.mjs",
+        "--workflow",
+        "${input:orchestrator.workflow}",
+        "--workflows-path",
+        "ai_instruction_modules/ai-workflow-assignments/dynamic-workflows",
+        "--exec-paths",
+        "scripts/executors",
+        "--params",
+        "${input:orchestrator.params}",
+        "--log",
+        "logs/${input:orchestrator.workflow}-exec-scaffold.jsonl",
+        "--console"
+      ],
+      "problemMatcher": [],
+      "presentation": { "reveal": "always" },
+      "detail": "Execute with the scaffold CLI; prompts for workflow and params."
+    }
+  ]
+  ,
+  "inputs": [
+    {
+      "id": "orchestrator.workflow",
+      "type": "promptString",
+      "description": "Workflow name (file under dynamic-workflows/<name>.md)",
+      "default": "sample-minimal"
+    },
+    {
+      "id": "orchestrator.file",
+      "type": "promptString",
+      "description": "Absolute or relative path to workflow .md file",
+      "default": "ai_instruction_modules/ai-workflow-assignments/dynamic-workflows/new-project.md"
+    },
+    {
+      "id": "orchestrator.fixtures",
+      "type": "promptString",
+      "description": "Optional fixtures JSON (blank to skip)",
+      "default": ""
+    },
+    {
+      "id": "orchestrator.params",
+      "type": "promptString",
+      "description": "Optional params JSON for assignment inputs (blank to skip)",
+      "default": "fixtures/sample-params.json"
+    },
+    {
+      "id": "orchestrator.log",
+      "type": "promptString",
+      "description": "Optional log JSONL path (blank for default in some tasks)",
+      "default": ""
+    }
   ]
 }

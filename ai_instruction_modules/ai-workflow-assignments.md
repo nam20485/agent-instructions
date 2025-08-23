@@ -49,7 +49,7 @@ The format is made up of the following sections:
 ### Initialization & Setup
 * [create-application.md](ai-workflow-assignments/create-application.md) (create-application): This assignment involves creating a new application given the description from a new app template that has been filled out, including setting up the project structure, configuring necessary components, and ensuring the application meets specified requirements.
 * [create-project-structure.md](ai-workflow-assignments/create-project-structure.md) (create-project-structure): This assignment involves creating the actual project structure and scaffolding for a new application based on a comprehensive application plan. This involves setting up the repository, creating the solution structure, configuring initial project files, and establishing the development environment foundation.
-* [initialize-new-repository.md](ai-workflow-assignments/initialize-new-repository.md) (initialize-repository): This assignment involves creating and configuring a new repository from a template, copying app plan docs, setting up labels and milestones, creating a GitHub Project board, and renaming workspace/devcontainer files.
+* [initiate-new-repository.md](ai-workflow-assignments/initiate-new-repository.md) (initiate-new-repository): This assignment involves creating and configuring a new repository from a template, copying app plan docs, setting up labels and milestones, creating a GitHub Project board, and renaming workspace/devcontainer files.
 
 ### Implementation & Execution
 * [continue-task-work.md](ai-workflow-assignments/continue-task-work.md) (continue-task-work): This assignment involves discovering, assessing, prioritizing, and resuming in-progress tasks to completion, ensuring proper integration, updates to issues/PRs, and stakeholder review.
@@ -66,4 +66,8 @@ The format is made up of the following sections:
 
 ### Specialized Tasks
 * [convert-vs-color-theme-to-vscode.md](ai-workflow-assignments/convert-vs-color-theme-to-vscode.md) (convert-vs-color-theme-to-vscode): This assignment involves converting a Visual Studio color theme to a Visual Studio Code color theme. You will create a plan, document it in an issue, and once gaining approval, you will implement the plan.
+
+### Dynamic Workflows
+* [orchestrate-dynamic-workflow.md](ai-workflow-assignments/orchestrate-dynamic-workflow.md) (orchestrate-dynamic-workflow): Orchestrate a dynamic workflow as defined in a dynamic workflow file under the “Script” section—iterate through each specified assignment (by short ID) in order, oversee execution to completion, and obtain approval.
+* [validate-dynamic-workflow-script.md](ai-workflow-assignments/validate-dynamic-workflow-script.md) (validate-dynamic-workflow-script): Validate a dynamic workflow script against the canonical DSL: check syntax, logical structure, existence of referenced assignment short IDs, and path correctness; provide pass/fail feedback with fixes if needed.
   

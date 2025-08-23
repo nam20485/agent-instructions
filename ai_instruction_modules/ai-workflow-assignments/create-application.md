@@ -14,14 +14,27 @@ Given a git repo and a filled out application template, create a new application
 ### Acceptance Criteria
 
 1. Application template has been thoroughly analyzed and understood
-2. Project structure has been created according to established guidelines
-3. All required components and dependencies have been implemented
-4. Application follows the specified technology stack and design principles
-5. All mandatory application requirements have been implemented (testing, documentation, containerization, etc.)
-6. Application builds and runs successfully
-7. All acceptance criteria from the template have been satisfied
-8. Code quality standards and best practices have been followed
-9. Application is ready for deployment and use
+2. Plan's project structure has been created according to established guidelines and plan
+3. Template from Appendix A has been used as a template for the plan.
+4. Plan contains detailed breakdown of all phases required to achieve complete implementation.
+5. All phases list important steps required to achieve completion of that phase.
+6. All required components and dependencies have been planned.
+7. Application plan follows the specified technology stack and design principles
+8. All mandatory application requirements have been addressed in plan. (testing, documentation, containerization, etc.)
+9. All acceptance criteria from the template have been addressed in the plan.
+10. All risks and mitigations identified.
+11. Code quality standards and best practices have been followed.
+12. Application plan is ready for development and implementation.
+13. Application plan has been documented in an issue using the template in #Appendix A.
+14. Epic sub-issue have been created for each and every phase. (Use template in #Appendix B)
+15. Phase sub-issues have been assigned to milestones.
+16. All required components and dependencies have been implemented
+17. Application follows the specified technology stack and design principles
+18. All mandatory application requirements have been implemented (testing, documentation, containerization, etc.)
+19. Application builds and runs successfully
+20. All acceptance criteria from the template have been satisfied
+21. Code quality standards and best practices have been followed
+22. Application is ready for deployment and use
 
 ### Assignment
 
