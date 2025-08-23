@@ -14,7 +14,7 @@ This file describes your iterative guardrails-based workflow where you create yo
 Guardrails are anything that can validate the code. They can be unit tests, integration tests, or any other type of test. They can also be linters, validators, or any other type of tool that scans the code. Building the code to validate there are no compiler or syntax or linking errors is also a type of guard. They can also be CI pipelines, or any other type of pipeline that validates the code.
 
 ### Guardrail Types
-- Auotmated Tests
+- Automated Tests
   - Unit Tests
   - Integration Tests
   - End-to-End Tests
