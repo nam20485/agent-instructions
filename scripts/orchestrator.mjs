@@ -30,6 +30,10 @@ function parseArgs(argv) {
         args.params = next; i++; break;
       case '--log':
         args.log = next; i++; break;
+      case '--exec-paths':
+        args.execPaths = next; i++; break;
+      case '--workflows-path':
+        args.workflowsPath = next; i++; break;
       default:
         // ignore unknown flags for now
         break;
@@ -407,7 +411,10 @@ async function main() {
   let filePath = args.file;
   if (!filePath) {
     if (!args.workflow) fail('Specify --workflow <name> or --file <path>');
-    filePath = path.join(repoRoot, 'ai_instruction_modules', 'ai-workflow-assignments', 'dynamic-workflows', `${args.workflow}.md`);
+    const wfBase = args.workflowsPath
+      ? (path.isAbsolute(args.workflowsPath) ? args.workflowsPath : path.join(repoRoot, args.workflowsPath))
+      : path.join(repoRoot, 'ai_instruction_modules', 'ai-workflow-assignments', 'dynamic-workflows');
+    filePath = path.join(wfBase, `${args.workflow}.md`);
   }
   if (!fs.existsSync(filePath)) fail(`Workflow file not found: ${filePath}`);
   const content = readFileSafe(filePath);
@@ -453,11 +460,38 @@ async function main() {
   const env = {}; // runtime variables if executors set any
   const refs = makeRefs(outputs);
   const runId = `run-${Date.now()}`;
+  // Resolve executor search paths
+  const searchPaths = [];
+  if (args.execPaths) {
+    for (const token of args.execPaths.split(/[;,]/)) {
+      const p = token.trim();
+      if (!p) continue;
+      searchPaths.push(path.isAbsolute(p) ? p : path.join(repoRoot, p));
+    }
+  }
+  // default fallback to local scripts/executors
+  searchPaths.push(path.join(repoRoot, 'scripts', 'executors'));
+
+  function findAssignmentExecutor(actionId) {
+    for (const base of searchPaths) {
+      const modPath = path.join(base, 'assignments', `${actionId}.mjs`);
+      if (fs.existsSync(modPath)) return modPath;
+    }
+    return path.join(searchPaths[0], 'assignments', `${actionId}.mjs`);
+  }
+  function findFunctionExecutor(funcName) {
+    for (const base of searchPaths) {
+      const modPath = path.join(base, 'functions', `${funcName}.mjs`);
+      if (fs.existsSync(modPath)) return modPath;
+    }
+    return path.join(searchPaths[0], 'functions', `${funcName}.mjs`);
+  }
+
   for (const step of plan.steps) {
     for (const a of step.actions) {
       if (a.type === 'assignment') {
         const actionId = a.assignmentId;
-        const modPath = path.join(repoRoot, 'scripts', 'executors', 'assignments', `${actionId}.mjs`);
+        const modPath = findAssignmentExecutor(actionId);
   const execFn = await loadExecutor(modPath);
         const meta = { stepId: step.id, actionId, source: a.source, runId };
         const start = nowMs();
@@ -488,7 +522,7 @@ async function main() {
         }
       } else if (a.type === 'function') {
         const funcName = a.functionName;
-        const modPath = path.join(repoRoot, 'scripts', 'executors', 'functions', `${funcName}.mjs`);
+        const modPath = findFunctionExecutor(funcName);
   const execFn = await loadExecutor(modPath);
         const meta = { stepId: step.id, functionName: funcName, source: a.source, runId };
         const start = nowMs();
