@@ -56,7 +56,7 @@ It is important to the final quality of our product for everyone to perform thei
    - Define the project structure, including directories, files, and naming conventions
    - Identify necessary frameworks, tools, and packages to be used
    - Plan for testing, documentation, containerization, and other mandatory requirements
-   - Create Issue documenting plan from the #Appendix A plan template and iterate to gain approval from the orchestrator or stakeholders   
+   - Create Issue documenting plan from the #Appendix A plan template and iterate to gain approval from the orchestrator or stakeholders
    - Import the issue labels using the `import-labels.ps1` and `.labels.json` files.
    - Milestones have been created and issues linked to the appropriate milestone.
 3. **Create Epic Sub-Issues for Each Phase**
