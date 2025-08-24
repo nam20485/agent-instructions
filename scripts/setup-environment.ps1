@@ -9,6 +9,26 @@ Windows environment setup (canonical)
 Note: Some installers may require admin rights (winget/choco).
 !#>
 
+# -----------------------------------------------------------------------------
+# Environment variables specify versions to use
+# -----------------------------------------------------------------------------
+$NODE_VERSION_PIN = '22.18.0'
+$NPM_VERSION_PIN = '10.1.0'
+$PNPM_VERSION_PIN = '8.11.0'
+$YARN_VERSION_PIN = '3.6.0'
+$PLAYWRIGHT_CLI = '1.44.1'
+$PLAYWRIGHT_BROWSERS = 'chromium, firefox, webkit'
+$PWSH_VERSION = '7.4.6'
+$GCLOUD_SDK = '463.0.0'
+$GH_CLI = '2.37.0'
+$TERRAFORM = '1.6.15'
+$ANSIBLE = '8.9.0'
+$FIREBASE_TOOLS = '11.11.0'
+$CDKTF = '0.16.0'
+$DOTNET_VERSION_PIN = '10.0.100-preview.7'
+$DOTNET_CHANNEL = '10.0'
+$DOTNET_QUALITY = 'preview'
+
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
@@ -17,29 +37,12 @@ Write-Host '=== Starting Windows environment setup (Linux parity) ==='
 # -----------------------------------------------------------------------------
 # Environment variables
 # -----------------------------------------------------------------------------
-$env:DOTNET_CLI_TELEMETRY_OPTOUT = '1'
-$env:DOTNET_SKIP_FIRST_TIME_EXPERIENCE = '1'
-$env:DOTNET_NOLOGO = '1'
-$env:ASPNETCORE_ENVIRONMENT = 'Development'
+[Environment]::SetEnvironmentVariable('DOTNET_CLI_TELEMETRY_OPTOUT','1','Process')
+[Environment]::SetEnvironmentVariable('DOTNET_SKIP_FIRST_TIME_EXPERIENCE','1','Process')
+[Environment]::SetEnvironmentVariable('DOTNET_NOLOGO','1','Process')
+[Environment]::SetEnvironmentVariable('ASPNETCORE_ENVIRONMENT','Development','Process')
 
-# Load repo-level tool pins if present (.env.tools)
-$envFile = Join-Path (Get-Location) '.env.tools'
-if (Test-Path $envFile) {
-        Write-Host "[env] Loading .env.tools"
-        Get-Content $envFile |
-            ForEach-Object {
-                if ($_ -match '^[\s#]*$') { return }
-                if ($_ -match '^\s*#') { return }
-                if ($_ -match '^\s*([^=]+)=(.*)$') {
-                        $name = $matches[1].Trim()
-                        $value = $matches[2].Trim()
-                        # Strip surrounding quotes if present
-                        if ($value -match '^"(.*)"$') { $value = $Matches[1] }
-                        if ($value -match "^'(.*)'$") { $value = $Matches[1] }
-                        $Env:$name = $value
-                }
-            }
-}
+
 
 function Test-Command {
     param([Parameter(Mandatory)][string]$Name)
@@ -77,9 +80,15 @@ function Install-NvmWindows {
     if ($chocoAvailable) {
         try { choco install nvm -y --no-progress } catch { Write-Warning "choco install of nvm failed: $($_.Exception.Message)" }
         # Also ensure the Chocolatey bin folder is on PATH for the current session
-        if (($env:ChocolateyInstall) -and (Test-Path $env:ChocolateyInstall)) {
-            $chocoBin = Join-Path $env:ChocolateyInstall 'bin'
-            if ((Test-Path $chocoBin) -and ($env:PATH -notmatch [regex]::Escape($chocoBin))) { $env:PATH = "$chocoBin;$env:PATH" }
+        $chocoInstall = ([Environment]::GetEnvironmentVariable('ChocolateyInstall','Process'))
+        if ([string]::IsNullOrWhiteSpace($chocoInstall)) { $chocoInstall = [Environment]::GetEnvironmentVariable('ChocolateyInstall','User') }
+        if ([string]::IsNullOrWhiteSpace($chocoInstall)) { $chocoInstall = [Environment]::GetEnvironmentVariable('ChocolateyInstall','Machine') }
+        if ($chocoInstall -and (Test-Path $chocoInstall)) {
+            $chocoBin = Join-Path $chocoInstall 'bin'
+            if (Test-Path $chocoBin) {
+                $path = [Environment]::GetEnvironmentVariable('PATH','Process')
+                if ($path -notmatch [regex]::Escape($chocoBin)) { [Environment]::SetEnvironmentVariable('PATH', "$chocoBin;$path", 'Process') }
+            }
         }
         Ensure-NvmInCurrentSession
         if (Test-Command nvm) { return }
@@ -99,7 +108,7 @@ function Install-Node-With-Nvm {
     }
 
     # Determine desired Node version
-    $nodeVersion = $env:NODE_VERSION_PIN
+    $nodeVersion = $NODE_VERSION_PIN
     if ([string]::IsNullOrWhiteSpace($nodeVersion)) {
         $nvmrcPath = Join-Path -Path (Get-Location) -ChildPath '.nvmrc'
         if (Test-Path $nvmrcPath) {
@@ -115,20 +124,22 @@ function Install-Node-With-Nvm {
     nvm use $nodeVersion | Out-Null
 
     # Ensure current session PATH sees node (nvm updates symlink at %ProgramFiles%\nodejs)
-    $nodeDir = "$env:ProgramFiles\nodejs"
-    if ($env:PATH -notmatch [regex]::Escape($nodeDir)) { $env:PATH = "$nodeDir;$env:PATH" }
+    $pf = [Environment]::GetFolderPath('ProgramFiles')
+    $nodeDir = (Join-Path $pf 'nodejs')
+    $pathNow = [Environment]::GetEnvironmentVariable('PATH','Process')
+    if ($pathNow -notmatch [regex]::Escape($nodeDir)) { [Environment]::SetEnvironmentVariable('PATH', "$nodeDir;$pathNow", 'Process') }
 
     # npm pin (optional). Otherwise keep bundled npm for determinism
-    if (-not [string]::IsNullOrWhiteSpace($env:NPM_VERSION_PIN)) {
-        Write-Host "[npm] Pinning npm@$($env:NPM_VERSION_PIN)"
-        npm install -g --no-audit --no-fund "npm@$($env:NPM_VERSION_PIN)" | Out-Null
+    if (-not [string]::IsNullOrWhiteSpace($NPM_VERSION_PIN)) {
+        Write-Host "[npm] Pinning npm@$($NPM_VERSION_PIN)"
+        npm install -g --no-audit --no-fund "npm@$($NPM_VERSION_PIN)" | Out-Null
     }
 
     Write-Host '[corepack] Enabling'
     try { corepack enable | Out-Null } catch {}
 
     # Resolve pnpm version from PNPM_VERSION_PIN or package.json's packageManager/pnpm fields
-    $pnpmVersion = $env:PNPM_VERSION_PIN
+    $pnpmVersion = $PNPM_VERSION_PIN
     if ([string]::IsNullOrWhiteSpace($pnpmVersion) -and (Test-Path 'package.json')) {
         try {
             $pkg = Get-Content package.json -Raw | ConvertFrom-Json
@@ -143,7 +154,7 @@ function Install-Node-With-Nvm {
     }
 
     # Resolve yarn version from YARN_VERSION_PIN or package.json's packageManager
-    $yarnVersion = $env:YARN_VERSION_PIN
+    $yarnVersion = $YARN_VERSION_PIN
     if ([string]::IsNullOrWhiteSpace($yarnVersion) -and (Test-Path 'package.json')) {
         try {
             $pkg2 = Get-Content package.json -Raw | ConvertFrom-Json
@@ -168,39 +179,61 @@ function Ensure-NvmInCurrentSession {
     $candidates = @()
 
     # Read machine-scoped environment variables set by installers
-    $machineNvmHome = [Environment]::GetEnvironmentVariable('NVM_HOME','Machine')
-    $machineNvmSymlink = [Environment]::GetEnvironmentVariable('NVM_SYMLINK','Machine')
-    if (-not [string]::IsNullOrWhiteSpace($machineNvmHome)) { $env:NVM_HOME = $env:NVM_HOME ?? $machineNvmHome }
-    if (-not [string]::IsNullOrWhiteSpace($machineNvmSymlink)) { $env:NVM_SYMLINK = $env:NVM_SYMLINK ?? $machineNvmSymlink }
+    $machineNvmHome   = [Environment]::GetEnvironmentVariable('NVM_HOME','Machine')
+    $machineNvmSymlink= [Environment]::GetEnvironmentVariable('NVM_SYMLINK','Machine')
+    $procNvmHome      = [Environment]::GetEnvironmentVariable('NVM_HOME','Process')
+    $procNvmSymlink   = [Environment]::GetEnvironmentVariable('NVM_SYMLINK','Process')
 
-    if (-not [string]::IsNullOrWhiteSpace($env:NVM_HOME)) { $candidates += $env:NVM_HOME }
-    if (-not [string]::IsNullOrWhiteSpace($env:ChocolateyInstall)) {
+    if ([string]::IsNullOrWhiteSpace($procNvmHome) -and -not [string]::IsNullOrWhiteSpace($machineNvmHome)) {
+        [Environment]::SetEnvironmentVariable('NVM_HOME', $machineNvmHome, 'Process')
+        $procNvmHome = $machineNvmHome
+    }
+    if ([string]::IsNullOrWhiteSpace($procNvmSymlink) -and -not [string]::IsNullOrWhiteSpace($machineNvmSymlink)) {
+        [Environment]::SetEnvironmentVariable('NVM_SYMLINK', $machineNvmSymlink, 'Process')
+        $procNvmSymlink = $machineNvmSymlink
+    }
+
+    if (-not [string]::IsNullOrWhiteSpace($procNvmHome)) { $candidates += $procNvmHome }
+
+    $chocoInstall = ([Environment]::GetEnvironmentVariable('ChocolateyInstall','Process'))
+    if ([string]::IsNullOrWhiteSpace($chocoInstall)) { $chocoInstall = [Environment]::GetEnvironmentVariable('ChocolateyInstall','User') }
+    if ([string]::IsNullOrWhiteSpace($chocoInstall)) { $chocoInstall = [Environment]::GetEnvironmentVariable('ChocolateyInstall','Machine') }
+    if (-not [string]::IsNullOrWhiteSpace($chocoInstall)) {
         $candidates += @(
-            (Join-Path $env:ChocolateyInstall 'bin'),
-            (Join-Path $env:ChocolateyInstall 'lib\nvm'),
-            (Join-Path $env:ChocolateyInstall 'lib\nvm\tools')
+            (Join-Path $chocoInstall 'bin'),
+            (Join-Path $chocoInstall 'lib\nvm'),
+            (Join-Path $chocoInstall 'lib\nvm\tools')
         )
     }
+    $pf  = [Environment]::GetFolderPath('ProgramFiles')
+    $pfx = [Environment]::GetFolderPath('ProgramFilesX86')
+    $la  = [Environment]::GetFolderPath('LocalApplicationData')
+    $ra  = [Environment]::GetFolderPath('ApplicationData')
     $candidates += @(
-        (Join-Path $env:ProgramFiles 'nvm'),
-        (Join-Path ${env:ProgramFiles(x86)} 'nvm'),
+        (Join-Path $pf 'nvm'),
+        (Join-Path $pfx 'nvm'),
         'C:\tools\nvm',
         'C:\nvm',
         'C:\ProgramData\chocolatey\bin',
         'C:\ProgramData\chocolatey\lib\nvm\tools',
         'C:\ProgramData\chocolatey\lib\nvm',
-        (Join-Path $env:LOCALAPPDATA 'Programs\nvm'),
-        (Join-Path $env:APPDATA 'nvm')
+        (Join-Path $la 'Programs\nvm'),
+        (Join-Path $ra 'nvm')
     )
 
     $found = $false
     foreach ($dir in $candidates | Where-Object { ($_) -and (Test-Path $_) }) {
         $exe = Join-Path $dir 'nvm.exe'
         if (Test-Path $exe) {
-            if ($env:PATH -notmatch [regex]::Escape($dir)) { $env:PATH = "$dir;$env:PATH" }
-            if ([string]::IsNullOrWhiteSpace($env:NVM_HOME)) { $env:NVM_HOME = $dir }
-            if ([string]::IsNullOrWhiteSpace($env:NVM_SYMLINK)) { $env:NVM_SYMLINK = Join-Path $env:ProgramFiles 'nodejs' }
-            if (-not (Test-Path $env:NVM_SYMLINK)) { New-Item -ItemType Directory -Path $env:NVM_SYMLINK -Force | Out-Null }
+            $pathCur = [Environment]::GetEnvironmentVariable('PATH','Process')
+            if ($pathCur -notmatch [regex]::Escape($dir)) { [Environment]::SetEnvironmentVariable('PATH', "$dir;$pathCur", 'Process') }
+            $procHome = [Environment]::GetEnvironmentVariable('NVM_HOME','Process')
+            if ([string]::IsNullOrWhiteSpace($procHome)) { [Environment]::SetEnvironmentVariable('NVM_HOME', $dir, 'Process') }
+            $pfCur = [Environment]::GetFolderPath('ProgramFiles')
+            $procLink = [Environment]::GetEnvironmentVariable('NVM_SYMLINK','Process')
+            if ([string]::IsNullOrWhiteSpace($procLink)) { [Environment]::SetEnvironmentVariable('NVM_SYMLINK', (Join-Path $pfCur 'nodejs'), 'Process') }
+            $nvmSymlink = [Environment]::GetEnvironmentVariable('NVM_SYMLINK','Process')
+            if (-not (Test-Path $nvmSymlink)) { New-Item -ItemType Directory -Path $nvmSymlink -Force | Out-Null }
             $found = $true
             break
         }
@@ -208,15 +241,23 @@ function Ensure-NvmInCurrentSession {
 
     if (-not $found) {
         # Fallback: scan common Chocolatey root for nvm.exe as last resort
-        $roots = @('C:\ProgramData\chocolatey', $env:ChocolateyInstall) | Where-Object { ($_) -and (Test-Path $_) }
+        $chocoInstallRoot = ([Environment]::GetEnvironmentVariable('ChocolateyInstall','Process'))
+        if ([string]::IsNullOrWhiteSpace($chocoInstallRoot)) { $chocoInstallRoot = [Environment]::GetEnvironmentVariable('ChocolateyInstall','User') }
+        if ([string]::IsNullOrWhiteSpace($chocoInstallRoot)) { $chocoInstallRoot = [Environment]::GetEnvironmentVariable('ChocolateyInstall','Machine') }
+        $roots = @('C:\ProgramData\chocolatey', $chocoInstallRoot) | Where-Object { ($_) -and (Test-Path $_) }
         foreach ($root in $roots) {
             $hit = Get-ChildItem -Path $root -Filter 'nvm.exe' -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1
             if ($hit) {
                 $dir = Split-Path -Parent $hit.FullName
-                if ($env:PATH -notmatch [regex]::Escape($dir)) { $env:PATH = "$dir;$env:PATH" }
-                if ([string]::IsNullOrWhiteSpace($env:NVM_HOME)) { $env:NVM_HOME = $dir }
-                if ([string]::IsNullOrWhiteSpace($env:NVM_SYMLINK)) { $env:NVM_SYMLINK = Join-Path $env:ProgramFiles 'nodejs' }
-                if (-not (Test-Path $env:NVM_SYMLINK)) { New-Item -ItemType Directory -Path $env:NVM_SYMLINK -Force | Out-Null }
+                $pathCur3 = [Environment]::GetEnvironmentVariable('PATH','Process')
+                if ($pathCur3 -notmatch [regex]::Escape($dir)) { [Environment]::SetEnvironmentVariable('PATH', "$dir;$pathCur3", 'Process') }
+                $procHome3 = [Environment]::GetEnvironmentVariable('NVM_HOME','Process')
+                if ([string]::IsNullOrWhiteSpace($procHome3)) { [Environment]::SetEnvironmentVariable('NVM_HOME', $dir, 'Process') }
+                $pf3 = [Environment]::GetFolderPath('ProgramFiles')
+                $procLink3 = [Environment]::GetEnvironmentVariable('NVM_SYMLINK','Process')
+                if ([string]::IsNullOrWhiteSpace($procLink3)) { [Environment]::SetEnvironmentVariable('NVM_SYMLINK', (Join-Path $pf3 'nodejs'), 'Process') }
+                $nvmSymlink3 = [Environment]::GetEnvironmentVariable('NVM_SYMLINK','Process')
+                if (-not (Test-Path $nvmSymlink3)) { New-Item -ItemType Directory -Path $nvmSymlink3 -Force | Out-Null }
                 $found = $true
                 break
             }
@@ -224,9 +265,15 @@ function Ensure-NvmInCurrentSession {
     }
 
     # If Chocolatey bin exists, ensure it's present on PATH (shims live here)
-    if (($env:ChocolateyInstall) -and (Test-Path $env:ChocolateyInstall)) {
-        $chocoBin = Join-Path $env:ChocolateyInstall 'bin'
-        if ((Test-Path $chocoBin) -and ($env:PATH -notmatch [regex]::Escape($chocoBin))) { $env:PATH = "$chocoBin;$env:PATH" }
+    $chocoInstall2 = ([Environment]::GetEnvironmentVariable('ChocolateyInstall','Process'))
+    if ([string]::IsNullOrWhiteSpace($chocoInstall2)) { $chocoInstall2 = [Environment]::GetEnvironmentVariable('ChocolateyInstall','User') }
+    if ([string]::IsNullOrWhiteSpace($chocoInstall2)) { $chocoInstall2 = [Environment]::GetEnvironmentVariable('ChocolateyInstall','Machine') }
+    if ($chocoInstall2 -and (Test-Path $chocoInstall2)) {
+        $chocoBin2 = Join-Path $chocoInstall2 'bin'
+        if (Test-Path $chocoBin2) {
+            $pathCur2 = [Environment]::GetEnvironmentVariable('PATH','Process')
+            if ($pathCur2 -notmatch [regex]::Escape($chocoBin2)) { [Environment]::SetEnvironmentVariable('PATH', "$chocoBin2;$pathCur2", 'Process') }
+        }
     }
 }
 
@@ -285,10 +332,12 @@ function Install-DotNet9 {
     try { $dotnetVersion = (dotnet --version) } catch {}
     if (-not ($dotnetVersion -like '9.*')) {
         Write-Host '[dotnet] Installing .NET 9 SDK (user-local)'
-        $installer = Join-Path $env:TEMP 'dotnet-install.ps1'
+        $installer = Join-Path ([IO.Path]::GetTempPath()) 'dotnet-install.ps1'
         Invoke-WebRequest -Uri 'https://dot.net/v1/dotnet-install.ps1' -OutFile $installer
-        & powershell -ExecutionPolicy Bypass -File $installer -Channel 9.0 -InstallDir "$env:USERPROFILE\.dotnet" -NoPath | Out-Null
-        $env:PATH = "$env:USERPROFILE\.dotnet;$env:PATH"
+        $userProfile = [Environment]::GetFolderPath('UserProfile')
+        & powershell -ExecutionPolicy Bypass -File $installer -Channel 9.0 -InstallDir (Join-Path $userProfile '.dotnet') -NoPath | Out-Null
+        $pathCur = [Environment]::GetEnvironmentVariable('PATH','Process')
+        [Environment]::SetEnvironmentVariable('PATH', ((Join-Path $userProfile '.dotnet') + ';' + $pathCur), 'Process')
     }
     if (Test-Command dotnet) {
         try { dotnet workload update | Out-Null } catch {}
@@ -303,7 +352,7 @@ function Install-DotNet9 {
 function Install-GlobalNpmCLIs {
     $pkgs = @('firebase-tools','@angular/cli','create-react-app','typescript','eslint','prettier','cdktf-cli')
     foreach ($p in $pkgs) {
-        try { npm install -g --no-audit --no-fund $p | Out-Null } catch { Write-Warning "Failed to install $p: $($_.Exception.Message)" }
+    try { npm install -g --no-audit --no-fund $p | Out-Null } catch { Write-Warning "Failed to install ${p}: $($_.Exception.Message)" }
     }
 }
 
