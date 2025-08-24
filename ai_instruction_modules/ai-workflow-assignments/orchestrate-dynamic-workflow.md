@@ -50,7 +50,13 @@ Highlights:
 
 ### Detailed Steps
 
+#### Scripts section
+
 The detailed steps are specified in the "Script" section of the dynamic workflow file. Essentially, you will iterate through each assignment specified in the file, orchestrating and overseeing the work until completion, according to the instructions provided in the "Script" section of the dynamic workflow file.
+
+#### Scripts / Inputs Section
+
+This section lists the input variables provided by the calling process or invocation. It will be passed in by the calling invoker and then should be provided as-is to the invoked workflow assignment.
 
 ### How to Run (Quick Start)
 
@@ -62,7 +68,7 @@ The detailed steps are specified in the "Script" section of the dynamic workflow
 Related:
 - Validate first: [validate-dynamic-workflow-script](./validate-dynamic-workflow-script.md)
 
-### Dry Run (Plan → Emit)
+<!-- ### Dry Run (Plan → Emit)
 
 To preview what would execute without performing any actions, use dry-run:
 
@@ -95,7 +101,7 @@ Fixtures format example:
 
 Notes:
 - With `--strict`, missing fixtures for required function outputs will error instead of warn
-- Output recording convention is applied for looped assignments as documented in the Legend
+- Output recording convention is applied for looped assignments as documented in the Legend -->
 
 ### Completion
 

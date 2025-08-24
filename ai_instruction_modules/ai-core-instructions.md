@@ -34,6 +34,7 @@
 - After apply: build/test validate; report PASS/FAIL; iterate on failure
 - Surface: assumptions, risks, alternatives (concise)
 - After completing a task in the chat window, only offer options that are directly related to the task at hand.
+- Use your sequential-thinking and memory tools whenever possible. 
 
 ## Constraints (Do Not)
 - Large refactors or new major deps without approval
@@ -105,7 +106,7 @@ Contains high-level information about development processes and guidelines
 - [ai-workflow-config.md](./ai-workflow-config.md)
 - [ai-local-environment.md](./ai-local-environment.md)
 
-### Optional Modules
+### Optional Modules (**OPTIONAL**: read based on current activity)
 
 #### After Creating Projects/Structures
 - [ai-workflow-assignments/create-project-structure.md](./ai-workflow-assignments/create-project-structure.md)

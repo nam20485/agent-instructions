@@ -6,6 +6,10 @@
 
 This assignment involves validating the syntax and logical correctness of a dynamic workflow script. The script is written in a custom domain-specific language (DSL) designed for specifying dynamic workflows. Your task is to ensure that the script adheres to the language's syntax rules and logical structure, and to provide feedback on the validity of the script.
 
+### Inputs
+
+$workflow_name: short id of the dynamic workflow assignment to validate
+
 ### Goal
 
 Your goal is to validate the provided dynamic workflow script to ensure it meets the syntax and logical requirements of the custom DSL, and provide reassurance of validity or feedback on any issues found.
