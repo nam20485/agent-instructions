@@ -4,6 +4,27 @@
 
 set -euo pipefail
 
+# -----------------------------------------------------------------------------
+# Environment variables specify versions to use
+# -----------------------------------------------------------------------------
+NODE_VERSION_PIN=22.18.0
+NPM_VERSION_PIN=10.1.0
+PNPM_VERSION_PIN=8.11.0
+YARN_VERSION_PIN=3.6.0
+PLAYWRIGHT_CLI=1.44.1
+PLAYWRIGHT_BROWSERS=chromium,firefox,webkit
+PWSH_VERSION=7.4.6
+GCLOUD_SDK=463.0.0
+GH_CLI=2.37.0
+TERRAFORM=1.6.15
+ANSIBLE=8.9.0
+FIREBASE_TOOLS=11.11.0
+CDKTF=0.16.0
+DOTNET_VERSION_PIN=10.0.100-preview.7
+DOTNET_CHANNEL=10.0
+DOTNET_QUALITY=preview
+
+
 echo "=== Starting environment setup (Dockerfile -> shell script) ==="
 
 # -----------------------------------------------------------------------------
@@ -20,29 +41,6 @@ if command -v sudo >/dev/null 2>&1; then
 	SUDO="sudo"
 else
 	SUDO=""
-fi
-
-# Load repo-level tool pins if present (.env.tools)
-if [ -f .env.tools ]; then
-	echo "[env] Loading .env.tools"
-	while IFS= read -r line || [ -n "$line" ]; do
-		# trim leading/trailing whitespace
-		line="$(echo "$line" | sed -E 's/^[[:space:]]+//; s/[[:space:]]+$//')"
-		# skip empty lines and comments
-		case "$line" in
-			""|#*) continue ;;
-		esac
-		# split on first '=' only
-		key="$(printf '%s' "$line" | sed -E 's/=.*$//')"
-		val="$(printf '%s' "$line" | sed -E 's/^[^=]*=//')"
-		# trim surrounding whitespace from key and val
-		key="$(printf '%s' "$key" | sed -E 's/^[[:space:]]+//; s/[[:space:]]+$//')"
-		val="$(printf '%s' "$val" | sed -E 's/^[[:space:]]+//; s/[[:space:]]+$//')"
-		# strip surrounding single or double quotes from value
-		val="$(printf '%s' "$val" | sed -E 's/^"(.*)"$/\1/; s/^'"'"'(.*)'
-'"'"'$/\1/')"
-		export "$key"="$val"
-	done < .env.tools
 fi
 
 # -----------------------------------------------------------------------------
