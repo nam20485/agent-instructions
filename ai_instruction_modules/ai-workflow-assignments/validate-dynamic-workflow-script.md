@@ -27,7 +27,7 @@ Your assignment is to validate the provided dynamic workflow script. This involv
 
 ##### Syntax reference (canonical)
 
-- Canonical syntax: [dynamic-workflow-synatx.md](./dynamic-workflows/dynamic-workflow-synatx.md)
+- Canonical syntax: [dynamic-workflow-syntax.md](./dynamic-workflows/dynamic-workflow-syntax.md)
 - Orchestration instructions: [orchestrate-dynamic-workflow.md](./orchestrate-dynamic-workflow.md)
 
 ### Detailed Steps

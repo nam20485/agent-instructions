@@ -19,7 +19,8 @@ This file defines the canonical syntax for dynamic workflow files. All tools and
 - `#<step>`: reference output of a step
 - `#<step>.<substep>`: reference output of a substep/assignment in that step
 - `get-function-name(<parameters>)`: call a function with parameters
-
+- [ listItem1, listItem2, ... ]: define a list
+  
 Quoting conventions:
 - Use backticks for assignment short IDs and step identifiers (e.g., `perform-task`)
 - Use single quotes for free-form strings
@@ -36,5 +37,5 @@ Define an array and iterate:
 `$assignments` = [`create-app-plan`, `create-project-structure`]
 
 For each `$assignment_name` in `$assignments`, you will:
-- assign the agent the `$assignment_name` assignment
-- record output as `#plan-and-setup.$assignment_name`
+  - assign the agent the `$assignment_name` assignment
+  - record output as `#plan-and-setup.$assignment_name`
