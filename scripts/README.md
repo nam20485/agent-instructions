@@ -78,3 +78,39 @@ Windows entrypoint
 ```powershell
 pwsh -NoProfile -ExecutionPolicy Bypass -File scripts/setup-environment.ps1
 ```
+
+Watching GitHub Actions (avoid Simple Browser)
+----------------------------------------------
+
+Some sites (including GitHub) block embedding in webviews/iframes using security headers (X-Frame-Options/CSP). In VS Code’s Simple Browser this often appears as a blank white page. Instead, use one of these approaches to monitor runs:
+
+1) External browser (most reliable)
+	 - Open: https://github.com/nam20485/agent-instructions/actions
+
+2) GitHub Actions extension (inside VS Code)
+	 - Install the “GitHub Actions” extension by GitHub.
+	 - View workflows, runs, and live logs in the sidebar without using Simple Browser.
+
+3) GitHub CLI (terminal; live tail when in progress)
+	 - List recent runs:
+		 ```powershell
+		 gh run list --repo nam20485/agent-instructions --limit 10
+		 ```
+	 - Watch the latest in-progress run (exits if none running):
+		 ```powershell
+		 gh run watch --repo nam20485/agent-instructions --exit-status
+		 ```
+	 - Watch a specific run and stream a particular job’s logs:
+		 ```powershell
+		 gh run view <run-id> --repo nam20485/agent-instructions
+		 gh run watch <run-id> --repo nam20485/agent-instructions --job "<job-name-or-id>" --exit-status
+		 ```
+	 - Open a run in your default browser:
+		 ```powershell
+		 gh run view <run-id> --repo nam20485/agent-instructions --web
+		 ```
+
+Notes
+- Simple Browser showing a blank page is expected for GitHub due to anti-embedding headers.
+- `gh run watch` tails only when a run is currently in progress; otherwise it exits with: “found no in progress runs to watch.”
+- If you prefer, disable Simple Browser in VS Code: Extensions → search “@builtin simple browser” → gear → “Disable (Workspace)”.
