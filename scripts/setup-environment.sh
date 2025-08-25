@@ -44,6 +44,18 @@ else
 fi
 
 # -----------------------------------------------------------------------------
+# Minimal mode control
+# - Default: OFF (unset/empty/"0"/"false"/"no"/"n" -> normal/full setup)
+# - Enable only when explicitly truthy: 1/true/yes/y (case-insensitive)
+# -----------------------------------------------------------------------------
+is_true() {
+	case "${1:-}" in
+		1|true|TRUE|True|yes|YES|y|Y) return 0 ;;
+		*) return 1 ;;
+	esac
+}
+
+# -----------------------------------------------------------------------------
 # Node.js: NVM everywhere with exact version pinning (required)
 # - Reads exact version from .nvmrc or NODE_VERSION_PIN (e.g., 22.18.0)
 # - Exits with error if no exact version provided to ensure determinism
@@ -135,7 +147,7 @@ install_node_via_nvm
 echo "[4/14] NVM installed and active"
 
 echo "[5/14] Enabling Corepack (pnpm & yarn) deterministically"
-if [ -n "${SETUP_MINIMAL:-}" ]; then
+if is_true "${SETUP_MINIMAL:-}"; then
 	echo "SETUP_MINIMAL=1: Skipping Corepack activation"
 elif command -v corepack >/dev/null 2>&1; then
     corepack enable || true
@@ -182,7 +194,7 @@ else
 fi
 
 echo "[6/14] Installing uv (Python package/dependency manager)"
-if [ -n "${SETUP_MINIMAL:-}" ]; then
+if is_true "${SETUP_MINIMAL:-}"; then
 	echo "SETUP_MINIMAL=1: Skipping uv install"
 elif ! command -v uv >/dev/null 2>&1; then
 	curl -LsSf https://astral.sh/uv/install.sh -o /tmp/uv-install.sh
@@ -191,7 +203,7 @@ elif ! command -v uv >/dev/null 2>&1; then
 fi
 
 echo "[7/14] Installing Playwright CLI and browsers (chromium, firefox, webkit)"
-if [ -n "${SETUP_MINIMAL:-}" ]; then
+if is_true "${SETUP_MINIMAL:-}"; then
 	echo "SETUP_MINIMAL=1: Skipping Playwright install"
 else
 	# Install Playwright CLI and browsers. --with-deps installs required system libraries on Ubuntu runners.
@@ -201,7 +213,7 @@ else
 fi
 
 echo "[8/14] Installing PowerShell"
-if [ -n "${SETUP_MINIMAL:-}" ]; then
+if is_true "${SETUP_MINIMAL:-}"; then
 	echo "SETUP_MINIMAL=1: Skipping PowerShell install"
 elif ! command -v pwsh >/dev/null 2>&1; then
 	wget -q "https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb" -O packages-microsoft-prod.deb
@@ -212,7 +224,7 @@ elif ! command -v pwsh >/dev/null 2>&1; then
 fi
 
 echo "[9/14] Installing Google Cloud CLI"
-if [ -n "${SETUP_MINIMAL:-}" ]; then
+if is_true "${SETUP_MINIMAL:-}"; then
 	echo "SETUP_MINIMAL=1: Skipping Google Cloud CLI install"
 elif ! command -v gcloud >/dev/null 2>&1; then
 	echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | $SUDO tee /etc/apt/sources.list.d/google-cloud-sdk.list >/dev/null
@@ -222,7 +234,7 @@ elif ! command -v gcloud >/dev/null 2>&1; then
 fi
 
 echo "[10/14] Installing GitHub CLI (gh)"
-if [ -n "${SETUP_MINIMAL:-}" ]; then
+if is_true "${SETUP_MINIMAL:-}"; then
 	echo "SETUP_MINIMAL=1: Skipping GitHub CLI install"
 elif ! command -v gh >/dev/null 2>&1; then
 	curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | $SUDO dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
@@ -233,7 +245,7 @@ elif ! command -v gh >/dev/null 2>&1; then
 fi
 
 echo "[11/14] Installing Terraform"
-if [ -n "${SETUP_MINIMAL:-}" ]; then
+if is_true "${SETUP_MINIMAL:-}"; then
 	echo "SETUP_MINIMAL=1: Skipping Terraform install"
 elif ! command -v terraform >/dev/null 2>&1; then
 	curl -fsSL https://apt.releases.hashicorp.com/gpg | $SUDO gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
@@ -243,7 +255,7 @@ elif ! command -v terraform >/dev/null 2>&1; then
 fi
 
 echo "[12/14] Installing Ansible"
-if [ -n "${SETUP_MINIMAL:-}" ]; then
+if is_true "${SETUP_MINIMAL:-}"; then
 	echo "SETUP_MINIMAL=1: Skipping Ansible install"
 elif ! command -v ansible >/dev/null 2>&1; then
 	$SUDO apt-get update -y
@@ -252,7 +264,7 @@ elif ! command -v ansible >/dev/null 2>&1; then
 fi
 
 echo "[13/14] Installing global npm CLI tools (firebase-tools, angular, CRA, typescript, eslint, prettier, cdktf)"
-if [ -n "${SETUP_MINIMAL:-}" ]; then
+if is_true "${SETUP_MINIMAL:-}"; then
 	echo "SETUP_MINIMAL=1: Skipping global npm CLI tool installs"
 else
 	# With NVM-managed Node, install globals without sudo to the user scope
