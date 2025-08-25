@@ -20,9 +20,9 @@ export TERRAFORM=1.6.15
 export ANSIBLE=8.9.0
 export FIREBASE_TOOLS=11.11.0
 export CDKTF=0.16.0
-export DOTNET_VERSION_PIN=10.0.100-preview.7
-export DOTNET_CHANNEL=10.0
-export DOTNET_QUALITY=preview
+export DOTNET_VERSION_PIN=9.0.102
+export DOTNET_CHANNEL=9.0
+export DOTNET_QUALITY=GA
 
 
 echo "=== Starting environment setup (Dockerfile -> shell script) ==="
