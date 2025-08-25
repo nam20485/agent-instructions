@@ -7,22 +7,22 @@ set -euo pipefail
 # -----------------------------------------------------------------------------
 # Environment variables specify versions to use
 # -----------------------------------------------------------------------------
-NODE_VERSION_PIN=22.18.0
-NPM_VERSION_PIN=10.1.0
-PNPM_VERSION_PIN=8.11.0
-YARN_VERSION_PIN=3.6.0
-PLAYWRIGHT_CLI=1.44.1
-PLAYWRIGHT_BROWSERS=chromium,firefox,webkit
-PWSH_VERSION=7.4.6
-GCLOUD_SDK=463.0.0
-GH_CLI=2.37.0
-TERRAFORM=1.6.15
-ANSIBLE=8.9.0
-FIREBASE_TOOLS=11.11.0
-CDKTF=0.16.0
-DOTNET_VERSION_PIN=10.0.100-preview.7
-DOTNET_CHANNEL=10.0
-DOTNET_QUALITY=preview
+export NODE_VERSION_PIN=22.18.0
+export NPM_VERSION_PIN=10.1.0
+export PNPM_VERSION_PIN=8.11.0
+export YARN_VERSION_PIN=3.6.0
+export PLAYWRIGHT_CLI=1.44.1
+export PLAYWRIGHT_BROWSERS=chromium,firefox,webkit
+export PWSH_VERSION=7.4.6
+export GCLOUD_SDK=463.0.0
+export GH_CLI=2.37.0
+export TERRAFORM=1.6.15
+export ANSIBLE=8.9.0
+export FIREBASE_TOOLS=11.11.0
+export CDKTF=0.16.0
+export DOTNET_VERSION_PIN=10.0.100-preview.7
+export DOTNET_CHANNEL=10.0
+export DOTNET_QUALITY=preview
 
 
 echo "=== Starting environment setup (Dockerfile -> shell script) ==="
@@ -65,6 +65,7 @@ install_node_via_nvm() {
 		# Some nvm versions attempt an automatic `nvm use` on sourcing when an .nvmrc is present,
 		# which may exit non-zero before the desired version is installed. Temporarily disable -e.
 		set +e
+		# shellcheck source=/dev/null
 		. "$NVM_DIR/nvm.sh"
 		source_rc=$?
 		set -e
