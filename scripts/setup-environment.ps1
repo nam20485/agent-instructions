@@ -9,6 +9,26 @@ Windows environment setup (canonical)
 Note: Some installers may require admin rights (winget/choco).
 !#>
 
+# -----------------------------------------------------------------------------
+# Environment variables specify versions to use
+# -----------------------------------------------------------------------------
+$NODE_VERSION_PIN = '22.18.0'
+$NPM_VERSION_PIN = '10.1.0'
+$PNPM_VERSION_PIN = '8.11.0'
+$YARN_VERSION_PIN = '3.6.0'
+$PLAYWRIGHT_CLI = '1.44.1'
+$PLAYWRIGHT_BROWSERS = 'chromium, firefox, webkit'
+$PWSH_VERSION = '7.4.6'
+$GCLOUD_SDK = '463.0.0'
+$GH_CLI = '2.37.0'
+$TERRAFORM = '1.6.15'
+$ANSIBLE = '8.9.0'
+$FIREBASE_TOOLS = '11.11.0'
+$CDKTF = '0.16.0'
+$DOTNET_VERSION_PIN = '9.0.102'
+$DOTNET_CHANNEL = '9.0'
+$DOTNET_QUALITY = ''
+
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
@@ -22,28 +42,20 @@ $env:DOTNET_SKIP_FIRST_TIME_EXPERIENCE = '1'
 $env:DOTNET_NOLOGO = '1'
 $env:ASPNETCORE_ENVIRONMENT = 'Development'
 
-# Load repo-level tool pins if present (.env.tools)
-$envFile = Join-Path (Get-Location) '.env.tools'
-if (Test-Path $envFile) {
-        Write-Host "[env] Loading .env.tools"
-        Get-Content $envFile |
-            ForEach-Object {
-                if ($_ -match '^[\s#]*$') { return }
-                if ($_ -match '^\s*#') { return }
-                if ($_ -match '^\s*([^=]+)=(.*)$') {
-                        $name = $matches[1].Trim()
-                        $value = $matches[2].Trim()
-                        # Strip surrounding quotes if present
-                        if ($value -match '^"(.*)"$') { $value = $Matches[1] }
-                        if ($value -match "^'(.*)'$") { $value = $Matches[1] }
-                        $Env:$name = $value
-                }
-            }
-}
+
 
 function Test-Command {
     param([Parameter(Mandatory)][string]$Name)
     try { Get-Command $Name -ErrorAction Stop | Out-Null; $true } catch { $false }
+}
+
+function Test-IsTrue {
+    param([string]$Value)
+    if ([string]::IsNullOrWhiteSpace($Value)) { return $false }
+    switch -Regex ($Value.ToLowerInvariant()) {
+        '^(1|true|yes|y)$' { return $true }
+        default { return $false }
+    }
 }
 
 function Get-PackageManager {
@@ -99,7 +111,7 @@ function Install-Node-With-Nvm {
     }
 
     # Determine desired Node version
-    $nodeVersion = $env:NODE_VERSION_PIN
+    $nodeVersion = $NODE_VERSION_PIN
     if ([string]::IsNullOrWhiteSpace($nodeVersion)) {
         $nvmrcPath = Join-Path -Path (Get-Location) -ChildPath '.nvmrc'
         if (Test-Path $nvmrcPath) {
@@ -119,41 +131,46 @@ function Install-Node-With-Nvm {
     if ($env:PATH -notmatch [regex]::Escape($nodeDir)) { $env:PATH = "$nodeDir;$env:PATH" }
 
     # npm pin (optional). Otherwise keep bundled npm for determinism
-    if (-not [string]::IsNullOrWhiteSpace($env:NPM_VERSION_PIN)) {
-        Write-Host "[npm] Pinning npm@$($env:NPM_VERSION_PIN)"
-        npm install -g --no-audit --no-fund "npm@$($env:NPM_VERSION_PIN)" | Out-Null
+    if (-not [string]::IsNullOrWhiteSpace($NPM_VERSION_PIN)) {
+        Write-Host "[npm] Pinning npm@$($NPM_VERSION_PIN)"
+        npm install -g --no-audit --no-fund "npm@$($NPM_VERSION_PIN)" | Out-Null
     }
 
-    Write-Host '[corepack] Enabling'
-    try { corepack enable | Out-Null } catch {}
+    if (Test-IsTrue $env:SETUP_MINIMAL) {
+        Write-Host 'SETUP_MINIMAL: Skipping Corepack activation'
+    }
+    else {
+        Write-Host '[corepack] Enabling'
+        try { corepack enable | Out-Null } catch {}
 
-    # Resolve pnpm version from PNPM_VERSION_PIN or package.json's packageManager/pnpm fields
-    $pnpmVersion = $env:PNPM_VERSION_PIN
-    if ([string]::IsNullOrWhiteSpace($pnpmVersion) -and (Test-Path 'package.json')) {
-        try {
-            $pkg = Get-Content package.json -Raw | ConvertFrom-Json
-            if ($pkg.packageManager -and ($pkg.packageManager -match '^pnpm@(.+)$')) { $pnpmVersion = $Matches[1] }
-            if ([string]::IsNullOrWhiteSpace($pnpmVersion) -and $pkg.pnpm) { $pnpmVersion = $pkg.pnpm }
-        } catch {}
-    }
-    if (-not [string]::IsNullOrWhiteSpace($pnpmVersion)) {
-        try { corepack prepare "pnpm@$pnpmVersion" --activate | Out-Null } catch {}
-    } else {
-        Write-Warning 'pnpm version not specified; skipping pnpm activation (set PNPM_VERSION_PIN or packageManager in package.json).'
-    }
+        # Resolve pnpm version from PNPM_VERSION_PIN or package.json's packageManager/pnpm fields
+        $pnpmVersion = $PNPM_VERSION_PIN
+        if ([string]::IsNullOrWhiteSpace($pnpmVersion) -and (Test-Path 'package.json')) {
+            try {
+                $pkg = Get-Content package.json -Raw | ConvertFrom-Json
+                if ($pkg.packageManager -and ($pkg.packageManager -match '^pnpm@(.+)$')) { $pnpmVersion = $Matches[1] }
+                if ([string]::IsNullOrWhiteSpace($pnpmVersion) -and $pkg.pnpm) { $pnpmVersion = $pkg.pnpm }
+            } catch {}
+        }
+        if (-not [string]::IsNullOrWhiteSpace($pnpmVersion)) {
+            try { corepack prepare "pnpm@$pnpmVersion" --activate | Out-Null } catch {}
+        } else {
+            Write-Warning 'pnpm version not specified; skipping pnpm activation (set PNPM_VERSION_PIN or packageManager in package.json).'
+        }
 
-    # Resolve yarn version from YARN_VERSION_PIN or package.json's packageManager
-    $yarnVersion = $env:YARN_VERSION_PIN
-    if ([string]::IsNullOrWhiteSpace($yarnVersion) -and (Test-Path 'package.json')) {
-        try {
-            $pkg2 = Get-Content package.json -Raw | ConvertFrom-Json
-            if ($pkg2.packageManager -and ($pkg2.packageManager -match '^yarn@(.+)$')) { $yarnVersion = $Matches[1] }
-        } catch {}
-    }
-    if (-not [string]::IsNullOrWhiteSpace($yarnVersion)) {
-        try { corepack prepare "yarn@$yarnVersion" --activate | Out-Null } catch {}
-    } else {
-        Write-Warning 'yarn version not specified; skipping yarn activation (set YARN_VERSION_PIN or packageManager in package.json).'
+        # Resolve yarn version from YARN_VERSION_PIN or package.json's packageManager
+        $yarnVersion = $YARN_VERSION_PIN
+        if ([string]::IsNullOrWhiteSpace($yarnVersion) -and (Test-Path 'package.json')) {
+            try {
+                $pkg2 = Get-Content package.json -Raw | ConvertFrom-Json
+                if ($pkg2.packageManager -and ($pkg2.packageManager -match '^yarn@(.+)$')) { $yarnVersion = $Matches[1] }
+            } catch {}
+        }
+        if (-not [string]::IsNullOrWhiteSpace($yarnVersion)) {
+            try { corepack prepare "yarn@$yarnVersion" --activate | Out-Null } catch {}
+        } else {
+            Write-Warning 'yarn version not specified; skipping yarn activation (set YARN_VERSION_PIN or packageManager in package.json).'
+        }
     }
 }
 
@@ -303,7 +320,7 @@ function Install-DotNet9 {
 function Install-GlobalNpmCLIs {
     $pkgs = @('firebase-tools','@angular/cli','create-react-app','typescript','eslint','prettier','cdktf-cli')
     foreach ($p in $pkgs) {
-        try { npm install -g --no-audit --no-fund $p | Out-Null } catch { Write-Warning "Failed to install $p: $($_.Exception.Message)" }
+    try { npm install -g --no-audit --no-fund $p | Out-Null } catch { Write-Warning "Failed to install ${p}: $($_.Exception.Message)" }
     }
 }
 
@@ -314,11 +331,11 @@ try {
         Install-Git
         Install-Python3
     Install-Node-With-Nvm
-        Install-GCloud
-        Install-GH
-        Install-Terraform
-        Install-Ansible
-    Install-GlobalNpmCLIs
+        if (Test-IsTrue $env:SETUP_MINIMAL) { Write-Host 'SETUP_MINIMAL: Skipping Google Cloud CLI install' } else { Install-GCloud }
+        if (Test-IsTrue $env:SETUP_MINIMAL) { Write-Host 'SETUP_MINIMAL: Skipping GitHub CLI install' } else { Install-GH }
+        if (Test-IsTrue $env:SETUP_MINIMAL) { Write-Host 'SETUP_MINIMAL: Skipping Terraform install' } else { Install-Terraform }
+        if (Test-IsTrue $env:SETUP_MINIMAL) { Write-Host 'SETUP_MINIMAL: Skipping Ansible install' } else { Install-Ansible }
+    if (Test-IsTrue $env:SETUP_MINIMAL) { Write-Host 'SETUP_MINIMAL: Skipping global npm CLI tool installs' } else { Install-GlobalNpmCLIs }
         Install-DotNet9
 
     Write-Host '\nEnvironment summary:' -ForegroundColor Cyan

@@ -8,8 +8,8 @@ Your goal is to initiate a new repository for a project. This involves creating 
 
 ### Inputs
 
-1. New repository name (string)
-2. App creation plan documents (list of file paths)
+- $context.repo_name: New repository name (string)
+- $context.app_plan_docs: App creation plan documents (list of file paths)
 
 ### Acceptance Criteria
 

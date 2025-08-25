@@ -6,6 +6,10 @@
 
 This assignment involves validating the syntax and logical correctness of a dynamic workflow script. The script is written in a custom domain-specific language (DSL) designed for specifying dynamic workflows. Your task is to ensure that the script adheres to the language's syntax rules and logical structure, and to provide feedback on the validity of the script.
 
+### Inputs
+
+$workflow_name: short id of the dynamic workflow assignment to validate
+
 ### Goal
 
 Your goal is to validate the provided dynamic workflow script to ensure it meets the syntax and logical requirements of the custom DSL, and provide reassurance of validity or feedback on any issues found.
@@ -41,6 +45,20 @@ Your assignment is to validate the provided dynamic workflow script. This involv
 ### Completion
 
 After completing the above steps, you will have validated the provided dynamic workflow script. You may then proceed to orchestrate it using [orchestrate-dynamic-workflow](./orchestrate-dynamic-workflow.md).
+
+## Preflight Outputs
+- Resolution Trace: orchestrate-dynamic-workflow → dynamic-workflows/$workflow_name → assignments → assignment files (URLs/SHAs)
+- Acceptance Criteria: Parsed list per assignment that will be enforced as gates
+- Preflight Checks: Template availability, required scripts, permissions, branch protection
+- Fail-Fast: If any required file is unreadable or preflight fails, stop before executing actions
+
+## Usage
+- Run the validator with $workflow_name and (optionally) $context to ensure all inputs and files are resolvable.
+- Only proceed to orchestration if the dry-run passes.
+
+## References
+- Orchestrator guardrails: [orchestrate-dynamic-workflow.md](./orchestrate-dynamic-workflow.md)
+- Dynamic syntax: [dynamic-workflow-syntax.md](./dynamic-workflows/dynamic-workflow-syntax.md)
 
 ## Appendix: Quick DSL Validation Checklist
 

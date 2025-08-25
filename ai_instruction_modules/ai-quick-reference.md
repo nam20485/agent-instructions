@@ -37,5 +37,10 @@
 - Use `dotnet test` for unit test validation  
 Refer to [ai-testing-validation.md](./ai-testing-validation.md) for more details.
 
+## Terminal Commands
+- Use `run_in_terminal` for all terminal interactions
+- Set `isBackground` to `true` for long-running processes only
+- Refer to [ai-terminal-management.md](./ai-terminal-management.md) for more details.
+- Refer to [ai-working-command-examples.md](./ai-working-command-examples.md before running any commands in the terminal.)
 
 *Reference: See `.ai-workflow-config.md` for complete guidelines*

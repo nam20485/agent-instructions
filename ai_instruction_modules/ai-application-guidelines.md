@@ -2,18 +2,24 @@
 
 ## Technology Stack
 
-- Always use latest versions:
+- **Always use latest versions**
   - .NET 9.0.102
 
-- https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-9/overview
+- **https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-9/overview**
 
-- Always use latest technologies listed in recent What's New?
+- **Always use latest technologies listed in recent What's New?**
 - https://devblogs.microsoft.com/dotnet/announcing-net-9-0/
 
 ### Core
 - **Language**: C# + .NET ≥9.0.0 with global.json:
   ```json
-  {"sdk": {"version": "9.0.102", "rollForward": "latestFeature"}}
+  {
+    "sdk":
+     {
+        "version": "9.0.102",
+        "rollForward": "latestFeature"
+     }
+  }
   ```
 
 ### Web Applications

@@ -26,7 +26,6 @@
    3. General design principles (SOLID, 12-Factor, DDD) *(ai-design-principles.md)*
    4. Workflow assignments (create app, perform task, review PR, etc.) *(ai-workflow-assignments.md)*
    5. Workflow processes (task-based, iterative guardrails) *(ai-task-based-workflow.md)*   
-   
 
 ## Core Behaviors
 - Issue & checklist driven; keep tasks granular
@@ -34,12 +33,21 @@
 - After apply: build/test validate; report PASS/FAIL; iterate on failure
 - Surface: assumptions, risks, alternatives (concise)
 - After completing a task in the chat window, only offer options that are directly related to the task at hand.
+- Use your sequential-thinking and memory tools whenever possible. 
+- Always make the smallest and least riskiest code changes necessary to accomplish your implementation plan.
+- Do not change any code unless strictly necessary.
 
 ## Constraints (Do Not)
 - Large refactors or new major deps without approval
 - Speculative features outside scope
 - Skip validation steps
 - Offer too many options at once.
+- Change any more code than what is needed accomplish your implementation plan.
+
+## Memory and Sequential Thinking Tools
+- These are MCP servers that are available to you.
+- Always start these tools.
+- Use your sequential-thinking and memory tools for every chat request.
 
 ## Change Flow
 1. Context gather (search/read)
@@ -105,14 +113,11 @@ Contains high-level information about development processes and guidelines
 - [ai-workflow-config.md](./ai-workflow-config.md)
 - [ai-local-environment.md](./ai-local-environment.md)
 
-### Optional Modules
-
-#### After Creating Projects/Structures
-- [ai-workflow-assignments/create-project-structure.md](./ai-workflow-assignments/create-project-structure.md)
+### Optional Modules (**OPTIONAL**: read based on current activity)
 
 #### Terminal Management
 Use this when working with the terminal
-- [ai-terminal-management.md](./ai-terminal-management.md)
+[ai-terminal-management.md](./ai-terminal-management.md)
 
 #### Test and Validation
 Use this when:
@@ -120,7 +125,8 @@ Use this when:
 - validating builds
 - validating Docker builds
 - creating CI / CD pipelines
-- [ai-testing-validation.md](./ai-testing-validation.md)
+
+[ai-testing-validation.md](./ai-testing-validation.md)
 
 #### Application Development
 Use these when creating a new application or updating an existing one.
@@ -156,7 +162,7 @@ These sections describe modules to use when you have been given an assignment or
 
 ##### Workflow Utilities
 
-- Memory Tool Current Tasl Reminder: [ai-current-task-reminder.md](./ai-current-task-reminder.md)
+- Memory Tool Current Task Reminder: [ai-current-task-reminder.md](./ai-current-task-reminder.md)
 - PR Comment Protocol: [ai-pr-comment-protocol.md](./ai-pr-comment-protocol.md)
 
 ##### Workflow Roles
@@ -167,8 +173,12 @@ Read these when assigned a specific workflow role.
 Read these when assigned a specific workflow assignment.
 - [ai-workflow-assignments.md](./ai-workflow-assignments.md)
 
+<!-- 
 #### New application
 This section describes your new application template used when assigned the `create-application` assignment.
+#### After Creating Projects/Structures
+- [ai-workflow-assignments/create-project-structure.md](./ai-workflow-assignments/create-project-structure.md)
+-->
 
 ### `.wip` Directory
 The `.wip` directory contains files that are still in development and may not be fully functional or accurate. 
