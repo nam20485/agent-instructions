@@ -49,6 +49,15 @@ function Test-Command {
     try { Get-Command $Name -ErrorAction Stop | Out-Null; $true } catch { $false }
 }
 
+function Test-IsTrue {
+    param([string]$Value)
+    if ([string]::IsNullOrWhiteSpace($Value)) { return $false }
+    switch -Regex ($Value.ToLowerInvariant()) {
+        '^(1|true|yes|y)$' { return $true }
+        default { return $false }
+    }
+}
+
 function Get-PackageManager {
     # Prefer winget on hosted runners; fall back to choco
     if (Test-Command winget) { return 'winget' }
@@ -127,36 +136,41 @@ function Install-Node-With-Nvm {
         npm install -g --no-audit --no-fund "npm@$($NPM_VERSION_PIN)" | Out-Null
     }
 
-    Write-Host '[corepack] Enabling'
-    try { corepack enable | Out-Null } catch {}
+    if (Test-IsTrue $env:SETUP_MINIMAL) {
+        Write-Host 'SETUP_MINIMAL: Skipping Corepack activation'
+    }
+    else {
+        Write-Host '[corepack] Enabling'
+        try { corepack enable | Out-Null } catch {}
 
-    # Resolve pnpm version from PNPM_VERSION_PIN or package.json's packageManager/pnpm fields
-    $pnpmVersion = $PNPM_VERSION_PIN
-    if ([string]::IsNullOrWhiteSpace($pnpmVersion) -and (Test-Path 'package.json')) {
-        try {
-            $pkg = Get-Content package.json -Raw | ConvertFrom-Json
-            if ($pkg.packageManager -and ($pkg.packageManager -match '^pnpm@(.+)$')) { $pnpmVersion = $Matches[1] }
-            if ([string]::IsNullOrWhiteSpace($pnpmVersion) -and $pkg.pnpm) { $pnpmVersion = $pkg.pnpm }
-        } catch {}
-    }
-    if (-not [string]::IsNullOrWhiteSpace($pnpmVersion)) {
-        try { corepack prepare "pnpm@$pnpmVersion" --activate | Out-Null } catch {}
-    } else {
-        Write-Warning 'pnpm version not specified; skipping pnpm activation (set PNPM_VERSION_PIN or packageManager in package.json).'
-    }
+        # Resolve pnpm version from PNPM_VERSION_PIN or package.json's packageManager/pnpm fields
+        $pnpmVersion = $PNPM_VERSION_PIN
+        if ([string]::IsNullOrWhiteSpace($pnpmVersion) -and (Test-Path 'package.json')) {
+            try {
+                $pkg = Get-Content package.json -Raw | ConvertFrom-Json
+                if ($pkg.packageManager -and ($pkg.packageManager -match '^pnpm@(.+)$')) { $pnpmVersion = $Matches[1] }
+                if ([string]::IsNullOrWhiteSpace($pnpmVersion) -and $pkg.pnpm) { $pnpmVersion = $pkg.pnpm }
+            } catch {}
+        }
+        if (-not [string]::IsNullOrWhiteSpace($pnpmVersion)) {
+            try { corepack prepare "pnpm@$pnpmVersion" --activate | Out-Null } catch {}
+        } else {
+            Write-Warning 'pnpm version not specified; skipping pnpm activation (set PNPM_VERSION_PIN or packageManager in package.json).'
+        }
 
-    # Resolve yarn version from YARN_VERSION_PIN or package.json's packageManager
-    $yarnVersion = $YARN_VERSION_PIN
-    if ([string]::IsNullOrWhiteSpace($yarnVersion) -and (Test-Path 'package.json')) {
-        try {
-            $pkg2 = Get-Content package.json -Raw | ConvertFrom-Json
-            if ($pkg2.packageManager -and ($pkg2.packageManager -match '^yarn@(.+)$')) { $yarnVersion = $Matches[1] }
-        } catch {}
-    }
-    if (-not [string]::IsNullOrWhiteSpace($yarnVersion)) {
-        try { corepack prepare "yarn@$yarnVersion" --activate | Out-Null } catch {}
-    } else {
-        Write-Warning 'yarn version not specified; skipping yarn activation (set YARN_VERSION_PIN or packageManager in package.json).'
+        # Resolve yarn version from YARN_VERSION_PIN or package.json's packageManager
+        $yarnVersion = $YARN_VERSION_PIN
+        if ([string]::IsNullOrWhiteSpace($yarnVersion) -and (Test-Path 'package.json')) {
+            try {
+                $pkg2 = Get-Content package.json -Raw | ConvertFrom-Json
+                if ($pkg2.packageManager -and ($pkg2.packageManager -match '^yarn@(.+)$')) { $yarnVersion = $Matches[1] }
+            } catch {}
+        }
+        if (-not [string]::IsNullOrWhiteSpace($yarnVersion)) {
+            try { corepack prepare "yarn@$yarnVersion" --activate | Out-Null } catch {}
+        } else {
+            Write-Warning 'yarn version not specified; skipping yarn activation (set YARN_VERSION_PIN or packageManager in package.json).'
+        }
     }
 }
 
@@ -317,11 +331,11 @@ try {
         Install-Git
         Install-Python3
     Install-Node-With-Nvm
-        Install-GCloud
-        Install-GH
-        Install-Terraform
-        Install-Ansible
-    Install-GlobalNpmCLIs
+        if (Test-IsTrue $env:SETUP_MINIMAL) { Write-Host 'SETUP_MINIMAL: Skipping Google Cloud CLI install' } else { Install-GCloud }
+        if (Test-IsTrue $env:SETUP_MINIMAL) { Write-Host 'SETUP_MINIMAL: Skipping GitHub CLI install' } else { Install-GH }
+        if (Test-IsTrue $env:SETUP_MINIMAL) { Write-Host 'SETUP_MINIMAL: Skipping Terraform install' } else { Install-Terraform }
+        if (Test-IsTrue $env:SETUP_MINIMAL) { Write-Host 'SETUP_MINIMAL: Skipping Ansible install' } else { Install-Ansible }
+    if (Test-IsTrue $env:SETUP_MINIMAL) { Write-Host 'SETUP_MINIMAL: Skipping global npm CLI tool installs' } else { Install-GlobalNpmCLIs }
         Install-DotNet9
 
     Write-Host '\nEnvironment summary:' -ForegroundColor Cyan
