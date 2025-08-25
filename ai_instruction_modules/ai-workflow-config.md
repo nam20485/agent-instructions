@@ -33,3 +33,12 @@
 
 ## Success Metrics
 Consistency, context awareness, learning from accumulated knowledge, systematic thinking, knowledge retention
+
+## Additional Steps
+- Before Plan: Resolve and print the assignment chain (orchestrator → dynamic-workflow → assignment files).
+- During Execute: Enforce template/source-of-truth and environment preflight checks where specified by the assignment.
+- After Execute: Gate completion on the assignment’s Acceptance Criteria.
+- Report: Produce a Run Report mapped to Acceptance Criteria (with evidence links) and include the resolution trace.
+
+## References
+- Orchestrator: [orchestrate-dynamic-workflow.md](./ai-workflow-assignments/orchestrate-dynamic-workflow.md)

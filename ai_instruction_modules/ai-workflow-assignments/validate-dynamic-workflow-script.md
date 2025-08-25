@@ -46,6 +46,20 @@ Your assignment is to validate the provided dynamic workflow script. This involv
 
 After completing the above steps, you will have validated the provided dynamic workflow script. You may then proceed to orchestrate it using [orchestrate-dynamic-workflow](./orchestrate-dynamic-workflow.md).
 
+## Preflight Outputs
+- Resolution Trace: orchestrate-dynamic-workflow → dynamic-workflows/$workflow_name → assignments → assignment files (URLs/SHAs)
+- Acceptance Criteria: Parsed list per assignment that will be enforced as gates
+- Preflight Checks: Template availability, required scripts, permissions, branch protection
+- Fail-Fast: If any required file is unreadable or preflight fails, stop before executing actions
+
+## Usage
+- Run the validator with $workflow_name and (optionally) $context to ensure all inputs and files are resolvable.
+- Only proceed to orchestration if the dry-run passes.
+
+## References
+- Orchestrator guardrails: [orchestrate-dynamic-workflow.md](./orchestrate-dynamic-workflow.md)
+- Dynamic syntax: [dynamic-workflow-syntax.md](./dynamic-workflows/dynamic-workflow-syntax.md)
+
 ## Appendix: Quick DSL Validation Checklist
 
 - File location and name align with repository convention (dynamic-workflows/<name>.md)

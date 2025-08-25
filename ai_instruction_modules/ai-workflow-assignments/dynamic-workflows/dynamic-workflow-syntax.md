@@ -12,6 +12,12 @@ This file defines the canonical syntax for dynamic workflow files. All tools and
 - Steps are third-level headings: "### <step-id>" (kebab-case, unique per file)
 - The lines under each step define variables, loops, and assignment/function directives
 
+## Orchestrator Responsibilities
+
+  - Resolve each listed assignment to its `ai-workflow-assignments/<assignment>.md` file.
+  - Extract and enforce the assignment’s Acceptance Criteria as the Definition of Done.
+  - Print a resolution trace and produce a Run Report as defined in the orchestrator guardrails.
+
 ## Legend
 
 - `$variable` = <value>: define variable
