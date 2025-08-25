@@ -25,9 +25,9 @@ $TERRAFORM = '1.6.15'
 $ANSIBLE = '8.9.0'
 $FIREBASE_TOOLS = '11.11.0'
 $CDKTF = '0.16.0'
-$DOTNET_VERSION_PIN = '10.0.100-preview.7'
-$DOTNET_CHANNEL = '10.0'
-$DOTNET_QUALITY = 'preview'
+$DOTNET_VERSION_PIN = '9.0.102'
+$DOTNET_CHANNEL = '9.0'
+$DOTNET_QUALITY = ''
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
@@ -102,7 +102,7 @@ function Install-Node-With-Nvm {
     }
 
     # Determine desired Node version
-    $nodeVersion = $env:NODE_VERSION_PIN
+    $nodeVersion = $NODE_VERSION_PIN
     if ([string]::IsNullOrWhiteSpace($nodeVersion)) {
         $nvmrcPath = Join-Path -Path (Get-Location) -ChildPath '.nvmrc'
         if (Test-Path $nvmrcPath) {
