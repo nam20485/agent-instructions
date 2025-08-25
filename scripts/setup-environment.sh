@@ -322,7 +322,12 @@ echo "- uv: $(uv --version 2>/dev/null || echo 'Not Installed')"
 echo
 
 echo "Cloud & DevOps Tools:"
-echo "- Google Cloud CLI: $(gcloud version --format='value(Google Cloud SDK)' 2>/dev/null || echo 'Not Installed')"
+if command -v gcloud >/dev/null 2>&1; then
+	GCLOUD_VER=$(gcloud version 2>/dev/null | sed -n "s/^Google Cloud SDK \(.*\)$/\1/p" | head -1)
+	echo "- Google Cloud CLI: ${GCLOUD_VER:-Installed}"
+else
+	echo "- Google Cloud CLI: Not Installed"
+fi
 echo "- Firebase CLI: $(firebase --version 2>/dev/null || echo 'Not Installed')"
 echo "- GitHub CLI: $(gh --version 2>/dev/null | head -1 || echo 'Not Installed')"
 echo "- Terraform: $(terraform --version 2>/dev/null | head -1 || echo 'Not Installed')"
