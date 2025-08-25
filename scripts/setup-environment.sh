@@ -148,7 +148,7 @@ echo "[4/14] NVM installed and active"
 
 echo "[5/14] Enabling Corepack (pnpm & yarn) deterministically"
 if is_true "${SETUP_MINIMAL:-}"; then
-	echo "SETUP_MINIMAL=1: Skipping Corepack activation"
+	echo "SETUP_MINIMAL: Skipping Corepack activation"
 elif command -v corepack >/dev/null 2>&1; then
     corepack enable || true
     # Determine pnpm version: PNPM_VERSION_PIN > package.json packageManager field > package.json pnpm field
@@ -195,7 +195,7 @@ fi
 
 echo "[6/14] Installing uv (Python package/dependency manager)"
 if is_true "${SETUP_MINIMAL:-}"; then
-	echo "SETUP_MINIMAL=1: Skipping uv install"
+	echo "SETUP_MINIMAL: Skipping uv install"
 elif ! command -v uv >/dev/null 2>&1; then
 	curl -LsSf https://astral.sh/uv/install.sh -o /tmp/uv-install.sh
 	sh /tmp/uv-install.sh >/dev/null 2>&1 || sh /tmp/uv-install.sh
@@ -204,7 +204,7 @@ fi
 
 echo "[7/14] Installing Playwright CLI and browsers (chromium, firefox, webkit)"
 if is_true "${SETUP_MINIMAL:-}"; then
-	echo "SETUP_MINIMAL=1: Skipping Playwright install"
+	echo "SETUP_MINIMAL: Skipping Playwright install"
 else
 	# Install Playwright CLI and browsers. --with-deps installs required system libraries on Ubuntu runners.
 	npx -y playwright@latest install --with-deps chromium firefox webkit || \
@@ -214,7 +214,7 @@ fi
 
 echo "[8/14] Installing PowerShell"
 if is_true "${SETUP_MINIMAL:-}"; then
-	echo "SETUP_MINIMAL=1: Skipping PowerShell install"
+	echo "SETUP_MINIMAL: Skipping PowerShell install"
 elif ! command -v pwsh >/dev/null 2>&1; then
 	wget -q "https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb" -O packages-microsoft-prod.deb
 	$SUDO dpkg -i packages-microsoft-prod.deb
@@ -225,7 +225,7 @@ fi
 
 echo "[9/14] Installing Google Cloud CLI"
 if is_true "${SETUP_MINIMAL:-}"; then
-	echo "SETUP_MINIMAL=1: Skipping Google Cloud CLI install"
+	echo "SETUP_MINIMAL: Skipping Google Cloud CLI install"
 elif ! command -v gcloud >/dev/null 2>&1; then
 	echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | $SUDO tee /etc/apt/sources.list.d/google-cloud-sdk.list >/dev/null
 	curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | $SUDO gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
@@ -235,7 +235,7 @@ fi
 
 echo "[10/14] Installing GitHub CLI (gh)"
 if is_true "${SETUP_MINIMAL:-}"; then
-	echo "SETUP_MINIMAL=1: Skipping GitHub CLI install"
+	echo "SETUP_MINIMAL: Skipping GitHub CLI install"
 elif ! command -v gh >/dev/null 2>&1; then
 	curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | $SUDO dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
 	$SUDO chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
@@ -246,7 +246,7 @@ fi
 
 echo "[11/14] Installing Terraform"
 if is_true "${SETUP_MINIMAL:-}"; then
-	echo "SETUP_MINIMAL=1: Skipping Terraform install"
+	echo "SETUP_MINIMAL: Skipping Terraform install"
 elif ! command -v terraform >/dev/null 2>&1; then
 	curl -fsSL https://apt.releases.hashicorp.com/gpg | $SUDO gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
 	echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | $SUDO tee /etc/apt/sources.list.d/hashicorp.list
@@ -256,7 +256,7 @@ fi
 
 echo "[12/14] Installing Ansible"
 if is_true "${SETUP_MINIMAL:-}"; then
-	echo "SETUP_MINIMAL=1: Skipping Ansible install"
+	echo "SETUP_MINIMAL: Skipping Ansible install"
 elif ! command -v ansible >/dev/null 2>&1; then
 	$SUDO apt-get update -y
 	$SUDO add-apt-repository --yes --update ppa:ansible/ansible
@@ -265,7 +265,7 @@ fi
 
 echo "[13/14] Installing global npm CLI tools (firebase-tools, angular, CRA, typescript, eslint, prettier, cdktf)"
 if is_true "${SETUP_MINIMAL:-}"; then
-	echo "SETUP_MINIMAL=1: Skipping global npm CLI tool installs"
+	echo "SETUP_MINIMAL: Skipping global npm CLI tool installs"
 else
 	# With NVM-managed Node, install globals without sudo to the user scope
 	npm install -g --no-audit --no-fund firebase-tools @angular/cli create-react-app typescript eslint prettier cdktf-cli
