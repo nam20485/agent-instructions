@@ -8,8 +8,8 @@ Your goal is to initiate a new repository for a project. This involves creating 
 
 ### Inputs
 
-- $context.repo_name: New repository name (string)
-- $context.app_plan_docs: App creation plan documents (list of file paths)
+- `$context.repo_name`: New repository name (string)
+- `$context.app_plan_docs`: App creation plan documents (list of file paths)
 
 ### Acceptance Criteria
 
@@ -21,23 +21,24 @@ Your goal is to initiate a new repository for a project. This involves creating 
 6. Filenames changed to match project name
 
 ### Assignment
-
+ 
 Your assignment is to initiate and set up a new repository for a project. This involves creating the repository and configuring the necessary settings. You will copy the provided app creation documents to the `docs/` directory. You will create a new issue-tracking project, import labels, and create milestones. You will rename workspace and devcontainer files to match the project name.
 
 ### Detailed Steps
 
 1. **Create Repository**
-   - Create a new repository with the provided name
+   - Let the new repo name be `$new_repo_name` = `${context.repo_name}_<random_word><random-2-digit-number>`
+   - Example: `new-repo_sparrow23`
+   - Create a new repository named `$new_repo_name`
    - New repository will be created from the `nam20485/ai-new-app-template` template repository
    - New repository will be created under the `nam20485` organization
-   - Public visibility
+   - Example: `nam20485/new-repo_sparrow23`
+   - Public visibility   
    - GNU Affero license
 
-2. **Clone Repository**
-   - Let the new repo directory name be `$repo_dir_name` = `$repo_name_random_word-random-3-digit-number`
-   - Example: `new-repo_sparrow-235`
-   - Let the new repo path be `$local_repo_path` = `./../dynamic_workflows/$repo_dir_name`
-   - Example: `./../dynamic_workflows/new-repo_sparrow-235`
+2. **Clone Repository**- 
+   - Let the new repo path be `$local_repo_path` = `./../dynamic_workflows/$new_repo_name`
+   - Example: `./../dynamic_workflows/new-repo_sparrow23`
    - Clone the new repository to your local machine at destination `$local_repo_path`
    - Change directory to the new repository location path: `$local_repo_path`
    - Example: `$ cd $local_repo_path`
