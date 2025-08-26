@@ -8,6 +8,9 @@ Create the actual project structure and scaffolding for a new application based 
 
 ### Inputs
 
+- `$context.repo_name`: New repository name (string)
+- `$context.app_plan_docs`: App creation plan documents (list of file paths)
+
 * Complete and thorough application plan documented in issue and/or .md file.
   * This can be found in the masi planning issue
   * Sometimes also documented in `APP_PLAN.md` file in the root of the repository.
@@ -86,7 +89,7 @@ It is important to the final quality of our product for everyone to perform thei
    1. Respository summary document is committed to the repository.
    2. Respository summary document is linked to from the README.md file.
    3. The repository summary is located at the root of the repository in a file called `.ai-repository-summary.md`.
-   4. The repository summary is created by following the instructions in the [ai-creating-repository-summary.md](https://github.com/nam20485/agent-instructions/blob/main/ai_instruction_modules/ai-workflow-assignments/ai-creating-repository-summary.md) file.
+   4. The repository summary is created by following the instructions in the [ai-creating-repository-summary.md](https://github.com/nam20485/agent-instructions/blob/main/ai_instruction_modules/ai-creating-repository-summary.md) file.
 
 8. **Initial Commit and Documentation**
    1. Make initial commit with complete structure

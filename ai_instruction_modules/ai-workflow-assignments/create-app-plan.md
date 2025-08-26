@@ -6,6 +6,11 @@
 
 Your goal is to create a plan for application, using the template in Appendix A, based on a filled-out new application template.
 
+### Inputs
+
+- `$context.repo_name`: New repository name (string)
+- `$context.app_plan_docs`: App creation plan documents (list of file paths)
+
 ### Acceptance Criteria
 
 1. Application template has been thoroughly analyzed and understood
