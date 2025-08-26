@@ -45,6 +45,7 @@ Your assignment is to initiate and set up a new repository for a project. This i
 
 3. **Copy App Creation Plan Documents**
    - A list of app creation documents will be provided as an input to this assignment
+   - The list of documents will be in the `$context.app_plan_docs` variable
    - Copy those files into the `docs/` directory of the new repository
 
 4. **Create GitHub Project for Issue Tracking**
