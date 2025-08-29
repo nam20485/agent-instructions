@@ -173,6 +173,10 @@ Read these when assigned a specific workflow role.
 Read these when assigned a specific workflow assignment.
 - [ai-workflow-assignments.md](./ai-workflow-assignments.md)
 
+#### Powershell
+Use this when writing Powershell scripts
+- [ai-powershell-instructions.md](./ai-powershell-instructions.md)
+
 <!-- 
 #### New application
 This section describes your new application template used when assigned the `create-application` assignment.
