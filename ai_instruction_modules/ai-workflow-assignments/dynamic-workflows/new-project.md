@@ -31,12 +31,12 @@ For each `$sub_issue_name` in `$sub_issues`, you will:
 
 ### iteratively-implement-and-validate
 
-    - For each sub-issue created in the previous `breakdown-epic-and-plan` step:
-   - assign the agent the `perform-task` assignment
-       - wait until the agent finishes the task
-       - review the work and approve it
-       - upon approval, move on to the next sub-issue
-    - upon approval, move on to the next stage
+- For each sub-issue created in the previous `breakdown-epic-and-plan` step:
+  - assign the agent the `perform-task` assignment
+  - wait until the agent finishes the task
+  - review the work and approve it
+  - upon approval, move on to the next sub-issue
+- upon approval, move on to the next stage
 
 ### final-validation-and-delivery
 

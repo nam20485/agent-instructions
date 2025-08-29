@@ -4,7 +4,7 @@
 
 ### Overview
 
-The dynamic workflow orchestration assignment is different than the other static workflow assignments, in that it must orchstrate the workflows for a dynamically-specified list of subordinate workflow assignments, which are orchestrated and performed in the order specified in the file, systematically iterating serially through each one until completion.
+The dynamic workflow orchestration assignment is different than the other static workflow assignments, in that it must orchestrate the workflows for a dynamically-specified list of subordinate workflow assignments, which are orchestrated and performed in the order specified in the file, systematically iterating serially through each one until completion.
 
 ### Goal
 
@@ -24,7 +24,7 @@ Your assignment is to orchestrate the workflow specified in the provided dynamic
 #### Dynamic Workflow File Conventions
 - The list of sub-workflow assignments resides in a file whose name is provided as input to this assignment.
 - The name provided indicates a dynamic workflow file located in the [./ai_instruction_modules/ai-workflow-assignments/dynamic](./dynamic) directory.
-- The format for naming the dynamic worklow files is `dynamic-workflow_<name>.md`. 
+- The format for naming the dynamic workflow files is `dynamic-workflow_<name>.md`.
 
 > **Example:** Invoking the `orchestrate-dynamic-workflow` assignment, by specifying *`new-project`* as the input, will invoke orchestration of a dynamic workflow specified in the file named `dynamic-workflow_new-project.md,` located in the `./ai_instruction_modules/ai-workflow-assignments/dynamic/` directory.
 
