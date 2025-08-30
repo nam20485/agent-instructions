@@ -6,11 +6,6 @@
 
 Create the actual project structure and scaffolding for a new application based on a comprehensive application plan. This involves creating the solution structure, configuring initial project files, and establishing the development environment foundation.
 
-### Inputs
-
-- `$context.repo_name`: New repository name (string)
-- `$context.app_plan_docs`: App creation plan documents (list of file paths)
-
 * Complete and thorough application plan documented in issue and/or .md file.
   * This can be found in the masi planning issue
   * Sometimes also documented in `APP_PLAN.md` file in the root of the repository.

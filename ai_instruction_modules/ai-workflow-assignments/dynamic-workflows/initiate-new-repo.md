@@ -6,11 +6,6 @@ This dynamic workflow file specifies the workflow for initiating a new repo. It 
 
 ## Script
 
-### Inputs
-
-- $context.repo_name: New repository name (string)
-- $context.app_plan_docs: App creation plan documents (list of file paths)
-
 ### initiate-new-repository
 
 `$assignments` = [  
