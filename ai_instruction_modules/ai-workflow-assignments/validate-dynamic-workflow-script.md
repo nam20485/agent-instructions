@@ -53,7 +53,7 @@ After completing the above steps, you will have validated the provided dynamic w
 - Fail-Fast: If any required file is unreadable or preflight fails, stop before executing actions
 
 ## Usage
-- Run the validator with $workflow_name and (optionally) $context to ensure all inputs and files are resolvable.
+- Run the validator with $workflow_name and to ensure all inputs and files are resolvable.
 - Only proceed to orchestration if the dry-run passes.
 
 ## References

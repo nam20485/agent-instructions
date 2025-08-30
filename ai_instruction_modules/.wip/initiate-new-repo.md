@@ -13,7 +13,7 @@ This dynamic workflow file specifies the workflow for initiating a new repo. It 
                  ]
 
 For each `$assignment_name` in `$assignments`, you will:
-   - assign the agent the `$assignment_name` assignment with inputs { $context }
+   - assign the agent the `$assignment_name` assignment
    - wait until the agent finishes the task
    - review the work and approve it
    - record output as `#initiate-new-repository.$assignment_name`

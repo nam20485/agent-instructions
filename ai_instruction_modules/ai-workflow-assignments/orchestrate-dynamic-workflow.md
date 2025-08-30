@@ -22,9 +22,6 @@ Your assignment is to orchestrate the workflow assignment as specified by name a
 
 > Example: Specifying "new-project" as input, when invoking the orchestrate-dynamic-workflow assignment, will look for a dynamic workflow file at `./ai_instruction_modules/ai-workflow-assignments/dynamic-workflows/new-project.md`.
 
-- The $context variable is an object containing variables.
-- This object contains input variables that are to be passed to the underlying workflow assignment that will be executed (i.e. the $workflow_name workflow assignment)
-
 - Ensure the file contains a "## Script" section with one or more third-level step headings (e.g., "### create-project-and-plan").
 - Run the orchestrate-dynamic-workflow assignment with input `<name>`.
 
@@ -77,29 +74,29 @@ These apply to all dynamic workflows.
 ## Execution Algorithm (Deterministic & Idempotent)
 
 1) Intake
-- Capture inputs: $workflow_name and $context.
+- Capture inputs: $workflow_name.
 - Resolve and print the resolution trace:
   - dynamic-workflows/$workflow_name.md → list of `$assignments`
   - For each: ai-workflow-assignments/<assignment>.md
 - Abort early if any file is missing or unreadable.
 
-2) Plan
+1) Plan
 - For each assignment:
   - Parse Inputs, Detailed Steps, and Acceptance Criteria from the assignment file.
   - Expand steps into concrete actions and checks for the current environment (permissions, branch protection, etc.).
   - Decide direct-to-default-branch vs. feature-branch+PR route.
 
-3) Execute (per assignment, in order)
+1) Execute (per assignment, in order)
 - Perform the Detailed Steps exactly as written in the assignment file.
 - Honor preflight requirements (templates, scripts, visibility, licenses) before continuing.
 - If a required step cannot be executed (e.g., missing permission), stop and report—do not partially declare success.
 
-4) Verify (Gated)
+1) Verify (Gated)
 - Evaluate each Acceptance Criterion.
 - Record PASS/FAIL with evidence (links to repos, files, PRs, issues, projects, etc.).
 - If any FAIL, stop and report the unmet criteria and remediation options.
 
-5) Report
+1) Report
 - Produce a Run Report (schema below) including the resolution trace, actions performed, and the acceptance-gated results.
 
 ## Preflight Checklist (Before Any Actions)
@@ -115,7 +112,7 @@ These apply to all dynamic workflows.
 ## Run Report (Required Schema)
 - Header
   - Assignment: orchestrate-dynamic-workflow
-  - Inputs: $workflow_name, $context (summarized)
+  - Inputs: $workflow_name (summarized)
 - Resolution Trace
   - Ordered list of files used with URLs (and SHAs if available)
 - Actions Executed
@@ -136,7 +133,7 @@ These apply to all dynamic workflows.
 ## How to Run (Quick Start)
 1. Place your workflow file under ai-workflow-assignments/dynamic-workflows/<name>.md.
 2. Ensure the file contains a "## Script" section that enumerates assignment short IDs and inputs.
-3. Invoke this orchestrator with inputs: $workflow_name=<name>, $context=<object>.
+3. Invoke this orchestrator with input: $workflow_name=<name>.
 4. The orchestrator resolves the assignment files and executes their Detailed Steps to completion (gated by Acceptance Criteria).
 5. Review the final Run Report; approve or request changes.
 
