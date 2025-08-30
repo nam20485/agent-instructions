@@ -6,10 +6,10 @@ This dynamic workflow file specifies the workflow for creating a new project. It
 
 ## Script
 
-### create-project-and-plan
+### init-project-and-plan
 
 `$assignments` = [  
-                    `initiate-new-repository`,
+                    `init-existing-repository`, 
                     `create-app-plan`, 
                     `create-project-structure`
                  ]
@@ -18,11 +18,11 @@ For each `$assignment_name` in `$assignments`, you will:
    - assign the agent the `$assignment_name` assignment
    - wait until the agent finishes the task
    - review the work and approve it
-   - record output as `#create-project-and-plan.$assignment_name`
+   - record output as `#init-project-and-plan.$assignment_name`
   
 ### iteratively-breakdown-epics-and-plan
 
-`$sub_issues` = get-sub-issues-from-previous-step(`#create-project-and-plan.create-app-plan`)
+`$sub_issues` = get-sub-issues-from-previous-step(`#init-project-and-plan.create-app-plan`)
 
 For each `$sub_issue_name` in `$sub_issues`, you will:
    - assign the agent the `breakdown-epic-and-plan` assignment
