@@ -24,7 +24,7 @@ Your assignment is to set up am existing repository for a project. This involves
 1. **Create GitHub Project for Issue Tracking**
    - Create a new GitHub Project for issue tracking
    - Name the project the same as the repository
-   - Set the project to `Basic Kanban` template
+   - Set the project to `Board` template
 
 2. **Import Labels**
    - Import the labels from the `.labels.json` file in the root of the repository
