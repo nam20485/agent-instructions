@@ -34,7 +34,7 @@ Specifically, you will:
 
 1. Analyze the filled-out application template and linked supporting documents to understand requirements and expectations and then create a comprehensive plan, documented as an issue (use the template in # #Appendix A), for the development of the application. There is no coding in this assignment. It is strictly planning.
 
-**Always follow instructions given here (generally) and specifically as described in the task-based workflow process.**
+**Always follow instructions given here and as described in the task-based workflow process.**
 
 It is important to the final quality of our product for everyone to perform their assignment exactly as specified.
 
@@ -50,6 +50,9 @@ It is important to the final quality of our product for everyone to perform thei
    - Review the provided application template and any linked documents
    - Identify all requirements, features, and components that need to be implemented
    - Understand the technology stack and design principles to be followed
+   - Identify and clarify any ambiguous or unclear requirements with stakeholders
+   - Identify languages, frameworks, tools, and packages to be used. Document in `docs/tech-stack.md`.
+   - Document high level architecture, components, and design decisions in `docs/architecture.md`.
 
 2. **Design Plan**
    - Create a detailed design plan based on the new app template
@@ -59,12 +62,13 @@ It is important to the final quality of our product for everyone to perform thei
    - Create Issue documenting plan from the #Appendix A plan template and iterate to gain approval from the orchestrator or stakeholders
    - Import the issue labels using the `import-labels.ps1` and `.labels.json` files.
    - Milestones have been created and issues linked to the appropriate milestone.
+   - 
 3. **Create Epic Sub-Issues for Each Phase**
     -Create a detailed sub-issue subordinate from the main plan issue for each phase of the plan.
     - These sub-issues are epics.
     - The sub-issue title should be the phase name.
     - The per-phase epic sub-issues should contain all of the sub-tasks (called Stories therein) listed in that phase
-    - Use the template in # #Appendix B below, as a template for the sub-issue epics. 
+    - Use the template in #Appendix B below, as a template for the sub-issue epics. 
 
 
 ### Completion
