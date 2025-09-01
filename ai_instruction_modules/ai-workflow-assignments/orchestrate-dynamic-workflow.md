@@ -52,21 +52,20 @@ These apply to all dynamic workflows.
 
 - Assignment-first execution (no step synthesis)
   - Dynamic workflow files may enumerate assignment names and inputs only.
-  - Execute steps strictly from the resolved assignment file(s). Do not infer or invent steps from the dynamic workflow file.
+  - Execute steps strictly from the resolved assignment file(s). Do not infer or invent steps from the dynamic workflow file. Do not choose items with names that are close but not exact matches.
 
 - Acceptance-criteria gating (Definition of Done)
   - Extract the Acceptance Criteria from each assignment file.
-  - Treat each criterion as a must-pass gate. Do not declare success unless every criterion passes or an explicit, documented deviation is approved.
-
+  - Treat each criterion as a must-pass gate. Do not declare success unless every criterion passes.
 - Template and preflight enforcement
   - If the assignment specifies template/source-of-truth requirements (e.g., create repo from a template, enforce license/visibility, required scripts), enforce them.
   - If the target already exists but violates preconditions, either:
     - Recreate per spec; or
-    - Retrofit artifacts and record the deviation (with rationale) in the Run Report.
+  -  **IF** pre-existing artifcats strictly meet acceptance criteroa and/or instruction, leave them and record a non-creation event.
 
-- Branch protection and idempotency
-  - If the default branch is protected, use a feature branch + PR path; do not force-push to protected branches.
-  - Make runs idempotent: detect pre-existing artifacts; reconcile without destructive changes.
+- Branch protection
+  - For code changes: if the default branch is protected, use a feature branch + PR path; do not force-push to protected branches.
+  - Non-code changes (e.g., settings, metadata) can be made directly to the default branch, even if protected.
 
 - Run Report (mandatory)
   - Produce a final Run Report mapped 1:1 to each assignment’s Acceptance Criteria with PASS/FAIL and evidence links.
@@ -89,7 +88,9 @@ These apply to all dynamic workflows.
 1) Execute (per assignment, in order)
 - Perform the Detailed Steps exactly as written in the assignment file.
 - Honor preflight requirements (templates, scripts, visibility, licenses) before continuing.
-- If a required step cannot be executed (e.g., missing permission), stop and report—do not partially declare success.
+- If a required step cannot be executed (e.g., missing permission), stop and report—do not partially declare success. DO NOT leave for anyone else to perform.
+- Do not continue performing any later step until you have successfully finished the current step, and all previous steps.
+- Your job is to perform the steps, do not plan to have anyone else perform any steps.
 
 1) Verify (Gated)
 - Evaluate each Acceptance Criterion.
@@ -120,7 +121,7 @@ These apply to all dynamic workflows.
 - Acceptance Criteria Results
   - For each assignment, list each criterion with PASS/FAIL and evidence links
 - Deviations
-  - Any variance from assignment specs (e.g., retrofitting template artifacts), with rationale
+  - Any variance from assignment specs (e.g., exxplicitly pre-approved deviations), with rationale and authorizating party's name
 - Outcome
   - Success only if all Acceptance Criteria are PASS (or explicitly approved deviations)
 
@@ -128,7 +129,7 @@ These apply to all dynamic workflows.
 - Dynamic workflow files reside under ai-workflow-assignments/dynamic-workflows.
 - They provide the Script section which enumerates assignment names and inputs.
 - They do not define executable steps; steps are defined in the referenced assignment files.
-- Canonical syntax reference: dynamic-workflows/dynamic-workflow-syntax.md
+- Canonical syntax reference: [dynamic-workflow-syntax.md](dynamic-workflows/dynamic-workflow-syntax.md)
 
 ## How to Run (Quick Start)
 1. Place your workflow file under ai-workflow-assignments/dynamic-workflows/<name>.md.
@@ -152,7 +153,8 @@ Execution rules (non-negotiable):
 - Execute steps strictly from the resolved assignment file(s); do not synthesize steps from dynamic workflow files.
 - Extract Acceptance Criteria from each assignment and treat them as gates.
 - Enforce template/source-of-truth and required scripts/visibility/license per assignment.
-- Respect branch protection (use feature branch + PR) and keep operations idempotent.
+- Respect branch protection (use feature branch + PR) for code changes.
+- Non-code changes (e.g., settings, metadata) can be made directly to the default branch, even if protected..
 
 Completion (Definition of Done):
 - Produce a Run Report containing:
