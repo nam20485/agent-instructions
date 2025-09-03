@@ -1,11 +1,11 @@
 {
-  "selectedAuthType": "oauth-enterprise",
-  "theme": "Default",
-  "preferredEditor": "vscode",
-  "autoAccept": "true",
-  "contextFileName": "GEMINI.md",
-  "mcpServers": {
-   "sequential-thinking": {
+	"selectedAuthType": "oauth-enterprise",
+	"theme": "Default",
+	"preferredEditor": "vscode",
+	"autoAccept": "true",
+	"contextFileName": "GEMINI.md",
+	"mcpServers": {
+		"sequential-thinking": {
 			"type": "stdio",
 			"command": "npx",
 			"args": [
@@ -82,25 +82,25 @@
 				"@playwright/mcp@latest"
 			]
 		},
-    "puppeteer": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-puppeteer"
-      ],
-      "env": {}
-    },
-    "web-browser": {
-      "type": "stdio",
-      "command": "uv",
-      "args": [
-        "tool",
-        "run",
-        "web-browser-mcp-server"
-      ]
-    }
-  },
-  "inputs": [
+		"puppeteer": {
+			"command": "npx",
+			"args": [
+				"-y",
+				"@modelcontextprotocol/server-puppeteer"
+			],
+			"env": {}
+		},
+		"web-browser": {
+			"type": "stdio",
+			"command": "uv",
+			"args": [
+				"tool",
+				"run",
+				"web-browser-mcp-server"
+			]
+		}
+	},
+	"inputs": [
 		{
 			"id": "NOTION_TOKEN",
 			"type": "promptString",

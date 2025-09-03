@@ -1,10 +1,17 @@
-# Assignment: Create Application Plan
+# Assignment: Create Epic
 
-## (create-app-plan)
+## (create-epic)
 
 ### Goal
 
-Your goal is to create a plan for application, using the template in Appendix A, based on a filled-out new application template.
+Your goal is to create an epic based on a phase from the main app plan issue.
+
+### Inputs
+- __issue: parent issue id
+
+
+### Output
+- Created phase epic sub-issue.
 
 ### Acceptance Criteria
 
@@ -21,16 +28,19 @@ Your goal is to create a plan for application, using the template in Appendix A,
 11. Code quality standards and best practices have been followed.
 12. Application plan is ready for development and implementation.
 13. Application plan has been documented in an issue using the template in #Appendix A.
+14. Epic sub-issue have been created for each and every phase. (Use template in #Appendix B)
+14. Epic sub-issues have been completely filled out with real information.
+15. Phase sub-issues have been assigned to milestones.
 
 ### Assignment
 
-Your assignment is to create a new application plan based on a filled-out application template. This involves systematic analysis of requirements, careful implementation following established guidelines, and delivery of a application plan that meets all specified criteria. You will use the template in #Appendix A as a template for the plan, and then fill in the details for the specific application.
+Your assignment is to create a new application plan based on a filled-out application template. This involves systematic analysis of requirements, careful implementation following established guidelines, and delivery of a application plan that meets all specified criteria. You will use the template in #Appendix A as a template for the plan, and then fill in the details for the specific application. You wil use the template in #Appendix B as a template for the epic sub-issues and fill in the details for the phase epic sub-issues.
 
 The application template can be found in the `docs/` directory in a file called `ai-new-app-template.md`. The supporting files are linked to in that file and are also included in the same directory. These files contain all the necessary details about the application you need to create the plan for, including features, components, and requirements.
 
 Specifically, you will:
 
-1. Analyze the filled-out application template and linked supporting documents to understand requirements and expectations and then create a comprehensive plan, documented as an issue (use the template in #Appendix A), for the development of the application. There is no coding in this assignment. It is strictly planning.
+1. Analyze the filled-out application template and linked supporting documents to understand requirements and expectations and then create a comprehensive plan, documented as an issue (use the template in # #Appendix A), and document the phase epic sub-issues (use the template in #Appendix B) for the development of the application. There is no coding in this assignment. It is strictly planning.
 
 **Always follow instructions given here and as described in the task-based workflow process.**
 
@@ -41,6 +51,9 @@ It is important to the final quality of our product for everyone to perform thei
 * Excellent examples of previously-completed plans created for different applications: 
     * https://github.com/nam20485/advanced-memory3/issues/12
     * https://github.com/nam20485/support-assistant/issues/2
+
+* Excellent exmple of a completed phase epic sub-issues for a different application:
+    * https://github.com/nam20485/advanced-memory3/issues/12
 
 ### Detailed Steps
 
@@ -60,13 +73,24 @@ It is important to the final quality of our product for everyone to perform thei
    - Create Issue documenting plan from the #Appendix A plan template and iterate to gain approval from the orchestrator or stakeholders
    - Import the issue labels using the `import-labels.ps1` and `.labels.json` files.
    - Milestones have been created and issues linked to the appropriate milestone.
+   - 
+3. **Create Epic Sub-Issues for Each Phase**
+    -Create a detailed sub-issue subordinate from the main plan issue for each phase of the plan.
+    - These sub-issues are epics.
+    - The sub-issue title should be the phase name.
+    - The per-phase epic sub-issues should contain all of the sub-tasks (called Stories therein) listed in that phase
+    - Use the template in #Appendix B below, as a template for the sub-issue epics. 
+    - Link the sub-issues to the main plan issue USING the sub-issue feature in GitHub. (https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/adding-sub-issues)
+    - You can link the phase names in the main issie to the relevant sub-issue epics.
+    - BUT you must also use the sub-issue feature in GitHub to link the sub-issues.
+    - Link the sub-issues to the appropriate milestone.
+    - List the sub-issues in the relationships section of the main plan issue to indicate thatey are blocking them main issue, i.e. the main plan issue cannot be completed until all of the sub-issues are completed.   (https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/creating-issue-dependencies)
+
 
 ### Completion
 
-- Ask the stake-holder if they are happy with the plan and can approve it. If not then make the requested changes and iterate asking for approval and making changes until approval is gained.
-- **DO NOT IMPLEMENT OR WRITE ANY CODE.** 
-- This assignment is planning only.
-- Ask the stake-holder for your next assignment.
+Ask the stake-holder if they are happy with the plan and can approve it. If not then make the requested changes and iterate asking for approval and making changes until approval is gained. **DO NOT IMPLEMENT OR WRITE ANY CODE.** This assignment is planning only.
+Ask the stake-holder for your next assignment.
 
 ## Appendix A: Application Plan Issue Template (Copy-Paste)
 
@@ -74,4 +98,10 @@ Use the template below when you “Create Issue documenting plan” in step 2. I
 
 Template has been moved to [application-plan.md](/.github/ISSUE_TEMPLATE/application-plan.md)
 
+---
 
+## Appendix B: Application Plan Phases's Epic Sub-Issue Template (Copy-Paste)
+
+Use the template below when you create a sub-issue for each phase in the application plan in step 4. It aligns with the Phases and covers all mandatory areas (testing, docs, containerization, CI/CD, security, risks, etc.). Create a sub-issue off of the main plan issue for each phase, using the template below, and then fill in the placeholders.
+
+Template has been moved to [epic.md](/.github/ISSUE_TEMPLATE/epic.md)

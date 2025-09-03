@@ -10,8 +10,11 @@ Sure! I will get a list of the 10 most recent issues for the repo nam20485/agent
 --USER
 For each issue, please check if it is a clearly defined coding task with acceptance criteria and a low to medium complexity to identify issues that are suitable for an AI Coding Agent to work on. Then assign each of the identified issues to Copilot.
 
+--USER
+ Create a new tracking issue to track the work. For each issue you assign to Copilot, add it as a sub-issue to your tracking issu.
+ 
 --ASSISTANT
-Certainly! Let me carefully check which ones are clearly scoped issues that are good to assign to the coding agent, and I will summarize and assign them now.
+Certainly! Let me carefully check which ones are clearly scoped issues that are good to assign to the coding agent, and I will summarize, link as sub-issue, and assign them now.
 
 --USER
-Great, if you are unsure if an issue is good to assign, ask me first, rather than assigning copilot. If you are certain the issue is clear and suitable you can assign it to Copilot without asking.
+Great, if you are unsure if an issue is good to assign, ask me first, rather than assigning copilot. If you are certain the issue is clear and suitable you can assign it to Copilot without asking. Once you have assigned all the issues, send me a link to the tracking issue.                                                                                                                                                                                                                          

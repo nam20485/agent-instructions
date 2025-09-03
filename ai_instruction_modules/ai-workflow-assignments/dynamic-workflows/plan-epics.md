@@ -6,7 +6,8 @@ Goal: Convert a higher-level multi-task sub-phase epic sub-issue into granular, 
 
 ### Steps
 1. Identify phases / major work streams from parent.
-2. For each phase create a epic sub-issue: purpose, scope, checklist.
+2. For each phase create a sub-issue: purpose, scope, checklist.
+3. Decompose tasks to < ~0.5 day effort each.
 4. Add acceptance criteria (functional + quality + validation commands).
 5. List dependencies (issues, env setup, creds, data seeds).
 6. Enumerate risks & mitigations.
@@ -15,7 +16,48 @@ Goal: Convert a higher-level multi-task sub-phase epic sub-issue into granular, 
 9. Cross-link: Parent: #<id>; siblings.
 10. Update parent with checklist referencing created sub-issues.
 
+### Sub-Issue Body Template (YAML)
+```yaml
+title: "Phase X: <objective>"
+body: |
+  Parent: #<parent>
+  
+  ## Objective
+  <Outcome sentence>
+  
+  ## Scope
+  In: <list>
+  Out: <list>
+  
+  ## Plan
+  1. [ ] Task 1
+  2. [ ] Task 2
+  3. [ ] Task 3
+  
+  ## Acceptance Criteria
+  - AC1
+  - AC2
 
+  ## Validation Commands
+  - Run: dotnet run
+  - Build: dotnet build
+  - Tests: dotnet test <Project.Tests>
+  
+  ## Dependencies
+  - Issue #
+  - Env var XYZ
+  
+  ## Risks & Mitigations
+  - Risk: <risk> → Mitigation: <mitigation>
+  
+  ## Test Strategy
+  - Unit: new cases in <Project.Tests>
+  - Integration: endpoints A,B via TestServer
+  
+  
+  ## Rollback
+  - Revert PR or commits <hash..hash>
+```
 
 ### Inputs
 - __repo: repository

@@ -15,7 +15,9 @@ Goal: Convert a higher-level multi-task sub-phase epic sub-issue into granular, 
 9. Cross-link: Parent: #<id>; siblings.
 10. Update parent with checklist referencing created sub-issues.
 
+### Sub-Issue Body Template (YAML)
 
+See [story.md](/.github/ISSUE_TEMPLATE/story.md)
 
 ### Inputs
 - __repo: repository
