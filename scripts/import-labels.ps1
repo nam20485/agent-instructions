@@ -4,7 +4,7 @@
 
 .DESCRIPTION
     Reads a JSON file (array of label objects as exported via:
-        gh api repos/<owner>/<repo>/labels --paginate > labels.json
+        gh api repos/<owner>/<repo>/labels --paginate > .labels.json
     ) and ensures the target repository has the same labels.
 
     - Creates missing labels
@@ -15,7 +15,7 @@
     Target repository in the form "owner/repo" (e.g., "nam20485/agent-instructions").
 
 .PARAMETER LabelsFile
-    Path to the JSON labels file (default: ./labels-AgentAsAService.json).
+    Path to the JSON labels file (default: ./.labels.json).
 
 .PARAMETER DryRun
     Show what would change without making any changes.
@@ -25,11 +25,11 @@
 
 .EXAMPLE
     # Preview changes
-    ./scripts/import-labels.ps1 -Repo "owner/target-repo" -LabelsFile "./labels-AgentAsAService.json" -DryRun
+    ./scripts/import-labels.ps1 -Repo "owner/target-repo" -LabelsFile "./.labels.json" -DryRun
 
 .EXAMPLE
     # Apply changes (create/update)
-    ./scripts/import-labels.ps1 -Repo "owner/target-repo" -LabelsFile "./labels-AgentAsAService.json"
+    ./scripts/import-labels.ps1 -Repo "owner/target-repo" -LabelsFile "./.labels.json"
 
 .EXAMPLE
     # Apply changes and delete labels not in the file
@@ -46,7 +46,7 @@ param(
     [string]$Repo,
 
     [Parameter()]
-    [string]$LabelsFile = "./labels-AgentAsAService.json",
+    [string]$LabelsFile = "./.labels.json",
 
     [switch]$DryRun,
     [switch]$DeleteMissing
@@ -64,6 +64,14 @@ try {
 } catch {
     Write-Error $_.Exception.Message
     exit 1
+}
+
+# Dot-source common auth helper if present
+$commonAuth = Join-Path $PSScriptRoot 'common-auth.ps1'
+if (Test-Path -LiteralPath $commonAuth) { . $commonAuth }
+if (Get-Command Initialize-GitHubAuth -ErrorAction SilentlyContinue) { Initialize-GitHubAuth } else {
+    $st = & gh auth status 2>$null; $code = $LASTEXITCODE
+    if ($code -ne 0) { Write-Warning 'GitHub CLI not authenticated. Initiating gh auth login...'; & gh auth login }
 }
 
 if (-not (Test-Path -LiteralPath $LabelsFile)) {
