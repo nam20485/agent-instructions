@@ -13,7 +13,8 @@ This dynamic workflow file specifies the workflow for initiating a new repo. It 
 `$assignments` = [  
                     `init-existing-repository`,
                     `create-app-plan`, 
-                    `create-project-structure`
+                    `create-project-structure`,
+                    `debrief-and-document`
                  ]
 
 For each `$assignment_name` in `$assignments`, you will:
