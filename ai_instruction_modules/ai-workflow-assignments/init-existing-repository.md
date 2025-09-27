@@ -22,23 +22,23 @@ Your assignment is to set up an existing repository for a project. This involves
 
 ### Detailed Steps
 
-0. **Create PR and New Branch**
+1. **Create PR and New Branch**
    - Create a new branch named after the invoking dynamic workflow assignment which called this workflow assignment, with the prefix `dynamic-workflow-`.
    - For example, if the dynamic workflow assignment is `project-setup`, the branch should be named `dynamic-workflow-project-setup`.
    - Create a pull request (PR) for the new branch to merge into `main`
    - Changes will most likely not be made until subsequent workflow assignmments invoked after this one, so it will be left open until all subsequent assignments are complete and approved.
    - Later workflow assignments will commit and push changes to this branch.
 
-1. **Create GitHub Project for Issue Tracking**
+2. **Create GitHub Project for Issue Tracking**
    - Create a new GitHub Project for issue tracking
    - Name the project the same as the repository
    - Set the project to `Board` template
 
-2. **Import Labels**
+3. **Import Labels**
    - Import the labels from the `.labels.json` file in the root of the repository
    - Use the `import-labels.ps1` script to import the labels
 
-3.  **Rename Workspace and Devcontainer Files**
+4.  **Rename Workspace and Devcontainer Files**
    - Inside the `.devcontainer/devcontainer.json` file rename the `name` property to use the repository name as the prefix, preserving the "devcontainer" suffix. Template: `<repo-name>-devcontainer`
    - Rename the `ai-new-app-template.code-workspace` file to use the repository name as the prefix, preserving the ".code-workspace" extension. Template: `<repo-name>.code-workspace`
 
