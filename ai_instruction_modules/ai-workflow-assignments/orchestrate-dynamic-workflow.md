@@ -70,6 +70,11 @@ These apply to all dynamic workflows.
 - Run Report (mandatory)
   - Produce a final Run Report mapped 1:1 to each assignment’s Acceptance Criteria with PASS/FAIL and evidence links.
 
+- Run Log
+- Maintain a detailed log of actions taken, decisions made, and any issues encountered during execution.
+- This log should be included in the final Run Report and debriefing documentfor transparency and auditing purposes.
+- Include actions taken at dynamic workflow level (e.g., "Starting assignment X") as well as actions taken at the individual assignment level, and all agent delegation events.
+
 ## Execution Algorithm (Deterministic & Idempotent)
 
 1) Intake
