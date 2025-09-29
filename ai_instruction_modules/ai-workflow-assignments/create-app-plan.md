@@ -21,6 +21,7 @@ Your goal is to create a plan for application, using the template in Appendix A,
 11. Code quality standards and best practices have been followed.
 12. Application plan is ready for development and implementation.
 13. Application plan has been documented in an issue using the template in #Appendix A.
+14. Milestones have been created and issues linked to the appropriate milestone.
 
 ### Assignment
 
@@ -30,7 +31,7 @@ The application template can be found in the `docs/` directory in a file called 
 
 Specifically, you will:
 
-1. Analyze the filled-out application template and linked supporting documents to understand requirements and expectations and then create a comprehensive plan, documented as an issue (use the template in #Appendix A), for the development of the application. There is no coding in this assignment. It is strictly planning.
+1. Analyze the filled-out application template and linked supporting documents to understand requirements and expectations and then create a comprehensive plan, documented as an issue (use the template in #Appendix A), for the development of the application. There is no coding in this assignment. It is strictly planning. Create the milestones and link the issues to the appropriate milestone.
 
 **Always follow instructions given here and as described in the task-based workflow process.**
 
@@ -58,8 +59,7 @@ It is important to the final quality of our product for everyone to perform thei
    - Identify necessary frameworks, tools, and packages to be used
    - Plan for testing, documentation, containerization, and other mandatory requirements
    - Create Issue documenting plan from the #Appendix A plan template and iterate to gain approval from the orchestrator or stakeholders
-   - Import the issue labels using the `import-labels.ps1` and `.labels.json` files.
-   - Milestones have been created and issues linked to the appropriate milestone.
+   - Create milestones based on the phases in the plan and link issues to the appropriate milestone.
 
 ### Completion
 
@@ -72,6 +72,8 @@ It is important to the final quality of our product for everyone to perform thei
 
 Use the template below when you “Create Issue documenting plan” in step 2. It aligns with the Acceptance Criteria and covers all mandatory areas (testing, docs, containerization, CI/CD, security, risks, etc.). Copy this into a new GitHub Issue and fill in the placeholders.
 
-Template has been moved to [application-plan.md](/.github/ISSUE_TEMPLATE/application-plan.md)
+**TEMPLATE MOVED**.
+
+Template has been moved to [application-plan.md](/.github/ISSUE_TEMPLATE/application-plan.md) file under the [.github/ISSUE_TEMPLATE/](/.github/ISSUE_TEMPLATE/) directory in the root of the repository.
 
 

@@ -1,7 +1,8 @@
-Title: [ProjectName] – Complete Implementation (Application Plan)
+>Title: [ProjectName] – Complete Implementation (Application Plan)
 
-Labels: plan, design, architecture
-Assignees: [owner]
+>Labels: plan, design, architecture
+
+>Assignees: [owner]
 
 ---
 

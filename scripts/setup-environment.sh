@@ -207,6 +207,7 @@ if is_true "${SETUP_MINIMAL:-}"; then
 	echo "SETUP_MINIMAL: Skipping Playwright install"
 else
 	# Install Playwright CLI and browsers. --with-deps installs required system libraries on Ubuntu runners.
+	npm install @playwright/test@latest
 	npx -y playwright@latest install --with-deps chromium firefox webkit || \
 	npx -y playwright@latest install chromium firefox webkit || true
 	npx -y playwright@latest --version || true

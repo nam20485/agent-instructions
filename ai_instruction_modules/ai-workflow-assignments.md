@@ -87,6 +87,7 @@ The format is made up of the following sections:
 ### Documentation & Analysis
 * [ai-creating-repository-summary.md](ai-creating-repository-summary.md): This assignment involves creating a custom summary of a repository. You will create a `.ai-repository-summary.md` file in the repository that contains information describing how a coding agent seeing it for the first time can work most efficiently.
 * [analyze-progress-doc.md](ai-workflow-assignments/analyze-progress-doc.md): This assignment involves rigorously interrogating a provided repo to analyze the progress made and identify any gaps or areas that need further work. You will then document your findings in a new issue.
+* [debrief-and-document-learnings.md](ai-workflow-assignments/debrief-and-document-learnings.md): This assignment involves running a formal debrief to capture lessons learned, highlight successes and gaps, and publish a stakeholder-approved report that informs future work.
 
 ### Specialized Tasks
 * [convert-vs-color-theme-to-vscode.md](ai-workflow-assignments/convert-vs-color-theme-to-vscode.md): This assignment involves converting a Visual Studio color theme to a Visual Studio Code color theme. You will create a plan, document it in an issue, and once gaining approval, you will implement the plan.
