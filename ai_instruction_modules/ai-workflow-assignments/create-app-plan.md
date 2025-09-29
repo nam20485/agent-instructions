@@ -4,7 +4,7 @@
 
 ### Goal
 
-Your goal is to create a plan for application, using the template in Appendix A, based on a filled-out new application template.
+Your goal is to create a plan for application, using the template in Appendix A, based on a filled-out new application template and its supporting documents.
 
 ### Acceptance Criteria
 
@@ -25,7 +25,7 @@ Your goal is to create a plan for application, using the template in Appendix A,
 
 ### Assignment
 
-Your assignment is to create a new application plan based on a filled-out application template. This involves systematic analysis of requirements, careful implementation following established guidelines, and delivery of a application plan that meets all specified criteria. You will use the template in #Appendix A as a template for the plan, and then fill in the details for the specific application.
+Your assignment is to create a new application plan based on a filled-out application template and its supporting documents. This involves systematic analysis of requirements, careful implementation following established guidelines, and delivery of a application plan that meets all specified criteria. You will use the template in #Appendix A as a template for the plan, and then fill in the details for the specific application.
 
 The application template can be found in the `docs/` directory in a file called `ai-new-app-template.md`. The supporting files are linked to in that file and are also included in the same directory. These files contain all the necessary details about the application you need to create the plan for, including features, components, and requirements.
 

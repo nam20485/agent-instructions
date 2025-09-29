@@ -1,10 +1,10 @@
-# Assignment: Create Application Plan
+# Assignment: Create Application Plan and Epics
 
-## (create-app-plan)
+## (create-app-plan-and-epics)
 
 ### Goal
 
-Your goal is to create a plan for application, using the template in Appendix A, based on a filled-out new application template.
+Your goal is to create a plan for application, using the template in Appendix A, based on a filled-out new application template. The application plan should include a detailed breakdown of all phases required to achieve complete implementation, including all important steps required to achieve completion of each phase. You will also create epic sub-issues for each phase using the template in Appendix B.
 
 ### Acceptance Criteria
 

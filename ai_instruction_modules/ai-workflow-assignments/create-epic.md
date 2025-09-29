@@ -8,6 +8,7 @@ Your goal is to create an epic based on a phase from the main app plan issue.
 
 ### Inputs
 - __issue: parent issue id
+- __phase_name: name of the phase to create an epic for
 
 
 ### Output
