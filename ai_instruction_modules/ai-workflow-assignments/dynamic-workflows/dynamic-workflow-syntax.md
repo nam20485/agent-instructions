@@ -15,17 +15,30 @@ This file defines the canonical syntax for dynamic workflow files. All tools and
 ## Orchestrator Responsibilities
 
   - Resolve each listed assignment to its `ai-workflow-assignments/<assignment>.md` file.
+  - Compile context for passing during delegtion or workflow assignments
+  - 
   - Extract and enforce the assignment’s Acceptance Criteria as the Definition of Done.
   - Print a resolution trace and produce a Run Report as defined in the orchestrator guardrails.
 
 ## Legend
 
 - `$variable` = <value>: define variable
+- `${variable}` = <value>: define variable (brace format)
+
 - `$variable`: use variable
+- `${variable}`: use variable (brace format)
+
 - `#<step>`: reference output of a step
 - `#<step>.<substep>`: reference output of a substep/assignment in that step
+
 - `get-function-name(<parameters>)`: call a function with parameters
 - [ listItem1, listItem2, ... ]: define a list
+- `$object_variable->property`: access an object property 
+
+## Example: Accessing Object Properties
+- $object_variable can be either a simple scalar value type or another complex object
+- when $object_variable is another complex object type, any property defined in that type of object can be accessed
+- when $object_variable is a simple scalar value type, only basic property types such as e.g. length, name, count, etc. can be accessed (depending on the type of the scalar value)  
   
 Quoting conventions:
 - Use backticks for assignment short IDs and step identifiers (e.g., `perform-task`)
