@@ -53,7 +53,7 @@ It is important to the final quality of our product for everyone to perform thei
 
 Given the following, implement the application as per the filled-out development plan issue:
 
-1. Iniiaoized Git repo
+1. Initialized Git repo
 2. Filled-out application template
 3. Filled-out development plan issue
 4. Created project structure
