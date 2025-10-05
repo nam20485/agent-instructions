@@ -2,14 +2,34 @@
 
 ## Overview
 
-This dynamic workflow file specifies the workflow for initiating a new repo. It is intended to be used with the `orchestrate-dynamic-workflow` assignment.
+This dynamic workflow breaks down an application development plan into epics and stories. It extracts phases from a plan issue, creates epic issues for each phase, then creates story issues for each epic. The workflow supports both parallel (stories created immediately after each epic) and serial (all epics created first, then all stories) execution modes.
 
 ## Script
 
+### Helper Functions
+
+#### getplanissue($issue_number, $repository)
+Retrieves the plan issue from the specified repository.
+- **Input:** Issue number and repository path
+- **Returns:** Issue object containing the application development plan
+- **Example:** `getplanissue(42, "myorg/myrepo")` returns issue #42 from myorg/myrepo
+
+#### getphases($plan_issue)
+Extracts development phases from the plan issue.
+- **Input:** Plan issue object
+- **Returns:** Array of phase objects, each containing phase description and requirements and entire content of phase
+- **Example:** `getphases($plan_issue)` returns `["Phase 1: Setup", "Phase 2: Core Features", ...]`
+
+#### getstories($epic)
+Extracts story items from an epic issue.
+- **Input:** Epic issue object
+- **Returns:** Array of story descriptions to be converted into story issues
+- **Example:** `getstories($epic)` returns `["Story 1: User login", "Story 2: Password reset", ...]`
+
 ### Inputs
-- `issue_number` (optional)
+- `$issue_number` (optional)
   - issue number to analyze
-- `repository` (optional)
+- `$repository` (optional)
   - git repo with plan issue to analyze
   - if not provided, use current workspace
 
@@ -18,32 +38,29 @@ This dynamic workflow file specifies the workflow for initiating a new repo. It 
 `$plan_issue` = getplanissue($issue_number, $repository)
 `$phases` = getphases($plan_issue)
 
-`$epics` = []
-
 const `$PARALLEL_EPIC_BREAKDOWN`: `true`
 
-For each `$phase` in `phases`, you will:
+For each `$phase` in `$phases`, you will:
    - assign the agent the `create-epic` assignment with input `$phase`
    - wait until the agent finishes the task
    - review the work and approve it
-   - record output as `$breakdown-plan.create-epic`
+   - record output as `#breakdown-plan.create-epic`
 
    if `$PARALLEL_EPIC_BREAKDOWN` is `true`:
-      $stories = getstories($breakdown-plan.create-epic)
+      $stories = getstories(#breakdown-plan.create-epic)
 
       For each `$story` in `$stories`, you will:
-       - assign the agent the `create-story` assignment with input `$story
+       - assign the agent the `create-story` assignment with input `$story`
        - wait until the agent finishes the task
        - review the work and approve it
-       - record output as `$breakdown-plan.breakdown-epic-and-plan.create-story`
-   else:
-      - add `$breakdown-plan.create-epic` to `$epics` array
+       - record output as `#breakdown-plan.create-story`
 
-if `$PARALLEL_EPIC_BREAKDOWN` is not `true`:
-   $stories = getstories($breakdown-plan.create-epic)
+if `$PARALLEL_EPIC_BREAKDOWN` is `false`:
+   For each `$epic` in `#breakdown-plan.create-epic`:
+      $stories = getstories($epic)
 
-   For each `$story` in `$stories`, you will:
-      - assign the agent the `create-story` assignment with input `$story
-      - wait until the agent finishes the task
-      - review the work and approve it
-      - record output as `$breakdown-plan.breakdown-epic-and-plan.create-story`
+      For each `$story` in `$stories`, you will:
+         - assign the agent the `create-story` assignment with input `$story`
+         - wait until the agent finishes the task
+         - review the work and approve it
+         - record output as `#breakdown-plan.create-story`
