@@ -20,6 +20,12 @@ Execute a specific task given to you by an orchestrator or stakeholder, using th
 
 Your assignment is to execute a specific task that has been assigned to you by following the established task-based workflow process. This involves systematic planning, stakeholder approval, careful execution, and thorough documentation to ensure successful task completion.
 
+### Workflow Process(es)
+
+You will use the following workflow process(es) to complete your assignment:
+- Task-based workflow [ai-task-based-workflow](../ai-workflow-processes/ai-task-based-workflow.md)
+- Iterative Guardrails Workflow [ai-iterative-guardrails-workflow](../ai-workflow-processes/ai-iterative-guardrails-workflow.md)
+
 **Always follow instructions exactly as listed here.**
 
 It is important to the final quality of our product for everyone to perform their assignment exactly as specified.

@@ -6,7 +6,14 @@ This dynamic workflow breaks down an application development plan into epics and
 
 ## Script
 
-### Helper Functions
+### Inputs
+- `$issue_number` (optional)
+  - issue number to analyze
+- `$repository` (optional)
+  - git repo with plan issue to analyze
+  - if not provided, use current workspace
+
+### Declarations
 
 #### getplanissue($issue_number, $repository)
 Retrieves the plan issue from the specified repository.
@@ -25,13 +32,6 @@ Extracts story items from an epic issue.
 - **Input:** Epic issue object
 - **Returns:** Array of story descriptions to be converted into story issues
 - **Example:** `getstories($epic)` returns `["Story 1: User login", "Story 2: Password reset", ...]`
-
-### Inputs
-- `$issue_number` (optional)
-  - issue number to analyze
-- `$repository` (optional)
-  - git repo with plan issue to analyze
-  - if not provided, use current workspace
 
  ### breakdown-plan
 
