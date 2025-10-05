@@ -1,6 +1,6 @@
 # Assignment: Create App from Plan Issue
 
-## create-application-from-plan-issue)
+## (create-application-from-plan-issue)
 
 ### Goal
 

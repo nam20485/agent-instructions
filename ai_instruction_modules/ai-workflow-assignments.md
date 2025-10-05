@@ -67,13 +67,14 @@ The format is made up of the following sections:
 * [orchestrate-new-project.md](ai-workflow-assignments/orchestrate-new-project.md): This assignment involves orchestrating a new project end-to-end—initializing the repo, creating the application plan, building the project structure, breaking down epics into implementable issues, overseeing implementation and validation, and delivering the final product.
 
 ### Planning
-* [breakdown-epic-and-plan.md](ai-workflow-assignments/breakdown-epic-and-plan.md): This assignment involves breaking down a high-level epic into granular, executable sub-issues. You will create a plan, document it in an issue, and once gaining approval, you will implement the plan.
 * [create-app-plan.md](ai-workflow-assignments/create-app-plan.md): This assignment involves creating a plan for a new application based on a filled-out application template. You will create a plan, document it in an issue, and once gaining approval, you will implement the plan.
 
 ### Initialization & Setup
 * [create-application.md](ai-workflow-assignments/create-application.md): This assignment involves creating a new application given the description from a new app template that has been filled out, including setting up the project structure, configuring necessary components, and ensuring the application meets specified requirements.
+* [create-app-from-plan-issue.md](ai-workflow-assignments/create-app-from-plan-issue.md): This assignment involves creating a new application from an initialized git repo and a filled-out development plan issue, implementing the project structure and components.
+* [create-app-from-plan-issue (unguided).md](ai-workflow-assignments/create-app-from-plan-issue%20(unguided).md): This assignment is an unguided variant of creating an application from a plan issue, providing less prescriptive steps.
 * [create-project-structure.md](ai-workflow-assignments/create-project-structure.md): This assignment involves creating the actual project structure and scaffolding for a new application based on a comprehensive application plan. This involves setting up the repository, creating the solution structure, configuring initial project files, and establishing the development environment foundation.
-* [initiate-new-repository.md](ai-workflow-assignments/initiate-new-repository.md): This assignment involves creating and configuring a new repository from a template, copying app plan docs, setting up labels and milestones, creating a GitHub Project board, and renaming workspace/devcontainer files.
+* [init-existing-repository.md](ai-workflow-assignments/init-existing-repository.md): This assignment involves initializing and configuring an existing repository, setting up project structure, labels, milestones, and renaming workspace/devcontainer files.
 
 ### Implementation & Execution
 * [continue-task-work.md](ai-workflow-assignments/continue-task-work.md) (continue-task-work): This assignment involves discovering, assessing, prioritizing, and resuming in-progress tasks to completion, ensuring proper integration, updates to issues/PRs, and stakeholder review.
@@ -86,13 +87,27 @@ The format is made up of the following sections:
 
 ### Documentation & Analysis
 * [ai-creating-repository-summary.md](ai-creating-repository-summary.md): This assignment involves creating a custom summary of a repository. You will create a `.ai-repository-summary.md` file in the repository that contains information describing how a coding agent seeing it for the first time can work most efficiently.
+* [analyze-plan-issue.md](ai-workflow-assignments/analyze-plan-issue.md): This assignment involves analyzing an application development plan issue to determine fitness for implementation, identify gaps, assess risks and mitigations, and provide recommendations for improvement.
 * [analyze-progress-doc.md](ai-workflow-assignments/analyze-progress-doc.md): This assignment involves rigorously interrogating a provided repo to analyze the progress made and identify any gaps or areas that need further work. You will then document your findings in a new issue.
 * [debrief-and-document.md](ai-workflow-assignments/debrief-and-document.md): This assignment involves running a formal debrief to capture lessons learned, highlight successes and gaps, and publish a stakeholder-approved report with recommended updates to workflows, prompts, and agent files.
 
-### Specialized Tasks
-* [convert-vs-color-theme-to-vscode.md](ai-workflow-assignments/convert-vs-color-theme-to-vscode.md): This assignment involves converting a Visual Studio color theme to a Visual Studio Code color theme. You will create a plan, document it in an issue, and once gaining approval, you will implement the plan.
-
 ### Dynamic Workflows
-* [orchestrate-dynamic-workflow.md](ai-workflow-assignments/orchestrate-dynamic-workflow.md): Orchestrate a dynamic workflow as defined in a dynamic workflow file under the “Script” section—iterate through each specified assignment (by short ID) in order, oversee execution to completion, and obtain approval.
+* [orchestrate-dynamic-workflow.md](ai-workflow-assignments/orchestrate-dynamic-workflow.md): Orchestrate a dynamic workflow as defined in a dynamic workflow file under the "Script" section—iterate through each specified assignment (by short ID) in order, oversee execution to completion, and obtain approval.
 * [validate-dynamic-workflow-script.md](ai-workflow-assignments/validate-dynamic-workflow-script.md): Validate a dynamic workflow script against the canonical DSL: check syntax, logical structure, existence of referenced assignment short IDs, and path correctness; provide pass/fail feedback with fixes if needed.
+
+## Work-In-Progress Assignments
+
+The following assignments are currently under development in the `.wip` directory and are not yet ready for use:
+
+### Planning (WIP)
+* [breakdown-epic-and-plan.md](.wip/breakdown-epic-and-plan.md): Breaking down a high-level epic into granular, executable sub-issues.
+* [breakdown-stories-and-plan.md](.wip/breakdown-stories-and-plan.md): Converting a higher-level multi-task sub-phase epic sub-issue into granular, executable sub-issues (stories).
+* [create-app-plan-and-epics.md](.wip/create-app-plan-and-epics.md): Creating a comprehensive application plan and creating epic sub-issues for each phase in a single workflow.
+* [create-epic.md](.wip/create-epic.md): Creating an epic sub-issue based on a phase from the main app plan issue.
+* [create-story.md](.wip/create-story.md): Creating a story sub-issue from an epic.
+* [plan-epic.md](.wip/plan-epic.md): Planning an epic with detailed breakdown and requirements.
+* [plan-story.md](.wip/plan-story.md): Planning a story with detailed implementation steps.
+
+### Specialized Tasks (WIP)
+* [convert-vs-color-theme-to-vscode.md](.wip/convert-vs-color-theme-to-vscode.md): Converting a Visual Studio color theme to a Visual Studio Code color theme.
   
