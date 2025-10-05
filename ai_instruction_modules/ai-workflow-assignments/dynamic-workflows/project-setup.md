@@ -8,7 +8,7 @@ This dynamic workflow file specifies the workflow for initiating a new repo. It 
 
 ### Inputs
 
- ### initiate-new-repository
+### initiate-new-repository
 
 `$assignments` = [  
                     `init-existing-repository`,
@@ -22,3 +22,21 @@ For each `$assignment_name` in `$assignments`, you will:
    - wait until the agent finishes the task
    - review the work and approve it
    - record output as `#init-existing-repository.$assignment_name`
+  
+
+### Events
+
+#### `post-assignment-completion`
+
+`$assignments` = [  
+                    `create-repository-summary`
+                 ]
+
+For each `$assignment_name` in `$assignments`, you will:
+   - assign the agent the `$assignment_name` assignment
+   - wait until the agent finishes the task
+   - review the work and approve it
+   - record output as `#events.post-assignment-completion.$assignment_name`
+
+### Meta
+

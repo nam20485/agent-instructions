@@ -20,6 +20,11 @@ Your task is to "onboard" this repository to Copilot coding agent by adding a `.
 
 You will do this task only one time per repository and doing a good job can SIGNIFICANTLY improve the quality of the agent's work, so take your time, think carefully, and search thoroughly before writing the instructions.
 
+- If file already exists, review it and update it as needed to ensure it is complete and accurate. 
+- This assignment will be called successively in each stage, so you can add to it iteratively over time as you learn more about the repository.
+- Whenever you make an update, before doing so, make a backup copy of the existing file so you can refer to it later if needed.
+- Backup copy can be called `.ai-repository-summary-backup-<date-time>.md` and placed in the same directory as the original file.   
+
 <Goals>
 - Reduce the likelihood of a coding agent pull request getting rejected by the user due to
 generating code that fails the continuous integration build, fails a validation pipeline, or
@@ -31,6 +36,7 @@ having misbehavior.
 <Limitations>
 - Instructions must be no longer than 2 pages.
 - Instructions must not be task specific.
+- Instructions MUST be specific to the repository.
 </Limitations>
 
 <WhatToAdd>

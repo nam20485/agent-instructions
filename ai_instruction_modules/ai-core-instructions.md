@@ -102,7 +102,7 @@ Contains high-level information about the repository, building, projects, and st
 
 - This file will not exist until after the project structure has been created
 - Always create it after creating the project/solution structure
-- Creating: [ai-creating-repository-summary.md](./ai-creating-repository-summary.md)
+- Creating: [ai-create-repository-summary.md](./ai-create-repository-summary.md)
 
 #### More Core Modules (**REQUIRED**: always read!)
 
@@ -157,8 +157,24 @@ These sections describe modules to use when you have been given an assignment or
 - In the context of a workflow role assignment:
   - You are expected to follow these rules as a general guide. 
   - The rules from your workflow role assignment take precedence.
+
 - [ai-task-based-workflow.md](./ai-workflow-processes/ai-task-based-workflow.md)
 - [ai-iterative-guardrails-workflow.md](./ai-workflow-processes/ai-iterative-guardrails-workflow.md)
+
+Use this when performing actual development tasks:
+  - writing code
+  - implementing features
+  - creating applications
+  - creating DevOps pipelines
+  - creating infrastructure as code (IaC)
+
+Use this when performing planning or design tasks:
+  - creating application plans
+  - creating design docs
+  - creating architecture diagrams
+  - creating technical specs
+
+- [ai-spec-driven-workflow-v1.md](./ai-workflow-processes/ai-spec-driven-workflow-v1.md)
 
 ##### Workflow Utilities
 

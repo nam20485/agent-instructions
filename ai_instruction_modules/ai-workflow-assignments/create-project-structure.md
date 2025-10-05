@@ -84,7 +84,7 @@ It is important to the final quality of our product for everyone to perform thei
    1. Respository summary document is committed to the repository.
    2. Respository summary document is linked to from the README.md file.
    3. The repository summary is located at the root of the repository in a file called `.ai-repository-summary.md`.
-   4. The repository summary is created by following the instructions in the [ai-creating-repository-summary.md](https://github.com/nam20485/agent-instructions/blob/main/ai_instruction_modules/ai-creating-repository-summary.md) file.
+   4. The repository summary is created by following the instructions in the [ai-create-repository-summary.md](https://github.com/nam20485/agent-instructions/blob/main/ai_instruction_modules/ai-create-repository-summary.md) file.
 
 8. **Initial Commit and Documentation**
    1. Make initial commit with complete structure

@@ -32,7 +32,7 @@ The instruction set is comprehensive and well-structured, with a clear hierarchy
     *   Consolidate the three PR-related documents (`ai-pr-utilities.md`, `ai-workflow-assignments/pr-approval-and-merge.md`, `ai-workflow-assignments/pr-review-comments.md`) into a single, comprehensive guide to reduce overlap.
 
 2.  **Fix Broken Links and References (High Priority):**
-    *   Correct the broken link in `ai-core-instructions.md` that points to `ai-creating-repository-summary.md`.
+    *   Correct the broken link in `ai-core-instructions.md` that points to `ai-create-repository-summary.md`.
     *   Address the broken references in `ai-operation-actions.md`, which refers to a non-existent `operation-actions` directory. The purpose and content of this file need clarification.
     *   Review and update the commented-out links in `ai-core-instructions.md` to accurately reflect the status and location of files in the `.wip` directory.
 

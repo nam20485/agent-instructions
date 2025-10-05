@@ -8,7 +8,17 @@ This assignment involves validating the syntax and logical correctness of a dyna
 
 ### Inputs
 
-$workflow_name: short id of the dynamic workflow assignment to validate
+- $workflow_name
+    - short id of the dynamic workflow assignment to validate
+    - string
+    - optional (iff $workflow_file is provided)
+    - e.g., `breakdown-plan`
+  
+ - $workflow_file
+    - path to the dynamic workflow file to validate
+    - string
+    - optional (iff $workflow_name is provided)    
+    - e.g., `dynamic-workflows/breakdown-plan.md`
 
 ### Goal
 

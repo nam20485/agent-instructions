@@ -1,4 +1,4 @@
-# Dynamic Workflow: Sample Minimal
+# Dynamic Workflow: Dynamic Workflow Template
 
 ## Overview
 
@@ -22,10 +22,7 @@ A minimal example dynamic workflow for exercising the DSL and orchestration end-
 
 ### plan-and-setup
 
-`$assignments` = [
-                    `create-app-plan`, 
-                    `create-project-structure`
-                    ]
+`$assignments` = [`create-app-plan`, `create-project-structure`]
 
 For each `$assignment_name` in `$assignments`, you will:
 - assign the agent the `$assignment_name` assignment
