@@ -68,6 +68,8 @@ The format is made up of the following sections:
 
 ### Planning
 * [create-app-plan.md](ai-workflow-assignments/create-app-plan.md): This assignment involves creating a plan for a new application based on a filled-out application template. You will create a plan, document it in an issue, and once gaining approval, you will implement the plan.
+* [create-epic.md](ai-workflow-assignments/.wip/create-epic.md) (create-epic): This assignment involves creating a single epic sub-issue from a phase in the main application plan. The epic represents a major implementation phase with clear deliverables and contains detailed story breakdowns.
+* [create-story.md](ai-workflow-assignments/.wip/create-story.md) (create-story): This assignment involves creating a single story sub-issue from an epic issue. Stories are granular, executable tasks that can be implemented independently by developers.
 
 ### Initialization & Setup
 * [create-application.md](ai-workflow-assignments/create-application.md): This assignment involves creating a new application given the description from a new app template that has been filled out, including setting up the project structure, configuring necessary components, and ensuring the application meets specified requirements.
@@ -104,8 +106,6 @@ The following assignments are currently under development in the `.wip` director
 * [breakdown-epic-and-plan.md](.wip/breakdown-epic-and-plan.md): Breaking down a high-level epic into granular, executable sub-issues.
 * [breakdown-stories-and-plan.md](.wip/breakdown-stories-and-plan.md): Converting a higher-level multi-task sub-phase epic sub-issue into granular, executable sub-issues (stories).
 * [create-app-plan-and-epics.md](.wip/create-app-plan-and-epics.md): Creating a comprehensive application plan and creating epic sub-issues for each phase in a single workflow.
-* [create-epic.md](.wip/create-epic.md): Creating an epic sub-issue based on a phase from the main app plan issue.
-* [create-story.md](.wip/create-story.md): Creating a story sub-issue from an epic.
 * [plan-epic.md](.wip/plan-epic.md): Planning an epic with detailed breakdown and requirements.
 * [plan-story.md](.wip/plan-story.md): Planning a story with detailed implementation steps.
 
