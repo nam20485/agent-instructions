@@ -4,105 +4,177 @@
 
 ### Goal
 
-Your goal is to create an epic based on a phase from the main app plan issue.
+Create a single epic sub-issue for a specific phase from the main application plan. The epic will break down the phase into detailed stories and tasks, providing a comprehensive implementation roadmap for that phase.
 
 ### Inputs
-- __issue: parent issue id
-- __phase_name: name of the phase to create an epic for
-
+- `$phase`: Phase object containing the phase name, description, requirements, and entire content from the parent plan issue
 
 ### Output
-- Created phase epic sub-issue.
+- Single epic sub-issue created and linked to the parent plan issue
+- Epic contains detailed breakdown of stories and tasks for the phase
+- Epic is assigned to the appropriate milestone
+- Returns the created epic issue object for downstream processing
 
 ### Acceptance Criteria
 
-1. Application template has been thoroughly analyzed and understood
-2. Plan's project structure has been created according to established guidelines and plan
-3. Template from Appendix A has been used as a template for the plan.
-4. Plan contains detailed breakdown of all phases required to achieve complete implementation.
-5. All phases list important steps required to achieve completion of that phase.
-6. All required components and dependencies have been planned.
-7. Application plan follows the specified technology stack and design principles
-8. All mandatory application requirements have been addressed in plan. (testing, documentation, containerization, etc.)
-9. All acceptance criteria from the template have been addressed in the plan.
-10. All risks and mitigations identified.
-11. Code quality standards and best practices have been followed.
-12. Application plan is ready for development and implementation.
-13. Application plan has been documented in an issue using the template in #Appendix A.
-14. Epic sub-issue have been created for each and every phase. (Use template in #Appendix B)
-14. Epic sub-issues have been completely filled out with real information.
-15. Phase sub-issues have been assigned to milestones.
+1. Parent plan issue has been reviewed and the specified phase understood
+2. Epic issue created using the official epic template from `.github/ISSUE_TEMPLATE/epic.md`
+3. Epic title follows format: `[ProjectName] – [PhaseName] - Epic`
+4. Epic contains complete breakdown of all stories within the phase
+5. Each story lists detailed sub-tasks with checkboxes
+6. Technology stack specific to this epic/component is documented
+7. Component architecture is clearly defined
+8. Project structure area relevant to this epic is identified
+9. All mandatory requirements sections are completed (Testing, Documentation, Build & Distribution, Infrastructure)
+10. Acceptance criteria are specific and measurable
+11. Risks and mitigation strategies are identified
+12. Timeline estimates provided for each story
+13. Success metrics defined
+14. Epic is linked as a sub-issue to the parent plan issue using GitHub's sub-issue feature
+15. Epic is linked to the appropriate milestone
+16. Epic is marked as blocking the parent plan issue
+17. Epic issue object is returned for downstream workflow processing
 
 ### Assignment
 
-Your assignment is to create a new application plan based on a filled-out application template. This involves systematic analysis of requirements, careful implementation following established guidelines, and delivery of a application plan that meets all specified criteria. You will use the template in #Appendix A as a template for the plan, and then fill in the details for the specific application. You wil use the template in #Appendix B as a template for the epic sub-issues and fill in the details for the phase epic sub-issues.
+Your assignment is to create a single epic sub-issue for one phase of an existing application plan. This involves:
 
-The application template can be found in the `docs/` directory in a file called `ai-new-app-template.md`. The supporting files are linked to in that file and are also included in the same directory. These files contain all the necessary details about the application you need to create the plan for, including features, components, and requirements.
+1. Analyzing the parent plan issue to understand the phase requirements
+2. Breaking down the phase into detailed stories and tasks
+3. Creating a comprehensive epic issue using the official template
+4. Properly linking the epic to the parent plan and milestone
 
-Specifically, you will:
+The parent application plan issue should already exist and contain the high-level phases. You will be creating ONE epic for ONE specific phase as provided in the `$phase` input parameter.
 
-1. Analyze the filled-out application template and linked supporting documents to understand requirements and expectations and then create a comprehensive plan, documented as an issue (use the template in # #Appendix A), and document the phase epic sub-issues (use the template in #Appendix B) for the development of the application. There is no coding in this assignment. It is strictly planning.
+This assignment is typically invoked by the `breakdown-plan` dynamic workflow, which orchestrates the creation of multiple epics from a plan issue.
 
 **Always follow instructions given here and as described in the task-based workflow process.**
 
 It is important to the final quality of our product for everyone to perform their assignment exactly as specified.
 
-### References:
+### Issue Hierarchy Context
 
-* Excellent examples of previously-completed plans created for different applications: 
+This assignment creates **Epics** at the second level of the issue hierarchy:
+
+```
+┌─────────────────────────────────────┐
+│     Main Application Plan Issue     │  ← Top level: Overall application plan
+└─────────────────────────────────────┘
+                 │
+        ┌────────┼────────┐
+        │        │        │
+┌───────▼──┐ ┌──▼──────┐ ┌▼────────┐
+│ Phase 1  │ │ Phase 2 │ │ Phase 3 │
+│  EPIC    │ │  EPIC   │ │  EPIC   │  ← **THIS LEVEL**: Epics created from phases
+└──────────┘ └─────────┘ └─────────┘     (This assignment creates ONE of these)
+     │            │           │
+  ┌──┼──┐      ┌─┼─┐      ┌──┼──┐
+  │  │  │      │ │ │      │  │  │
+  ▼  ▼  ▼      ▼ ▼ ▼      ▼  ▼  ▼
+Story1 2 3   Story4 5 6  Story7 8 9   ← Bottom level: Stories (granular tasks)
+```
+
+**Your Role:** You are creating ONE Epic for ONE Phase. The Epic will contain multiple Stories as sub-issues.
+
+### References
+
+* Excellent example of a completed epic sub-issue:
+    * https://github.com/nam20485/advanced-memory3/issues/13 (Foundation & Core Services Epic)
+    * https://github.com/nam20485/support-assistant/issues/3 (Phase 1 Epic)
+
+* Example parent plan issues:
     * https://github.com/nam20485/advanced-memory3/issues/12
     * https://github.com/nam20485/support-assistant/issues/2
 
-* Excellent exmple of a completed phase epic sub-issues for a different application:
-    * https://github.com/nam20485/advanced-memory3/issues/12
-
 ### Detailed Steps
 
-1. **Analyze the Application Template**
-   - Review the provided application template and any linked documents
-   - Identify all requirements, features, and components that need to be implemented
-   - Understand the technology stack and design principles to be followed
-   - Identify and clarify any ambiguous or unclear requirements with stakeholders
-   - Identify languages, frameworks, tools, and packages to be used. Document in `docs/tech-stack.md`.
-   - Document high level architecture, components, and design decisions in `docs/architecture.md`.
+1. **Review Phase Input**
+   - Extract the phase name, description, and requirements from the `$phase` input
+   - Identify the parent plan issue from the phase context
+   - Understand the phase goals, requirements, and scope
+   - Review the technology stack and architecture from the parent plan
+   - Note the project structure and components involved in this phase
 
-2. **Design Plan**
-   - Create a detailed design plan based on the new app template
-   - Define the project structure, including directories, files, and naming conventions
-   - Identify necessary frameworks, tools, and packages to be used
-   - Plan for testing, documentation, containerization, and other mandatory requirements
-   - Create Issue documenting plan from the #Appendix A plan template and iterate to gain approval from the orchestrator or stakeholders
-   - Import the issue labels using the `import-labels.ps1` and `.labels.json` files.
-   - Milestones have been created and issues linked to the appropriate milestone.
-   - 
-3. **Create Epic Sub-Issues for Each Phase**
-    -Create a detailed sub-issue subordinate from the main plan issue for each phase of the plan.
-    - These sub-issues are epics.
-    - The sub-issue title should be the phase name.
-    - The per-phase epic sub-issues should contain all of the sub-tasks (called Stories therein) listed in that phase
-    - Use the template in #Appendix B below, as a template for the sub-issue epics. 
-    - Link the sub-issues to the main plan issue USING the sub-issue feature in GitHub. (https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/adding-sub-issues)
-    - You can link the phase names in the main issie to the relevant sub-issue epics.
-    - BUT you must also use the sub-issue feature in GitHub to link the sub-issues.
-    - Link the sub-issues to the appropriate milestone.
-    - List the sub-issues in the relationships section of the main plan issue to indicate thatey are blocking them main issue, i.e. the main plan issue cannot be completed until all of the sub-issues are completed.   (https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/creating-issue-dependencies)
+2. **Analyze Phase Requirements**
+   - Extract all requirements and features for this specific phase
+   - Identify the component(s) this phase belongs to
+   - Understand dependencies and prerequisites from other phases
+   - Clarify any ambiguous requirements with stakeholders
+   - Review any referenced documentation (tech stack, architecture docs)
 
+3. **Break Down Phase into Stories**
+   - Divide the phase into logical stories (typically 3-5 stories per epic)
+   - For each story, identify specific sub-tasks with clear deliverables
+   - Ensure stories follow a logical sequence (foundation → core → integration → testing)
+   - Include all mandatory requirements: testing, documentation, containerization, CI/CD
+   - Add checkboxes for all tasks and sub-tasks
+
+4. **Create Epic Issue**
+   - Use the official epic template from `.github/ISSUE_TEMPLATE/epic.md`
+   - Fill in all sections completely:
+     - Overview: Concise summary of the epic
+     - Project: Name of the project
+     - Component: Specific component this epic implements
+     - Goals: Clear, measurable goals
+     - Technology Stack: Technologies specific to this epic
+     - Epic Stories: List all stories
+     - Component Architecture: Core services and key tasks
+     - Project Structure Area: Highlight affected directories
+     - Implementation Plan: Detailed breakdown of all stories with checkboxes
+     - Mandatory Requirements: Testing, Docs, Build, Infrastructure sections
+     - Acceptance Criteria: Specific and measurable
+     - Risk Mitigation Strategies: Table of risks and mitigations
+     - Timeline Estimate: Time estimate per story
+     - Success Metrics: Measurable success indicators
+
+5. **Link Epic to Plan**
+   - Create the epic issue in the repository
+   - Use GitHub's sub-issue feature to link the epic to the parent plan issue
+     - Reference: https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/adding-sub-issues
+   - Link the epic to the appropriate milestone matching the phase
+   - Add the epic as a blocking dependency in the parent plan issue
+     - Reference: https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/creating-issue-dependencies
+   - Apply appropriate labels (e.g., `epic`, `plan`, `phase-name`)
+
+6. **Quality Validation**
+   - Verify all template sections are completed (no placeholders remain)
+   - Ensure all stories have detailed sub-tasks
+   - Confirm mandatory requirements are addressed
+   - Validate timeline estimates are reasonable
+   - Check that risks are identified with mitigations
+   - Ensure acceptance criteria are measurable
 
 ### Completion
 
-Ask the stake-holder if they are happy with the plan and can approve it. If not then make the requested changes and iterate asking for approval and making changes until approval is gained. **DO NOT IMPLEMENT OR WRITE ANY CODE.** This assignment is planning only.
-Ask the stake-holder for your next assignment.
+1. **Finalize Epic:**
+   - Confirm epic is properly linked as sub-issue to parent plan
+   - Verify milestone assignment is correct
+   - Ensure epic is marked as blocking the parent issue
+   - Verify all template sections are complete
+   - **DO NOT IMPLEMENT OR WRITE ANY CODE.** This assignment is planning only.
 
-## Appendix A: Application Plan Issue Template (Copy-Paste)
+2. **Return Epic Object:**
+   - Return the created epic issue object to the calling workflow
+   - The epic object will be used by the `breakdown-plan` workflow to:
+     - Extract stories for the `create-story` assignment (if `$PARALLEL_EPIC_BREAKDOWN` is true)
+     - Track progress of epic creation
+     - Enable downstream workflow processing
 
-Use the template below when you “Create Issue documenting plan” in step 2. It aligns with the Acceptance Criteria and covers all mandatory areas (testing, docs, containerization, CI/CD, security, risks, etc.). Copy this into a new GitHub Issue and fill in the placeholders.
+**Note:** Stakeholder review of individual epics is not required. The orchestrating workflow will handle review of all epics after they are created.
 
-Template has been moved to [application-plan.md](/.github/ISSUE_TEMPLATE/application-plan.md)
+## Epic Template Reference
 
----
+The official epic template is located at:
+`.github/ISSUE_TEMPLATE/epic.md`
 
-## Appendix B: Application Plan Phases's Epic Sub-Issue Template (Copy-Paste)
-
-Use the template below when you create a sub-issue for each phase in the application plan in step 4. It aligns with the Phases and covers all mandatory areas (testing, docs, containerization, CI/CD, security, risks, etc.). Create a sub-issue off of the main plan issue for each phase, using the template below, and then fill in the placeholders.
-
-Template has been moved to [epic.md](/.github/ISSUE_TEMPLATE/epic.md)
+Use this template when creating the epic issue. It contains the complete structure including:
+- Overview and goals
+- Technology stack
+- Epic stories breakdown
+- Component architecture
+- Implementation plan with detailed sub-tasks
+- Mandatory requirements sections
+- Acceptance criteria
+- Risk mitigation strategies
+- Timeline estimates
+- Success metrics

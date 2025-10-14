@@ -56,7 +56,7 @@ For each `$phase` in `$phases`, you will:
        - record output as `#breakdown-plan.create-story`
 
 if `$PARALLEL_EPIC_BREAKDOWN` is `false`:
-   For each `$epic` in `#breakdown-plan.create-epic`:
+   For each `$epic` in `#breakdown-plan.create-epic`, you will:
       $stories = getstories($epic)
 
       For each `$story` in `$stories`, you will:
