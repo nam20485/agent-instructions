@@ -85,6 +85,26 @@ Analyzes stories to determine if they can be safely executed in parallel.
   - Assessing integration complexity
 - **Example:** `analyze_story_dependencies($stories)` returns `true` if stories are independent, `false` if dependencies exist
 
+#### create_pull_request($story)
+Creates a pull request for the completed story implementation.
+- **Input:** Story object with completed implementation
+- **Returns:** Pull request object containing PR number, URL, and metadata
+- **Actions:**
+  - Creates PR from story's feature branch to target branch
+  - Links PR to story issue
+  - Sets PR title and description from story details
+- **Example:** `create_pull_request($story)` returns PR object for story implementation
+
+#### request_automated_reviews($pull_request)
+Requests automated reviews from AI bots on the pull request.
+- **Input:** Pull request object
+- **Returns:** Review request confirmation
+- **Actions:**
+  - Posts comment `@gemini review` to trigger Gemini bot review
+  - Posts comment `@claude review this PR` to trigger Claude bot review
+  - Waits for automated reviews to complete
+- **Example:** `request_automated_reviews($pr)` triggers both AI bot reviews
+
  ### implement-by-stories
 
 `$plan_issue` = getplanissue($issue_number, $repository)
@@ -101,23 +121,60 @@ For each `$epic` in `$epics`, you will:
       # PARALLEL EXECUTION MODE
       # Assign all stories to agents simultaneously
       For each `$story` in `$stories`, in parallel:
+         # Step 1: Implement the story
          - assign an available agent the `perform-task` assignment with input `$story`
-         - track assignment in `#implement-by-stories.parallel-assignments`
+         - wait until the agent completes the story implementation
+         - record output as `#implement-by-stories.perform-task`
+         
+         # Step 2: Create pull request for the story
+         $pull_request = create_pull_request(#implement-by-stories.perform-task)
+         - record PR as `#implement-by-stories.pull-request`
+         
+         # Step 3: Request automated reviews
+         - post comment on `$pull_request`: "@gemini review"
+         - post comment on `$pull_request`: "@claude review this PR"
+         - wait until both automated reviews complete
+         - record reviews as `#implement-by-stories.automated-reviews`
+         
+         # Step 4: Assign PR approval and merge
+         - assign an available agent the `pr-approval-and-merge` assignment with input `$pull_request`
+         - wait until the agent completes PR approval and merge
+         - record output as `#implement-by-stories.pr-merged`
       
-      # Wait for all parallel stories to complete
-      - wait until all agents finish their assigned stories
-      - collect all outputs as `#implement-by-stories.perform-task-parallel`
+      # Wait for all parallel stories to complete (all PRs merged)
+      - wait until all agents finish their assigned stories and PRs are merged
+      - collect all outputs as `#implement-by-stories.parallel-complete`
       
-      # Review all stories together
+      # Review epic integration
       - review all completed work for integration issues
-      - resolve any merge conflicts
-      - approve the epic as a whole
+      - resolve any merge conflicts that occurred during parallel merges
+      - validate the epic as a whole
+      - approve the epic
    
    else:
       # SERIAL EXECUTION MODE (Default/Safe)
       # Assign stories one at a time in sequence
       For each `$story` in `$stories`, you will:
+         # Step 1: Implement the story
          - assign the agent the `perform-task` assignment with input `$story`
-         - wait until the agent finishes the task
-         - review the work and approve it
+         - wait until the agent completes the story implementation
          - record output as `#implement-by-stories.perform-task`
+         
+         # Step 2: Create pull request for the story
+         $pull_request = create_pull_request(#implement-by-stories.perform-task)
+         - record PR as `#implement-by-stories.pull-request`
+         
+         # Step 3: Request automated reviews
+         - post comment on `$pull_request`: "@gemini review"
+         - post comment on `$pull_request`: "@claude review this PR"
+         - wait until both automated reviews complete
+         - record reviews as `#implement-by-stories.automated-reviews`
+         
+         # Step 4: Assign PR approval and merge
+         - assign an available agent the `pr-approval-and-merge` assignment with input `$pull_request`
+         - wait until the agent completes PR approval and merge
+         - record output as `#implement-by-stories.pr-merged`
+         
+         # Step 5: Review and continue
+         - review the merged story
+         - approve before moving to next story
