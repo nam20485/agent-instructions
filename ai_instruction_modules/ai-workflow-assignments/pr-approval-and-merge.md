@@ -31,6 +31,9 @@ It is important to the final quality of our product for everyone to perform thei
 
 ### Detailed Steps
 
+**NOTE** For a concise pseudocode version of this algorithm see the workflow assignment here:
+    - [PR Review Comments Assignment](./pr-review-comments.md)
+
 1. Fetch and analyze all of the review comments for the assigned PR.
 2. Create an issue that lists each issue with a link, a description of the issue and its cause, and then your plan to resolve.
 3. After gaining an approval, create a branch off of the PR's base branch, link it to your issue, start a review, and then being resolving each issue systematically in order. After finishing resolution of each issue, commit your changes, update the issue, and reply with a comment explaining the outcome on the original review comment. Then mark the comment resolved.
