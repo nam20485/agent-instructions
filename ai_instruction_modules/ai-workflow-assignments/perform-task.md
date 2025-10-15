@@ -6,6 +6,15 @@
 
 Execute a specific task given to you by an orchestrator or stakeholder, using the task-based workflow process. This includes understanding the task requirements, planning/gaining approval and gathering necessary resources, and delivering the expected outcome.
 
+### Inputs
+- `$task`: Task object or description containing the task requirements, objectives, deliverables, and any relevant context
+
+### Output
+- Task successfully completed according to acceptance criteria
+- All deliverables validated and approved by stakeholders
+- Work documented and integrated into the project
+- Returns the task completion status and deliverables for workflow tracking
+
 ### Acceptance Criteria
 
 1. Task requirements have been fully understood and clarified
