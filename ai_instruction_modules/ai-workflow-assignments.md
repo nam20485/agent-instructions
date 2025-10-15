@@ -106,6 +106,7 @@ The following assignments are currently under development in the `.wip` director
 * [breakdown-epic-and-plan.md](.wip/breakdown-epic-and-plan.md): Breaking down a high-level epic into granular, executable sub-issues.
 * [breakdown-stories-and-plan.md](.wip/breakdown-stories-and-plan.md): Converting a higher-level multi-task sub-phase epic sub-issue into granular, executable sub-issues (stories).
 * [create-app-plan-and-epics.md](.wip/create-app-plan-and-epics.md): Creating a comprehensive application plan and creating epic sub-issues for each phase in a single workflow.
+* [outline-epic.md](.wip/outline-epic.md) (outline-epic): Creating a comprehensive structural outline for an epic with all classes, interfaces, methods (no implementation), comprehensive XML documentation, and test stubs to enable Test-Driven Development.
 * [plan-epic.md](.wip/plan-epic.md): Planning an epic with detailed breakdown and requirements.
 * [plan-story.md](.wip/plan-story.md): Planning a story with detailed implementation steps.
 
