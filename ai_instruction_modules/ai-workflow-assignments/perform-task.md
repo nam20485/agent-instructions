@@ -29,6 +29,16 @@ Execute a specific task given to you by an orchestrator or stakeholder, using th
 
 Your assignment is to execute a specific task that has been assigned to you by following the established task-based workflow process. This involves systematic planning, stakeholder approval, careful execution, and thorough documentation to ensure successful task completion.
 
+**Note on Parallel Execution:**
+You may be assigned a task (such as a story) that is part of a larger epic being implemented by multiple agents in parallel. In such cases:
+- Focus on your assigned task's scope - do not overlap with other agents' work
+- Use clear, descriptive feature branch names to avoid confusion
+- Commit and push your work frequently to minimize merge conflicts
+- Coordinate with the orchestrator if you discover dependencies on other agents' work
+- Be prepared for integration testing once all parallel tasks complete
+
+The orchestrator will handle coordination and conflict resolution across parallel work streams.
+
 ### Workflow Process(es)
 
 You will use the following workflow process(es) to complete your assignment:
@@ -65,9 +75,13 @@ It is important to the final quality of our product for everyone to perform thei
 4. **Implementation Execution**
    1. Mark the issue as "state:in-progress" once approval is received
    2. Create appropriate feature branches using naming convention: `issues/<number>-<short-description>`
+      - If working in parallel with other agents, ensure your branch name is unique and descriptive
+      - Example: `issues/42-user-authentication` (not just `issues/42`)
    3. Execute each subtask systematically according to the approved plan
    4. Update issue checkboxes and progress as you complete each step
    5. Commit work frequently with descriptive commit messages
+      - Frequent commits reduce merge conflict risk when working in parallel
+   6. Push your feature branch regularly to make progress visible to orchestrator
 
 5. **Quality Assurance and Testing**
    1. Test each component as it's implemented
