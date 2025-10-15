@@ -4,12 +4,14 @@
 
 ### Goal
 
-Create a comprehensive structural outline for a single epic with all of its stories. This involves creating all main classes, interfaces, methods, and functions WITHOUT implementation (no function bodies). Provide comprehensive XML comment documentation for all classes and members describing their purpose, behavior, parameters, return values, and other important details. Create test case stubs for all functionality to enable Test-Driven Development (TDD) during the subsequent implementation stage.
+Create a comprehensive structural outline for a single **EXISTING** epic with all of its **EXISTING** stories. The epic and all story issues ALREADY EXIST in GitHub - you are NOT creating new issues. You are writing CODE (classes, interfaces, methods) based on the requirements in these existing issues.
+
+This involves creating all main classes, interfaces, methods, and functions WITHOUT implementation (no function bodies). Provide comprehensive XML comment documentation for all classes and members describing their purpose, behavior, parameters, return values, and other important details. Create test case stubs for all functionality to enable Test-Driven Development (TDD) during the subsequent implementation stage.
 
 This outline serves as the architectural blueprint that will be filled in with actual implementation code in the next stage.
 
 ### Inputs
-- `$epic`: Epic issue object containing the epic name, description, requirements, story breakdown, and entire content
+- `$epic`: Epic issue object containing the epic name, description, requirements, story breakdown, and entire content from an **EXISTING GitHub issue**
 
 ### Output
 - Complete structural outline with:
@@ -23,47 +25,75 @@ This outline serves as the architectural blueprint that will be filled in with a
 
 ### Acceptance Criteria
 
-1. Epic issue has been reviewed and all stories understood
-2. All main classes have been created with class-level XML documentation
-3. All interfaces have been created with interface-level XML documentation
-4. All public methods and functions have been declared with complete signatures
-5. Method/function bodies contain only `throw new NotImplementedException()` or language-equivalent placeholder
-6. Every class has comprehensive XML documentation describing its purpose and responsibilities
-7. Every method/function has comprehensive XML documentation including:
+1. **EXISTING** Application Plan issue has been retrieved and reviewed
+2. **EXISTING** Epic issue has been retrieved and reviewed (from GitHub, not created)
+3. All **EXISTING** story issues within the epic have been retrieved and reviewed (from GitHub, not created)
+4. All main classes have been created with class-level XML documentation
+5. All interfaces have been created with interface-level XML documentation
+6. All public methods and functions have been declared with complete signatures
+7. Method/function bodies contain only `throw new NotImplementedException()` or language-equivalent placeholder
+8. Every class has comprehensive XML documentation describing its purpose and responsibilities
+9. Every method/function has comprehensive XML documentation including:
    - Summary of what it does
    - Description of each parameter (with `<param>` tags)
    - Description of return value (with `<returns>` tag)
    - Any exceptions thrown (with `<exception>` tags)
    - Remarks for important behavior or usage notes (with `<remarks>` tag)
-8. Test case classes have been created for every production class
-9. Test method stubs have been created for every public method/function
-10. Test methods follow naming convention: `MethodName_Scenario_ExpectedBehavior`
-11. Test methods contain `// Arrange`, `// Act`, `// Assert` comment sections
-12. Project structure follows the plan's architecture
-13. All necessary `using`/`import` statements are included
-14. Code follows project coding standards and conventions
-15. Project builds successfully without errors
-16. All files are committed to a feature branch
-17. Epic outline object is returned for workflow tracking
+10. Test case classes have been created for every production class
+11. Test method stubs have been created for every public method/function
+12. Test methods follow naming convention: `MethodName_Scenario_ExpectedBehavior`
+13. Test methods contain `// Arrange`, `// Act`, `// Assert` comment sections
+14. Project structure follows the plan's architecture
+15. All necessary `using`/`import` statements are included
+16. Code follows project coding standards and conventions
+17. Project builds successfully without errors
+18. All files are committed to a feature branch
+19. Epic outline object is returned for workflow tracking
+20. **NO NEW ISSUES WERE CREATED** - only code files were created
 
 ### Assignment
 
-Your assignment is to create the complete structural outline for an epic and all of its stories. This is a critical architectural phase that establishes the foundation for implementation.
+> **⚠️ CRITICAL INSTRUCTION - READ THIS FIRST ⚠️**
+>
+> **THE EPIC AND ALL STORIES ALREADY EXIST AS GITHUB ISSUES!**
+> 
+> - You are **NOT** creating new issues
+> - You are **READING** existing issues and **WRITING CODE**
+> - The `$epic` input contains an EXISTING GitHub issue
+> - All stories are EXISTING sub-issues of the epic
+> - Your job: Read the issues, then create CODE FILES (classes, interfaces, tests)
+> 
+> **If you find yourself creating GitHub issues, STOP - you're doing it wrong!**
+
+Your assignment is to create the complete structural outline (CODE FILES ONLY) for an **EXISTING** epic and all of its **EXISTING** stories. The epic and stories ALREADY EXIST as GitHub issues - you will retrieve and read them, NOT create new ones.
+
+This is a critical architectural phase that establishes the foundation for implementation.
+
+**CRITICAL: About the Epic and Stories**
+- ✅ The epic issue ALREADY EXISTS in GitHub - retrieve it using the `$epic` input
+- ✅ All story issues ALREADY EXIST in GitHub - retrieve them from the epic
+- ✅ You are creating CODE FILES (classes, interfaces, tests), NOT GitHub issues
+- ❌ DO NOT create new epic or story issues
+- ❌ DO NOT recreate issues that already exist
+- ❌ DO NOT use GitHub issue creation commands or APIs
 
 **What You WILL Do:**
-- Create all class files with empty classes
-- Define all interfaces with method signatures
-- Declare all public methods with complete signatures
-- Write comprehensive XML documentation for everything
-- Create test class files with test method stubs
-- Ensure the project compiles
+- ✅ Retrieve and read the EXISTING epic issue from GitHub
+- ✅ Retrieve and read all EXISTING story issues from the epic
+- ✅ Create all class files with empty classes (CODE FILES)
+- ✅ Define all interfaces with method signatures (CODE FILES)
+- ✅ Declare all public methods with complete signatures (CODE FILES)
+- ✅ Write comprehensive XML documentation for everything
+- ✅ Create test class files with test method stubs (CODE FILES)
+- ✅ Ensure the project compiles
 
 **What You WILL NOT Do:**
-- Write any implementation code in method bodies
-- Create private helper methods (add during implementation)
-- Write actual test assertions or test logic
-- Implement any business logic
-- Add error handling code
+- ❌ Create or recreate any GitHub issues (epic or stories)
+- ❌ Write any implementation code in method bodies
+- ❌ Create private helper methods (add during implementation)
+- ❌ Write actual test assertions or test logic
+- ❌ Implement any business logic
+- ❌ Add error handling code
 
 **The Outline's Purpose:**
 This outline serves as a contract between the design and implementation phases. During the next implementation phase, developers will:
@@ -111,16 +141,22 @@ Story1 2 3   Story4 5 6  Story7 8 9   ← All stories are outlined together
 
 ### Detailed Steps
 
-1. **Review Epic and Stories**
-   - Extract the epic name, description, and requirements from the `$epic` input
-   - Review all stories contained in the epic
-   - Identify all features and functionality to be implemented
-   - Understand the component architecture and technology stack
+1. **Retrieve and Review EXISTING Epic and Stories (NO ISSUE CREATION)**
+   - **IMPORTANT:** The epic and stories ALREADY EXIST in GitHub as issues
+   - Extract the epic issue number/URL from the `$epic` input object
+   - Retrieve the EXISTING epic issue from GitHub (use GitHub API or gh CLI)
+   - Read the epic's name, description, and requirements
+   - Retrieve all EXISTING story issues that are sub-issues of this epic
+   - Read each story's requirements, tasks, and acceptance criteria
+   - **DO NOT CREATE ANY NEW ISSUES** - only read existing ones
+   - Identify all features and functionality to be implemented across all stories
+   - Understand the component architecture and technology stack from the plan
    - Review the parent plan's project structure
    - Note any dependencies or prerequisites
-   - Create a mental model of the class hierarchy and relationships
+   - Create a mental model of the class hierarchy and relationships needed
 
-2. **Design Class Structure**
+2. **Design Class Structure (CODE ARCHITECTURE)**
+   - Based on the EXISTING story requirements, design the code architecture
    - Identify all main classes needed across all stories
    - Determine which classes should implement interfaces
    - Design interface hierarchies and contracts
@@ -130,7 +166,8 @@ Story1 2 3   Story4 5 6  Story7 8 9   ← All stories are outlined together
    - Identify DTOs, entities, view models, and other data structures
    - Plan for dependency injection and IoC patterns
 
-3. **Create Classes and Interfaces**
+3. **Create Classes and Interfaces (CODE FILES ONLY)**
+   - **REMINDER:** You are creating CODE FILES, not GitHub issues
    - Create all interface files first
      - Define interface method signatures
      - Add comprehensive XML documentation to interfaces
@@ -245,29 +282,34 @@ Story1 2 3   Story4 5 6  Story7 8 9   ← All stories are outlined together
 
 10. **Quality Validation**
     - Review checklist:
-      - [ ] All classes from all stories are created
-      - [ ] All interfaces are defined
+      - [ ] **VERIFIED: Read EXISTING epic issue from GitHub (did not create new issue)**
+      - [ ] **VERIFIED: Read EXISTING story issues from GitHub (did not create new issues)**
+      - [ ] All classes from all stories are created (CODE FILES)
+      - [ ] All interfaces are defined (CODE FILES)
       - [ ] All public methods have signatures only (no implementation)
       - [ ] Every class has XML documentation
       - [ ] Every method has complete XML documentation
       - [ ] Every parameter is documented
       - [ ] Every return value is documented
-      - [ ] Test classes exist for all production classes
+      - [ ] Test classes exist for all production classes (CODE FILES)
       - [ ] Test methods exist for all public methods
       - [ ] Test methods follow naming conventions
       - [ ] Project builds successfully
       - [ ] Code committed to feature branch
+      - [ ] **NO NEW GITHUB ISSUES WERE CREATED**
     - Run through manual review of 2-3 sample classes
     - Verify documentation is comprehensive and clear
     - Ensure consistency across all files
+    - **Final check:** Confirm you only created code files, not GitHub issues
 
 ### Completion
 
 1. **Finalize Outline:**
-   - Confirm all classes, interfaces, and tests are created
+   - Confirm all classes, interfaces, and tests are created (CODE FILES)
    - Verify project builds without errors
    - Ensure all code is committed to feature branch
    - Validate XML documentation is comprehensive
+   - **VERIFY: NO GITHUB ISSUES WERE CREATED** - you only read existing issues and created code files
    - **DO NOT IMPLEMENT METHOD BODIES.** Implementation comes in the next phase.
    - **DO NOT MERGE TO MAIN.** Feature branch stays open for implementation.
 
