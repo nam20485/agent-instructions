@@ -102,7 +102,8 @@ The format is made up of the following sections:
 * [implement-by-stories.md](ai-workflow-assignments/dynamic-workflows/implement-by-stories.md): Implements an application development plan by systematically completing story issues across all epics. Processes each epic in sequence, with support for parallel or serial story execution within each epic.
 * [implement-epic.md](ai-workflow-assignments/dynamic-workflows/implement-epic.md): Implements a single epic by systematically completing its story issues. Auto-selects the next incomplete epic if none is specified. Includes milestone completion and project progress tracking.
 * [analyze-plan.md](ai-workflow-assignments/dynamic-workflows/analyze-plan.md): Dynamic workflow for analyzing application development plans.
-* [breakdown-plan.md](ai-workflow-assignments/dynamic-workflows/breakdown-plan.md): Dynamic workflow for breaking down plans into implementable components.
+* [breakdown-plan.md](ai-workflow-assignments/dynamic-workflows/breakdown-plan.md): Dynamic workflow for breaking down plans into implementable components. Supports parallel epic creation.
+* [breakdown-epic.md](ai-workflow-assignments/dynamic-workflows/breakdown-epic.md): Dynamic workflow for breaking down a single epic into story issues. Auto-selects the next epic needing breakdown if none is specified.
 * [design-app-outline.md](ai-workflow-assignments/dynamic-workflows/design-app-outline.md): Dynamic workflow for creating application design outlines.
 
 ## Work-In-Progress Assignments
