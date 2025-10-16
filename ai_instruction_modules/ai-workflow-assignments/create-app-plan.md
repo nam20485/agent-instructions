@@ -27,7 +27,7 @@ Your goal is to create a plan for application, using the template in Appendix A,
 
 Your assignment is to create a new application plan based on a filled-out application template and its supporting documents. This involves systematic analysis of requirements, careful implementation following established guidelines, and delivery of a application plan that meets all specified criteria. You will use the template in #Appendix A as a template for the plan, and then fill in the details for the specific application.
 
-The application template can be found in the `docs/` directory in a file called `ai-new-app-template.md`. The supporting files are linked to in that file and are also included in the same directory. These files contain all the necessary details about the application you need to create the plan for, including features, components, and requirements.
+The application template can be found in the `plan_docs/` directory in a file called `ai-new-app-template.md`. The supporting files are linked to in that file and are also included in the same directory. These files contain all the necessary details about the application you need to create the plan for, including features, components, and requirements.
 
 Specifically, you will:
 
@@ -50,8 +50,8 @@ It is important to the final quality of our product for everyone to perform thei
    - Identify all requirements, features, and components that need to be implemented
    - Understand the technology stack and design principles to be followed
    - Identify and clarify any ambiguous or unclear requirements with stakeholders
-   - Identify languages, frameworks, tools, and packages to be used. Document in `docs/tech-stack.md`.
-   - Document high level architecture, components, and design decisions in `docs/architecture.md`.
+   - Identify languages, frameworks, tools, and packages to be used. Document in `plan_docs/tech-stack.md`.
+   - Document high level architecture, components, and design decisions in `plan_docs/architecture.md`.
 
 2. **Design Plan**
    - Create a detailed design plan based on the new app template

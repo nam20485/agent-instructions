@@ -52,7 +52,7 @@ Given the following, implement the application as per the filled-out development
 1. Iniiaoized Git repo
 2. Filled-out application template
 3. Application template supporting documentation
-   a. in `docs/` directory`
+   a. in `plan_docs/` directory`
    b. linked to in the application template
 5. Filled-out development plan issue
 6. Created project structure

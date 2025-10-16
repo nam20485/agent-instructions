@@ -14,7 +14,7 @@ Your goal is to initiate a new repository for a project. This involves creating 
 ### Acceptance Criteria
 
 1. Git repository created with proper configuration
-2. App creation plan documents copied to `docs/` directory
+2. App creation plan documents copied to `plan_docs/` directory
 3. Git Project created for issue tracking
 4. Milestones created based on application plan phases
 5. Labels imported for issue management
@@ -22,7 +22,7 @@ Your goal is to initiate a new repository for a project. This involves creating 
 
 ### Assignment
  
-Your assignment is to initiate and set up a new repository for a project. This involves creating the repository and configuring the necessary settings. You will copy the provided app creation documents to the `docs/` directory. You will create a new issue-tracking project, import labels, and create milestones. You will rename workspace and devcontainer files to match the project name.
+Your assignment is to initiate and set up a new repository for a project. This involves creating the repository and configuring the necessary settings. You will copy the provided app creation documents to the `plan_docs/` directory. You will create a new issue-tracking project, import labels, and create milestones. You will rename workspace and devcontainer files to match the project name.
 
 ### Detailed Steps
 
@@ -46,7 +46,7 @@ Your assignment is to initiate and set up a new repository for a project. This i
 3. **Copy App Creation Plan Documents**
    - A list of app creation documents will be provided as an input to this assignment
    - The list of documents will be in the `$context.app_plan_docs` variable
-   - Copy those files into the `docs/` directory of the new repository
+   - Copy those files into the `plan_docs/` directory of the new repository
 
 4. **Create GitHub Project for Issue Tracking**
    - Create a new GitHub Project for issue tracking

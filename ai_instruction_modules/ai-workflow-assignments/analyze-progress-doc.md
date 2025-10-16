@@ -26,7 +26,7 @@ It is important to the final quality of our product for everyone to perform thei
 
 1. Determine what application is supposed to be being built
    1. **Start by reading the issue if provided.**
-   2. Also read the [docs/ai-new-app-template.md](../../docs/ai-new-app-template.md) and included files.
+   2. Also read the [plan_docs/ai-new-app-template.md](../../plan_docs/ai-new-app-template.md) and included files.
 
    **Once you know what the specification of the application is supposed to be, you can analyze how much of that is complete, and what is still missing.**
    

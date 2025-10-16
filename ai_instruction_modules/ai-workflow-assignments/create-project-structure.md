@@ -10,8 +10,8 @@ Create the actual project structure and scaffolding for a new application based 
   * This can be found in the masi planning issue
   * Sometimes also documented in `APP_PLAN.md` file in the root of the repository.
 * Application template and linked supporting documents.
-  * This can be found in the `docs/ai-new-app-template.md` file in the root of the repository.
-  * Supporting documents are linked from the app template and are also included in the `docs/` directory.  
+  * This can be found in the `plan_docs/ai-new-app-template.md` file in the root of the repository.
+  * Supporting documents are linked from the app template and are also included in the `plan_docs/` directory.  
 
 ### Acceptance Criteria
 

@@ -12,9 +12,11 @@ Your goal is to initiate a new repository for a project. This involves creating 
 
 0. PR and new branch created
 1. Git Project created for issue tracking
-2. Milestones created based on application plan phases
-3. Labels imported for issue management
-4. Filenames changed to match project name
+2. Git Project linked to repository
+3. Project columns created: Not Started, In Progress, In Review, Done
+4. Milestones created based on application plan phases
+5. Labels imported for issue management
+6. Filenames changed to match project name
 
 ### Assignment
  
@@ -33,6 +35,12 @@ Your assignment is to set up an existing repository for a project. This involves
    - Create a new GitHub Project for issue tracking
    - Name the project the same as the repository
    - Set the project to `Board` template
+   - Link project to the repository
+   - Create the following columns in the project:
+     - Not Started
+     - In Progress
+     - In Review
+     - Done
 
 3. **Import Labels**
    - Import the labels from the `.labels.json` file in the root of the repository
