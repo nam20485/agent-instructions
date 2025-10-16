@@ -66,6 +66,32 @@ Finds the next epic issue that has not been fully completed.
   - Issues that are open OR have incomplete stories
   - Ordered by milestone due date (earliest first), then by issue number
   - Excludes epics where all stories are closed and merged
+- **Story completion detection (Priority Order):**
+  1. **HIGHEST PRIORITY - Stories with branch but no PR:**
+     - Check for linked branches on story issues (via `development` or `linked-branch` references)
+     - Use `gh pr list --head <branch-name>` to verify if PR exists
+     - Stories with a branch but no PR are considered incomplete and highest priority
+     - These indicate work was started but never submitted for review
+  2. **SECOND PRIORITY - Stories with PR but unresolved reviews:**
+     - Check for linked PRs on story issues
+     - Use `gh pr view <pr-number> --json reviewDecision,reviews,state`
+     - Stories with PRs that are:
+       - In draft state
+       - Have unresolved review comments
+       - Have requested changes not addressed
+       - Not approved (reviewDecision != "APPROVED")
+       - Not merged (state != "MERGED")
+     - These indicate work submitted but not completed through review process
+  3. **Stories not started or partially complete:**
+     - Story issues that are open with no linked branch or PR
+     - Story issues marked as "in progress" but with no commits
+- **Epic completeness:**
+  - An epic is complete only when ALL its stories have:
+    - Branches created
+    - PRs created from those branches
+    - PR reviews completed and approved
+    - PRs merged to target branch
+    - Story issues closed
 - **Example:** `find_next_incomplete_epic("myorg/myrepo")` returns the next epic issue object that needs work
 
 #### getepic($epic, $repository)
