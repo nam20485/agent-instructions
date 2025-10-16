@@ -42,6 +42,22 @@ Stories must be executed serially when:
 - Be prepared to handle merge conflicts when integrating parallel work
 - Serial execution is the **safe default** when dependencies are unclear
 
+### Parallel Execution and Workspace Management
+**How Parallel Execution Works:**
+- Each agent assigned a story creates their own feature branch: `issues/<story-number>-<description>`
+- Agents work in their feature branches independently and push to remote
+- The orchestrator coordinates assignments but agents don't work simultaneously in the same local directory
+- True parallelism happens through:
+  1. **Time-sliced work**: Different agents work at different times, switching branches as needed
+  2. **Separate clones**: Each agent works in a separate clone of the repository
+  3. **Remote coordination**: All work pushed to remote; integration happens via PRs
+
+**Conflict Resolution:**
+- Feature branches allow independent development
+- Conflicts are resolved during PR merge, not during development
+- Frequent commits and pushes reduce merge conflict risk
+- The orchestrator reviews and approves each PR sequentially even if work happens in parallel
+
 ## Script
 
 ### Inputs

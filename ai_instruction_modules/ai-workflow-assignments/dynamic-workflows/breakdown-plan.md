@@ -4,6 +4,19 @@
 
 This dynamic workflow breaks down an application development plan into epics and stories. It extracts phases from a plan issue, creates epic issues for each phase, then creates story issues for each epic. The workflow supports parallel execution where multiple epics can be created simultaneously by different agents, and also supports parallel story creation after each epic is complete.
 
+### Parallel Execution and Workspace Management
+**How Parallel Execution Works:**
+- When `$parallel_execution` is `true`, multiple agents can be assigned `create-epic` tasks simultaneously
+- Each agent works independently, typically in their own workspace or time-sliced
+- Agents don't need separate branches for issue creation (epics/stories are GitHub issues, not code)
+- The orchestrator coordinates assignments and collects outputs from all parallel agents
+- This is different from implementation parallelism where feature branches are required
+
+**Coordination:**
+- The orchestrator waits for all parallel agents to complete before proceeding
+- Issue creation is less conflict-prone than code implementation
+- Epic and story issues are created in GitHub's issue tracker, not in the repository code
+
 ## Script
 
 ### Inputs
