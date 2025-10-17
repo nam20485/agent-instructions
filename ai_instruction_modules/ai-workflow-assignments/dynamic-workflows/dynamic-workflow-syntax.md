@@ -57,6 +57,79 @@ Standard pattern for delegating work to an agent:
 - `review the work and approve it`
 - `record output as #step.substep`
 
+### Events
+
+Events are special subsections within the Script section that define actions to be executed at specific lifecycle points during workflow execution. Events enable dynamic, context-aware behavior that responds to workflow state changes.
+
+#### Event Declaration
+
+Events are declared as fourth-level headings under a third-level "Events" step:
+
+```markdown
+### Events
+
+#### `event-name`
+```
+
+#### Standard Event Types
+
+- `pre-script-begin`: Executes once before any script steps begin
+- `post-script-complete`: Executes once after all script steps complete successfully
+- `pre-assignment-begin`: Executes before each assignment in an iteration starts
+- `post-assignment-completion`: Executes after each assignment in an iteration completes successfully
+- `on-assignment-failure`: Executes when an assignment fails (provides error context)
+- `on-script-failure`: Executes when the entire script fails (cleanup/rollback actions)
+
+#### Event Execution Rules
+
+1. **Timing is Critical**: Events MUST execute at their designated lifecycle point
+   - `pre-*` events run BEFORE the associated action
+   - `post-*` events run AFTER the associated action completes
+   - `on-*-failure` events run only when the associated action fails
+
+2. **Scope and Context**:
+   - `pre-script-begin` and `post-script-complete` execute once per workflow run
+   - `pre-assignment-begin` and `post-assignment-completion` execute once per assignment in loops
+   - Events have access to the same variables and outputs as the parent script
+   - Loop events can access the current iteration's `$assignment_name` and loop index
+
+3. **Execution Order**:
+   ```
+   pre-script-begin
+   → main-step-1
+      → pre-assignment-begin (if loop)
+      → assignment execution
+      → post-assignment-completion (if loop)
+   → main-step-2
+   → ...
+   → post-script-complete
+   ```
+
+4. **Failure Handling**:
+   - If an event script fails, the entire workflow fails
+   - `on-assignment-failure` and `on-script-failure` events should not throw errors
+   - Use failure events for cleanup, logging, and notification only
+
+5. **Output Recording**:
+   - Event outputs should be recorded under: `#events.<event-name>.$assignment_name` (for loop events)
+   - Or: `#events.<event-name>` (for singular events)
+
+#### Event Script Syntax
+
+Event scripts use the same DSL syntax as main scripts:
+
+```markdown
+#### `post-assignment-completion`
+
+`$assignments` = [`create-repository-summary`]
+
+For each `$assignment_name` in `$assignments`, you will:
+   - assign the agent the `$assignment_name` assignment
+   - wait until the agent finishes the task
+   - review the work and approve it
+   - record output as `#events.post-assignment-completion.$assignment_name`
+```
+
 ### Quoting Conventions
 
 - Use backticks for assignment short IDs and step identifiers (e.g., `perform-task`)
@@ -151,3 +224,59 @@ if `$PARALLEL_MODE` is `false`:
 For each `$assignment_name` in `$assignments`, you will:
   - assign the agent the `$assignment_name` assignment
   - record output as `#plan-and-setup.$assignment_name`
+
+## Example: Complete Workflow with Events
+
+This example demonstrates a complete workflow with pre-script, loop iteration, and post-assignment events:
+
+```markdown
+### Inputs
+- `$project_name` (required): Name of the project to initialize
+
+### Events
+
+#### `pre-script-begin`
+- validate environment prerequisites
+- ensure GitHub authentication is configured
+- record validation results as `#events.pre-script-begin`
+
+#### `post-assignment-completion`
+
+`$cleanup_assignments` = [`create-repository-summary`, `update-documentation`]
+
+For each `$assignment_name` in `$cleanup_assignments`, you will:
+   - assign the agent the `$assignment_name` assignment with input $project_name
+   - wait until the agent finishes the task
+   - review the work and approve it
+   - record output as `#events.post-assignment-completion.$assignment_name`
+
+#### `post-script-complete`
+- generate final workflow report
+- notify stakeholders of completion
+- record completion metrics as `#events.post-script-complete`
+
+#### `on-script-failure`
+- log failure details and context
+- attempt to rollback partial changes
+- notify stakeholders of failure
+- record failure report as `#events.on-script-failure`
+
+### initialize-project
+
+`$main_assignments` = [`init-existing-repository`, `create-app-plan`, `create-project-structure`]
+
+For each `$assignment_name` in `$main_assignments`, you will:
+   - assign the agent the `$assignment_name` assignment with input $project_name
+   - wait until the agent finishes the task
+   - review the work and approve it
+   - record output as `#initialize-project.$assignment_name`
+```
+
+**Execution Flow**:
+1. `pre-script-begin` event executes (validates environment)
+2. `initialize-project` step begins
+3. For each assignment in loop:
+   - Assignment executes
+   - `post-assignment-completion` event executes (creates summary and updates docs)
+4. After all assignments complete, `post-script-complete` event executes (generates report)
+5. If any failure occurs, `on-script-failure` event executes instead of `post-script-complete`

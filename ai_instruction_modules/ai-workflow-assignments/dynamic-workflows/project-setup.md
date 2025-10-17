@@ -28,15 +28,14 @@ For each `$assignment_name` in `$assignments`, you will:
 
 #### `post-assignment-completion`
 
-`$assignments` = [  
+`$poc_assignments` = [  
                     `create-repository-summary`
                  ]
 
-For each `$assignment_name` in `$assignments`, you will:
-   - assign the agent the `$assignment_name` assignment
+For each `$poc_assignment_name` in `$poc_assignments`, you will:
+   - assign the agent the `$poc_assignment_name` assignment
    - wait until the agent finishes the task
    - review the work and approve it
-   - record output as `#events.post-assignment-completion.$assignment_name`
+   - record output as `#events.post-assignment-completion.$poc_assignment_name`
 
-### Meta
 

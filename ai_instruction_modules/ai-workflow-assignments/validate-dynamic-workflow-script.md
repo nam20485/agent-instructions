@@ -30,6 +30,9 @@ Your goal is to validate the provided dynamic workflow script to ensure it meets
 2. The logical structure of the script is correct and coherent.
 3. All variables and functions used in the script are properly defined and referenced.
 4. The script does not contain any logical errors or contradictions.
+5. **If an Events section is present, all event definitions are valid and use recognized event types.**
+6. **Event scripts (if present) follow the same DSL syntax rules as main scripts.**
+7. **All assignment short IDs referenced in events (if present) exist in the repository.**
 
 ### Assignment
 
@@ -48,9 +51,14 @@ Your assignment is to validate the provided dynamic workflow script. This involv
 4. Ensure all variables and functions used in the script are properly defined and referenced.
 5. Verify that all referenced assignment short IDs exist in this repository (e.g., `create-app-plan`, `perform-task`).
 6. Verify that any referenced files/paths resolve (e.g., dynamic workflow file location and name).
-7. Check the script for any logical errors or contradictions.
-8. If the script is found to be valid, provide reassurance of its validity.
-9. If any issues are found, provide feedback on the nature of the issues and how they can be resolved.
+7. **Check for an "Events" subsection (if present) and validate event definitions**:
+   - Verify event names match standard types (`pre-script-begin`, `post-script-complete`, `pre-assignment-begin`, `post-assignment-completion`, `on-assignment-failure`, `on-script-failure`)
+   - Ensure event scripts use valid DSL syntax
+   - Verify all assignment short IDs referenced in event scripts exist
+   - Confirm event output recording follows the convention: `#events.<event-name>` or `#events.<event-name>.$assignment_name`
+8. Check the script for any logical errors or contradictions.
+9. If the script is found to be valid, provide reassurance of its validity.
+10. If any issues are found, provide feedback on the nature of the issues and how they can be resolved.
 
 ### Completion
 
@@ -79,5 +87,12 @@ After completing the above steps, you will have validated the provided dynamic w
 - Variables are defined before use and not redefined inconsistently
 - When iterating, outputs are recorded per assignment using the output recording convention (e.g., `#step.assignment-short-id`) if later referenced
 - All referenced assignment short IDs exist in the repository
-- Any referenced paths resolve from this file’s location
+- Any referenced paths resolve from this file's location
 - No contradictory or unreachable instructions; steps proceed in a logical order
+- **If Events section present**:
+  - Events are declared as fourth-level headings under a third-level "Events" heading (#### `event-name`)
+  - Event names match standard types: `pre-script-begin`, `post-script-complete`, `pre-assignment-begin`, `post-assignment-completion`, `on-assignment-failure`, `on-script-failure`
+  - Event scripts follow the same DSL syntax as main scripts
+  - All assignment short IDs referenced in event scripts exist in the repository
+  - Event output recording follows convention: `#events.<event-name>` or `#events.<event-name>.$assignment_name`
+  - Event timing is logically consistent (e.g., `post-*` events don't execute before associated actions)

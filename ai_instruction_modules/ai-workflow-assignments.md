@@ -98,6 +98,98 @@ The format is made up of the following sections:
 * [orchestrate-dynamic-workflow.md](ai-workflow-assignments/orchestrate-dynamic-workflow.md): Orchestrate a dynamic workflow as defined in a dynamic workflow file under the "Script" section—iterate through each specified assignment (by short ID) in order, oversee execution to completion, and obtain approval.
 * [validate-dynamic-workflow-script.md](ai-workflow-assignments/validate-dynamic-workflow-script.md): Validate a dynamic workflow script against the canonical DSL: check syntax, logical structure, existence of referenced assignment short IDs, and path correctness; provide pass/fail feedback with fixes if needed.
 
+## Dynamic Workflow Event System
+
+Dynamic workflows support an event system that enables lifecycle-aware actions to execute at specific workflow execution points. Events are declared in an "Events" subsection within the Script section of a dynamic workflow file.
+
+### Event Types and Lifecycle Points
+
+**Pre-Execution Events**:
+- `pre-script-begin`: Executes once before any workflow steps begin
+  - Use for: environment validation, prerequisite checks, initialization
+- `pre-assignment-begin`: Executes before each assignment in a loop iteration starts
+  - Use for: per-assignment setup, context preparation, logging
+
+**Post-Execution Events**:
+- `post-assignment-completion`: Executes after each assignment in a loop completes successfully
+  - Use for: cleanup, documentation updates, notifications, summary generation
+- `post-script-complete`: Executes once after all workflow steps complete successfully
+  - Use for: final reporting, stakeholder notification, workflow metrics
+
+**Failure-Handling Events**:
+- `on-assignment-failure`: Executes when an assignment fails
+  - Use for: error logging, partial rollback, diagnostic collection
+- `on-script-failure`: Executes when the entire script fails
+  - Use for: full rollback, cleanup, failure notification
+
+### Event Execution Rules
+
+1. **Timing is Mandatory**: Events MUST execute at their exact lifecycle point
+   - Orchestrators must check for event definitions and execute them at the correct time
+   - Missing or delayed event execution violates the workflow contract
+
+2. **Scope and Context**:
+   - Events have access to all script variables, outputs, and current state
+   - Loop events (pre/post-assignment) can access the current `$assignment_name` and iteration context
+   - Singular events (pre/post-script) access the entire workflow context
+
+3. **Execution Order**:
+   ```
+   1. pre-script-begin (once)
+   2. For each main step:
+      a. pre-assignment-begin (if loop, per iteration)
+      b. assignment execution
+      c. post-assignment-completion (if loop, per iteration)
+   3. post-script-complete (once, if all succeed)
+      OR
+      on-script-failure (once, if any fail)
+   ```
+
+4. **Failure Handling**:
+   - If an event fails, the entire workflow fails (except for `on-*-failure` events)
+   - `on-assignment-failure` and `on-script-failure` should be defensive and not throw errors
+   - Use failure events for cleanup, logging, and notification only—not for additional work
+
+5. **Output Recording**:
+   - Loop events: `#events.<event-name>.$assignment_name`
+   - Singular events: `#events.<event-name>`
+   - Event outputs must be included in the Run Report
+
+### Event Script Syntax
+
+Events use the same DSL syntax as main workflow scripts:
+
+```markdown
+### Events
+
+#### `post-assignment-completion`
+
+`$assignments` = [`create-repository-summary`, `update-documentation`]
+
+For each `$assignment_name` in `$assignments`, you will:
+   - assign the agent the `$assignment_name` assignment
+   - wait until the agent finishes the task
+   - review the work and approve it
+   - record output as `#events.post-assignment-completion.$assignment_name`
+```
+
+### Orchestrator Responsibilities for Events
+
+When orchestrating a dynamic workflow, the orchestrator MUST:
+1. **Detect** the presence of an "Events" subsection during workflow parsing
+2. **Parse** each event definition and identify its type and trigger point
+3. **Execute** events at their exact lifecycle point:
+   - Check before/after each relevant action
+   - Pass appropriate context (variables, outputs, current state)
+4. **Record** event execution in the Run Report with evidence
+5. **Gate** on event success: if an event fails, halt the workflow (unless it's a failure-handling event)
+
+### Example: Complete Workflow with Events
+
+See [dynamic-workflow-syntax.md](ai-workflow-assignments/dynamic-workflows/dynamic-workflow-syntax.md#example-complete-workflow-with-events) for a complete example.
+
+For detailed event syntax and conventions, see: [dynamic-workflow-syntax.md](ai-workflow-assignments/dynamic-workflows/dynamic-workflow-syntax.md#events)
+
 #### Available Dynamic Workflow Scripts
 * [implement-by-stories.md](ai-workflow-assignments/dynamic-workflows/implement-by-stories.md): Implements an application development plan by systematically completing story issues across all epics. Processes each epic in sequence, with support for parallel or serial story execution within each epic.
 * [implement-epic.md](ai-workflow-assignments/dynamic-workflows/implement-epic.md): Implements a single epic by systematically completing its story issues. Auto-selects the next incomplete epic if none is specified. Includes milestone completion and project progress tracking.
