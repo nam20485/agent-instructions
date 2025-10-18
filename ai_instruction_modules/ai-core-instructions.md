@@ -189,6 +189,10 @@ Read these when assigned a specific workflow role.
 Read these when assigned a specific workflow assignment.
 - [ai-workflow-assignments.md](./ai-workflow-assignments.md)
 
+##### Workflow Development (Optional)
+Use this when creating, modifying, or troubleshooting workflow assignments and dynamic workflows.
+- [ai-workflow-development-guide.md](./ai-workflow-development-guide.md)
+
 #### Powershell
 Use this when writing Powershell scripts
 - [ai-powershell-instructions.md](./ai-powershell-instructions.md)
