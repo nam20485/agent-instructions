@@ -45,11 +45,11 @@
 
 <constraints>
 ## Constraints (Do Not)
-- Large refactors or new major deps without approval
-- Speculative features outside scope
-- Skip validation steps
-- Offer too many options at once.
-- Change any more code than what is needed accomplish your implementation plan.
+- Large refactors or new major deps without approval → Propose incremental changes with clear approval gates
+- Speculative features outside scope → Focus on assigned tasks; defer out-of-scope features to stakeholder discussion
+- Skip validation steps → Always run validation (dotnet build, dotnet test, Docker build if applicable)
+- Offer too many options at once → Present focused recommendations with clear rationale
+- Change any more code than what is needed accomplish your implementation plan → Limit changes to only what's required for the current implementation plan
 </constraints>
 
 <tools>

@@ -34,9 +34,9 @@ run_in_terminal: dotnet run --project WebApp (isBackground=true)
 
 ### ❌ Incorrect Usage
 ```
-# Don't create new terminals for sequential commands
-run_in_terminal: dotnet build (isBackground=true)  # WRONG
-run_in_terminal: dotnet test (isBackground=true)   # WRONG
+# Use isBackground=false for sequential commands (reuse terminal session)
+run_in_terminal: dotnet build (isBackground=true)  # WRONG - should use isBackground=false
+run_in_terminal: dotnet test (isBackground=true)   # WRONG - should use isBackground=false
 ```
 
 ## System Impact

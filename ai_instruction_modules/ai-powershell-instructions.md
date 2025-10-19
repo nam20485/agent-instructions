@@ -8,7 +8,7 @@ This guide provides PowerShell-specific instructions to help GitHub Copilot gene
   - Use approved PowerShell verbs (Get-Verb)
   - Use singular nouns
   - PascalCase for both verb and noun
-  - Avoid special characters and spaces
+  - Use letters, numbers, and hyphens only
 
 - **Parameter Names:**
   - Use PascalCase
@@ -19,14 +19,14 @@ This guide provides PowerShell-specific instructions to help GitHub Copilot gene
 - **Variable Names:**
   - Use PascalCase for public variables
   - Use camelCase for private variables
-  - Avoid abbreviations
+  - Use complete, descriptive names (no abbreviations)
   - Use meaningful names
 
-- **Alias Avoidance:**
-  - Use full cmdlet names
-  - Avoid using aliases in scripts (e.g., use Get-ChildItem instead of gci)
+- **Cmdlet and Parameter Names:**
+  - Use full cmdlet names in scripts (e.g., Get-ChildItem instead of gci)
+  - Use full parameter names (not abbreviations)
   - Document any custom aliases
-  - Use full parameter names
+  - Aliases acceptable for interactive shell only
 
 ### Example
 
@@ -70,7 +70,7 @@ function Get-UserProfile {
 
 - **Switch Parameters:**
   - Use [switch] for boolean flags
-  - Avoid $true/$false parameters
+  - Use switch parameters instead of $true/$false parameters
   - Default to $false when omitted
   - Use clear action names
 
@@ -112,13 +112,13 @@ function Set-ResourceConfiguration {
 - **Output Objects:**
   - Return rich objects, not formatted text
   - Use PSCustomObject for structured data
-  - Avoid Write-Host for data output
+  - Use Write-Output or return statement for data (Write-Host for UI only)
   - Enable downstream cmdlet processing
 
 - **Pipeline Streaming:**
   - Output one object at a time
   - Use process block for streaming
-  - Avoid collecting large arrays
+  - Stream objects immediately instead of collecting arrays
   - Enable immediate processing
 
 - **PassThru Pattern:**
@@ -185,7 +185,7 @@ function Update-ResourceStatus {
   - `Write-Warning` for warning conditions
   - `Write-Error` for non-terminating errors
   - `throw` for terminating errors
-  - Avoid `Write-Host` except for user interface text
+  - Use `Write-Host` only for user interface text, not data output
 
 - **Error Handling Pattern:**
   - Use try/catch blocks for error management
@@ -196,7 +196,7 @@ function Update-ResourceStatus {
 
 - **Non-Interactive Design:**
   - Accept input via parameters
-  - Avoid `Read-Host` in scripts
+  - Use parameters instead of `Read-Host` in scripts
   - Support automation scenarios
   - Document all required inputs
 
@@ -270,7 +270,7 @@ function Remove-UserAccount {
   - Closing braces on new line
   - Use line breaks after pipeline operators
   - PascalCase for function and parameter names
-  - Avoid unnecessary whitespace
+  - Use consistent, minimal whitespace
 
 - **Pipeline Support:**
   - Implement Begin/Process/End blocks for pipeline functions
@@ -278,8 +278,8 @@ function Remove-UserAccount {
   - Support pipeline input by property name
   - Return proper objects, not formatted text
 
-- **Avoid Aliases:** Use full cmdlet names and parameters
-  - Avoid using aliases in scripts (e.g., use Get-ChildItem instead of gci); aliases are acceptable for interactive shell use.
+- **Full Cmdlet Names:** Use complete cmdlet names and parameters in scripts
+  - Use full cmdlet names in scripts (e.g., Get-ChildItem instead of gci); aliases acceptable for interactive shell only
   - Use `Where-Object` instead of `?` or `where`
   - Use `ForEach-Object` instead of `%`
   - Use `Get-ChildItem` instead of `ls` or `dir`
@@ -387,10 +387,10 @@ Prefer a plain `.ps1` script when:
 - It’s a single-purpose, one-off automation with no reuse
 - The script will not be shared beyond a small context and contains only 1–2 helpers
 
-Avoid anti-patterns:
-- Exporting everything with wildcards for published modules; be explicit
-- Polluting global scope or relying on global variables from modules
-- Giant “kitchen sink” modules; split into focused, cohesive modules
+Follow best practices:
+- Export specific functions/cmdlets explicitly for published modules (not wildcards)
+- Use module-scoped variables instead of polluting global scope
+- Create focused, cohesive modules (not giant "kitchen sink" modules)
 
 ### Key Microsoft Docs
 

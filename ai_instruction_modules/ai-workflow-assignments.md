@@ -33,7 +33,7 @@ The format is made up of the following sections:
 
 ## Mandatory Practices
 - Resolution trace before execution (print files + URLs/SHAs when available)
-- Assignment-first execution; no step synthesis from higher-level index or dynamic files
+- Assignment-first execution; use only steps from resolved assignment files (no synthesis from higher-level index or dynamic files)
 - Acceptance-criteria gating as the Definition of Done
 - Template and preflight enforcement where specified
 - Branch-protection-aware, idempotent operations
@@ -41,8 +41,8 @@ The format is made up of the following sections:
 
 ## Non-Negotiable Behaviors for Workflow Assignments
 - Resolution Trace: Before executing any workflow assignment, print the dereference chain (files + URLs/SHAs).
-- Assignment-First: Execute steps only from the resolved assignment file(s); do not infer steps from indices or dynamic files.
-- Acceptance Gate: Treat Acceptance Criteria as the Definition of Done; do not mark complete unless all pass or deviations are explicitly approved.
+- Assignment-First: Execute steps only from the resolved assignment file(s) → Use explicit steps from resolved assignments (no inference from indices or dynamic files)
+- Acceptance Gate: Treat Acceptance Criteria as the Definition of Done → Mark complete only when all criteria pass or deviations are explicitly approved
 - Preflight: Enforce template/source-of-truth and environment prerequisites before executing steps.
 - Protection-Aware: Respect branch protection; prefer feature branch + PR when protected.
 - Report: Produce a Run Report mapped to Acceptance Criteria with evidence links.

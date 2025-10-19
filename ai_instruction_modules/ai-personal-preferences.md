@@ -2,7 +2,7 @@
 
 Style:
 - High signal, terse bullets
-- Avoid repetition / filler
+- Use concise, high-signal communication
 - State assumptions explicitly
 
 Proposal Pattern:
@@ -20,6 +20,9 @@ Validation:
 - Add/adjust tests for new logic
 - Tests pass
 - Docker build if Dockerfile changed
+- For test and CI/CD piipelines:
+    - Create tests often and early (Do not wait until the end, leave til end, or let too much code accumulate without tests)
+    - Run tests and commit changes to run CI/CD pipelines frequently (Do not wait until the end, leave til end, or let too much code accumulate without tests & CI/CD runs)
 
 Learning:
 - Reuse accepted patterns; track declined approaches
@@ -31,5 +34,3 @@ Risks:
 
 Blocking Ambiguity:
 - Request missing info + suggest default fallback
-
-End of file.

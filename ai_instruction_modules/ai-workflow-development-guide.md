@@ -264,8 +264,8 @@ For each `$assignment_name` in `$cleanup_assignments`, you will:
 
 ### During Execution (Non-Negotiable)
 1. **Assignment-First Execution** - Execute steps ONLY from resolved assignment files
-   - Do not infer or synthesize steps from dynamic workflow files
-   - Do not use close-but-not-exact matches for assignment names
+   - Do not infer or synthesize steps from dynamic workflow files → Use only explicit steps from resolved assignment files
+   - Do not use close-but-not-exact matches for assignment names → Match assignment names exactly as specified
 
 2. **Event Execution** - At each lifecycle point:
    - Check for corresponding event definition
@@ -275,7 +275,7 @@ For each `$assignment_name` in `$cleanup_assignments`, you will:
 
 3. **Acceptance Criteria Gating** - Treat as Definition of Done:
    - Extract criteria from each assignment file
-   - No partial completion - all criteria must pass
+   - Complete all criteria (no partial completion) - all criteria must pass
    - Record PASS/FAIL with evidence links
 
 4. **Template & Preflight Enforcement**:
