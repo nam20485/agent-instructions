@@ -1,5 +1,6 @@
 # Quick AI Tool Reference Card
 
+<tools>
 ## 🧠 Sequential Thinking - Use for:
 - ✅ Complex problems requiring breakdown
 - ✅ Multi-step planning and analysis  
@@ -15,19 +16,25 @@
 - ✅ Building project knowledge graph
 - ✅ Linking related concepts and patterns
 - ✅ Preserving lessons learned
+</tools>
 
+<workflow>
 ## 🔄 Default Workflow:
 1. **Start**: Check memory for relevant context
 2. **Plan**: Use sequential thinking for complex tasks
 3. **Execute**: Apply systematic approach
 4. **Record**: Update memory with outcomes
+</workflow>
 
+<quality_checklist>
 ## 📋 Quality Checklist:
 - [ ] Used sequential thinking for complex analysis?
 - [ ] Checked memory for relevant context?
 - [ ] Updated memory with new insights?
 - [ ] Considered ASP.NET Core + Google Cloud context?
+</quality_checklist>
 
+<testing_validation>
 ## Testing & Validation
 - Use the TDD (Test-Driven Development) approach for all code changes.
 - Write unit tests before implementing new features or changes.
@@ -37,7 +44,9 @@
 - Use `dotnet test` for unit test validation
 
 Refer to [ai-testing-validation.md](./ai-testing-validation.md) for more details.
+</testing_validation>
 
+<terminal_commands>
 ## Terminal Commands
 - Use `run_in_terminal` for all terminal interactions
 - Set `isBackground` to `true` for long-running processes only
@@ -45,3 +54,4 @@ Refer to [ai-testing-validation.md](./ai-testing-validation.md) for more details
 - Refer to [ai-working-command-examples.md](./ai-working-command-examples.md) before running any commands in the terminal
 
 *Reference: See `ai-workflow-config.md` for complete guidelines*
+</terminal_commands>

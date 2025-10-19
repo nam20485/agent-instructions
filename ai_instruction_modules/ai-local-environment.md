@@ -1,5 +1,6 @@
 # Local Environment 
 
+<shells>
 ## Shells
 
 ### Windows
@@ -15,7 +16,9 @@
 In a devcontainer, codespace, or when running in your agent dev environment, your shell is configured by running the `setup-environment.sh` script.
 - You will have access to all of the tools and versions specified in the `setup-environment.sh` script
 - See the `setup-environment.sh` Script section below for more information on the tools available there 
+</shells>
 
+<setup_script>
 ## `setup-environment.sh` Script
 
 ### Overview
@@ -128,5 +131,5 @@ Troubleshooting
 - Permission errors: run the Linux script with sudo for system-level apt installs (the script auto-uses `sudo` when available). On Windows, prefer running with a package manager (winget/choco) available in the PATH or run an elevated PowerShell session where necessary.
 
 If something in the script doesn't match your platform or environment, open an issue with the exact error output and the OS shell you used.
-
+</setup_script>
 
