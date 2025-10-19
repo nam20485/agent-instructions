@@ -1,5 +1,6 @@
 # Testing & Validation Instructions
 
+<testing_approach>
 ## Testing Approach
 
 - Use the TDD (Test-Driven Development) approach for all code changes.
@@ -11,7 +12,9 @@
 - Always run `dotnet build` before suggesting changes are complete
 - Use `dotnet test` for unit test validation  
 - Test Docker builds with `docker build` when Dockerfile changes are made
+</testing_approach>
 
+<frameworks>
 ## Frameworks / Packages
 
 ### For C#
@@ -33,14 +36,18 @@
 
 ### C++
 * Catch2
+</frameworks>
 
+<ci_cd>
 ## Continuous Integration
 - Use GitHub Actions for CI/CD workflows.
 - Include workflows for:
   - Automated builds
   - Automated tests
   - Docker image builds and pushes to the repository's GitHub package registry
+</ci_cd>
 
+<resources>
 ## Links for TDD with AI Agents:
 - [Test-Driven Development with AI Agents](https://www.flowhunt.io/blog/test-driven-development-with-ai-agents/)
 - [TDD with AI Agents](https://www.flowhunt.io/blog/tdd-with-ai-agents/)
@@ -71,3 +78,4 @@
 - Include relevant Microsoft Learn links: <https://learn.microsoft.com/>
 - Reference Google Cloud docs: <https://cloud.google.com/docs>
 - Link to ASP.NET Core guides: <https://learn.microsoft.com/aspnet/core/>
+</resources>

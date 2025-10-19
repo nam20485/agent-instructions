@@ -14,6 +14,19 @@ This file contains instructions for creating a custom summary of a repository.
 
 * Note: You are not to write or include any instructions in this file, but to only use the instructions from the documentation that are relevant to creating a summary of the properties of a repository.
 
+## Formatting Standards
+
+When creating the repository summary file, follow the formatting standards defined in:
+- [ai-instructions-format.md](./ai-instructions-format.md) - Canonical format reference for all instruction files
+
+**Key Requirements:**
+- Use XML semantic tags to structure major sections
+- Follow markdown formatting guidelines
+- Keep file under 32K tokens (preferably 8-16K)
+- Use positive instructions (what TO do)
+- Include examples where helpful
+- See format guide for complete standards
+
 ## Instructions for Creating Repository Summary
 
 Your task is to "onboard" this repository to Copilot coding agent by adding a `.ai-repository-summary.md` file in the repository that contains information describing how a coding agent seeing it for the first time can work most efficiently.

@@ -1,5 +1,6 @@
 # Application Guidelines
 
+<technology_stack>
 ## Technology Stack
 
 - **Always use latest versions**
@@ -65,3 +66,4 @@
 
 ### Optional Packages
 - Polly, ABP, Carter, Nancy, CommunityToolkit
+</technology_stack>

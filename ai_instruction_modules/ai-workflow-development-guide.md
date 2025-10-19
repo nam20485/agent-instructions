@@ -3,6 +3,18 @@
 ## Purpose
 Use this guide when creating, modifying, or troubleshooting workflow assignments and dynamic workflows. This is the comprehensive reference for workflow system developers and orchestrators.
 
+## Formatting Standards
+
+All workflow files must follow the formatting standards defined in:
+- [ai-instructions-format.md](./ai-instructions-format.md) - Canonical format reference
+
+**Key requirements for workflow files:**
+- Use XML semantic tags for major sections
+- Follow markdown formatting guidelines
+- Use positive instructions
+- Include examples demonstrating syntax
+- See format guide for complete standards
+
 ## When to Use This Guide
 - Creating new workflow assignment files
 - Creating new dynamic workflow scripts

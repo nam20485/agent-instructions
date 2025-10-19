@@ -1,5 +1,12 @@
 # Custom Instructions Optimization to Improve Context Retention
 
+## Canonical Format Reference
+
+All optimization strategies are documented and enforced in the canonical format guide:
+- [ai-instructions-format.md](./ai-instructions-format.md) - Complete formatting standards and guidelines
+
+This document tracks the implementation plan for these strategies.
+
 ## Explicit Strategies
 
 The following strategies will be employed. **Do not worry or waste time on any other strategies not listed here.**
