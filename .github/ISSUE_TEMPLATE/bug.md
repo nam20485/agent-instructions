@@ -1,4 +1,3 @@
-
 **Bug Template:**
 ```markdown
 Title: [Bug]: [Brief Description]
@@ -23,3 +22,6 @@ Labels: bug, [severity-label]
 
 ## Proposed Fix
 [Solution approach]
+
+## Related Feedback
+FB-XXX: [title]

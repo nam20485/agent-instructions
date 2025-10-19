@@ -592,28 +592,17 @@ For each actionable feedback item in the plan:
 - Requires coordination across team members
 
 **Epic Template:**
+## Content from Epic Template
+[epic.md](.github/ISSUE_TEMPLATE/epic.md)
+
+(Append following content)
+---
 ```markdown
-Title: [Epic]: [Brief Description]
-Labels: epic, [category-label]
-
-## Goal
-[What this epic achieves]
-
-## Background
-[Context from feedback]
-
-## Stories
-- [ ] Story #[TBD]: [title]
-- [ ] Story #[TBD]: [title]
-[List all related stories]
-
-## Success Criteria
-[How to know epic is complete]
-
 ## Related Feedback Items
 - FB-XXX: [title]
 - FB-XXX: [title]
 ```
+---
 
 #### When to Create a Story
 - Single feature or capability
@@ -623,40 +612,16 @@ Labels: epic, [category-label]
 - Can be completed independently
 
 **Story Template:**
+## Content from Story Template
+[pstory.md](.github/ISSUE_TEMPLATE/epic.md)
+
+(Append following content)
+---
 ```markdown
-Title: [Story]: [Brief Description]
-Labels: story, [category-label]
-
-## User Story
-As a [role], I want [capability] so that [benefit]
-
-OR
-
-## Technical Story
-Implement [technical capability] to [achieve goal]
-
-## Background
-[Context from feedback: FB-XXX]
-
-## Acceptance Criteria
-- [ ] [Criterion 1]
-- [ ] [Criterion 2]
-- [ ] [Criterion 3]
-
-## Tasks
-- [ ] [Task 1]
-- [ ] [Task 2]
-- [ ] [Task 3]
-
-## Definition of Done
-- [ ] Code written and reviewed
-- [ ] Tests added and passing
-- [ ] Documentation updated
-- [ ] PR merged
-
 ## Related Feedback
 FB-XXX: [title and link to action plan]
 ```
+---
 
 #### When to Create a Task
 - Single, focused piece of work
@@ -666,26 +631,17 @@ FB-XXX: [title and link to action plan]
 - Part of a story or can stand alone
 
 **Task Template:**
+## Content from Task Template
+[task.md](.github/ISSUE_TEMPLATE/task.md)
+
+(Append following content)
+---
 ```markdown
-Title: [Task]: [Brief Description]
-Labels: task, [category-label]
-
-## Description
-[What needs to be done - from FB-XXX]
-
-## Steps
-1. [Step 1]
-2. [Step 2]
-3. [Step 3]
-
-## Acceptance Criteria
-- [ ] [Criterion 1]
-- [ ] [Criterion 2]
-
-## Related
-- Feedback: FB-XXX
-- Story: #[story number if part of one]
+## Related Feedback
+FB-XXX: [title and link to action plan]
+FB-XXX: [title and link to action plan]
 ```
+---
 
 #### When to Create a Bug
 - Existing functionality broken
@@ -694,33 +650,17 @@ Labels: task, [category-label]
 - Quality issue in delivered code
 
 **Bug Template:**
+## Content from Bug Template
+[bug.md](.github/ISSUE_TEMPLATE/bug.md)
+
+(Append following content)
+---
 ```markdown
-Title: [Bug]: [Brief Description]
-Labels: bug, [severity-label]
-
-## Description
-[What's wrong - from FB-XXX]
-
-## Current Behavior
-[What happens now]
-
-## Expected Behavior
-[What should happen]
-
-## Steps to Reproduce
-1. [Step 1]
-2. [Step 2]
-3. [Step 3]
-
-## Impact
-[How this affects users/system]
-
-## Proposed Fix
-[Solution approach]
-
 ## Related Feedback
-FB-XXX: [title]
+FB-XXX: [title and link to action plan]
+FB-XXX: [title and link to action plan]
 ```
+---
 
 ### 5.2 Issue Creation Process
 
