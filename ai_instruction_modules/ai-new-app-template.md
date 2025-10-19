@@ -16,7 +16,7 @@
 
 [x] Test cases
 [x] Logging
-[x] Containeriza tion: Docker
+[x] Containerization: Docker
 [x] Containerization: Docker Compose
 [x] Swagger/OpenAPI
 [x] Documentation

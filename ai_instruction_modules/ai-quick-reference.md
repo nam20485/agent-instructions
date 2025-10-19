@@ -34,13 +34,14 @@
 - Iterate, cycling between writing tests and code until the feature is complete.
 - Coverage should be substantial, aiming for at least 80% coverage.
 - Always run `dotnet build` before suggesting changes are complete
-- Use `dotnet test` for unit test validation  
+- Use `dotnet test` for unit test validation
+
 Refer to [ai-testing-validation.md](./ai-testing-validation.md) for more details.
 
 ## Terminal Commands
 - Use `run_in_terminal` for all terminal interactions
 - Set `isBackground` to `true` for long-running processes only
-- Refer to [ai-terminal-management.md](./ai-terminal-management.md) for more details.
-- Refer to [ai-working-command-examples.md](./ai-working-command-examples.md before running any commands in the terminal.)
+- Refer to [ai-terminal-management.md](./ai-terminal-management.md) for more details
+- Refer to [ai-working-command-examples.md](./ai-working-command-examples.md) before running any commands in the terminal
 
-*Reference: See `.ai-workflow-config.md` for complete guidelines*
+*Reference: See `ai-workflow-config.md` for complete guidelines*

@@ -10,11 +10,11 @@
 
  On Linux and/or in WSL your shell is typically bash.
 
-### Devcontainer, Codespaces, and Copilot Agent Dev Enironment
+### Devcontainer, Codespaces, and Copilot Agent Dev Environment
 
- In a devcontainer, codespace,, or when running in your agent dev environment, your shell is configured by running the `setup-environment.sh` script.
- - You will have access to all of the tools and versions specified in the `setup-environment.sh` script.
- - See the #`setup-environment.sh` Script section below for more information onthe tools available there. 
+In a devcontainer, codespace, or when running in your agent dev environment, your shell is configured by running the `setup-environment.sh` script.
+- You will have access to all of the tools and versions specified in the `setup-environment.sh` script
+- See the `setup-environment.sh` Script section below for more information on the tools available there 
 
 ## `setup-environment.sh` Script
 
