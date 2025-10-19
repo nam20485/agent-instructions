@@ -1,10 +1,14 @@
-**Task Template:**
-```markdown
 Title: [Task]: [Brief Description]
+
 Labels: task, [category-label]
+Assignees: [owner]
+
+---
+
+# [Task Name]
 
 ## Description
-[What needs to be done - from FB-XXX]
+[What needs to be done - from FB-XXX or requirement]
 
 ## Steps
 1. [Step 1]
@@ -18,4 +22,4 @@ Labels: task, [category-label]
 ## Related
 - Feedback: FB-XXX
 - Story: #[story number if part of one]
-```
+- Epic: #[epic number if applicable]
