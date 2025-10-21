@@ -152,7 +152,7 @@ If changes need to be reverted:
    - Check for dependencies on the changes
 
 2. **Perform Rollback**:
-   - Use git to revert changes: `git checkout -- .` or `git reset --hard`
+   - Use git to revert changes: `git checkout -- .` or `git reset --soft`
    - Delete generated files/directories
    - Restore from backup if available
    - Clean build artifacts

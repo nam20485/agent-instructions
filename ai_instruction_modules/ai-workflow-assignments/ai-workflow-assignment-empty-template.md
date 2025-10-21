@@ -8,9 +8,9 @@
 
 ### Prerequisites
 
-* [Prerequisite 1]
-* [Prerequisite 2]
-* [Prerequisite 3]
+- [Prerequisite 1]
+- [Prerequisite 2]
+- [Prerequisite 3]
 
 ### Acceptance Criteria
 
@@ -69,6 +69,7 @@ Before beginning this assignment, complete these preparation steps:
 
 **Only proceed once all preparation steps are complete.**
 
+If you are unable to complete any of the preparation steps, escalate the issue to your team lead or follow the escalation procedure outlined in the Error Recovery section.
 ### Detailed Steps
 
 #### 1. [Step 1 Title]
@@ -187,7 +188,7 @@ If errors persist after troubleshooting:
 
 If changes need to be reverted:
 
-1. Use git to revert changes: `git checkout -- .` or `git reset --hard`
+1. Use git to revert changes: `git checkout -- .` or `git reset --soft`
 2. Delete generated files/directories
 3. Restore from backup if available
 4. Document what was rolled back and why
