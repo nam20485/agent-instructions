@@ -69,6 +69,7 @@ Before beginning this assignment, complete these preparation steps:
 
 **Only proceed once all preparation steps are complete.**
 
+If you are unable to complete any of the preparation steps, escalate the issue to your team lead or follow the escalation procedure outlined in the Error Recovery section.
 ### Detailed Steps
 
 #### 1. [Step 1 Title]
