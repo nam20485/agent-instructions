@@ -8,6 +8,7 @@ This template should be added to long-running workflow assignments (>30 minutes)
 
 This assignment has multiple steps and may take [ESTIMATED_TIME] minutes. Report progress at these checkpoints:
 
+> **Note for assignment authors:** For guidance on determining `[ESTIMATED_TIME]`, see the "Estimate Time" section in the "Before Starting" template.
 ### Checkpoint 1: [MILESTONE_NAME] (25% complete)
 
 **Tasks**:
