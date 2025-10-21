@@ -1,3 +1,4 @@
+<cli_examples>
 # AI API and CLI Examples (Working Commands)
 
 Use these exact, known‑working command forms to avoid repeated syntax and command errors across PowerShell, GitHub CLI, Git, and Python. They come from a successful end‑to‑end run of the “initiate-new-repo” workflow and have been validated on Windows with PowerShell.
@@ -9,6 +10,7 @@ Notes
 
 ---
 
+<github_cli>
 ## GitHub CLI: Authentication
 
 ```pwsh
@@ -48,6 +50,7 @@ gh api repos/nam20485/new_repo_test/contents --jq '.[].name'
 # List .github items
 gh api repos/nam20485/new_repo_test/contents/.github --jq '.[].name'
 ```
+</github_cli>
 
 ---
 
@@ -284,3 +287,4 @@ Get-Content pr3.diff -TotalCount 120 | ForEach-Object { $_ }
 - Conflict‑safe Git flows: Shows a predictable rebase/cherry‑pick approach to resolve PR conflicts cleanly.
 
 Adopt these command shapes as your default to reduce errors and speed up repeatable automation.
+</cli_examples>

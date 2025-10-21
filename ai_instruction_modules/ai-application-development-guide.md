@@ -1,5 +1,7 @@
+<application_development_guide>
 # AI Application Development Guide
 
+<purpose>
 ## Purpose
 Use this guide when creating, modifying, or refactoring applications. This comprehensive reference consolidates application development practices, design principles, and technology-specific guidelines to help you build high-quality software.
 
@@ -11,7 +13,9 @@ Use this guide when creating, modifying, or refactoring applications. This compr
 - Reviewing code for best practices
 - Planning application structure and design
 - Selecting technologies and frameworks
+</purpose>
 
+<quick_reference>
 ## Quick Reference
 
 ### Technology Stack (Latest Versions)
@@ -625,3 +629,7 @@ This guide consolidates application development practices across multiple domain
 - **ASP.NET Specifics**: See [ai-instructions-aspnet-guidelines.md](./ai-instructions-aspnet-guidelines.md)
 
 Remember: These guides provide navigation and quick reference. Always consult the canonical files for complete specifications and authoritative guidance.
+</quick_reference>
+</application_development_guide>
+
+```

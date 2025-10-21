@@ -1,13 +1,18 @@
+<research_findings>
 # Context & Custom Instruction Optimization Research
 
+<overview>
 ## Research Overview
 
 This document compiles research findings on optimizing context windows and custom instructions for AI models (particularly Claude and similar LLMs), analyzing implementation complexity versus performance gains.
 
 ---
+</overview>
 
+<key_findings>
 ## Key Findings: High-Impact, Low-Complexity Techniques
 
+<tier1_techniques>
 ### ✅ Tier 1: Easy Implementation + High Performance Gain
 
 These techniques offer the best ROI for optimization efforts:
@@ -644,3 +649,7 @@ File: comprehensive-instructions.md (1000 lines)
 - Unstructured → XML structured
 - ~150 lines → 200 lines (but 3x clearer)
 - Expected: 50-70% improvement in instruction following
+</tier1_techniques>
+</key_findings>
+</research_findings>
+

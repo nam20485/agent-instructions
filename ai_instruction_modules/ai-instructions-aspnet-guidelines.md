@@ -1,10 +1,14 @@
+<aspnet_guidelines>
 # ASP.NET Core Guidelines
 
+<code_style>
 ## Code Style
 - Concise, idiomatic C#; standard folder structure (Controllers, Services, Models, Data)
 - OOP/FP patterns, LINQ/lambdas, descriptive naming, separation of concerns
 - **Naming**: PascalCase (classes/methods), camelCase (locals/privates), UPPERCASE (constants), "I" prefix (interfaces)
+</code_style>
 
+<csharp_features>
 ## C# Features
 - C# 10+ features (records, pattern matching, null-coalescing)
 - ASP.NET Core + Community Toolkit libraries, EF Core with DbContext/repository patterns
@@ -27,3 +31,5 @@
 - Swagger/OpenAPI, XML comments for controllers/DTOs
 
 *Reference official Microsoft/ASP.NET Core/Community Toolkit docs for best practices.*
+</csharp_features>
+</aspnet_guidelines>

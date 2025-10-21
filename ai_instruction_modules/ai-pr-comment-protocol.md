@@ -1,7 +1,10 @@
 # PR Comment Protocols
 
+<overview>
 This module documents the protocols for managing PR review comments and how/when to use the `scripts/query.ps1` helper.
+</overview>
 
+<reply_comments>
 ## Reply Comments
 
 ### 📝 Reply template (per comment)
@@ -54,9 +57,9 @@ Use GitHub CLI. Authenticate once with repo scope: `gh auth login`.
       ```
 
 Note: You only need a helper to 1) enumerate threads (for your own loop), 2) reply by comment_id, and 3) resolve by thread_id. Avoid bulk auto-resolution unless explicitly requested.
+</reply_comments>
 
-
-
+<utilities>
 # AI PR Utilities
 
 This module documents the local PowerShell helper for managing PR review threads and how/when to use it.
@@ -126,3 +129,4 @@ pwsh -NoProfile -ExecutionPolicy Bypass -File scripts/query.ps1 -Owner myorg -Re
 - The script writes a markdown summary to `pr-review-threads-summary.md` in the repo root.
 - Thread resolution uses GraphQL `resolveReviewThread`; replies use `gh api` to the replies endpoint.
 - This utility aligns with the guidance in `ai_workflow_assignments/pr-review-comments.md` (individual replies and resolving threads). Consider pairing its use with commit messages referencing the thread resolutions.
+</utilities>

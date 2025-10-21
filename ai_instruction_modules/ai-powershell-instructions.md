@@ -47,7 +47,9 @@ function Get-UserProfile {
     }
 }
 ```
+</naming_conventions>
 
+<parameter_design>
 ## Parameter Design
 
 - **Standard Parameters:**
@@ -556,3 +558,5 @@ function New-Resource {
     }
 }
 ```
+</parameter_design>
+</powershell_guidelines>

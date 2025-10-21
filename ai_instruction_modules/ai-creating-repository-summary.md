@@ -1,7 +1,9 @@
+<repo_summary_instructions>
 # Creating Repository Custom Instructions
 
 This file contains instructions for creating a custom summary of a repository.
 
+<goals>
 ## Goal
 
 - Create custom summary of a repository.
@@ -44,9 +46,9 @@ generating code that fails the continuous integration build, fails a validation 
 having misbehavior.
 - Minimize bash command and build failures.
 - Allow the agent to complete its task more quickly by minimizing the need for exploration using grep, find, str_replace_editor, and code search tools.
-</Goals>
+</goals>
 
-<Limitations>
+<limitations>
 - Instructions must be no longer than 2 pages.
 - Instructions must not be task specific.
 - Instructions MUST be specific to the repository.
@@ -139,3 +141,5 @@ This project is a web application that allows users to manage their tasks and to
 - Node.js and Express for the backend.
 - MongoDB for data storage.
 ```
+</limitations>
+</repo_summary_instructions>

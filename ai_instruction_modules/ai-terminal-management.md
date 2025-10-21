@@ -1,5 +1,6 @@
 # Terminal Management Best Practices
 
+<core_principle>
 ## Core Principle: Reuse Terminal Sessions
 
 ### Default Behavior (Recommended)
@@ -18,7 +19,9 @@ run_in_terminal with isBackground=true
 - **Behavior**: Creates new terminal session that runs independently
 - **When to use**: Only when you need the process to continue running while executing other commands
 - **⚠️ IMPORTANT**: Always stop any existing background process BEFORE starting a new one to avoid port conflicts and resource waste
+</core_principle>
 
+<examples>
 ## Examples
 
 ### ✅ Correct Usage
@@ -38,17 +41,22 @@ run_in_terminal: dotnet run --project WebApp (isBackground=true)
 run_in_terminal: dotnet build (isBackground=true)  # WRONG - should use isBackground=false
 run_in_terminal: dotnet test (isBackground=true)   # WRONG - should use isBackground=false
 ```
+</examples>
 
+<system_impact>
 ## System Impact
 - **Multiple terminals waste system resources**
 - **Clutters process list and VS Code terminal tabs**
 - **Makes debugging and monitoring more difficult**
 - **Can lead to orphaned processes**
+</system_impact>
 
+<cleanup_strategy>
 ## Cleanup Strategy
 - Monitor running PowerShell/terminal processes
 - Clean up unnecessary background processes
 - Use `Get-Process` to check for resource usage
+</cleanup_strategy>
 
 ---
 *This practice ensures efficient terminal usage and better system resource management.*

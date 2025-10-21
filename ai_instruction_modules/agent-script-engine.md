@@ -1,8 +1,12 @@
+<agent_script_engine>
 # Agent Script Engine
 
+<description>
 ## Description
 The Agent Script Engine is a powerful tool designed to extend custom prompt and command features of AI agents/chat clients such as VS Code, Claude Code, Gemini, and others. It provides a structured way to declare instructions that can be executed by these agents, allowing for more complex interactions and workflows.
+</description>
 
+<features>
 ## Features
 
 The agent script is unique in that it does not require definition of the functions that are declared and used in the script. Instead, the script engine will automatically map the declared functions to the corresponding commands or actions supported by the target AI agent or chat client. This allows for a more seamless integration and reduces the need for boilerplate code. 
@@ -208,3 +212,5 @@ if (deployed) {
 - Control flow structures (if/else, for loops) follow standard programming conventions
 - The engine automatically handles type conversions and error handling
 - Scripts can be as simple or complex as needed, from single-function calls to multi-step workflows
+</features>
+</agent_script_engine>
