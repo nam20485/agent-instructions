@@ -23,7 +23,7 @@ This is an upgraded version of the project-setup workflow that uses the new gene
 
 `$assignments` = [  
                     `init-existing-repository`,
-                    `create-app-plan`, 
+                    `create-app-plan`,
                     `create-application-foundation`,
                     `create-application-structure`,
                     `create-testing-infrastructure`,
