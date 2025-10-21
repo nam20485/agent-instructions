@@ -240,6 +240,12 @@ This example demonstrates a complete workflow with pre-script, loop iteration, a
 - ensure GitHub authentication is configured
 - record validation results as `#events.pre-script-begin`
 
+#### `pre-assignment-begin`
+- log assignment start time
+- prepare assignment-specific context
+- validate assignment prerequisites
+- record preparation status as `#events.pre-assignment-begin.$assignment_name`
+
 #### `post-assignment-completion`
 
 `$cleanup_assignments` = [`create-repository-summary`, `update-documentation`]
@@ -276,6 +282,7 @@ For each `$assignment_name` in `$main_assignments`, you will:
 1. `pre-script-begin` event executes (validates environment)
 2. `initialize-project` step begins
 3. For each assignment in loop:
+   - `pre-assignment-begin` event executes (prepares assignment context)
    - Assignment executes
    - `post-assignment-completion` event executes (creates summary and updates docs)
 4. After all assignments complete, `post-script-complete` event executes (generates report)
