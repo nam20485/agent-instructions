@@ -7,6 +7,7 @@ The dynamic workflow orchestration assignment is different than static workflow 
 
 ## Inputs
 - $workflow_name: the dynamic workflow name to execute (string)
+- pass through any other inputs specified in the dynamic workflow file's "Inputs" section (to the invoked assignments)
 
 ## Goal
 Orchestrate systematically through the assignments as specified in the provided dynamic workflow file's Script section, performing the steps in each one to completion in turn. Assignments are specified by short ID.
