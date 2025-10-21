@@ -57,6 +57,13 @@ Standard pattern for delegating work to an agent:
 - `review the work and approve it`
 - `record output as #step.substep`
 
+### Logging
+
+- `log: "message"` - output a log message during workflow execution
+- `log: "message with {variable}"` - interpolate variables in log messages using curly braces
+- `log: "access property: {object.property}"` - access object properties in log messages
+- Log messages are output to the orchestrator's execution trace for debugging and monitoring
+
 ### Events
 
 Events are special subsections within the Script section that define actions to be executed at specific lifecycle points during workflow execution. Events enable dynamic, context-aware behavior that responds to workflow state changes.
