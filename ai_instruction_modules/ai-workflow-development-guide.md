@@ -1,5 +1,7 @@
+<workflow_development_guide>
 # AI Workflow Development Guide
 
+<purpose>
 ## Purpose
 Use this guide when creating, modifying, or troubleshooting workflow assignments and dynamic workflows. This is the comprehensive reference for workflow system developers and orchestrators.
 
@@ -23,7 +25,9 @@ All workflow files must follow the formatting standards defined in:
 - Troubleshooting workflow execution issues
 - Understanding workflow system architecture
 - Validating workflow syntax and structure
+</purpose>
 
+<core_files>
 ## Core Workflow System Files (Essential References)
 
 Before developing workflows, familiarize yourself with these foundational files:

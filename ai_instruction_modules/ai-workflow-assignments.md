@@ -1,8 +1,10 @@
+<workflow_assignments>
 # Assignment-Based Workflow
 
 * The assignment-based workflow builds on the task-based workflow process by including the new concept of assignments. 
 * Workflow assignments are specifically-defined sets of goals, acceptance criteria, and steps.
 
+<overview>
 ## Workflow Assignments
 
 * Each workflow assignment is unique and describes how to accomplish a specific task, start a new project/application, or stage of the project.
@@ -38,7 +40,9 @@ The format is made up of the following sections:
 - Template and preflight enforcement where specified
 - Branch-protection-aware, idempotent operations
 - Required Run Report mapped 1:1 to Acceptance Criteria with evidence
+</overview>
 
+<mandatory_behaviors>
 ## Non-Negotiable Behaviors for Workflow Assignments
 - Resolution Trace: Before executing any workflow assignment, print the dereference chain (files + URLs/SHAs).
 - Assignment-First: Execute steps only from the resolved assignment file(s) → Use explicit steps from resolved assignments (no inference from indices or dynamic files)
@@ -213,5 +217,9 @@ The following assignments are currently under development in the `.wip` director
 * [plan-story.md](.wip/plan-story.md): Planning a story with detailed implementation steps.
 
 ### Specialized Tasks (WIP)
-* [convert-vs-color-theme-to-vscode.md](.wip/convert-vs-color-theme-to-vscode.md): Converting a Visual Studio color theme to a Visual Studio Code color theme.
+* * [convert-vs-color-theme-to-vscode.md](.wip/convert-vs-color-theme-to-vscode.md): Converting a Visual Studio color theme to a Visual Studio Code color theme.
+  
+```
+</mandatory_behaviors>
+</workflow_assignments>
   

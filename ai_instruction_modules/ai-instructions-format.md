@@ -1,5 +1,7 @@
+<format_guide>
 # AI Instructions Format Guide
 
+<overview>
 ## Overview
 
 This document serves as the **canonical reference** for formatting all AI instruction module files in this repository. It defines the standards, conventions, and best practices that ensure optimal parsing, context retention, and multi-agent compatibility.
@@ -13,7 +15,9 @@ This document serves as the **canonical reference** for formatting all AI instru
 - AI Agents (GitHub Copilot, Claude, Gemini, Qwen, etc.)
 - Human developers and maintainers
 - Anyone creating new instruction modules
+</overview>
 
+<formatting_principles>
 ## Core Formatting Principles
 
 ### 1. XML Semantic Tags
