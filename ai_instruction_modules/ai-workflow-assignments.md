@@ -92,6 +92,7 @@ The format is made up of the following sections:
 * [analyze-plan-issue.md](ai-workflow-assignments/analyze-plan-issue.md): This assignment involves analyzing an application development plan issue to determine fitness for implementation, identify gaps, assess risks and mitigations, and provide recommendations for improvement.
 * [analyze-progress-doc.md](ai-workflow-assignments/analyze-progress-doc.md): This assignment involves rigorously interrogating a provided repo to analyze the progress made and identify any gaps or areas that need further work. You will then document your findings in a new issue.
 * [debrief-and-document.md](ai-workflow-assignments/debrief-and-document.md): This assignment involves running a formal debrief to capture lessons learned, highlight successes and gaps, and publish a stakeholder-approved report with recommended updates to workflows, prompts, and agent files.
+* [update-from-feedback.md](ai-workflow-assignments/update-from-feedback.md) (update-from-feedback): This assignment involves incorporating feedback from previous assignments to improve quality and effectiveness. It includes categorizing feedback into 8 categories, prioritizing issues, creating action plans, generating GitHub issues (epics/stories/tasks/bugs), implementing changes, validating results, and documenting workflow improvements for the agent-instructions repository.
 * [update-plan-issue.md](ai-workflow-assignments/update-plan-issue.md) (update-plan-issue): This assignment involves creating a new, updated version of an application development plan issue by incorporating findings and recommendations from an analysis file, conducting delegate roundtable review, and obtaining stakeholder approval.
 
 ### Dynamic Workflows
@@ -191,6 +192,7 @@ See [dynamic-workflow-syntax.md](ai-workflow-assignments/dynamic-workflows/dynam
 For detailed event syntax and conventions, see: [dynamic-workflow-syntax.md](ai-workflow-assignments/dynamic-workflows/dynamic-workflow-syntax.md#events)
 
 #### Available Dynamic Workflow Scripts
+* [single-workflow.md](ai-workflow-assignments/dynamic-workflows/single-workflow.md): Generic "cradle" workflow that executes any single workflow assignment. Takes a workflow assignment short ID as input and handles execution with validation, event hooks, and acceptance criteria verification. Useful for wrapping workflow assignments with dynamic workflow features.
 * [implement-by-stories.md](ai-workflow-assignments/dynamic-workflows/implement-by-stories.md): Implements an application development plan by systematically completing story issues across all epics. Processes each epic in sequence, with support for parallel or serial story execution within each epic.
 * [implement-epic.md](ai-workflow-assignments/dynamic-workflows/implement-epic.md): Implements a single epic by systematically completing its story issues. Auto-selects the next incomplete epic if none is specified. Includes milestone completion and project progress tracking.
 * [analyze-plan.md](ai-workflow-assignments/dynamic-workflows/analyze-plan.md): Dynamic workflow for analyzing application development plans.
