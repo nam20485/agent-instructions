@@ -52,8 +52,8 @@ For each `$poc_assignment_name` in `$poc_assignments`, you will:
    - assign the agent the `$poc_assignment_name` assignment
    - wait until the agent finishes the task
    - review the work and approve it
-   - if `$poc_assignment_name` is `validate-assignment-completion`:
-     - if validation failed, halt workflow and request manual intervention
+     - if `$poc_assignment_name` is `validate-assignment-completion`:
+     - if validation failed, halt workflow and request manual intervention # Halt workflow to prevent further execution with invalid state
      - if validation passed, proceed to next assignment in `$poc_assignments`
    - record output as `#events.post-assignment-completion.$poc_assignment_name`
 
