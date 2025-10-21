@@ -59,8 +59,8 @@ It is important to the final quality of our product for everyone to perform thei
    FROM node:18-alpine
    WORKDIR /app
    COPY --from=builder /app/dist ./dist
-   COPY --from=builder /app/node_modules ./node_modules
-   COPY package*.json ./
+   COPY --from=builder /app/package*.json ./
+   RUN npm ci --omit=dev
    EXPOSE 3000
    CMD ["node", "dist/main.js"]
    ```
@@ -119,7 +119,7 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -140,7 +140,7 @@ jobs:
         run: npm run build
       
       - name: Upload coverage
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
         if: success()
 ```
 

@@ -204,7 +204,7 @@ This document summarizes the implementation of workflow improvements based on fe
 
 **Old Workflow**:
 ```markdown
-$assignments` = [  
+`$assignments` = [  
     `create-project-structure`,
     `debrief-and-document`
 ]
@@ -212,7 +212,7 @@ $assignments` = [
 
 **New Workflow**:
 ```markdown
-$assignments` = [  
+`$assignments` = [  
     `create-application-foundation`,
     `create-application-structure`,
     `create-testing-infrastructure`,
