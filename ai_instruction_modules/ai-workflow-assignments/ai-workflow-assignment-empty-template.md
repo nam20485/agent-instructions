@@ -8,9 +8,9 @@
 
 ### Prerequisites
 
-* [Prerequisite 1]
-* [Prerequisite 2]
-* [Prerequisite 3]
+- [Prerequisite 1]
+- [Prerequisite 2]
+- [Prerequisite 3]
 
 ### Acceptance Criteria
 
@@ -188,7 +188,7 @@ If errors persist after troubleshooting:
 
 If changes need to be reverted:
 
-1. Use git to revert changes: `git checkout -- .` or `git reset --hard`
+1. Use git to revert changes: `git checkout -- .` or `git reset --soft`
 2. Delete generated files/directories
 3. Restore from backup if available
 4. Document what was rolled back and why
