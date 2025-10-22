@@ -81,9 +81,9 @@ All 10 feedback items from the workflow execution debrief have been successfully
 **Priority:** P2 | **Effort:** Small (2-3 hours)
 
 **Addresses:**
-- **FB-003** - Fix project-repo link verification (WARNING)
+- **FB-003** - Project-Repository Link Verification
 - **FB-007** - Fix build warning for missing workload
-- **FB-008** - Add PR reviewers to workflow assignments
+- **FB-008** - After PR was created needed manual reviewer assignment
 
 **Actions:**
 - Investigate and fix project-repo link verification logic

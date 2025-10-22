@@ -78,7 +78,7 @@ This document details specific workflow changes needed based on feedback from th
 ### Workflow: All workflows creating PRs (e.g., `implement-story.md`)
 **Reference**: `ai_instruction_modules/ai-workflow-assignments/dynamic-workflows/implement-story.md`
 
-#### Change 2.1: Automatic PR Reviewer Assignment (FB-008)
+#### Change 2.1: After PR was created needed manual reviewer assignment (FB-008)
 
 **Current State**: PRs created without automatic reviewer assignment, requiring manual intervention.
 
@@ -166,7 +166,7 @@ gh issue create \
 **Rationale**:
 - Establishes explicit project-repository linkage
 - Automates project board management
-- Addresses verification limitation from FB-003
+- Addresses Project-Repository Link Verification from FB-003
 
 **Impact Assessment**:
 - **Effort**: Small (1-2 hours)
