@@ -282,7 +282,7 @@ All feedback from the workflow execution debrief has been successfully processed
 ## References
 
 ### Source Documents
-- **Original Feedback:** `debriefs/recommentations.md`
+- **Original Feedback:** `debriefs/recommendations.md`
 - **Assignment File:** `ai_instruction_modules/ai-workflow-assignments/update-from-feedback.md`
 
 ### Created Documents
