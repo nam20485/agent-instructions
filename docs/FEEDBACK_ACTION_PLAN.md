@@ -129,14 +129,16 @@ This action plan addresses 10 feedback items identified during the execution of 
 **Owner**: DevOps/QA  
 **Estimated Effort**: 2-4 hours  
 **Steps**:
-1. Manually verify project at https://github.com/users/nam20485/projects/37
-2. Confirm repository appears in project settings
-3. Document verification process for future reference
-4. Update validation procedures
+1. Use GitHub CLI to verify project-repository link programmatically
+2. Run: `gh api /users/nam20485/projects/37 --jq '.repositories[] | select(.name=="agent-instructions")'`
+3. Verify output confirms repository linkage
+4. Document automated verification process for future reference
+5. Update validation procedures to include `gh api` verification
 
 **Acceptance Criteria**:
-- Manual verification completed and documented
+- Automated verification completed using `gh api`
 - Process documented for future projects
+- No manual UI verification required
 
 ---
 
@@ -144,10 +146,19 @@ This action plan addresses 10 feedback items identified during the execution of 
 **Owner**: Workflow Orchestrator  
 **Estimated Effort**: 4-5 hours total  
 **Steps**:
-1. Update next assignment to include project linkage step
-2. Configure milestone usage (Phase 1, 2, 3, ..., n)
-3. Document label application process
-4. Update workflow assignment instructions
+1. Update next assignment to include project linkage step (FB-004)
+   - **What it does**: Links created issues to GitHub Project for unified tracking and visualization
+   - **Why it matters**: Enables Kanban-style workflow, progress tracking, and sprint planning in GitHub Projects UI
+
+2. Configure milestone usage (FB-005)
+   - **What it does**: Assigns issues to milestones (Phase 1, 2, 3, ..., n) for release planning
+   - **Why it matters**: Groups related work, tracks release progress, generates burndown charts
+
+3. Document label application process (FB-006)
+   - **What it does**: Applies semantic labels (bug, feature, priority, etc.) from imported label set
+   - **Why it matters**: Enables filtering, searching, automation triggers, and team coordination
+
+4. Update workflow assignment instructions to include all three steps
 
 **Acceptance Criteria**:
 - Issues added to project automatically or via documented process
@@ -161,14 +172,20 @@ This action plan addresses 10 feedback items identified during the execution of 
 **Estimated Effort**: 2-3 hours  
 **Steps**:
 1. Review `implement-story` workflow for reference implementation
-2. Update PR creation workflow to include reviewer assignment
-3. Test with sample PR
-4. Document configuration
+2. Update PR creation workflow to include full automation cycle:
+   - **Auto-assign reviewers** when PR is created
+   - **Auto-trigger review** process (GitHub Actions or `gh` CLI)
+   - **Auto-post review comments** based on validation results
+   - **Auto-approve** PR if all checks pass
+   - **Auto-merge** PR after approval (with branch protection rules respected)
+3. Test complete automation cycle with sample PR
+4. Document configuration and automation workflow
 
 **Acceptance Criteria**:
-- PRs automatically assigned reviewers
+- PRs automatically assigned reviewers upon creation
+- Full automation cycle implemented: review → comment → approve → merge
 - Configuration documented
-- Workflow tested and validated
+- Workflow tested and validated end-to-end
 
 ---
 
@@ -283,40 +300,29 @@ This action plan addresses 10 feedback items identified during the execution of 
 
 ---
 
-## Timeline & Milestones
+## Implementation Timeline
 
-### Sprint 1 (Weeks 1-2)
-- **Week 1**: 
-  - Complete FB-003 verification (2-4 hours)
-  - Begin FB-008 PR reviewer automation (2-3 hours)
-- **Week 2**: 
-  - Complete FB-008 implementation
-  - Execute FB-004, FB-005, FB-006 during next assignment
+**All items to be implemented immediately** - No phased rollout required.
 
-**Milestone**: P2 items completed
+### Execution Order
 
-### Sprint 2 (Weeks 3-4)
-- **Week 3**: 
-  - Implement FB-007 build warning fix (1-2 hours)
-  - Begin FB-009 workflow analysis (2-4 hours)
-- **Week 4**: 
-  - Complete FB-009 analysis and remediation
-  - Begin FB-002 ADR setup (4-8 hours)
+**Phase 1: Immediate Actions (Today)**
+- FB-003: Project-Repository Link Verification (automated via `gh api`)
+- FB-007: Build warning fix (`dotnet workload restore`)
+- FB-008: PR reviewer automation (update workflow configuration)
 
-**Milestone**: Quality issues resolved
+**Phase 2: Next Assignment Execution (During next workflow run)**
+- FB-004: Add issues to project for linkage
+- FB-005: Use milestones for issue assignment
+- FB-006: Apply appropriate labels
 
-### Sprint 3 (Weeks 5-6)
-- **Week 5**: 
-  - Complete FB-002 ADR implementation
-  - Begin FB-010 workflow integration (4-6 hours)
-- **Week 6**: 
-  - Complete FB-010 workflow integration
-  - Establish FB-001 documentation maintenance process
+**Phase 3: Documentation & Process (This week)**
+- FB-001: Documentation maintenance process
+- FB-002: ADR template and initial setup
+- FB-009: Workflow assignment analysis
+- FB-010: Integrate Part 2 workflow improvements
 
-**Milestone**: All P3 items completed
-
-### Ongoing
-- **FB-001**: Continuous documentation maintenance (2 hours/sprint)
+**Target Completion**: All 10 items within current development cycle (this week)
 
 ---
 
