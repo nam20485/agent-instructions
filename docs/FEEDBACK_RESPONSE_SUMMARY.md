@@ -3,7 +3,7 @@
 **Assignment:** `update-from-feedback`  
 **Date:** 2025-10-21  
 **Executor:** AI Agent (Claude)  
-**Source:** `debriefs/recommentations.md`
+**Source:** `debriefs/recommendations.md`
 
 ---
 
