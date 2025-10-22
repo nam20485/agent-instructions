@@ -16,7 +16,8 @@ When this event fires, the orchestrator should:
 ### 1. Resolution Trace
 Print a complete resolution trace showing:
 - **Script source**: URL or path of the workflow file
-- **Canonical SHA/version**: Commit hash or version identifier- **Assignment dependencies**: List of all assignment IDs referenced in the script
+- **Canonical SHA/version**: Commit hash or version identifier
+- **Assignment dependencies**: List of all assignment IDs referenced in the script
 - **Assignment resolutions**: URL and SHA for each assignment file
 - **Variable context**: Initial values of all script variables
 
