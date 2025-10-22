@@ -126,7 +126,7 @@ Story1 2 3   Story4 5 6  Story7 8 9   ← **THIS LEVEL**: Stories (granular task
 5. **Link Story to Epic**
    - Create the story issue in the repository
    - Link the story to the GitHub Project for unified tracking
-   - Use GitHub''s sub-issue feature to link the story to the parent epic issue
+   - Use GitHub's sub-issue feature to link the story to the parent epic issue
      - Reference: https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/adding-sub-issues
    - Link the story to the appropriate milestone matching the epic''s milestone
    - Add the story as a blocking dependency in the parent epic issue

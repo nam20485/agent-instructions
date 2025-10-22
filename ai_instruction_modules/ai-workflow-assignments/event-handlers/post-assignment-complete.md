@@ -74,3 +74,9 @@ Make go/no-go decision:
 → Continue to next workflow step
 
 **Request Changes:**
+- One or more acceptance criteria not met, or quality standards not satisfied
+- Reviewer identifies issues requiring revision
+- Document specific feedback and required changes
+- Notify collaborator agent of requested changes
+- Return assignment for rework
+- Upon resubmission, repeat validation and review steps

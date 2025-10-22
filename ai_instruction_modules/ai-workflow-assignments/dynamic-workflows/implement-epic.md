@@ -235,7 +235,7 @@ else:
 if `$parallel_execution` is `true` AND `$can_parallelize` is `true`:
       # PARALLEL EXECUTION MODE
       # Assign all stories to agents simultaneously
-       For each `$story` in `$stories`, in parallel:
+      For each `$story` in `$stories`, in parallel:
           # Step 1: Implement the story
           - assign an available agent the `perform-task` assignment with input `$story`
           - wait until the agent completes the story implementation
