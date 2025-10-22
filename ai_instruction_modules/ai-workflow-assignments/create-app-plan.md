@@ -9,7 +9,7 @@ Your goal is to create a plan for application, using the template in Appendix A,
 ### Acceptance Criteria
 
 1. Application template has been thoroughly analyzed and understood
-2. Plan's project structure has been created according to established guidelines and plan
+2. Plan's project structure has been documented according to established guidelines and plan
 3. Template from Appendix A has been used as a template for the plan.
 4. Plan contains detailed breakdown of all phases required to achieve complete implementation.
 5. All phases list important steps required to achieve completion of that phase.
@@ -43,6 +43,18 @@ It is important to the final quality of our product for everyone to perform thei
 ## Before Starting
 
 Before beginning this assignment, complete these preparation steps:
+
+### Important: Planning Only - No Implementation
+
+This assignment is **PLANNING ONLY**. You will:
+- ✅ Document the plan in an issue
+- ✅ Create planning documents (tech-stack.md, architecture.md)
+- ✅ Create milestones and link issues
+- ❌ NOT create any project files (.csproj, .sln, source code, etc.)
+- ❌ NOT write any implementation code
+- ❌ NOT create application directory structures
+
+All implementation happens in subsequent assignments (create-application-foundation, create-application-structure, etc.).
 
 ### 1. Read Assignment Completely
 
@@ -170,7 +182,9 @@ Before beginning this assignment, complete these preparation steps:
 
 2. **Design Plan**
    - Create a detailed design plan based on the new app template
-   - Define the project structure, including directories, files, and naming conventions
+   - Document the planned project structure, including directories, files, and naming conventions
+   
+   **Note**: You are documenting the PLAN for the project structure, not creating the actual directories or files. Actual file creation happens in the 'create-application-foundation' assignment.
    - Identify necessary frameworks, tools, and packages to be used
    - Plan for testing, documentation, containerization, and other mandatory requirements
    - Create Issue documenting plan from the #Appendix A plan template and iterate to gain approval from the orchestrator or stakeholders
