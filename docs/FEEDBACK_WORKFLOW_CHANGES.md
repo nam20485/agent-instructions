@@ -1,7 +1,7 @@
 # Feedback-Driven Workflow Changes
 
 **Generated**: 2025-10-21  
-**Source**: `debriefs/recommentations.md`  
+**Source**: `debriefs/recommendations.md`  
 **Related**: `docs/FEEDBACK_ACTION_PLAN.md`  
 **Status**: PROPOSED
 
