@@ -34,7 +34,7 @@ No functional impact. Project is operational and correctly configured. This is p
 
 ### Other Issues (Remediation Proposal Needed)
 
-1. Build warning: missinng workload.
+1. Build warning: missing workload.
     - Severity: LOW
     - Blocking: NO
     - Description: The build process emitted a warning regarding a missing workload. This does not prevent the build from completing successfully but may indicate incomplete configuration.
