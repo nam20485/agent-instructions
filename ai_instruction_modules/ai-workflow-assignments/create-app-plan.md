@@ -22,6 +22,9 @@ Your goal is to create a plan for application, using the template in Appendix A,
 12. Application plan is ready for development and implementation.
 13. Application plan has been documented in an issue using the template in #Appendix A.
 14. Milestones have been created and issues linked to the appropriate milestone.
+15. Created issue has been added to the GitHub Project for tracking.
+16. Created issue has been assigned to the appropriate milestone (typically "Phase 1: Foundation").
+17. Appropriate labels have been applied to the issue (typically "planning", "documentation").
 
 ### Assignment
 
@@ -171,7 +174,10 @@ Before beginning this assignment, complete these preparation steps:
    - Identify necessary frameworks, tools, and packages to be used
    - Plan for testing, documentation, containerization, and other mandatory requirements
    - Create Issue documenting plan from the #Appendix A plan template and iterate to gain approval from the orchestrator or stakeholders
-   - Create milestones based on the phases in the plan and link issues to the appropriate milestone.
+   - Create milestones based on the phases in the plan using `gh api` or the GitHub CLI
+   - Link created issue to the GitHub Project for unified tracking
+   - Assign issue to appropriate milestone (typically the first phase: "Phase 1: Foundation")
+   - Apply appropriate labels to issue from the imported label set (typically: "planning", "documentation")
 
 ## Progress Reporting
 

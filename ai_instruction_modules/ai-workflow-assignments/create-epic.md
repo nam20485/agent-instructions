@@ -31,9 +31,10 @@ Create a single epic sub-issue for a specific phase from the main application pl
 12. Timeline estimates provided for each story
 13. Success metrics defined
 14. Epic is linked as a sub-issue to the parent plan issue using GitHub's sub-issue feature
-15. Epic is linked to the appropriate milestone
-16. Epic is marked as blocking the parent plan issue
-17. Epic issue object is returned for downstream workflow processing
+15. Epic has been added to the GitHub Project
+16. Epic is linked to the appropriate milestone
+17. Epic is marked as blocking the parent plan issue
+18. Epic issue object is returned for downstream workflow processing
 
 ### Assignment
 
@@ -129,6 +130,7 @@ Story1 2 3   Story4 5 6  Story7 8 9   ← Bottom level: Stories (granular tasks)
 
 5. **Link Epic to Plan**
    - Create the epic issue in the repository
+   - Link the epic to the GitHub Project for unified tracking
    - Use GitHub's sub-issue feature to link the epic to the parent plan issue
      - Reference: https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/adding-sub-issues
    - Link the epic to the appropriate milestone matching the phase
