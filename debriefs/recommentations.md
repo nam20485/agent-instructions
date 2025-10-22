@@ -27,7 +27,7 @@ No functional impact. Project is operational and correctly configured. This is p
 
 
 ### Recommendations for Next Assignment
-1. When creating issues in Assignment 2, add them to the created projectto establish explicit linkage
+1. When creating issues in Assignment 2, add them to the created project to establish explicit linkage
 2. Use milestones (Phase 1, 2, 3, ..., n) for issue assignment
 3. Apply appropriate labels from the 15 imported labels
 
