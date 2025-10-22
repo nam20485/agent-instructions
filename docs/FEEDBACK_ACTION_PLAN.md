@@ -1,7 +1,7 @@
 # Feedback Action Plan
 
 **Generated**: 2025-10-21  
-**Source**: `debriefs/recommentations.md`  
+**Source**: `debriefs/recommendations.md`  
 **Workflow Assignment**: `update-from-feedback`  
 **Status**: ACTIVE
 
