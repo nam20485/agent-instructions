@@ -42,7 +42,7 @@ No functional impact. Project is operational and correctly configured. This is p
        1. Review build configuration and ensure all necessary workloads are installed and configured properly to avoid potential issues in future builds.
        2. Run `dotnet workload restore` to restore any missing workloads.
 
-2. After PR was create needed manual reviewer assignment.
+2. After PR was created needed manual reviewer assignment.
     - Severity: LOW
     - Blocking: NO
     - Description: The automated workflow did not assign reviewers to the created pull request, necessitating manual intervention to ensure proper code review.
