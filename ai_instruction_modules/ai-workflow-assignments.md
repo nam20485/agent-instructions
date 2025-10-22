@@ -262,9 +262,8 @@ The following assignments are currently under development in the `.wip` director
 * [plan-story.md](.wip/plan-story.md): Planning a story with detailed implementation steps.
 
 ### Specialized Tasks (WIP)
-* * [convert-vs-color-theme-to-vscode.md](.wip/convert-vs-color-theme-to-vscode.md): Converting a Visual Studio color theme to a Visual Studio Code color theme.
-  
-```
+* [convert-vs-color-theme-to-vscode.md](.wip/convert-vs-color-theme-to-vscode.md): Converting a Visual Studio color theme to a Visual Studio Code color theme.
+
 </mandatory_behaviors>
 </workflow_assignments>
   

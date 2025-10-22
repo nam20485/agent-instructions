@@ -181,39 +181,39 @@ For each `$epic` in `$epics`, you will:
    if `$parallel_execution` is `true` AND `$can_parallelize` is `true`:
       # PARALLEL EXECUTION MODE
       # Assign all stories to agents simultaneously
-      For each `$story` in `$stories`, in parallel:
-         # Step 1: Implement the story
-         - assign an available agent the `perform-task` assignment with input `$story`
-         - wait until the agent completes the story implementation
-         - record output as `#implement-by-stories.perform-task`
-         
-         # Step 2: Create pull request for the story
-         $pull_request = create_pull_request(#implement-by-stories.perform-task)
-         - record PR as `#implement-by-stories.pull-request`
-         
-         # Step 3: Request automated reviews
-         - post comment on `$pull_request`: "@gemini review"
-         - post comment on `$pull_request`: "@claude review this PR"
-         - wait until both automated reviews complete
-         - record reviews as `#implement-by-stories.automated-reviews`
-         
-         # Step 4: Automated approval and merge
-         $approval_status = auto_approve_pr($pull_request, #implement-by-stories.automated-reviews)
-         
-         if `$approval_status` is `"approved"`:
-            # Attempt automated merge
-            $merge_status = auto_merge_pr($pull_request)
-            
-            if `$merge_status` is `"merged"`:
-               - record successful merge as `#implement-by-stories.pr-merged`
-            else:
-               # Merge failed, manual intervention required
-               - notify that PR #`$pull_request->number` requires manual merge
-               - stop workflow and request manual intervention
-         else:
-            # Auto-approval failed, manual intervention required
-            - notify that PR #`$pull_request->number` requires manual review and approval
-            - stop workflow and request manual intervention
+       For each `$story` in `$stories`, in parallel:
+          # Step 1: Implement the story
+          - assign an available agent the `perform-task` assignment with input `$story`
+          - wait until the agent completes the story implementation
+          - record output as `#implement-by-stories.perform-task`
+          
+          # Step 2: Create pull request for the story
+          $pull_request = create_pull_request(#implement-by-stories.perform-task)
+          - record PR as `#implement-by-stories.pull-request`
+          
+          # Step 3: Request automated reviews
+          - post comment on `$pull_request`: "@gemini review"
+          - post comment on `$pull_request`: "@claude review this PR"
+          - wait until both automated reviews complete
+          - record reviews as `#implement-by-stories.automated-reviews`
+          
+          # Step 4: Automated approval and merge
+          $approval_status = auto_approve_pr($pull_request, #implement-by-stories.automated-reviews)
+          
+          if $approval_status is "approved":
+             # Attempt automated merge
+             $merge_status = auto_merge_pr($pull_request)
+             
+             if $merge_status is "merged":
+                - record successful merge as `#implement-by-stories.pr-merged`
+             else:
+                # Merge failed, manual intervention required
+                - notify that PR #`$pull_request->number` requires manual merge
+                - stop workflow and request manual intervention
+          else:
+             # Auto-approval failed, manual intervention required
+             - notify that PR #`$pull_request->number` requires manual review and approval
+             - stop workflow and request manual intervention
       
       # Wait for all parallel stories to complete (all PRs merged)
       - wait until all agents finish their assigned stories and PRs are merged
@@ -228,39 +228,39 @@ For each `$epic` in `$epics`, you will:
    else:
       # SERIAL EXECUTION MODE (Default/Safe)
       # Assign stories one at a time in sequence
-      For each `$story` in `$stories`, you will:
-         # Step 1: Implement the story
-         - assign the agent the `perform-task` assignment with input `$story`
-         - wait until the agent completes the story implementation
-         - record output as `#implement-by-stories.perform-task`
-         
-         # Step 2: Create pull request for the story
-         $pull_request = create_pull_request(#implement-by-stories.perform-task)
-         - record PR as `#implement-by-stories.pull-request`
-         
-         # Step 3: Request automated reviews
-         - post comment on `$pull_request`: "@gemini review"
-         - post comment on `$pull_request`: "@claude review this PR"
-         - wait until both automated reviews complete
-         - record reviews as `#implement-by-stories.automated-reviews`
-         
-         # Step 4: Automated approval and merge
-         $approval_status = auto_approve_pr($pull_request, #implement-by-stories.automated-reviews)
-         
-         if `$approval_status` is `"approved"`:
-            # Attempt automated merge
-            $merge_status = auto_merge_pr($pull_request)
-            
-            if `$merge_status` is `"merged"`:
-               - record successful merge as `#implement-by-stories.pr-merged`
-            else:
-               # Merge failed, manual intervention required
-               - notify that PR #`$pull_request->number` requires manual merge
-               - stop workflow and request manual intervention
-         else:
-            # Auto-approval failed, manual intervention required
-            - notify that PR #`$pull_request->number` requires manual review and approval
-            - stop workflow and request manual intervention
+       For each `$story` in `$stories`, you will:
+          # Step 1: Implement the story
+          - assign the agent the `perform-task` assignment with input `$story`
+          - wait until the agent completes the story implementation
+          - record output as `#implement-by-stories.perform-task`
+          
+          # Step 2: Create pull request for the story
+          $pull_request = create_pull_request(#implement-by-stories.perform-task)
+          - record PR as `#implement-by-stories.pull-request`
+          
+          # Step 3: Request automated reviews
+          - post comment on `$pull_request`: "@gemini review"
+          - post comment on `$pull_request`: "@claude review this PR"
+          - wait until both automated reviews complete
+          - record reviews as `#implement-by-stories.automated-reviews`
+          
+          # Step 4: Automated approval and merge
+          $approval_status = auto_approve_pr($pull_request, #implement-by-stories.automated-reviews)
+          
+          if $approval_status is "approved":
+             # Attempt automated merge
+             $merge_status = auto_merge_pr($pull_request)
+             
+             if $merge_status is "merged":
+                - record successful merge as `#implement-by-stories.pr-merged`
+             else:
+                # Merge failed, manual intervention required
+                - notify that PR #`$pull_request->number` requires manual merge
+                - stop workflow and request manual intervention
+          else:
+             # Auto-approval failed, manual intervention required
+             - notify that PR #`$pull_request->number` requires manual review and approval
+             - stop workflow and request manual intervention
          
          # Step 5: Review and continue
          - review the merged story
