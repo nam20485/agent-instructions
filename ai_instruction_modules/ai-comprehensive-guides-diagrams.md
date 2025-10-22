@@ -1,5 +1,6 @@
 # AI Instruction Modules: Visual Architecture Diagrams
 
+<diagrams>
 This document contains Mermaid diagrams that visualize the comprehensive guides architecture. These diagrams can be rendered in GitHub, VS Code with Mermaid extensions, or other Mermaid-compatible viewers.
 
 ## High-Level System Architecture
@@ -404,3 +405,4 @@ All diagrams can be rendered in:
 - VS Code (with Mermaid extension)
 - Mermaid Live Editor (https://mermaid.live)
 - Any Mermaid-compatible viewer
+</diagrams>

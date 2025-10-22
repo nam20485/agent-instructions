@@ -1,3 +1,4 @@
+<memory_tool>
 #### Memory Tool "Current Task Reminder"
 
 Using your memory tool, you can set (and get) a "current task reminder" to help you remember what task you were working on last. This is useful if you have to stop working before completing your planned tasks, or if you switch contexts frequently.
@@ -12,6 +13,7 @@ Using your memory tool, you can set (and get) a "current task reminder" to help 
 
 As you complete an item and then begin a new task, you can set a "current task reminder" to help you remember what task you were working on last. This will help you remember where to start when you come back to the task later.
 
+<structure_schema>
 ##### Structure of the "current task reminder"
 
 You can use the following structure to create a "current task reminder" in your memory tool:
@@ -43,6 +45,7 @@ Where:
 1. Next steps you were planning to take
 1. Any blockers or issues you encountered
 1. The last updated timestamp
+</structure_schema>
 
 ###### Example of a "Current task reminder"
 
@@ -68,3 +71,4 @@ Where:
 1. If you are unsure, take a moment to reflect on your recent work and try to recall the task you were focused on.
 1. Continue the Review Current State section to gather more context.
 1. Based on information from the "current task reminder" and the Review Current State section, you can then proceed to plan your next steps.
+</memory_tool>

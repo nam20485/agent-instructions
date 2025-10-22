@@ -1,3 +1,4 @@
+<navigation_guide>
 # Quick Start: AI Instruction Modules Navigation
 
 This is your **quick reference card** for navigating the AI instruction modules system. Print this, bookmark it, or keep it open while working.
@@ -9,6 +10,7 @@ This is your **quick reference card** for navigating the AI instruction modules 
 - Identifies which comprehensive guide you need
 - Provides overview of the entire system
 
+<comprehensive_guides>
 ## 📚 Three Comprehensive Guides
 
 Choose the guide that matches your current activity:
@@ -105,7 +107,9 @@ All guides follow the same structure:
 See complete visual diagrams:
 - **Architecture Overview:** [ai-comprehensive-guides-architecture.md](./ai-comprehensive-guides-architecture.md)
 - **Mermaid Diagrams:** [ai-comprehensive-guides-diagrams.md](./ai-comprehensive-guides-diagrams.md)
+</comprehensive_guides>
 
+<common_scenarios>
 ## ⚡ Common Scenarios
 
 ### "I need to create a new REST API"
@@ -171,7 +175,9 @@ See complete visual diagrams:
 1. Deep dive into canonical files for your specialty area
 2. Understand when to use guides vs canonical files
 3. Contribute improvements to guides or files
+</common_scenarios>
 
+<pro_tips>
 ## 💡 Pro Tips
 
 1. **Start broad, go deep:** Begin with comprehensive guide, drill down to canonical files
@@ -218,3 +224,5 @@ See complete visual diagrams:
 - **Canonical Files** = Complete Specifications + Authority
 
 Use both! Start with guides, reference canonical files for details. 🚀
+</pro_tips>
+</navigation_guide>

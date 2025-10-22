@@ -1,5 +1,6 @@
 # AI Instruction Modules: Comprehensive Guides Architecture
 
+<overview>
 ## Overview
 
 This document provides a visual representation of how comprehensive guides relate to canonical instruction module files, showing the hybrid architecture that balances discoverability with authoritative specifications.
@@ -372,3 +373,4 @@ This hybrid architecture provides:
 - **Maintainability** through single source of truth
 
 The system serves both newcomers (who need orientation and quick reference) and experienced users (who need detailed specifications), while maintaining clear relationships between all components.
+</overview>

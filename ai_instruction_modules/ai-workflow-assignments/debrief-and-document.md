@@ -22,6 +22,146 @@ Create and document a comprehensive debriefing report following the structured t
 
 It is important to the final quality of our product for everyone to perform their assignment exactly as specified.
 
+## Before Starting
+
+Before beginning this assignment, complete these preparation steps:
+
+### 1. Read Assignment Completely
+
+- Read through all detailed steps
+- Understand the overall goal
+- Review acceptance criteria
+- Note any dependencies on other assignments
+- Identify potential challenges
+
+### 2. Gather Context
+
+- Review previous assignment outputs
+  - Check what was accomplished during the project
+  - Review all artifacts created
+  - Understand the full scope of work completed
+  - Verify all deliverables are available
+- Check for related issues or PRs
+  - Look for any open issues from the project
+  - Review PR discussions and feedback
+  - Check for any unresolved concerns
+  - Review validation reports
+- Review project documentation
+  - Read all documentation created
+  - Check architecture decisions made
+  - Review implementation notes
+  - Understand technical choices
+- Understand current state
+  - What the project achieved
+  - What challenges were faced
+  - What could be improved
+  - What lessons were learned
+
+### 3. Verify Prerequisites
+
+- Check that required tools are installed
+  - Git for committing the report
+  - Text editor for creating markdown
+  - Access to project repository
+  - GitHub/GitLab credentials
+- Verify previous assignments completed
+  - All project work is finished
+  - All deliverables are complete
+  - Validation reports available
+  - No outstanding blockers
+- Ensure dependencies are met
+  - Access to project history
+  - Access to workflow execution logs
+  - Ability to commit to repository
+  - Stakeholder availability for review
+- Confirm environment is ready
+  - Repository is accessible
+  - Correct branch checked out
+  - No uncommitted changes blocking work
+  - Report directory exists or can be created
+
+### 4. Create Task List
+
+- Break down steps into specific tasks
+  - Gather all project data (~10 min)
+  - Fill in Executive Summary (~5 min)
+  - Create Workflow Overview table (~10 min)
+  - Document Key Deliverables (~5 min)
+  - List Lessons Learned (~10 min)
+  - Document What Worked Well (~5 min)
+  - Document What Could Be Improved (~10 min)
+  - Document Errors and Resolutions (~15 min)
+  - Document Complex Steps and Challenges (~10 min)
+  - Create Suggested Changes (~15 min)
+  - Gather Metrics and Statistics (~10 min)
+  - Write Future Recommendations (~10 min)
+  - Write Conclusion (~10 min)
+  - Review and revise (~10 min)
+  - Present to stakeholders (~10 min)
+  - Address feedback (~10 min)
+  - Commit and push (~5 min)
+- Identify potential challenges
+  - Incomplete information
+  - Stakeholder unavailable for review
+  - Missing metrics or data
+  - Difficulty remembering details
+  - Time-consuming to be thorough
+- Note any questions or uncertainties
+  - What metrics are most important
+  - Who needs to review the report
+  - Where to save the report
+  - How much detail is needed
+  - What format is preferred
+- Plan the approach
+  - Work through sections sequentially
+  - Take breaks between major sections
+  - Review each section before moving on
+  - Save drafts frequently
+
+### 5. Estimate Time
+
+- Review estimated time for assignment
+  - Baseline: 90-150 minutes (comprehensive)
+  - Consider project complexity
+  - Account for number of assignments completed
+- Consider your specific context
+  - Amount of information to document
+  - Number of errors encountered
+  - Complexity of recommendations
+  - Stakeholder availability
+- Add buffer for unexpected issues
+  - 20-30% buffer recommended
+  - More if project was complex
+  - Account for review cycles
+  - Allow time for revisions
+- Plan accordingly
+  - Schedule 2-3 hour block
+  - Ensure uninterrupted time
+  - Plan for stakeholder review time
+  - Set realistic expectations
+
+### 6. Prepare Environment
+
+- Set up workspace
+  - Clean terminal/console
+  - Open text editor
+  - Navigate to project directory
+  - Close distracting applications
+- Gather required resources
+  - Workflow execution logs
+  - Validation reports
+  - Error logs and resolutions
+  - Metrics and statistics
+  - Assignment files used
+  - Git commit history
+  - PR discussions and feedback
+- Create backup if needed
+  - Commit current state
+  - Create draft branch if desired
+  - Document starting point
+
+**Only proceed once all preparation steps are complete.**
+
 ### Detailed Steps
 
 1. **Create Report Using Structured Template**
@@ -283,6 +423,342 @@ Organized by timeframe:
 **Date**: [YYYY-MM-DD]  
 **Status**: [Ready for Review / Draft / Final]  
 **Next Steps**: [What should happen next]
+
+---
+
+## Progress Reporting
+
+This assignment has multiple steps and may take 90-150 minutes. Report progress at these checkpoints:
+
+### Checkpoint 1: Data Gathering and Executive Summary (25% complete)
+
+**Tasks**:
+- [ ] Gather all project data, logs, and artifacts
+- [ ] Review workflow execution history
+- [ ] Fill in Executive Summary section
+- [ ] Create initial Workflow Overview table
+
+**Report**: After completing these tasks, provide a brief status update including:
+- What was completed
+- Any issues encountered
+- Estimated time remaining
+- Next steps
+
+**Example Report**:
+```
+✅ Checkpoint 1 Complete (25%)
+- Completed: Gathered project data and logs, completed Executive Summary
+- Issues: Some workflow logs incomplete, used git history as backup
+- Time remaining: ~100 minutes
+- Next: Workflow Overview, Deliverables, and Lessons Learned
+```
+
+---
+
+### Checkpoint 2: Workflow/Deliverables/Lessons (50% complete)
+
+**Tasks**:
+- [ ] Complete Workflow Overview table
+- [ ] Document all Key Deliverables
+- [ ] List all Lessons Learned
+- [ ] Document What Worked Well
+- [ ] Document What Could Be Improved
+
+**Report**: After completing these tasks, provide a brief status update including:
+- What was completed
+- Any issues encountered
+- Estimated time remaining
+- Next steps
+
+**Example Report**:
+```
+✅ Checkpoint 2 Complete (50%)
+- Completed: Workflow Overview (8 assignments), Deliverables, Lessons Learned
+- Issues: None
+- Time remaining: ~60 minutes
+- Next: Errors/Challenges/Suggestions sections
+```
+
+---
+
+### Checkpoint 3: Errors/Challenges/Suggestions (75% complete)
+
+**Tasks**:
+- [ ] Document all Errors Encountered and Resolutions
+- [ ] Document Complex Steps and Challenges
+- [ ] Create Suggested Changes for workflows, agents, prompts, scripts
+
+**Report**: After completing these tasks, provide a brief status update including:
+- What was completed
+- Any issues encountered
+- Estimated time remaining
+- Next steps
+
+**Example Report**:
+```
+✅ Checkpoint 3 Complete (75%)
+- Completed: 5 errors documented, 3 challenges detailed, 8 suggested changes
+- Issues: Had to review error logs carefully, some errors not well-documented
+- Time remaining: ~30 minutes
+- Next: Metrics, Recommendations, Conclusion, and Review
+```
+
+---
+
+### Final Checkpoint: Complete (100%)
+
+**Tasks**:
+- [ ] Gather Metrics and Statistics
+- [ ] Write Future Recommendations
+- [ ] Write Conclusion
+- [ ] Review entire report for completeness
+- [ ] Present to stakeholders
+- [ ] Address feedback
+- [ ] Commit and push
+
+**Report**: Provide final summary including:
+- All completed work
+- Total time taken
+- Any issues resolved
+- Final status
+
+**Example Report**:
+```
+✅ Assignment Complete (100%)
+- Completed: Full debriefing report with all 12 sections
+- Total time: 135 minutes
+- Issues resolved: Filled in missing data from git history and PR discussions
+- Status: Ready for stakeholder review
+```
+
+---
+
+### How to Report Progress
+
+After completing each checkpoint, provide a brief update including:
+
+1. **What was completed**:
+   - List specific tasks finished
+   - Highlight major milestones
+   - Note any deliverables created
+
+2. **Any issues encountered**:
+   - Describe problems faced
+   - Explain how they were resolved
+   - Note any ongoing concerns
+
+3. **Estimated time remaining**:
+   - Calculate based on progress
+   - Adjust for complexity
+   - Account for any delays
+
+4. **Next steps**:
+   - What comes next
+   - Any dependencies
+   - Expected timeline
+
+### Progress Tracking Tips
+
+- **Be honest about progress**: Don't overestimate completion
+- **Report blockers immediately**: Don't wait until the end
+- **Update estimates**: Adjust time estimates as you learn more
+- **Document issues**: Keep notes on problems and solutions
+- **Celebrate milestones**: Acknowledge progress at each checkpoint
+
+---
+
+## Error Recovery
+
+If an error occurs during this assignment, follow these steps:
+
+### Common Errors
+
+#### Error: Missing Project Data or Logs
+- **Symptoms**: Unable to find workflow execution logs, validation reports, or project artifacts
+- **Possible Causes**: 
+  - Logs were not saved during execution
+  - Files were deleted or moved
+  - Incorrect file paths
+  - Logs stored in unexpected location
+- **Solutions**:
+  1. Check git commit history for project activity
+  2. Review PR discussions for context
+  3. Check issue comments and workflow runs
+  4. Look for validation reports in standard locations
+  5. Ask user for log locations or backup data
+  6. Use git log with `--stat` to see file changes
+
+#### Error: Stakeholder Unavailable for Review
+- **Symptoms**: Unable to get stakeholder review or approval
+- **Possible Causes**:
+  - Stakeholder busy or unavailable
+  - Report posted but not reviewed
+  - Unclear who should review
+  - Time zone differences
+- **Solutions**:
+  1. Document report as "Draft" status
+  2. Ask user who should review
+  3. Set reminder to follow up
+  4. Continue with other work if possible
+  5. Escalate to orchestrator if blocking
+  6. Consider asynchronous review process
+
+#### Error: Incomplete Metrics or Statistics
+- **Symptoms**: Missing data for Metrics and Statistics section
+- **Possible Causes**:
+  - Metrics not tracked during project
+  - Build/test data not saved
+  - No automated metrics collection
+  - Data scattered across multiple sources
+- **Solutions**:
+  1. Use git statistics: `git log --stat`, `git diff --stat`
+  2. Count files: `find . -name "*.ts" | wc -l`
+  3. Use tools like `cloc` for lines of code
+  4. Review package.json/requirements.txt for dependencies
+  5. Check test runner output for test counts
+  6. Document "Metrics not available" with explanation
+
+#### Error: Git Commit or Push Fails
+- **Symptoms**: Unable to commit or push report to repository
+- **Possible Causes**:
+  - Working directory has uncommitted changes
+  - Branch protection rules blocking push
+  - Network connectivity issues
+  - Authentication failures
+  - Conflicts with remote changes
+- **Solutions**:
+  1. Verify git status and commit any pending changes
+  2. Check if branch protection requires PR
+  3. Create feature branch if pushing to protected branch
+  4. Verify git credentials are configured
+  5. Pull latest changes and resolve conflicts
+  6. Check network connectivity and GitHub status
+
+#### Error: Report Format Issues
+- **Symptoms**: Markdown formatting broken, tables not rendering, sections missing
+- **Possible Causes**:
+  - Markdown syntax errors
+  - Missing table delimiters
+  - Incorrect heading levels
+  - Special characters not escaped
+- **Solutions**:
+  1. Validate markdown syntax in editor
+  2. Check table formatting (pipes aligned)
+  3. Verify heading hierarchy (#, ##, ###)
+  4. Escape special characters where needed
+  5. Preview markdown in GitHub or editor
+  6. Use markdown linter if available
+
+#### Error: Difficulty Remembering Project Details
+- **Symptoms**: Unable to recall specific errors, challenges, or lessons learned
+- **Possible Causes**:
+  - Project completed too long ago
+  - Insufficient notes taken during execution
+  - Too many details to remember
+  - Context switching between projects
+- **Solutions**:
+  1. Review all git commit messages chronologically
+  2. Read through PR comments and discussions
+  3. Check issue history and comments
+  4. Review validation reports for errors
+  5. Check terminal history for commands used
+  6. Ask user for clarification on specific items
+  7. Document "Details not available" with explanation
+
+#### Error: Review Feedback Requires Major Changes
+- **Symptoms**: Stakeholder requests significant revisions to report
+- **Possible Causes**:
+  - Missed important information
+  - Incorrect interpretation of events
+  - Need for different focus or emphasis
+  - Missing critical sections
+- **Solutions**:
+  1. Clarify specific changes requested
+  2. Gather additional information as needed
+  3. Revise report section by section
+  4. Re-submit for review
+  5. Track changes if requested
+  6. Update status to "Draft" until approved
+
+### Escalation Procedure
+
+If errors persist after troubleshooting:
+
+1. **Document the Error**:
+   - Full error message and stack trace
+   - Steps that led to the error
+   - Environment details (OS, runtime version, etc.)
+   - What solutions were attempted
+   - Any relevant configuration files
+
+2. **Create an Issue**:
+   - Create GitHub issue with error details
+   - Tag with "bug" and "needs-investigation"
+   - Link to this assignment
+   - Include reproduction steps
+
+3. **Notify User**:
+   - Report the error to the user
+   - Provide error details and context
+   - Request manual intervention
+   - Suggest potential next steps
+
+4. **Do Not Proceed**:
+   - Do not mark assignment as complete
+   - Do not proceed to next assignment
+   - Wait for error resolution
+   - Document the blocker
+
+### Rollback Procedure
+
+If changes need to be reverted:
+
+1. **Assess Impact**:
+   - Determine what changes were made
+   - Identify what needs to be rolled back
+   - Check for dependencies on the changes
+
+2. **Perform Rollback**:
+   - Use git to revert changes: `git checkout -- .` or `git reset --soft`
+   - Delete report file if needed
+   - Restore from backup if available
+   - Clean any temporary files
+
+3. **Verify Rollback**:
+   - Confirm system is in previous state
+   - Test that previous functionality still works
+   - Verify no orphaned files remain
+
+4. **Document Rollback**:
+   - Document what was rolled back and why
+   - Record lessons learned
+   - Update issue/ticket with rollback details
+   - Plan next steps
+
+### Prevention Tips
+
+To avoid common errors:
+
+1. **Before Starting**:
+   - Read assignment completely
+   - Gather all project data upfront
+   - Verify access to logs and artifacts
+   - Ensure stakeholder is available for review
+   - Check git repository access
+
+2. **During Execution**:
+   - Follow report template exactly
+   - Save draft frequently
+   - Document data sources as you go
+   - Take screenshots if helpful
+   - Keep notes of what you include
+
+3. **After Completion**:
+   - Review all 12 sections for completeness
+   - Validate markdown formatting
+   - Verify all tables render correctly
+   - Check all checkboxes and status indicators
+   - Test git commit before final submission
 
 ---
 

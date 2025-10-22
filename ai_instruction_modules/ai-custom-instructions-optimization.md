@@ -1,12 +1,16 @@
+<optimization_plan>
 # Custom Instructions Optimization to Improve Context Retention
 
+<canonical_reference>
 ## Canonical Format Reference
 
 All optimization strategies are documented and enforced in the canonical format guide:
 - [ai-instructions-format.md](./ai-instructions-format.md) - Complete formatting standards and guidelines
 
 This document tracks the implementation plan for these strategies.
+</canonical_reference>
 
+<strategies>
 ## Explicit Strategies
 
 The following strategies will be employed. **Do not worry or waste time on any other strategies not listed here.**
@@ -23,7 +27,9 @@ Given these strategies:
 
 - Curate diverse few-shot examples to guide model behavior
 - Use explicit, positive instructions to reduce ambiguity
+</strategies>
 
+<important_notes>
 ## Important notes:
 
 - Remember that mulitple agents all use these same instrcution files:
@@ -33,8 +39,9 @@ Given these strategies:
     - Gemini CLI
     - Qwen Code CLI
     - Opencode.ai
+</important_notes>
 
-
+<task>
 ## Your Task
 
 - STEP 1
@@ -72,3 +79,5 @@ Do some research on the internet re: context & custom instruction optimization.
 
 Refer to the [ai-custom-instructions-optimization.md](/ai_instruction_modules/ai-custom-instructions-optimization.md) file for the strategies to be implemented.
 ```
+</task>
+</optimization_plan>

@@ -2,18 +2,9 @@
 
 ## Overview
 
-This is an upgraded version of the project-setup workflow that uses the new generic, framework-agnostic assignments and includes automatic validation.
+This workflow sets up a new project with modern best practices using generic, framework-agnostic assignments with automatic validation.
 
-**Key Improvements**:
-- Uses 4 focused assignments instead of 1 monolithic assignment
-- Includes automatic validation after each assignment
-- Works across all tech stacks (Node.js, Python, Rust, Java, Go, C#, etc.)
-- Better error isolation and recovery
-- Faster execution (15-30 min per assignment vs 60+ min)
-
-**Use this workflow for**: New project setup with modern best practices
-
-**Original workflow**: `project-setup.md`
+**Use this workflow for**: New project setup across all tech stacks (Node.js, Python, Rust, Java, Go, C#, etc.)
 
 ## Script
 
@@ -71,7 +62,7 @@ For each `$poc_assignment_name` in `$poc_assignments`, you will:
    - Documents architecture and technology choices
    - Defines project scope and requirements
 
-3. **create-application-foundation** (NEW - replaces part of create-project-structure)
+3. **create-application-foundation**
    - Sets up dependency management (package.json, requirements.txt, Cargo.toml, etc.)
    - Configures build system (vite, webpack, gradle, cargo, etc.)
    - Sets up code quality tools (ESLint, pylint, clippy, etc.)
@@ -80,7 +71,7 @@ For each `$poc_assignment_name` in `$poc_assignments`, you will:
    - **Time**: 15-20 minutes
    - **Generic**: Works with any tech stack
 
-4. **create-application-structure** (NEW - replaces part of create-project-structure)
+4. **create-application-structure**
    - Creates application entry point
    - Sets up core architecture (MVC, Clean Architecture, etc.)
    - Creates configuration management
@@ -89,7 +80,7 @@ For each `$poc_assignment_name` in `$poc_assignments`, you will:
    - **Time**: 20-25 minutes
    - **Generic**: Works with any architecture pattern
 
-5. **create-testing-infrastructure** (NEW - replaces part of create-project-structure)
+5. **create-testing-infrastructure**
    - Sets up test framework (Jest, pytest, JUnit, cargo test, etc.)
    - Creates test directory structure
    - Creates test utilities
@@ -98,7 +89,7 @@ For each `$poc_assignment_name` in `$poc_assignments`, you will:
    - **Time**: 20-30 minutes
    - **Generic**: Works with any testing framework
 
-6. **create-deployment-infrastructure** (NEW - replaces part of create-project-structure)
+6. **create-deployment-infrastructure**
    - Creates containerization (Docker, if applicable)
    - Sets up CI/CD workflows (GitHub Actions, GitLab CI, Jenkins, etc.)
    - Creates deployment scripts
@@ -116,82 +107,21 @@ For each `$poc_assignment_name` in `$poc_assignments`, you will:
 
 ### Event Assignments
 
-1. **validate-assignment-completion** (NEW)
+1. **validate-assignment-completion**
    - Validates that assignment outputs exist
    - Runs verification commands (build, test, lint, etc.)
    - Creates validation report
    - **Blocks progression if validation fails**
    - Provides specific remediation steps if needed
-   - **Time**: 5-10 minutes per assignment
 
 2. **create-repository-summary**
    - Creates repository summary document
    - Links from README
    - Documents project structure and setup
 
-## Benefits of Upgraded Workflow
-
-### Compared to Original Workflow
-
-**Original**:
-- 1 monolithic `create-project-structure` assignment (60+ minutes)
-- No validation between steps
-- Specific to certain tech stacks
-- Difficult to debug and recover from errors
-
-**Upgraded**:
-- 4 focused assignments (15-30 minutes each)
-- Automatic validation after each assignment
-- Works with any tech stack
-- Better error isolation and recovery
-- Enables parallel execution (if desired)
-
-### Key Improvements
-
-1. **Generic and Reusable**
-   - Works with Node.js, Python, Rust, Java, Go, C#, Ruby, PHP, etc.
-   - Supports different architectures (MVC, Clean, Hexagonal, etc.)
-   - Reusable across web apps, APIs, CLIs, libraries, mobile apps
-
-2. **Faster and More Focused**
-   - Each assignment is 15-30 minutes instead of 60+
-   - Clear, focused goals for each assignment
-   - Better progress tracking
-
-3. **Automatic Validation**
-   - Validates after each assignment
-   - Prevents cascading failures
-   - Provides immediate feedback
-   - Creates audit trail
-
-4. **Better Error Recovery**
-   - Smaller assignments = easier to debug
-   - Clear error recovery procedures in each assignment
-   - Validation catches issues early
-   - Easier to rollback or fix
-
-## Migration from Original Workflow
-
-If you have projects using the original `project-setup.md` workflow:
-
-**Option 1: Use Upgraded for New Projects**
-- Keep using original for existing projects
-- Use upgraded for all new projects
-- Gradually migrate existing projects
-
-**Option 2: Full Migration**
-- Update all references from `project-setup` to `project-setup-upgraded`
-- Test thoroughly before deploying
-- Update documentation
-
-**Backward Compatibility**:
-- Original `project-setup.md` still works
-- Both workflows can coexist
-- Choose based on project needs
-
 ## Usage
 
-To use this upgraded workflow:
+To use this workflow:
 
 ```bash
 # Orchestrate the upgraded workflow
@@ -206,6 +136,27 @@ Or reference it in other workflows:
 assign the agent the `orchestrate-dynamic-workflow` assignment with workflow `$workflow`
 ```
 
+## Workflow Templates
+
+All assignments in this workflow utilize three standardized templates to enhance execution quality:
+
+### BEFORE_STARTING Template
+- **Purpose**: Pre-execution preparation checklist
+- **Benefits**: Reduces false starts, ensures prerequisites are met
+- **Included in**: ALL workflow assignments
+
+### PROGRESS_REPORTING Template
+- **Purpose**: Structured progress tracking for long-running tasks
+- **Benefits**: Enables early issue detection, provides stakeholder visibility
+- **Included in**: Long-running assignments (>30 minutes)
+
+### ERROR_RECOVERY Template
+- **Purpose**: Systematic error handling and troubleshooting
+- **Benefits**: Faster issue resolution, prevents workflow abandonment
+- **Included in**: ALL workflow assignments
+
+For detailed information about customizing these templates for specific assignments, see: [`docs/TEMPLATE_CUSTOMIZATION_GUIDE.md`](../../../docs/TEMPLATE_CUSTOMIZATION_GUIDE.md)
+
 ## Notes
 
 - This workflow uses all the new generic assignments from Part 1
@@ -218,10 +169,14 @@ assign the agent the `orchestrate-dynamic-workflow` assignment with workflow `$w
 ## Related Files
 
 - **Original Workflow**: `project-setup.md`
-- **New Assignments**: 
+- **Assignments**: 
+  - `init-existing-repository.md`
+  - `create-app-plan.md`
   - `create-application-foundation.md`
   - `create-application-structure.md`
   - `create-testing-infrastructure.md`
   - `create-deployment-infrastructure.md`
+  
   - `validate-assignment-completion.md`
-- **Enhanced Assignment**: `debrief-and-document.md`
+  - `create-repository-summary.md`
+  - `debrief-and-document.md`

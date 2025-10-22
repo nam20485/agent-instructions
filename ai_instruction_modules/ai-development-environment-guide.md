@@ -1,5 +1,7 @@
+<development_environment_guide>
 # AI Development Environment Guide
 
+<purpose>
 ## Purpose
 Use this guide when setting up development environments, managing terminals, working with PowerShell, or executing shell commands. This comprehensive reference consolidates environment setup procedures, terminal best practices, PowerShell development guidelines, and proven command examples.
 
@@ -11,7 +13,9 @@ Use this guide when setting up development environments, managing terminals, wor
 - Troubleshooting environment configuration issues
 - Installing and configuring development tools
 - Working with package managers and version pinning
+</purpose>
 
+<quick_reference>
 ## Quick Reference
 
 ### Environment Types
@@ -927,3 +931,5 @@ This guide consolidates development environment best practices across multiple d
 - **Working Commands**: See [ai-working-command-examples.md](./ai-working-command-examples.md)
 
 Remember: These guides provide navigation and quick reference. Always consult the canonical files for complete specifications and authoritative guidance.
+</quick_reference>
+</development_environment_guide>

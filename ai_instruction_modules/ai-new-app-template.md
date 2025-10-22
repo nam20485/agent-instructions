@@ -1,3 +1,4 @@
+<template_structure>
 # New Application
 
 ## App Title
@@ -49,3 +50,4 @@ rollForward: "latestFeature"
 ## Branch
 
 ## Deliverables
+</template_structure>

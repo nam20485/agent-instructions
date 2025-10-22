@@ -1,7 +1,9 @@
+<powershell_guidelines>
 # PowerShell Cmdlet Development Guidelines
 
-This guide provides PowerShell-specific instructions to help GitHub Copilot generate idiomatic, safe, and maintainable scripts. It aligns with Microsoft’s PowerShell cmdlet development guidelines.
+This guide provides PowerShell-specific instructions to help GitHub Copilot generate idiomatic, safe, and maintainable scripts. It aligns with Microsoft's PowerShell cmdlet development guidelines.
 
+<naming_conventions>
 ## Naming Conventions
 
 - **Verb-Noun Format:**
@@ -47,7 +49,9 @@ function Get-UserProfile {
     }
 }
 ```
+</naming_conventions>
 
+<parameter_design>
 ## Parameter Design
 
 - **Standard Parameters:**
@@ -556,3 +560,5 @@ function New-Resource {
     }
 }
 ```
+</parameter_design>
+</powershell_guidelines>
