@@ -44,8 +44,8 @@ This action plan addresses 10 feedback items identified during the execution of 
 - **FB-010**: Workflow improvements from Part 2 not integrated (P3, Medium effort)
 
 ### Category 6: Quality & Validation Issues
-- **FB-003**: Project-repository link verification limitation (P2, Small effort - verification only)
-- **FB-008**: PR missing automatic reviewer assignment (P2, Small effort)
+- **FB-003**: Project-Repository Link Verification (P2, Small effort - verification only)
+- **FB-008**: After PR was created needed manual reviewer assignment (P2, Small effort)
 
 ### Category 7: Performance & Scalability Issues
 *No items in this category*
@@ -64,7 +64,7 @@ This action plan addresses 10 feedback items identified during the execution of 
 *No items - No high priority issues identified*
 
 ### P2 - Medium Priority (Next Sprint) - 5 items
-1. **FB-003**: Project-repository link verification
+1. **FB-003**: Project-Repository Link Verification
    - **Effort**: Small (2-4 hours)
    - **Rationale**: Establish clear verification process for future projects
    - **Action**: Manual verification via GitHub UI
@@ -84,7 +84,7 @@ This action plan addresses 10 feedback items identified during the execution of 
    - **Rationale**: Leverages existing label infrastructure
    - **Action**: Include in next assignment execution
 
-5. **FB-008**: PR missing automatic reviewer assignment
+5. **FB-008**: After PR was created needed manual reviewer assignment
    - **Effort**: Small (2-3 hours)
    - **Rationale**: Reduces manual overhead and ensures reviews
    - **Action**: Update workflow configuration
@@ -401,12 +401,12 @@ No significant risks identified. All items represent incremental improvements wi
 |----|----------|----------|--------|-------------|
 | FB-001 | Process & Workflow | P3 | Small | Documentation Maintenance |
 | FB-002 | Documentation | P3 | Medium | Introduce ADRs |
-| FB-003 | Quality & Validation | P2 | Small | Project-repo link verification |
+| FB-003 | Quality & Validation | P2 | Small | Project-Repository Link Verification |
 | FB-004 | Process & Workflow | P2 | Small | Add issues to project |
 | FB-005 | Process & Workflow | P2 | Small | Use milestones |
 | FB-006 | Process & Workflow | P2 | Small | Apply labels |
 | FB-007 | Configuration | P3 | Small | Build warning fix |
-| FB-008 | Quality & Validation | P2 | Small | PR reviewer automation |
+| FB-008 | Quality & Validation | P2 | Small | After PR was created needed manual reviewer assignment |
 | FB-009 | Organizational | P3 | Small | Wrong assignment placement |
 | FB-010 | Process & Workflow | P3 | Medium | Integrate Part 2 improvements |
 
