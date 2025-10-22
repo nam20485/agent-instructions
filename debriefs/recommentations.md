@@ -49,7 +49,7 @@ No functional impact. Project is operational and correctly configured. This is p
     - Proposed Remediation:
         1. Update the workflow to include automatic reviewer assignment. (same workflow as in [implement-story](ai_instruction_modules/ai-workflow-assignments/dynamic-workflows/implement-story.md))
        
-3. C# Project files were created duringh `create-app-plan` assignment instead of `create-application-foundation`.
+3. C# Project files were created during `create-app-plan` assignment instead of `create-application-foundation`.
     - Severity: LOW
     - Blocking: NO
     - Description: The C# project files were generated in the wrong assignment step, which could lead to confusion regarding the project structure and setup.
