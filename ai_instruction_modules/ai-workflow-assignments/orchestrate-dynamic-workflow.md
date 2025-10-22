@@ -180,6 +180,22 @@ See [dynamic-workflow-syntax.md](dynamic-workflows/dynamic-workflow-syntax.md#ev
 7. Approval is obtained for the final product.
 8. No unresolved items remain at completion; results are documented and cross-linked as appropriate.
 
+## Workflow Templates
+
+All assignments orchestrated through this workflow utilize three standardized templates:
+
+- **BEFORE_STARTING_TEMPLATE.md**: Pre-execution preparation checklist
+- **PROGRESS_REPORTING_TEMPLATE.md**: Progress tracking for long-running assignments  
+- **ERROR_RECOVERY_TEMPLATE.md**: Systematic error handling procedures
+
+These templates are integrated into assignment files and provide:
+- Consistent preparation, tracking, and recovery patterns
+- Reduced false starts and thorough issue handling
+- Clear progress visibility and status reporting
+- Structured error recovery to prevent workflow abandonment
+
+For customization guidance, see: [`docs/TEMPLATE_CUSTOMIZATION_GUIDE.md`](../../docs/TEMPLATE_CUSTOMIZATION_GUIDE.md)
+
 ## Guardrails (Authoritative, Non-Optional)
 These apply to all dynamic workflows.
 

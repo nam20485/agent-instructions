@@ -136,6 +136,27 @@ Or reference it in other workflows:
 assign the agent the `orchestrate-dynamic-workflow` assignment with workflow `$workflow`
 ```
 
+## Workflow Templates
+
+All assignments in this workflow utilize three standardized templates to enhance execution quality:
+
+### BEFORE_STARTING Template
+- **Purpose**: Pre-execution preparation checklist
+- **Benefits**: Reduces false starts, ensures prerequisites are met
+- **Included in**: ALL workflow assignments
+
+### PROGRESS_REPORTING Template
+- **Purpose**: Structured progress tracking for long-running tasks
+- **Benefits**: Enables early issue detection, provides stakeholder visibility
+- **Included in**: Long-running assignments (>30 minutes)
+
+### ERROR_RECOVERY Template
+- **Purpose**: Systematic error handling and troubleshooting
+- **Benefits**: Faster issue resolution, prevents workflow abandonment
+- **Included in**: ALL workflow assignments
+
+For detailed information about customizing these templates for specific assignments, see: [`docs/TEMPLATE_CUSTOMIZATION_GUIDE.md`](../../../docs/TEMPLATE_CUSTOMIZATION_GUIDE.md)
+
 ## Notes
 
 - This workflow uses all the new generic assignments from Part 1

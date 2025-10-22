@@ -71,6 +71,22 @@ Smaller, focused assignments enable:
 - **Rollback capability**: Easier to revert smaller changes
 - **Fix in place**: Can fix issues without restarting entire workflow
 
+#### 5. Standardized Workflow Templates
+
+All assignments incorporate three standardized templates:
+
+- **BEFORE_STARTING Template**: Pre-execution checklist ensuring prerequisites are met
+- **PROGRESS_REPORTING Template**: Structured progress tracking for long-running tasks
+- **ERROR_RECOVERY Template**: Systematic error handling and troubleshooting procedures
+
+These templates provide:
+- **Consistency**: All assignments follow the same preparation, tracking, and recovery patterns
+- **Quality**: Reduces false starts and ensures thorough issue handling
+- **Visibility**: Clear progress tracking and status reporting
+- **Resilience**: Structured error recovery prevents workflow abandonment
+
+For detailed customization guidance, see [`TEMPLATE_CUSTOMIZATION_GUIDE.md`](./TEMPLATE_CUSTOMIZATION_GUIDE.md)
+
 ## Assignment Breakdown Details
 
 ### Foundation vs Structure Separation
