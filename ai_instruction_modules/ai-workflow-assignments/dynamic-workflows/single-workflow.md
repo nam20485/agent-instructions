@@ -149,6 +149,15 @@ else:
 
 ### Events
 
+#### `pre-assignment-begins`
+
+This event runs before the main workflow assignment begins to gather context and prepare for execution.
+
+- assign the agent the `gather-context` assignment
+- wait until the agent finishes the task
+- review the work and approve it
+- record output as `#events.pre-assignment-begins.gather-context`
+
 #### `pre-script-begin`
 
 - log: "Pre-execution: Single Workflow Executor"
@@ -168,7 +177,13 @@ if `$description` is provided:
 # This event runs after the workflow assignment completes
 - log: "Post-assignment: '{workflow_assignment}' completed"
 
-# Collect execution metadata
+# First report progress
+- assign the agent the `report-progress` assignment
+- wait until the agent finishes the task
+- review the work and approve it
+- record output as `#events.post-assignment-completion.report-progress`
+
+# Then collect execution metadata
 `$execution_time` = calculate time elapsed since assignment start
 - log: "Execution time: {execution_time}"
 
@@ -185,7 +200,13 @@ if `$description` is provided:
 - log: "ERROR: Workflow assignment '{workflow_assignment}' failed"
 - log: "Failure occurred during assignment execution"
 
-# Capture failure context
+# First recover from the error
+- assign the agent the `recover-from-error` assignment
+- wait until the agent finishes the task
+- review the work and approve it
+- record output as `#events.on-assignment-failure.recover-from-error`
+
+# Then capture failure context
 - capture error message and stack trace if available
 - identify which step of the assignment failed
 - collect agent output/logs up to failure point
@@ -249,15 +270,15 @@ if workflow requires tracking:
 
 - log: "Failure Report:"
 - log: "  Assignment: {failure_report.workflow_assignment}"
-- log: "  Failure Point: {failure_report.failure_point}"
-- log: "  Error: {failure_report.error_message}"
+- log: " Failure Point: {failure_report.failure_point}"
+- log: " Error: {failure_report.error_message}"
 
 # Provide recovery guidance
 - log: "Recovery Options:"
 - log: "  1. Fix input parameters and retry"
 - log: "  2. Review assignment definition for issues"
 - log: "  3. Check that prerequisites are met"
-- log: "  4. Escalate to stakeholder if systemic issue"
+- log: " 4. Escalate to stakeholder if systemic issue"
 
 - record failure report as `#events.on-script-failure`
 - do NOT automatically retry (preserve state for investigation)

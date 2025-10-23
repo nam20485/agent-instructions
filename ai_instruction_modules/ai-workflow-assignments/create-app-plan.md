@@ -46,6 +46,7 @@ This assignment is **PLANNING ONLY**. You will:
 - ✅ Document the plan in an issue
 - ✅ Create planning documents (tech-stack.md, architecture.md)
 - ✅ Create milestones and link issues
+- ✅ Link plan to GitHub Project
 - ❌ NOT create any project files (.csproj, .sln, source code, etc.)
 - ❌ NOT write any implementation code
 - ❌ NOT create application directory structures
@@ -82,6 +83,35 @@ All implementation happens in subsequent assignments (create-application-foundat
    - Apply appropriate labels to issue from the imported label set (typically: "planning", "documentation")
 
 
+
+### Events
+
+#### `pre-assignment-begins`
+
+This event runs before the assignment begins to gather context and prepare for execution.
+
+- assign the agent the `gather-context` assignment
+- wait until the agent finishes the task
+- review the work and approve it
+- record output as `#events.pre-assignment-begins.gather-context`
+
+#### `on-assignment-failure`
+
+This event runs if the assignment fails to recover from errors systematically.
+
+- assign the agent the `recover-from-error` assignment
+- wait until the agent finishes the task
+- review the work and approve it
+- record output as `#events.on-assignment-failure.recover-from-error`
+
+#### `post-assignment-completion`
+
+This event runs after the assignment completes to report progress.
+
+- assign the agent the `report-progress` assignment
+- wait until the agent finishes the task
+- review the work and approve it
+- record output as `#events.post-assignment-completion.report-progress`
 
 ### Completion
 

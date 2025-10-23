@@ -30,23 +30,42 @@ For each `$assignment_name` in `$assignments`, you will:
 
 ### Events
 
+#### `pre-assignment-begins`
+
+This event runs before EACH assignment begins to gather context and prepare for execution.
+
+- assign the agent the `gather-context` assignment
+- wait until the agent finishes the task
+- review the work and approve it
+- record output as `#events.pre-assignment-begins.gather-context`
+
+#### `on-assignment-failure`
+
+This event runs when ANY assignment fails to recover from errors systematically.
+
+- assign the agent the `recover-from-error` assignment
+- wait until the agent finishes the task
+- review the work and approve it
+- record output as `#events.on-assignment-failure.recover-from-error`
+
 #### `post-assignment-completion`
 
-This event runs after EACH assignment completes to validate the work and create repository summary.
+This event runs after EACH assignment completes to report progress and validate the work.
 
-`$poc_assignments` = [  
-                    `validate-assignment-completion`,
-                    `create-repository-summary`
+`$progress_and_validation_assignments` = [
+                     `create-repository-summary`,     
+                     `validate-assignment-completion`,
+                     `report-progress`
                  ]
 
-For each `$poc_assignment_name` in `$poc_assignments`, you will:
-   - assign the agent the `$poc_assignment_name` assignment
+For each `$pv_assignment_name` in `$progress_and_validation_assignments`, you will:
+   - assign the agent the `$pv_assignment_name` assignment
    - wait until the agent finishes the task
    - review the work and approve it
-     - if `$poc_assignment_name` is `validate-assignment-completion`:
+     - if `$pv_assignment_name` is `validate-assignment-completion`:
      - if validation failed, halt workflow and request manual intervention # Halt workflow to prevent further execution with invalid state
-     - if validation passed, proceed to next assignment in `$poc_assignments`
-   - record output as `#events.post-assignment-completion.$poc_assignment_name`
+     - if validation passed, proceed to next assignment in `$progress_and_validation_assignments`
+   - record output as `#events.post-assignment-completion.$pv_assignment_name`
 
 ## Assignment Details
 
@@ -126,14 +145,6 @@ To use this workflow:
 ```bash
 # Orchestrate the upgraded workflow
 orchestrate-dynamic-workflow project-setup-upgraded
-```
-
-Or reference it in other workflows:
-
-```markdown
-`$workflow` = `project-setup-upgraded`
-
-assign the agent the `orchestrate-dynamic-workflow` assignment with workflow `$workflow`
 ```
 
 ## Notes
