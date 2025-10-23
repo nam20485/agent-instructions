@@ -52,6 +52,8 @@ Dynamic workflows may include an "Events" subsection that defines actions to exe
 - `post-script-complete`: Runs once after all script steps complete successfully
 - `pre-assignment-begin`: Runs before each assignment in a loop starts
 - `post-assignment-completion`: Runs after each assignment in a loop completes
+- `pre-step-begin`: Runs before each step (the high level headings) in an assignment starts
+- `post-step-completion`: Runs after each step (the high level headings) in an assignment completes
 - `on-assignment-failure`: Runs when an assignment fails
 - `on-script-failure`: Runs when the entire script fails (for cleanup/rollback)
 
@@ -77,23 +79,6 @@ See [dynamic-workflow-syntax.md](dynamic-workflows/dynamic-workflow-syntax.md#ev
 7. Approval is obtained for the final product.
 8. No unresolved items remain at completion; results are documented and cross-linked as appropriate.
 
-## Event Handler Integration
-
-All assignments orchestrated through this workflow can utilize **Standard** event handlers for standardized lifecycle behaviors:
-
-- **pre-create-assignment-Standard**: Pre-execution preparation and validation
-- **post-step-complete-Standard**: Progress tracking and step completion handlers
-- **post-assignment-complete-Standard**: Assignment completion and wrap-up actions
-- **on-assignment-failure-Standard**: Systematic error handling and recovery procedures
-- **pre-script-begin-Standard**: Workflow initialization and setup
-
-The Standard event handlers are located in [`ai_instruction_modules/ai-workflow-assignments/event-handlers/`](./Standard-event-handlers/) and provide:
-- Consistent preparation, tracking, and recovery patterns
-- Reduced false starts and thorough issue handling
-- Clear progress visibility and status reporting
-- Structured error recovery to prevent workflow abandonment
-
-~Event handlers are triggered automatically at their designated lifecycle points during workflow execution. See the [Events Section](#scripts--events-section) above for integration details.~
 
 ## Guardrails (Authoritative, Non-Optional)
 These apply to all dynamic workflows.
@@ -152,12 +137,14 @@ These apply to all dynamic workflows.
 1) Execute (per main script step, in order)
 - **If `pre-script-begin` event exists, execute it first**
 - For each main workflow step:
-  - **If `pre-assignment-begin` event exists and step contains loops, execute before each iteration**
-  - Perform the Detailed Steps exactly as written in the assignment file
-  - Honor preflight requirements (templates, scripts, visibility, licenses) before continuing
-  - If a required step cannot be executed (e.g., missing permission), trigger `on-assignment-failure` event (if present), then stop and report
-  - Do not continue performing any later step until you have successfully finished the current step, and all previous steps
-  - **If `post-assignment-completion` event exists and step contains loops, execute after each iteration**
+    **If `pre-step-begin` event exists, execute it before the step**
+  - For each assignment in the step:
+    - **If `pre-assignment-begin` event exists and step contains loops, execute before each iteration**
+    - Perform the Detailed Steps exactly as written in the assignment file
+    - Honor preflight requirements (templates, scripts, visibility, licenses) before continuing
+    - If a required step cannot be executed (e.g., missing permission), trigger `on-assignment-failure` event (if present), then stop and report
+    - Do not continue performing any later step until you have successfully finished the current step, and all previous steps
+    - **If `post-assignment-completion` event exists and step contains loops, execute after each iteration**
 - **If all steps succeed and `post-script-complete` event exists, execute it**
 - **If any step fails and `on-script-failure` event exists, execute it for cleanup/rollback**
 
@@ -212,45 +199,6 @@ These apply to all dynamic workflows.
 
 ## Completion
 After all steps have been completed and all Acceptance Criteria have passed (or explicitly approved deviations are recorded), notify the user that the workflow is complete and provide the Run Report.
-
-## Prompt Guidance (Embed in any chat prompt)
-Use this pre-execution preamble in any prompt that invokes this orchestrator to ensure consistent, acceptance-gated runs across tools and contexts.
-
-Before execution (must do):
-- Print the resolution trace (files + URLs/SHAs when available):
-  - orchestrate-dynamic-workflow → dynamic-workflows/$workflow_name → assignments → ai-workflow-assignments/<assignment>.md
-- Refuse to proceed if any file in the chain is unreadable.
-
-Execution rules (non-negotiable):
-- Execute steps strictly from the resolved assignment file(s); do not synthesize steps from dynamic workflow files.
-- Extract Acceptance Criteria from each assignment and treat them as gates.
-- Enforce template/source-of-truth and required scripts/visibility/license per assignment.
-- Respect branch protection (use feature branch + PR) for code changes.
-- Non-code changes (e.g., settings, metadata) can be made directly to the default branch, even if protected..
-
-Completion (Definition of Done):
-- Produce a Run Report containing:
-  - Resolution trace (files + URLs/SHAs)
-  - Actions executed (mirroring Detailed Steps)
-  - Acceptance Criteria: PASS/FAIL per item with evidence links
-  - Deviations (if any) with rationale
-  - Outcome: Success only if all criteria PASS (or explicitly approved deviations)
-
-Embeddable snippet:
-
-```
-Before any execution:
-- Print the resolution trace (files + URLs/SHAs) for: orchestrate-dynamic-workflow → dynamic-workflows/$workflow_name → assignments → ai-workflow-assignments/<assignment>.md
-- Refuse to proceed if any file cannot be read.
-
-Execution rules:
-- Use only the resolved assignment file(s) for executable steps.
-- Extract Acceptance Criteria and enforce them as gates (no partial done).
-- Enforce template/scripts/visibility/license per assignment; respect branch protection (feature branch + PR) and idempotency.
-
-Completion:
-- Produce a Run Report with: resolution trace, actions executed, PASS/FAIL per criterion with evidence, deviations, and final outcome.
-```
 
 ### References
 
