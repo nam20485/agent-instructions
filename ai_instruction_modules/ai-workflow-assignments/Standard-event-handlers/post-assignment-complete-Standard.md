@@ -80,3 +80,20 @@ Make go/no-go decision:
 - Notify collaborator agent of requested changes
 - Return assignment for rework
 - Upon resubmission, repeat validation and review steps
+
+## Parameters
+
+The following context is available during this event:
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$assignmentId` | String | Unique ID of the completed assignment |
+| `$assignmentName` | String | Name of the assignment |
+| `$assignmentOutput` | Object | Assignment execution results and outputs |
+| `$collaboratorAgent` | String | Agent role that completed the assignment |
+| `$duration` | String | Time elapsed during assignment execution |
+| `$acceptanceCriteria` | Array | List of acceptance criteria to validate |
+| `$validation_assignments` | Array | Optional validation assignments to run (default: ['validate-assignment-completion']) |
+| `$files_created` | Array | List of files created during assignment |
+| `$outputs` | Object | Key-value pairs of assignment outputs |
+| `$status` | String | Completion status (e.g., "COMPLETE", "FAILED") |
