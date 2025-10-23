@@ -182,10 +182,10 @@ For each `$epic` in `$epics`, you will:
       # PARALLEL EXECUTION MODE
       # Assign all stories to agents simultaneously
       For each `$story` in `$stories`, in parallel:
-          # Step 1: Implement the story
-          - assign an available agent the `perform-task` assignment with input `$story`
-          - wait until the agent completes the story implementation
-          - record output as `#implement-by-stories.perform-task`
+        # Step 1: Implement the story
+        - assign an available agent the `perform-task` assignment with input `$story`
+        - wait until the agent completes the story implementation
+        - record output as `#implement-by-stories.perform-task`
           
           # Step 2: Create pull request for the story
           $pull_request = create_pull_request(#implement-by-stories.perform-task)
@@ -228,11 +228,11 @@ For each `$epic` in `$epics`, you will:
    else:
       # SERIAL EXECUTION MODE (Default/Safe)
       # Assign stories one at a time in sequence
-       For each `$story` in `$stories`, you will:
-          # Step 1: Implement the story
-          - assign the agent the `perform-task` assignment with input `$story`
-          - wait until the agent completes the story implementation
-          - record output as `#implement-by-stories.perform-task`
+      For each `$story` in `$stories`, you will:
+        # Step 1: Implement the story
+        - assign the agent the `perform-task` assignment with input `$story`
+        - wait until the agent completes the story implementation
+        - record output as `#implement-by-stories.perform-task`
           
           # Step 2: Create pull request for the story
           $pull_request = create_pull_request(#implement-by-stories.perform-task)
