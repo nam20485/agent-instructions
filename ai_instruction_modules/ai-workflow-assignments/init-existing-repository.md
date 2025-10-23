@@ -22,6 +22,10 @@ Your goal is to initiate a new repository for a project. This involves creating 
  
 Your assignment is to set up an existing repository for a project. This involves configuring the necessary settings. You will create a new issue-tracking project, import labels, and create milestones. You will rename workspace and devcontainer files to match the project name.
 
+**Always follow instructions exactly as listed here.**
+
+It is important to the final quality of our product for everyone to perform their assignment exactly as specified.
+
 ### Detailed Steps
 
 1. **Create PR and New Branch**
@@ -50,6 +54,6 @@ Your assignment is to set up an existing repository for a project. This involves
    - Inside the `.devcontainer/devcontainer.json` file rename the `name` property to use the repository name as the prefix, preserving the "devcontainer" suffix. Template: `<repo-name>-devcontainer`
    - Rename the `ai-new-app-template.code-workspace` file to use the repository name as the prefix, preserving the ".code-workspace" extension. Template: `<repo-name>.code-workspace`
 
-### Completion
+## Completion
 
 After all steps have been completed, notify the orchestrator that this assignment has been completed and obtain approval to move to the next step. The repository has been initiated and is ready for the next step.

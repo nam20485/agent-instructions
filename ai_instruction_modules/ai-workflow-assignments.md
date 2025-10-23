@@ -55,6 +55,51 @@ The format is made up of the following sections:
 - Orchestrator: [/orchestrate-dynamic-workflow.md](./ai-workflow-assignments/orchestrate-dynamic-workflow.md/orchestrate-dynamic-workflow.md)
 - Dynamic syntax: [dynamic-workflow-syntax.md](./ai-workflow-assignments/dynamic-workflows/dynamic-workflow-syntax.md)
 
+## Standardized Workflow Templates
+
+To ensure consistency, quality, and resilience across all workflow assignment executions, three standardized templates have been integrated into workflow assignments:
+
+### Template Types
+
+1. **BEFORE_STARTING_TEMPLATE** - Pre-execution validation and context gathering
+   - Verifies all prerequisites, inputs, and environmental conditions
+   - Establishes baseline understanding and clarifies ambiguities
+   - Prevents execution failures due to missing context or invalid assumptions
+   
+2. **PROGRESS_REPORTING_TEMPLATE** - Structured progress updates during execution
+   - Provides stakeholder visibility into ongoing work
+   - Documents decisions, blockers, and deviations in real-time
+   - Enables early course correction and intervention when needed
+
+3. **ERROR_RECOVERY_TEMPLATE** - Systematic error handling and remediation
+   - Diagnoses failures with root cause analysis
+   - Documents recovery attempts and outcomes
+   - Escalates appropriately when automated recovery is insufficient
+
+### Benefits
+
+- **Consistency**: All assignments follow the same validation, reporting, and error handling patterns
+- **Quality**: Early validation catches issues before costly execution begins
+- **Visibility**: Real-time progress updates keep stakeholders informed
+- **Resilience**: Structured error recovery reduces downtime and improves success rates
+
+### Integration Status
+
+The following workflow assignments currently integrate these templates:
+
+- `create-application-foundation` - Application core structure creation
+- `create-application-structure` - Full application scaffolding
+- `create-testing-infrastructure` - Test framework setup
+- `create-deployment-infrastructure` - Deployment pipeline configuration
+
+Additional assignments will adopt these templates incrementally as the framework matures.
+
+### Customization
+
+Each template includes placeholders for assignment-specific customization. Detailed guidance on template usage and customization is available in:
+
+**[Template Customization Guide](../docs/TEMPLATE_CUSTOMIZATION_GUIDE.md)**
+
 ### Section Descriptions
 
 * Assignment Title: A descriptive title for the assignment.
@@ -217,9 +262,8 @@ The following assignments are currently under development in the `.wip` director
 * [plan-story.md](.wip/plan-story.md): Planning a story with detailed implementation steps.
 
 ### Specialized Tasks (WIP)
-* * [convert-vs-color-theme-to-vscode.md](.wip/convert-vs-color-theme-to-vscode.md): Converting a Visual Studio color theme to a Visual Studio Code color theme.
-  
-```
+* [convert-vs-color-theme-to-vscode.md](.wip/convert-vs-color-theme-to-vscode.md): Converting a Visual Studio color theme to a Visual Studio Code color theme.
+
 </mandatory_behaviors>
 </workflow_assignments>
   

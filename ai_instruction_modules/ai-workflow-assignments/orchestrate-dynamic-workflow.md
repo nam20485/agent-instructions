@@ -14,95 +14,7 @@ The dynamic workflow orchestration assignment is different than static workflow 
 
 ### Input Passing Examples
 
-**Example 1: Direct parameter passing**
-```markdown
-/orchestrate-dynamic-workflow
-  - $workflow_name = `single-workflow`
-  - $workflow_assignment = `update-from-feedback`
-  - $assignment_inputs = { directory: `./debriefs` }
-```
-
-**Example 2: Using command arguments**
-```markdown
-/orchestrate-dynamic-workflow
-  - $workflow_name = `single-workflow`
-  - $workflow_assignment = `$ARGUMENTS[0]`
-  - $assignment_inputs = `$ARGUMENTS[1]`
-```
-
-**Example 3: Workflow with multiple inputs**
-```markdown
-/orchestrate-dynamic-workflow
-  - $workflow_name = `implement-epic`
-  - $epic = 42
-  - $repository = `myorg/myrepo`
-  - $parallel_execution = `false`
-```
-
-**Example 4: Using the orchestrate-single-workflow command**
-
-This command file wraps the orchestration for convenience:
-```bash
-# File: /home/nam20485/.config/opencode/command/orchestrate-single-workflow.md
-
-# Usage from command line:
-/orchestrate-single-workflow update-from-feedback { directory: "./debriefs" }
-```
-
-Internally it expands to:
-```markdown
-/orchestrate-dynamic-workflow
-  - $workflow_name = `single-workflow`
-  - $workflow_assignment = `update-from-feedback`  # from $ARGUMENTS[0]
-  - $assignment_inputs = { directory: "./debriefs" }  # from $ARGUMENTS[1]
-```
-
-**Example 5: Using the orchestrate-single-update-from-feedback command**
-
-This is a specialized command that pre-fills the assignment name:
-```bash
-# File: /home/nam20485/.config/opencode/command/orchestrate-single-update-from-feedback.md
-
-# Usage from command line:
-/orchestrate-single-update-from-feedback ./debriefs
-```
-
-Internally it expands to:
-```markdown
-/orchestrate-dynamic-workflow
-  - $workflow_name = `single-workflow`
-  - $workflow_assignment = `update-from-feedback`  # hard-coded
-  - $assignment_inputs = `./debriefs`  # from $ARGUMENTS[0] - directory path
-```
-
-Note: The `update-from-feedback` assignment expects:
-- Input: `$directory` (string) - path to directory containing feedback documents
-- Example paths: `./debriefs`, `./feedback`, `./docs/feedback/epic-7`
-
-**Example 6: Passing structured inputs**
-
-For assignments that need multiple parameters:
-```markdown
-/orchestrate-dynamic-workflow
-  - $workflow_name = `single-workflow`
-  - $workflow_assignment = `create-app-plan`
-  - $assignment_inputs = {
-      project_name: `my-project`,
-      description: `A web application for task management`,
-      features: [`authentication`, `task-crud`, `notifications`]
-    }
-```
-
-**Example 7: Passing through from command arguments**
-
-For flexible command wrappers:
-```markdown
-# Generic wrapper that takes any assignment and inputs
-/orchestrate-dynamic-workflow
-  - $workflow_name = `single-workflow`
-  - $workflow_assignment = `$ARGUMENTS[0]`  # e.g., "debrief-and-document"
-  - $assignment_inputs = `$ARGUMENTS[1]`    # e.g., { workflow: "implement-epic" }
-```
+For complex examples, see reference file: [orchestrate-dynamic-workflow-input-syntax.md](./ai-workflow-assignments/orchestrate-dynamic-workflow-input-syntax.md)
 
 The orchestrator will extract all parameters (except `$workflow_name`) and pass them to the dynamic workflow as its inputs.
 
@@ -153,21 +65,6 @@ Dynamic workflows may include an "Events" subsection that defines actions to exe
 4. **Failure Handling**: Event failure causes workflow failure; failure events should not throw errors
 5. **Output Recording**: Record event outputs as `#events.<event-name>` or `#events.<event-name>.$assignment_name`
 
-**Example**:
-```markdown
-### Events
-
-#### `post-assignment-completion`
-
-`$assignments` = [`create-repository-summary`]
-
-For each `$assignment_name` in `$assignments`, you will:
-   - assign the agent the `$assignment_name` assignment
-   - wait until the agent finishes the task
-   - review the work and approve it
-   - record output as `#events.post-assignment-completion.$assignment_name`
-```
-
 See [dynamic-workflow-syntax.md](dynamic-workflows/dynamic-workflow-syntax.md#events) for complete event documentation.
 
 ## Acceptance Criteria
@@ -179,6 +76,24 @@ See [dynamic-workflow-syntax.md](dynamic-workflows/dynamic-workflow-syntax.md#ev
 6. **All event scripts (if present) are executed at their designated lifecycle points.**
 7. Approval is obtained for the final product.
 8. No unresolved items remain at completion; results are documented and cross-linked as appropriate.
+
+## Event Handler Integration
+
+All assignments orchestrated through this workflow can utilize **Standard** event handlers for standardized lifecycle behaviors:
+
+- **pre-create-assignment-Standard**: Pre-execution preparation and validation
+- **post-step-complete-Standard**: Progress tracking and step completion handlers
+- **post-assignment-complete-Standard**: Assignment completion and wrap-up actions
+- **on-assignment-failure-Standard**: Systematic error handling and recovery procedures
+- **pre-script-begin-Standard**: Workflow initialization and setup
+
+The Standard event handlers are located in [`ai_instruction_modules/ai-workflow-assignments/event-handlers/`](./Standard-event-handlers/) and provide:
+- Consistent preparation, tracking, and recovery patterns
+- Reduced false starts and thorough issue handling
+- Clear progress visibility and status reporting
+- Structured error recovery to prevent workflow abandonment
+
+~Event handlers are triggered automatically at their designated lifecycle points during workflow execution. See the [Events Section](#scripts--events-section) above for integration details.~
 
 ## Guardrails (Authoritative, Non-Optional)
 These apply to all dynamic workflows.

@@ -278,26 +278,6 @@ chmod +x deploy.sh
    - Save validation report
    - Proceed to next assignment
 
-### Event Integration
-
-This assignment is designed to be called from the `post-assignment-completion` event in dynamic workflows:
-
-```markdown
-### Events
-
-#### `post-assignment-completion`
-
-`$validation_assignments` = [`validate-assignment-completion`]
-
-For each `$assignment_name` in `$validation_assignments`, you will:
-   - assign the agent the `$assignment_name` assignment
-   - wait until the agent finishes the task
-   - review the validation results
-   - if validation failed, halt workflow and request manual intervention
-   - if validation passed, record output as `#events.post-assignment-completion.$assignment_name`
-   - proceed to next assignment only if validation passed
-```
-
 ### Completion
 
 1. **Verify Validation is Complete:**

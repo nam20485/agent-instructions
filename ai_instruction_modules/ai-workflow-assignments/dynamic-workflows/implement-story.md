@@ -34,6 +34,8 @@ Creates a pull request for the completed story implementation.
   - Links PR to story issue
   - Sets PR title and description from story details
   - Links to parent epic if provided
+  - Auto-assigns reviewers based on CODEOWNERS or repository settings
+  - Sets default reviewers for the PR
 - **Example:** `create_pull_request($story)` returns PR object for story implementation
 
 #### request_automated_reviews($pull_request)
@@ -55,6 +57,48 @@ Updates the story issue with current progress status.
   - Updates labels if needed (e.g., state:in-progress, state:review)
   - Links to PR if created
 - **Example:** `update_story_progress($story, "Implementation complete, PR created")` updates the story issue
+
+#### auto_approve_pr($pull_request, $validation_results)
+Automatically approves a pull request if all validation checks pass.
+- **Input:** Pull request object and validation results from automated reviews
+- **Returns:** Approval status (approved/pending_manual/failed)
+- **Approval criteria:**
+  - All automated CI/CD checks must pass (build, tests, linting)
+  - All automated review comments are informational or approved
+  - No requested changes from automated reviewers
+  - Code coverage meets or exceeds threshold
+  - No merge conflicts with target branch
+  - Branch protection rules satisfied
+- **Actions:**
+  - Evaluates validation results against approval criteria
+  - Posts approval review if all criteria met
+  - Adds approval comment with summary of validation results
+  - Returns approval status for workflow decision making
+- **Example:** `auto_approve_pr($pr, $validation_results)` returns `"approved"` if all checks pass
+
+#### auto_merge_pr($pull_request)
+Automatically merges a pull request if approved and all checks pass.
+- **Input:** Pull request object (must be approved)
+- **Returns:** Merge status (merged/pending/failed)
+- **Merge criteria:**
+  - PR must be approved (manual or automated)
+  - All required status checks must pass
+  - No merge conflicts with target branch
+  - Branch protection rules must be satisfied (required reviews, CI checks, etc.)
+  - PR cannot be in draft state
+- **Actions:**
+  - Validates PR is ready to merge against all branch protection rules
+  - Attempts merge using configured merge strategy (merge commit, squash, or rebase)
+  - Handles branch protection bypasses if authorized and necessary
+  - Deletes source branch after successful merge (if configured)
+  - Posts merge confirmation comment with commit SHA
+  - Returns merge status for workflow tracking
+- **Branch Protection Handling:**
+  - **Protected branches:** Respects all branch protection rules (required reviews, status checks)
+  - **Merge strategies:** Uses repository's configured default merge method
+  - **Bypass rules:** Only bypasses if explicitly authorized (admin/maintainer role) AND necessary
+  - **Failure handling:** Returns failed status if protection rules not met, allowing manual intervention
+- **Example:** `auto_merge_pr($pr)` returns `"merged"` if PR successfully merged, `"pending"` if waiting for checks, `"failed"` if merge blocked
 
 ### implement-story
 
@@ -91,11 +135,28 @@ if `$epic` is provided:
 # Step 5: Update story with review status
 - update_story_progress($story_issue, "PR #{pull_request.number} reviews complete, ready for approval")
 
-# Step 6: Assign PR approval and merge
-- assign the agent the `pr-approval-and-merge` assignment with input `$pull_request`
-- wait until the agent completes PR approval and merge
-- record output as `#implement-story.pr-merged`
-- log: "PR #{pull_request.number} merged for story #{story_issue.number}"
+# Step 6: Automated PR approval and merge
+$approval_status = auto_approve_pr(#implement-story.pull-request, #implement-story.automated-reviews)
+
+if $approval_status is "approved":
+   - log: "PR #{pull_request.number} auto-approved, proceeding to merge"
+   $merge_status = auto_merge_pr(#implement-story.pull-request)
+   
+   if $merge_status is "merged":
+      - record merge as `#implement-story.pr-merged`
+      - log: "PR #{pull_request.number} successfully merged for story #{story_issue.number}"
+   else if $merge_status is "pending":
+      - log: "PR #{pull_request.number} merge pending additional checks, requires manual intervention"
+      - post comment on `$pull_request`: "⚠️ Automated merge pending: waiting for additional status checks to complete. Manual merge may be required."
+      - STOP workflow with message: "Manual intervention required: PR #{pull_request.number} merge is pending additional checks"
+   else:
+      - log: "PR #{pull_request.number} auto-merge failed, requires manual intervention"
+      - post comment on `$pull_request`: "❌ Automated merge failed: branch protection rules not satisfied or merge conflicts present. Manual intervention required."
+      - STOP workflow with message: "Manual intervention required: PR #{pull_request.number} could not be automatically merged"
+else:
+   - log: "PR #{pull_request.number} requires manual approval"
+   - post comment on `$pull_request`: "⚠️ Automated approval criteria not met. Manual review and approval required."
+   - STOP workflow with message: "Manual intervention required: PR #{pull_request.number} needs manual approval"
 
 # Step 7: Final story update and closure
 - update_story_progress($story_issue, "PR merged, story implementation complete")

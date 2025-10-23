@@ -31,8 +31,9 @@ Create a single story sub-issue from an epic issue. The story represents a granu
 12. Rollback guidance is provided
 13. Story is linked as a sub-issue to the parent epic using GitHub's sub-issue feature
 14. Story is linked to the appropriate milestone
-15. Story is marked as blocking the parent epic issue
-16. Story issue object is returned for downstream workflow processing
+15. Story has been added to the GitHub Project
+16. Story is marked as blocking the parent epic issue
+17. Story issue object is returned for downstream workflow processing
 
 ### Assignment
 
@@ -124,7 +125,8 @@ Story1 2 3   Story4 5 6  Story7 8 9   ← **THIS LEVEL**: Stories (granular task
 
 5. **Link Story to Epic**
    - Create the story issue in the repository
-   - Use GitHub''s sub-issue feature to link the story to the parent epic issue
+   - Link the story to the GitHub Project for unified tracking
+   - Use GitHub's sub-issue feature to link the story to the parent epic issue
      - Reference: https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/adding-sub-issues
    - Link the story to the appropriate milestone matching the epic''s milestone
    - Add the story as a blocking dependency in the parent epic issue

@@ -631,5 +631,3 @@ This guide consolidates application development practices across multiple domain
 Remember: These guides provide navigation and quick reference. Always consult the canonical files for complete specifications and authoritative guidance.
 </quick_reference>
 </application_development_guide>
-
-```

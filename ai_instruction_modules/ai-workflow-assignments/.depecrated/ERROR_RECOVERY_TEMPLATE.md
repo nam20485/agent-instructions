@@ -1,6 +1,20 @@
 # Error Recovery Template
 
-This template should be added to all workflow assignments after the "Detailed Steps" section and before "Completion".
+> **⚠️ DEPRECATED**: This standalone template file is deprecated and should no longer be embedded directly into assignment files.
+> 
+> **Migration Path**: This functionality has been consolidated into the event handler system:
+> - **New Location**: `ai_instruction_modules/ai-workflow-assignments/event-handlers/on-error.md`
+> - **Trigger**: Automatically invoked by the workflow orchestrator when errors occur during assignment execution
+> - **Benefit**: Single source of truth eliminates duplication and maintenance burden
+> 
+> **For Assignment Authors**: Do NOT copy this content into new assignment files. The event handler system will automatically provide error recovery functionality when errors are encountered.
+
+---
+
+## Legacy Content (for reference only)
+
+~This template should be added to all workflow assignments after the "Detailed Steps" section and before "Completion".~
+This template should be added to all dynamic-workflows at the `on-assignment-failure` event.
 
 ---
 

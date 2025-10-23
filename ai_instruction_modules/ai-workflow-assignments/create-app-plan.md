@@ -9,7 +9,7 @@ Your goal is to create a plan for application, using the template in Appendix A,
 ### Acceptance Criteria
 
 1. Application template has been thoroughly analyzed and understood
-2. Plan's project structure has been created according to established guidelines and plan
+2. Plan's project structure has been documented according to established guidelines and plan
 3. Template from Appendix A has been used as a template for the plan.
 4. Plan contains detailed breakdown of all phases required to achieve complete implementation.
 5. All phases list important steps required to achieve completion of that phase.
@@ -22,6 +22,9 @@ Your goal is to create a plan for application, using the template in Appendix A,
 12. Application plan is ready for development and implementation.
 13. Application plan has been documented in an issue using the template in #Appendix A.
 14. Milestones have been created and issues linked to the appropriate milestone.
+15. Created issue has been added to the GitHub Project for tracking.
+16. Created issue has been assigned to the appropriate milestone (typically "Phase 1: Foundation").
+17. Appropriate labels have been applied to the issue (typically "planning", "documentation").
 
 ### Assignment
 
@@ -36,6 +39,18 @@ Specifically, you will:
 **Always follow instructions given here and as described in the task-based workflow process.**
 
 It is important to the final quality of our product for everyone to perform their assignment exactly as specified.
+
+### Important: Planning Only - No Implementation
+
+This assignment is **PLANNING ONLY**. You will:
+- ✅ Document the plan in an issue
+- ✅ Create planning documents (tech-stack.md, architecture.md)
+- ✅ Create milestones and link issues
+- ❌ NOT create any project files (.csproj, .sln, source code, etc.)
+- ❌ NOT write any implementation code
+- ❌ NOT create application directory structures
+
+All implementation happens in subsequent assignments (create-application-foundation, create-application-structure, etc.).
 
 ### References:
 
@@ -55,11 +70,18 @@ It is important to the final quality of our product for everyone to perform thei
 
 2. **Design Plan**
    - Create a detailed design plan based on the new app template
-   - Define the project structure, including directories, files, and naming conventions
+   - Document the planned project structure, including directories, files, and naming conventions
+   
+   **Note**: You are documenting the PLAN for the project structure, not creating the actual directories or files. Actual file creation happens in the 'create-application-foundation' assignment.
    - Identify necessary frameworks, tools, and packages to be used
    - Plan for testing, documentation, containerization, and other mandatory requirements
    - Create Issue documenting plan from the #Appendix A plan template and iterate to gain approval from the orchestrator or stakeholders
-   - Create milestones based on the phases in the plan and link issues to the appropriate milestone.
+   - Create milestones based on the phases in the plan using `gh api` or the GitHub CLI
+   - Link created issue to the GitHub Project for unified tracking
+   - Assign issue to appropriate milestone (typically the first phase: "Phase 1: Foundation")
+   - Apply appropriate labels to issue from the imported label set (typically: "planning", "documentation")
+
+
 
 ### Completion
 
