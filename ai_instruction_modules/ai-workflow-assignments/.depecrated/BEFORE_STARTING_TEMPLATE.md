@@ -1,6 +1,20 @@
 # Before Starting Template
 
-This template should be added to all workflow assignments after the "Assignment" section and before "Detailed Steps".
+> **⚠️ DEPRECATED**: This standalone template file is deprecated and should no longer be embedded directly into assignment files.
+> 
+> **Migration Path**: This functionality has been consolidated into the event handler system:
+> - **New Location**: `ai_instruction_modules/ai-workflow-assignments/event-handlers/pre-create-assignment.md`
+> - **Trigger**: Automatically invoked by the workflow orchestrator before assignment execution
+> - **Benefit**: Single source of truth eliminates duplication and maintenance burden
+> 
+> **For Assignment Authors**: Do NOT copy this content into new assignment files. The event handler system will automatically provide this functionality at the appropriate workflow lifecycle point.
+
+---
+
+## Legacy Content (for reference only)
+
+~This template should be added to all workflow assignments after the "Assignment" section and before "Detailed Steps".~
+This template should be added to all dynamic-workflows at the `pre-script-begins` event.
 
 ---
 

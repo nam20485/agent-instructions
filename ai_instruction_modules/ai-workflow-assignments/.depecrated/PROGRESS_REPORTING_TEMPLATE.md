@@ -1,6 +1,20 @@
 # Progress Reporting Template
 
-This template should be added to long-running workflow assignments (>30 minutes) after the "Detailed Steps" section and before "Error Recovery".
+> **⚠️ DEPRECATED**: This standalone template file is deprecated and should no longer be embedded directly into assignment files.
+> 
+> **Migration Path**: This functionality has been consolidated into the event handler system:
+> - **New Location**: `ai_instruction_modules/ai-workflow-assignments/event-handlers/post-step-complete.md`
+> - **Trigger**: Automatically invoked by the workflow orchestrator after each major step completion
+> - **Benefit**: Single source of truth eliminates duplication and maintenance burden
+> 
+> **For Assignment Authors**: Do NOT copy this content into new assignment files. The event handler system will automatically provide progress reporting functionality at the appropriate workflow lifecycle points.
+
+---
+
+## Legacy Content (for reference only)
+
+~This template should be added to long-running workflow assignments (>30 minutes) after the "Detailed Steps" section and before "Error Recovery".~
+This template should be added to all dynamic-workflows at the `post-assignment-complete` event.
 
 ---
 

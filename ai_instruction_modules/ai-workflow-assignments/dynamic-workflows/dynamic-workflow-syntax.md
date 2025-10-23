@@ -78,7 +78,7 @@ Events are declared as fourth-level headings under a third-level "Events" step:
 #### `event-name`
 ```
 
-#### Standard Event Types
+#### Canonical Event Types
 
 - `pre-script-begin`: Executes once before any script steps begin
 - `post-script-complete`: Executes once after all script steps complete successfully
@@ -86,6 +86,24 @@ Events are declared as fourth-level headings under a third-level "Events" step:
 - `post-assignment-completion`: Executes after each assignment in an iteration completes successfully
 - `on-assignment-failure`: Executes when an assignment fails (provides error context)
 - `on-script-failure`: Executes when the entire script fails (cleanup/rollback actions)
+
+## Event Handler Integration
+
+All assignments orchestrated through this workflow can utilize **Standard** event handlers for standardized lifecycle behaviors:
+
+- **pre-create-assignment-Standard**: Pre-execution preparation and validation
+- **post-step-complete-Standard**: Progress tracking and step completion handlers
+- **post-assignment-complete-Standard**: Assignment completion and wrap-up actions
+- **on-assignment-failure-Standard**: Systematic error handling and recovery procedures
+- **pre-script-begin-Standard**: Workflow initialization and setup
+
+The Standard event handlers are located in [`ai_instruction_modules/ai-workflow-assignments/event-handlers/`](../Standard-event-handlers) and provide:
+- Consistent preparation, tracking, and recovery patterns
+- Reduced false starts and thorough issue handling
+- Clear progress visibility and status reporting
+- Structured error recovery to prevent workflow abandonment
+
+~Event handlers are triggered automatically at their designated lifecycle points during workflow execution. See the [Events Section](../orchestrate-dynamic-workflow.md#scripts--events-section) above for integration details.~
 
 #### Event Execution Rules
 

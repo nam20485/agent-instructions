@@ -31,7 +31,7 @@ Outputs:
   - <file-created>: <file-path>
 ```
 
-### 2. Acceptance Criteria Validation
+#332## 2. Acceptance Criteria Validation
 Verify the assignment's Definition of Done:
 - Check each acceptance criterion against actual outputs
 - Validate file existence, format, content
