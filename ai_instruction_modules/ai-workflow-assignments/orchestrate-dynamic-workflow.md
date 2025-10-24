@@ -7,7 +7,7 @@ The dynamic workflow orchestration assignment is different than static workflow 
 
 ## Inputs
 - `$workflow_name`: the dynamic workflow name to execute (string)
-- Additional inputs: Any other parameters specified in the dynamic workflow file's "Inputs" section
+- `{ Additional inputs }: Any other parameters specified in the dynamic workflow file's "Inputs" section
   - These are passed through to the workflow being orchestrated
   - Parameter names must match those defined in the workflow's "Inputs" section
   - Can be passed as individual parameters or as a structured object
@@ -77,7 +77,7 @@ See [dynamic-workflow-syntax.md](dynamic-workflows/dynamic-workflow-syntax.md#ev
 3. All specified assignments are completed according to the instructions in the dynamic workflow file.
 4. All acceptance criteria for each specified assignment are met.
 5. All directives in the Script section of the dynamic workflow file are executed.
-6. **All event scripts (if present) are executed at their designated lifecycle points.**
+6. **All event handlerscripts (if present) are executed at their designated lifecycle points.**
 7. Approval is obtained for the final product.
 8. No unresolved items remain at completion; results are documented and cross-linked as appropriate.
 
