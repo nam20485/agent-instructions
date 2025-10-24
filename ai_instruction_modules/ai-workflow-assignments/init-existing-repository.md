@@ -6,6 +6,41 @@
 
 Your goal is to initiate a new repository for a project. This involves creating the repository, copying the provided files to the repository, configuring the necessary settings, and creating the initial administrative structure.
 
+### Prerequisites
+
+- GitHub authentication with appropriate scopes: `repo`, `project`, `read:project`, `read:user`, `user:email`
+- Access to create GitHub Projects and link them to repositories (requires `project` and `read:project` scopes)
+- Permissions to create repositories, manage labels, create milestones, and create branches/PRs
+- GitHub CLI (gh) installed and authenticated
+
+### Verification Steps
+
+Before starting this assignment, verify that your environment has the necessary permissions by running the automated test script:
+
+```powershell
+# Run the permissions verification script
+./scripts/test-github-permissions.ps1 -Owner <your-github-username>
+
+# Or run with auto-fix to attempt to resolve authentication issues automatically
+./scripts/test-github-permissions.ps1 -Owner <your-github-username> -AutoFixAuth
+
+# Or run with PAT authentication (non-interactive) - set GITHUB_AUTH_TOKEN environment variable first
+$env:GITHUB_AUTH_TOKEN = "<your-pat-token>"
+./scripts/test-github-permissions.ps1 -Owner <your-github-username> -AutoFixAuth
+```
+
+The script will test all required permissions and can automatically attempt to fix authentication issues when the `-AutoFixAuth` parameter is used. This includes:
+- Checking if GitHub CLI is installed and authenticated
+- Using the `scripts/gh-auth.ps1` helper script for authentication (supports both interactive OAuth and non-interactive PAT via `$env:GITHUB_TOKEN`)
+- Verifying required authentication scopes (`repo`, `project`, `read:project`, `read:user`, `user:email`)
+- Attempting to refresh authentication with missing scopes using `gh auth refresh` if needed
+- Testing repository creation/deletion
+- Testing project creation
+- Testing label management
+- Testing milestone creation
+- Testing branch/PR creation workflow
+
+
 ### Inputs
 
 ### Acceptance Criteria
@@ -14,9 +49,8 @@ Your goal is to initiate a new repository for a project. This involves creating 
 1. Git Project created for issue tracking
 2. Git Project linked to repository
 3. Project columns created: Not Started, In Progress, In Review, Done
-4. Milestones created based on application plan phases
-5. Labels imported for issue management
-6. Filenames changed to match project name
+4. Labels imported for issue management
+5. Filenames changed to match project name
 
 ### Assignment
  
@@ -31,7 +65,7 @@ It is important to the final quality of our product for everyone to perform thei
 1. **Create PR and New Branch**
    - Create a new branch named after the invoking dynamic workflow assignment which called this workflow assignment, with the prefix `dynamic-workflow-`.
    - For example, if the dynamic workflow assignment is `project-setup`, the branch should be named `dynamic-workflow-project-setup`.
-   - Create a pull request (PR) for the new branch to merge into `main`
+   
    - Changes will most likely not be made until subsequent workflow assignmments invoked after this one, so it will be left open until all subsequent assignments are complete and approved.
    - Later workflow assignments will commit and push changes to this branch.
 
@@ -53,6 +87,9 @@ It is important to the final quality of our product for everyone to perform thei
 4.  **Rename Workspace and Devcontainer Files**
    - Inside the `.devcontainer/devcontainer.json` file rename the `name` property to use the repository name as the prefix, preserving the "devcontainer" suffix. Template: `<repo-name>-devcontainer`
    - Rename the `ai-new-app-template.code-workspace` file to use the repository name as the prefix, preserving the ".code-workspace" extension. Template: `<repo-name>.code-workspace`
+
+5. **Final Steps**
+   - Create a pull request (PR) for the new branch to merge into `main`
 
 ## Completion
 
