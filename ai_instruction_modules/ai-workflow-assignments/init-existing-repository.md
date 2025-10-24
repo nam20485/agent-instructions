@@ -62,34 +62,35 @@ It is important to the final quality of our product for everyone to perform thei
 
 ### Detailed Steps
 
-1. **Create PR and New Branch**
-   - Create a new branch named after the invoking dynamic workflow assignment which called this workflow assignment, with the prefix `dynamic-workflow-`.
-   - For example, if the dynamic workflow assignment is `project-setup`, the branch should be named `dynamic-workflow-project-setup`.
-   
-   - Changes will most likely not be made until subsequent workflow assignmments invoked after this one, so it will be left open until all subsequent assignments are complete and approved.
-   - Later workflow assignments will commit and push changes to this branch.
-
-2. **Create GitHub Project for Issue Tracking**
+1. **Create GitHub Project for Issue Tracking**
    - Create a new GitHub Project for issue tracking
    - Name the project the same as the repository
    - Set the project to `Board` template
    - Link project to the repository
+   - Link the project to the PR created in step 1
    - Create the following columns in the project:
      - Not Started
      - In Progress
      - In Review
      - Done
 
-3. **Import Labels**
+2. **Import Labels**
    - Import the labels from the `.labels.json` file in the root of the repository
    - Use the `import-labels.ps1` script to import the labels
 
-4.  **Rename Workspace and Devcontainer Files**
+3.  **Rename Workspace and Devcontainer Files**
    - Inside the `.devcontainer/devcontainer.json` file rename the `name` property to use the repository name as the prefix, preserving the "devcontainer" suffix. Template: `<repo-name>-devcontainer`
    - Rename the `ai-new-app-template.code-workspace` file to use the repository name as the prefix, preserving the ".code-workspace" extension. Template: `<repo-name>.code-workspace`
 
+4. **Create PR and New Branch**
+- Create a new branch named after the invoking dynamic workflow assignment which called this workflow assignment, with the prefix `dynamic-workflow-`.
+- For example, if the dynamic workflow assignment is `project-setup`, the branch should be named `dynamic-workflow-project-setup`.
+
+- Changes will most likely not be made until subsequent workflow assignments invoked after this one, so it will be left open until all subsequent assignments are complete and approved.
+- Later workflow assignments will commit and push changes to this branch.
+
 5. **Final Steps**
-   - Create a pull request (PR) for the new branch to merge into `main`
+   - Nothing to do here, just proceed to the completion section below. 
 
 ## Completion
 
