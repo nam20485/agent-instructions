@@ -19,6 +19,7 @@ Validate that a completed assignment has successfully met all its acceptance cri
 3. Validation report created documenting results
 4. Pass/fail status determined
 5. If failed, specific remediation steps provided
+6. If **any** acceptance criterion is not met, the assignment is marked as **failed**
 
 ### Assignment
 
@@ -83,6 +84,26 @@ npm run lint  # or pylint, cargo clippy, etc.
 
 # Run formatter check
 npm run format:check  # or black --check, cargo fmt --check, etc.
+```
+
+**For .NET C# Assignments:**
+```bash
+# Restore dependencies
+dotnet restore
+
+# Run build
+dotnet build
+
+# Run tests
+dotnet test
+
+# Run linter (using dotnet-format)
+dotnet tool install -g dotnet-format
+dotnet format --check
+
+# run application (if applicable)
+dotnet run --project <ProjectName>.csproj
+# (then stop it)
 ```
 
 **For Structure Assignments:**

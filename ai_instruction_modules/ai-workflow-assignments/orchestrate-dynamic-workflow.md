@@ -97,11 +97,18 @@ These apply to all dynamic workflows.
 - Acceptance-criteria gating (Definition of Done)
   - Extract the Acceptance Criteria from each assignment file.
   - Treat each criterion as a must-pass gate. Do not declare success unless every criterion passes.
+
+  **ALL ACCEPTANCE CRITERIA MUST PASS OR ASSIGNMENT/STEP/SCRIPT/WORKFLOW ASSIGNMENT FAILS.**
+
+  **NO EXCEPTIONS, ACCEPTANCE CRITERIA ARE NON-NEGOTIABLE.**
+  
+  **NO LEAVING CRITERIA FOR MANUAL EXECUTION LATER**
+
 - Template and preflight enforcement
   - If the assignment specifies template/source-of-truth requirements (e.g., create repo from a template, enforce license/visibility, required scripts), enforce them.
   - If the target already exists but violates preconditions, either:
     - Recreate per spec; or
-  -  **IF** pre-existing artifcats strictly meet acceptance criteroa and/or instruction, leave them and record a non-creation event.
+  -  **IF** pre-existing artifacts strictly meet acceptance criteria and/or instruction, leave them and record a non-creation event.
 
 - Branch protection
   - For code changes: if the default branch is protected, use a feature branch + PR path; do not force-push to protected branches.
