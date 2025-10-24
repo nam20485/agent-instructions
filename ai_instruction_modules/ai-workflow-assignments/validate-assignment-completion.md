@@ -12,6 +12,41 @@ Validate that a completed assignment has successfully met all its acceptance cri
 * Assignment acceptance criteria are documented
 * Assignment outputs are available for verification
 
+
+#### validate_workflow_assignment($workflow_assignment)
+Validates that a workflow assignment exists and is executable.
+- **Input:** Workflow assignment short ID (string)
+- **Returns:** Boolean indicating if the assignment is valid
+- **Actions:**
+  - Checks if assignment file exists at expected path
+  - Verifies assignment file has required sections (Goal, Acceptance Criteria, Assignment)
+  - Validates assignment short ID matches file naming convention
+  - Returns `true` if valid, `false` if not found or invalid
+- **Example:** `validate_workflow_assignment("update-from-feedback")` returns `true`
+
+#### get_assignment_acceptance_criteria($workflow_assignment)
+Retrieves the acceptance criteria from a workflow assignment definition.
+- **Input:** Workflow assignment short ID (string)
+- **Returns:** Array of acceptance criteria strings
+- **Actions:**
+  - Reads the workflow assignment file
+  - Extracts the "Acceptance Criteria" section
+  - Parses criteria into an array
+  - Returns list of criteria for validation
+- **Example:** `get_assignment_acceptance_criteria("update-from-feedback")` returns `["All feedback items categorized", "Action plan created", ...]`
+
+#### verify_acceptance_criteria($workflow_assignment, $output)
+Verifies that all acceptance criteria for the assignment are met.
+- **Input:** Workflow assignment short ID and agent output/work artifacts
+- **Returns:** Object with `all_met` (boolean) and `criteria_status` (array of {criterion, status, evidence})
+- **Actions:**
+  - Gets acceptance criteria for the assignment
+  - Reviews agent output and work artifacts
+  - Checks each criterion against output
+  - Documents evidence for each criterion
+  - Returns verification results
+- **Example:** `verify_acceptance_criteria("update-from-feedback", $output)` returns verification object
+
 ### Acceptance Criteria
 
 1. All required files from assignment exist
