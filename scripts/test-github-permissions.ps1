@@ -105,7 +105,7 @@ function Test-AuthScopes {
             
             if ($AutoFixAuth) {
                 Write-Host "`nAttempting to add missing scope: $scope..." -ForegroundColor Yellow
-                $refreshResult = & gh auth refresh -s $scope 2>&1
+                $refreshResult = & gh auth refresh -h github.com -s $scope 2>&1
                 if ($LASTEXITCODE -eq 0) {
                     Write-Status "Successfully added scope: $scope" 'SUCCESS'
                     # Test again to confirm it worked

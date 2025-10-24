@@ -30,7 +30,7 @@ function Initialize-GitHubAuth {
         else {
             Write-Host 'Authenticating using PAT token (non-interactive)' -ForegroundColor Green
             # Authenticate using the PAT token via stdin
-            $result = $Token | & gh auth login --with-token 2>&1
+            $result = $Token | & gh auth login --with-token --hostname github.com 2>&1
             if ($LASTEXITCODE -ne 0) {
                 throw "Failed to authenticate using PAT token: $result"
             }
