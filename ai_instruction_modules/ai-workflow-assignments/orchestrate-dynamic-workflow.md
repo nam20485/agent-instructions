@@ -50,12 +50,14 @@ Dynamic workflows may include an "Events" subsection that defines actions to exe
 **Standard Event Types**:
 - `pre-script-begin`: Runs once before any script steps begin
 - `post-script-complete`: Runs once after all script steps complete successfully
+
 - `pre-assignment-begin`: Runs before each assignment in a loop starts
 - `post-assignment-completion`: Runs after each assignment in a loop completes
+
 - `pre-step-begin`: Runs before each step (the high level headings) in an assignment starts
 - `post-step-completion`: Runs after each step (the high level headings) in an assignment completes
+
 - `on-assignment-failure`: Runs when an assignment fails
-- `on-script-failure`: Runs when the entire script fails (for cleanup/rollback)
 
 **Event Execution Requirements**:
 1. **Timing**: Events MUST execute at their designated lifecycle point
@@ -138,15 +140,17 @@ These apply to all dynamic workflows.
 - **If `pre-script-begin` event exists, execute it first**
 - For each main workflow step:
     **If `pre-step-begin` event exists, execute it before the step**
-  - For each assignment in the step:
-    - **If `pre-assignment-begin` event exists and step contains loops, execute before each iteration**
-    - Perform the Detailed Steps exactly as written in the assignment file
-    - Honor preflight requirements (templates, scripts, visibility, licenses) before continuing
-    - If a required step cannot be executed (e.g., missing permission), trigger `on-assignment-failure` event (if present), then stop and report
-    - Do not continue performing any later step until you have successfully finished the current step, and all previous steps
-    - **If `post-assignment-completion` event exists and step contains loops, execute after each iteration**
-- **If all steps succeed and `post-script-complete` event exists, execute it**
-- **If any step fails and `on-script-failure` event exists, execute it for cleanup/rollback**
+    - For each assignment in the step:
+      - **If `pre-assignment-begin` event exists and step contains loops, execute before each iteration**
+      - Perform the #DetailedSteps exactly as written in the assignment file
+      - Honor preflight requirements (templates, scripts, visibility, licenses) before continuing
+      - If any assignment fails:        
+        - **If `on-assignment-failure` event exists, execute it for cleanup/rollback**
+        - Stop execution of the current step and report failure
+      - Else
+          **If `post-assignment-completion` event exists, execute it**
+    **If `post-step-completion` event exists, execute it after the step**
+- **If `post-script-complete` event exists, execute it**
 
 1) Verify (Gated)
 - Evaluate each Acceptance Criterion (including event execution criteria).
