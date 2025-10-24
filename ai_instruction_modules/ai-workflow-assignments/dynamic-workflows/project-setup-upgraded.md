@@ -19,6 +19,7 @@ This workflow sets up a new project with modern best practices using generic, fr
                     `create-application-structure`,
                     `create-testing-infrastructure`,
                     `create-deployment-infrastructure`,
+                    `pr-approval-and-merge`,
                     `debrief-and-document`
                  ]
 
