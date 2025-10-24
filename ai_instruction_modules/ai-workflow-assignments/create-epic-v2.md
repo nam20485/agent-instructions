@@ -76,13 +76,13 @@ This assignment creates **Line Item Epics** at the second level of the issue hie
 ```
 ┌─────────────────────────────────────┐
 │     Main Application Plan Issue     │  ← Top level: Overall application plan
-└─────────────────────────────┘
+└─────────────────────────────────────┘
                  │
         ┌────────┼────────┐
         │        │        │
 ┌───────▼──┐ ┌──▼──────┐ ┌▼────────┐
 │ Phase 1  │ │ Phase 2 │ │ Phase 3 │
-│  (agg)   │ │  (agg)   │ │  (agg)  │  ← **THIS LEVEL**: Phase collections (aggregates)
+│  (agg)   │ │  (agg)  │ │  (agg)  │  ← **THIS LEVEL**: Phase collections (aggregates)
 └──────────┘ └─────────┘ └─────────┘
      │            │           │
  ┌──┼──┐      ┌─┼─┐      ┌──┼──┐
