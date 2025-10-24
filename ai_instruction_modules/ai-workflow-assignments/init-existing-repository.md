@@ -31,7 +31,7 @@ $env:GITHUB_AUTH_TOKEN = "<your-pat-token>"
 
 The script will test all required permissions and can automatically attempt to fix authentication issues when the `-AutoFixAuth` parameter is used. This includes:
 - Checking if GitHub CLI is installed and authenticated
-- Using the `scripts/gh-auth.ps1` helper script for authentication (supports both interactive OAuth and non-interactive PAT via `$env:GITHUB_TOKEN`)
+- Using the `scripts/gh-auth.ps1` helper script for authentication (supports both interactive OAuth and non-interactive PAT via `$env:GITHUB_AUTH_TOKEN`)
 - Verifying required authentication scopes (`repo`, `project`, `read:project`, `read:user`, `user:email`)
 - Attempting to refresh authentication with missing scopes using `gh auth refresh` if needed
 - Testing repository creation/deletion
