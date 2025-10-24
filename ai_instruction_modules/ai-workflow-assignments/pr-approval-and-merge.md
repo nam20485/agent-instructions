@@ -6,6 +6,19 @@
 
 Complete the full PR approval and merge process, including resolving all PR comments, obtaining approval, merging the PR, and closing associated issues.
 
+### Inputs
+- `$pr_num`: (required) 
+    - The pull request number to process
+
+### Outputs
+
+- `result` (required)
+  - The status of the PR approval and merge process
+  - Possible values:
+    - `"merged"`: PR was successfully approved and merged to target branch
+    - `"pending"`: PR merge is pending additional checks or manual intervention
+    - `"failed"`: PR could not be merged due to conflicts, failed checks, or other issues
+
 ### Acceptance Criteria
 
 1. All PR comments resolved.
@@ -129,12 +142,3 @@ The completion process follows these steps:
    - If merge is blocked by pending status checks: result = "pending"
    - If merge fails due to conflicts, branch protection, or other issues: result = "failed"
 4. **Issue Closure**: Close the associated issue and branch (only if merge was successful)
-
-### Output
-
-- `result` (required)
-  - The status of the PR approval and merge process
-  - Possible values:
-    - `"merged"`: PR was successfully approved and merged to target branch
-    - `"pending"`: PR merge is pending additional checks or manual intervention
-    - `"failed"`: PR could not be merged due to conflicts, failed checks, or other issues
