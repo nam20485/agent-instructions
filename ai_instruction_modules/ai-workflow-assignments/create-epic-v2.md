@@ -11,11 +11,21 @@ Transform a single task-list line item from a parent application plan into its o
 - `$line_item`: Line item object containing the identifier, title, description, acceptance criteria, dependencies, and source task-list structure from the parent plan
 
 ### Output
-- Single epic sub-issue created and linked to the parent plan issue
-- Epic contains the preserved checkbox-driven task list from the line item
-- Epic contains high-level story bullets for downstream workflows
-- Epic is assigned to the appropriate milestone
 - Returns the created epic issue object for downstream processing
+- The epic issue object includes: issue ID, URL, title, and metadata for linking
+
+#### Structure of Output Epic Issue Object
+```json
+{
+  "id": 123456789,
+  "url": "https://github.com/owner/repo/issues/123456789",
+  "title": "[ProjectName] – [PhaseName] – [LineItemIdentifier] Epic",
+  "metadata": {
+    "parent_issue_id": 987654321,
+    "phase": "$phase",
+    "line_item": "$line_item"
+  }
+}
 
 ### Acceptance Criteria
 
