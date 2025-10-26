@@ -1,48 +1,40 @@
-# Dynamic Workflow: Create Epics for Phase
+# Dynamic Workflow: Create Stories for Epic
 
 ## Overview
 
-This dynamic workflow creates epic issues for a specific phase within an application development plan. It extracts the specified phase from a plan issue, then creates individual epic issues for each line item in that phase using the create-epic-v2 assignment. The workflow enforces serial execution for now, creating one epic at a time to ensure correctness.
+This dynamic workflow creates story issues for a specific epic within an application development plan. It extracts the specified story bullets from an epic issue, then creates individual story issues for each story using the create-story-v2 assignment. The workflow enforces serial execution for now, creating one story at a time to ensure correctness.
 
 ### Parallel Execution and Workspace Management
 **How Serial Execution Works:**
-- Even when `$parallel_execution` is `true`, the workflow enforces serial execution by hard-coding `$PARALLEL_EPIC_BREAKDOWN` to `false`
-- Each `create-epic-v2` task runs sequentially, one after another
+- Even when `$parallel_execution` is `true`, the workflow enforces serial execution by hard-coding `$PARALLEL_STORY_CREATION` to `false`
+- Each `create-story-v2` task runs sequentially, one after another
 - This ensures proper validation of the workflow before enabling parallel execution
 - The orchestrator coordinates assignments and collects outputs from each serial agent
 
 **Coordination:**
-- The orchestrator waits for each epic creation to complete before proceeding to the next
+- The orchestrator waits for each story creation to complete before proceeding to the next
 - Issue creation is less conflict-prone than code implementation
-- Epic issues are created in GitHub's issue tracker, not in the repository code
+- Story issues are created in GitHub's issue tracker, not in the repository code
 
 ## Script
 
 ### Inputs
-- `$plan_issue_number` (required)
-  - issue number of the plan to analyze
+- `$epic_issue_number` (required)
+ - issue number of the epic to analyze
   - if not provided, have agent find it
 - `$repository` (optional)
-  - git repo with plan issue to analyze
+  - git repo with epic issue to analyze
   - if not provided, use current workspace
-- `$epic_issue` (required)
- - GitHub issue # of the epic to process (e.g., "Epic 1", "Epic 2", etc.)
 - `$parallel_execution` (optional, default: `false`)
   - Whether to attempt parallel execution (currently ignored - always runs serially)
 
 ### Declarations
 
-#### getplanissue($issue_number, $repository)
-Retrieves the plan issue from the specified repository.
-- **Input:** Issue number and repository path
-- **Returns:** Issue object containing the application development plan
-- **Example:** `getplanissue(42, "myorg/myrepo")` returns issue #42 from myorg/myrepo
-
-#### getepic($epic, $repository)
+#### getepic($issue_number, $repository)
 Retrieves the epic issue from the specified repository.
-- **Input:** Epic issue number or object and repository path
-- **Returns:** Epic issue object containing the epic description and requirements
-- **Example:** `getepic(15, "myorg/myrepo")` returns epic issue #15 from myorg/myrepo
+- **Input:** Issue number and repository path
+- **Returns:** Issue object containing the epic description and requirements
+- **Example:** `getepic(42, "myorg/myrepo")` returns issue #42 from myorg/myrepo
 
 #### getstories($epic)
 Extracts story items from an epic issue.
@@ -50,21 +42,19 @@ Extracts story items from an epic issue.
 - **Returns:** Array of story descriptions to be converted into story issues
 - **Example:** `getstories($epic)` returns `["Story 1: User login", "Story 2: Password reset", ...]`
 
-
 ### create-stories-for-epic
 
-`$plan_issue` = getplanissue($plan_issue_number, $repository)
-`$target_epic` = getepic($epic_issue, $repository)
-`$stories` = getstories($target_epic)
+`$epic_issue` = getepic($epic_issue_number, $repository)
+`$stories` = getstories($epic_issue)
 
-const `$PARALLEL_EPIC_BREAKDOWN`: `false`
+const `$PARALLEL_STORY_CREATION`: `false`
 
 # SERIAL MODE: Create stories one at a time (parallel execution is disabled for validation)
 For each `$story` in `$stories`, you will:
-   - assign the agent the `create-story` assignment with inputs `$target_epic` and `$story`
+   - assign the agent the `create-story-v2` assignment with inputs `$epic_issue` and `$story`
    - wait until the agent finishes the task
    - review the work and approve it
-   - record output as `#create-stories-for-epic.create-story`
+   - record output as `#create-stories-for-epic.create-story-v2`
 
 ### Events
 
