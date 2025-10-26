@@ -168,3 +168,9 @@ The assignment ensures that:
    - Commit current state to version control
    - Tag important points for easy reference
    - Document starting point for rollback if needed
+
+4. Perform authentication checks
+   - Verify access to required services
+   - Confirm credentials are valid and working
+   - Test connectivity to external dependencies
+   - Authenticate using instruciotns ion 
