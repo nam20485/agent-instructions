@@ -36,7 +36,7 @@ Transform a high-level story bullet from a parent epic into its own story sub-is
 
 1. Parent epic issue has been reviewed and the targeted story bullet fully understood
 2. Story issue created using the official story template from `.github/ISSUE_TEMPLATE/story.md`
-3. Story title follows format: `Story: <story name>`
+3. Story title follows format: `Story: <story name> (<epic_id>: #<epic number>)`
 4. Story objective captures the intent of the original story bullet with clear expected outcome
 5. Scope is clearly defined (what's included and excluded) and aligned with the parent epic
 6. Implementation plan preserves the checkbox hierarchy from the story bullet while expanding steps where needed
@@ -82,14 +82,18 @@ This assignment creates **Stories** at the bottom level of the issue hierarchy:
         │        │        │
 ┌───────▼──┐ ┌──▼──────┐ ┌▼────────┐
 │ Phase 1  │ │ Phase 2 │ │ Phase 3 │
-│  EPIC    │ │  EPIC   │ │  EPIC   │  ← Middle level: Epics (from phases)
+│  (agg)   │ │  (agg)  │ │  (agg)  │  
 └──────────┘ └─────────┘ └─────────┘
+     │            │           │
+ ┌──┼──┐      ┌─┼─┐      ┌──┼──┐
+  │  │  │      │ │ │      │  │  │
+  ▼  ▼ ▼      ▼ ▼ ▼      ▼ ▼ ▼
+Epic1 2 3    Epic4 5 6 Epic7 8 9   ← **THIS LEVEL**: Epic collections (aggregates already created)
      │            │           │
   ┌──┼──┐      ┌─┼─┐      ┌──┼──┐
   │  │  │      │ │ │      │  │  │
   ▼  ▼  ▼      ▼ ▼ ▼      ▼  ▼  ▼
-Story1 2 3   Story4 5 6  Story7 8 9   ← **THIS LEVEL**: Stories (granular tasks)
-                                         (This assignment creates ONE of these)
+Story1 2 3   Story4 5 6  Story7 8 9   ← **THIS LEVEL**: Stories (granular tasks) (This assignment creates ONE of these)
 ```
 
 **Your Role:** You are creating ONE Story from ONE Epic. Stories are directly implementable tasks.
