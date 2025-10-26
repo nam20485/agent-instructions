@@ -51,8 +51,9 @@ const `$PARALLEL_STORY_CREATION`: `false`
 
 # SERIAL MODE: Create stories one at a time (parallel execution is disabled for validation)
 For each `$story` in `$stories`, you will:
-   - assign the agent the `create-story-v2` assignment with inputs `$epic_issue` and `$story`
-   - wait until the agent finishes the task
+   - If ! (`$story` has already been created as a story issue linked to `$epic_issue`):
+      - assign the agent the `create-story-v2` assignment with inputs `$epic_issue` and `$story`
+      - wait until the agent finishes the task           
    - review the work and approve it
    - record output as `#create-stories-for-epic.create-story-v2`
 
