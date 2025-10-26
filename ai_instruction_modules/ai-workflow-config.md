@@ -108,4 +108,5 @@ For complete event documentation, see:
 <references>
 ## References
 - Orchestrator: [orchestrate-dynamic-workflow.md](./ai-workflow-assignments/orchestrate-dynamic-workflow.md)
+- GitHub Authentication: [ai-gh-authentication.md](./ai-gh-authentication.md)
 </references>

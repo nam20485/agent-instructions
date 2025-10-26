@@ -10,6 +10,11 @@ This is your **quick reference card** for navigating the AI instruction modules 
 - Identifies which comprehensive guide you need
 - Provides overview of the entire system
 
+**Authentication Setup:** [ai-gh-authentication.md](./ai-gh-authentication.md)
+- Required for GitHub CLI operations
+- Covers both interactive and non-interactive authentication
+- Essential for workflow assignments that interact with GitHub
+
 <comprehensive_guides>
 ## 📚 Three Comprehensive Guides
 

@@ -18,6 +18,8 @@
   * Powershell
   * uv (https://astral.sh/uv/)
 * Cite authoritative docs for non-trivial recommendations.
+* For GitHub authentication, reference the official documentation:
+  * [ai-gh-authentication](./ai-gh-authentication.md)
 </persona>
 
 <hierarchy>
