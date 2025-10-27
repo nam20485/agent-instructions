@@ -1,6 +1,12 @@
 # Dynamic Workflow: Implement Story
 
-## ⚠️ MANDATORY: Pre-Execution Reading Chain (NO EXCEPTIONS)
+## Overview
+
+This dynamic workflow performs implementation of a single story from an epic. It is designed to be called from the `implement-epic` workflow (serial flow) or used standalone when you need to implement one specific story. This workflow handles the complete lifecycle of a story: implementation, PR creation, automated reviews, and merge.
+
+## Prerequisites
+
+**⚠️ MANDATORY: Pre-Execution Reading Chain (NO EXCEPTIONS)**
 
 **STOP! Before executing this workflow, you MUST read these files in order and LOG each one:**
 
@@ -13,11 +19,11 @@
 
 **After reading all three files, log: "✓ Completed mandatory reading chain for implement-story workflow"**
 
+** DO NOT PROCEED until you have read the ## Events section later in This file.**
+
+- It contains critical event handlers required for proper execution of this workflow and its assignments.
+
 **Do not proceed with workflow execution until all three files are read and logged.**
-
-## Overview
-
-This dynamic workflow performs implementation of a single story from an epic. It is designed to be called from the `implement-epic` workflow (serial flow) or used standalone when you need to implement one specific story. This workflow handles the complete lifecycle of a story: implementation, PR creation, automated reviews, and merge.
 
 ## Script
 
@@ -186,3 +192,42 @@ else:
 - close the story issue with completion summary
 - record completion as `#implement-story.complete`
 - log: "Story #{story_issue.number} complete"
+
+### Events
+
+#### `pre-assignment-begins`
+
+This event runs before EACH assignment begins to gather context and prepare for execution.
+
+- assign the agent the `gather-context` assignment
+- wait until the agent finishes the task
+- review the work and approve it
+- record output as `#events.pre-assignment-begins.gather-context`
+
+#### `on-assignment-failure`
+
+This event runs when ANY assignment fails to recover from errors systematically.
+
+- assign the agent the `recover-from-error` assignment
+- wait until the agent finishes the task
+- review the work and approve it
+- record output as `#events.on-assignment-failure.recover-from-error`
+
+#### `post-assignment-completion`
+
+This event runs after EACH assignment completes to report progress and validate the work.
+
+`$progress_and_validation_assignments` = [
+                     `create-repository-summary`,     
+                     `validate-assignment-completion`,
+                     `report-progress`
+                 ]
+
+For each `$pv_assignment_name` in `$progress_and_validation_assignments`, you will:
+   - assign the agent the `$pv_assignment_name` assignment
+   - wait until the agent finishes the task
+   - review the work and approve it
+     - if `$pv_assignment_name` is `validate-assignment-completion`:
+     - if validation failed, halt workflow and request manual intervention # Halt workflow to prevent further execution with invalid state
+     - if validation passed, proceed to next assignment in `$progress_and_validation_assignments`
+   - record output as `#events.post-assignment-completion.$pv_assignment_name`
