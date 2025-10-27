@@ -5,6 +5,92 @@
 ## Overview
 The dynamic workflow orchestration assignment is different than static workflow assignments, in that it must orchestrate workflows for a dynamically specified list of workflow assignments, as specified in a dynamic workflow file. The dynamic workflow file specifies assignments to be performed in the "Script" section of the file.
 
+## MANDATORY: Instruction Reading Chain (NO EXCEPTIONS)
+
+**CRITICAL PROTOCOL**: Before orchestrating ANY dynamic workflow, you MUST read the following instruction files in this exact order. This applies to:
+
+- ✅ **New workflow orchestrations** - Starting fresh
+- ✅ **Resuming halted/interrupted workflows** - Picking up where you left off
+- ✅ **Continuing mid-assignment work** - Even if "already started"
+- ✅ **Debugging failed workflows** - Understanding what went wrong
+- ✅ **ANY scenario involving dynamic workflow orchestration**
+
+**NO EXCEPTIONS. EVEN IF YOU'RE TOLD "WORK HAS ALREADY STARTED" - STILL READ THIS CHAIN TO ORIENT YOURSELF.**
+
+### Required Reading Sequence
+
+Read these files in order from the canonical repository (nam20485/agent-instructions/main):
+
+1. **ai-core-instructions.md**
+   - Location: `ai_instruction_modules/ai-core-instructions.md`
+   - Purpose: Foundational rules, protocols, and agent responsibilities
+   - URL: `https://raw.githubusercontent.com/nam20485/agent-instructions/main/ai_instruction_modules/ai-core-instructions.md`
+
+2. **dynamic-workflow-syntax.md** (EVENT SYSTEM)
+   - Location: `ai_instruction_modules/ai-workflow-assignments/dynamic-workflows/dynamic-workflow-syntax.md`
+   - Purpose: **Learn the event system** - what events are, when they fire, how to execute them
+   - URL: `https://raw.githubusercontent.com/nam20485/agent-instructions/main/ai_instruction_modules/ai-workflow-assignments/dynamic-workflows/dynamic-workflow-syntax.md`
+   - **Key focus**: The "Events" section - understand `pre-assignment-begin`, `post-assignment-completion`, etc.
+
+3. **ai-workflow-assignments.md**
+   - Location: `ai_instruction_modules/ai-workflow-assignments.md`
+   - Purpose: Assignment protocol, structure, and delegation procedures
+   - URL: `https://raw.githubusercontent.com/nam20485/agent-instructions/main/ai_instruction_modules/ai-workflow-assignments.md`
+
+4. **orchestrate-dynamic-workflow.md** (THIS FILE)
+   - Location: `ai_instruction_modules/ai-workflow-assignments/orchestrate-dynamic-workflow.md`
+   - Purpose: Dynamic workflow orchestration rules and guardrails
+   - You're reading it now - continue to the rest of this file
+
+5. **[workflow-name].md** (The specific workflow you're orchestrating)
+   - Location: `ai_instruction_modules/ai-workflow-assignments/dynamic-workflows/[workflow-name].md`
+   - Purpose: The workflow script, steps, and events for your specific task
+   - Example: `implement-story.md`, `new-project.md`, etc.
+
+6. **[assignment-name].md** (Each assignment you're delegating to)
+   - Location: `ai_instruction_modules/ai-workflow-assignments/[assignment-name].md`
+   - Purpose: Assignment details, acceptance criteria, and **pre-assignment-begin event**
+   - Example: `pr-approval-and-merge.md`, `perform-task.md`, etc.
+   - **CRITICAL**: Read this BEFORE delegating to the assignment
+
+7. **Execute pre-assignment-begin event** (From dynamic-workflow-syntax.md)
+   - After reading the assignment file, execute its `pre-assignment-begin` event
+   - This is defined in the workflow's Events section or the assignment's requirements
+   - **THEN and ONLY THEN** delegate to the assignment
+
+### Why This Chain Matters
+
+This reading sequence ensures you:
+- ✅ Understand the complete protocol before executing
+- ✅ Know what events are and when to execute them
+- ✅ Don't skip critical pre-assignment-begin events
+- ✅ Have full context even when resuming mid-workflow
+- ✅ Follow proper delegation procedures
+- ✅ Understand acceptance criteria and Definition of Done
+
+### Consequences of Skipping This Chain
+
+If you skip this reading chain, you will:
+- ❌ Miss critical pre-assignment-begin events
+- ❌ Violate protocol and cause workflow failures
+- ❌ Lack context about what's already been done
+- ❌ Make incorrect assumptions about workflow state
+- ❌ Delegate improperly without required setup
+
+### Resuming Mid-Workflow: Special Note
+
+**If you're told "work has already started and was halted":**
+
+1. **STILL read the full instruction chain above** - Don't skip it!
+2. After reading, investigate current state:
+   - Check what's been completed (PRs, issues, branches)
+   - Identify where the workflow stopped
+   - Determine which step/assignment to resume from
+3. **Then** execute the pre-assignment-begin event for the NEXT assignment
+4. Continue with proper protocol
+
+**The instruction chain is for YOUR orientation, not just for starting fresh work.**
+
 ## Inputs
 - `$workflow_name`: the dynamic workflow name to execute (string)
 - Additional inputs: Any other parameters specified in the dynamic workflow file's "Inputs" section
