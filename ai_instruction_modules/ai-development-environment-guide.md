@@ -13,6 +13,10 @@ Use this guide when setting up development environments, managing terminals, wor
 - Troubleshooting environment configuration issues
 - Installing and configuring development tools
 - Working with package managers and version pinning
+
+**GitHub Authentication:**
+* For GitHub authentication, reference the official documentation:
+  * [ai-gh-authentication](./ai-gh-authentication.md)
 </purpose>
 
 <quick_reference>

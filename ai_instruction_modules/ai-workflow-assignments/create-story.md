@@ -114,7 +114,7 @@ Story1 2 3   Story4 5 6  Story7 8 9   ← **THIS LEVEL**: Stories (granular task
    - Use the official story template from `.github/ISSUE_TEMPLATE/story.md`
    - Fill in all sections completely:
      - **Objective**: Clear, concise statement of what the story achieves
-     - **Scope**: Explicitly define what''s in scope and out of scope
+     - **Scope**: Explicitly define what's in scope and out of scope
      - **Plan**: Detailed checklist of tasks with checkboxes
      - **Acceptance Criteria**: Specific, measurable conditions for completion
      - **Validation Commands**: Actual commands to build, run, and test
@@ -126,7 +126,7 @@ Story1 2 3   Story4 5 6  Story7 8 9   ← **THIS LEVEL**: Stories (granular task
 5. **Link Story to Epic**
    - Create the story issue in the repository
    - Link the story to the GitHub Project for unified tracking
-   - Use GitHub''s sub-issue feature to link the story to the parent epic issue
+   - Use GitHub's sub-issue feature to link the story to the parent epic issue
      - Reference: https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/adding-sub-issues
    - Link the story to the appropriate milestone matching the epic''s milestone
    - Add the story as a blocking dependency in the parent epic issue

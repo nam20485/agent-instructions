@@ -20,6 +20,24 @@ A minimal example dynamic workflow for exercising the DSL and orchestration end-
     - optional (iff $workflow_name is provided)    
     - e.g., `dynamic-workflows/breakdown-plan.md`
 
+### Outputs
+
+- $results
+    - structured object containing results (unique to Workflow)
+    - object
+    - e.g., 
+    ```json
+    {
+      "plan-and-setup": { ... },
+      "implement": { ... },
+      "quality-and-merge": { ... }
+    }
+    ```
+
+### Declarations
+
+ Function and global variable declarations go here (if any).
+
 ### plan-and-setup
 
 `$assignments` = [`create-app-plan`, `create-project-structure`]
@@ -44,3 +62,13 @@ For each `$assignment_name` in `$assignments`, you will:
 - assign the agent the `pr-approval-and-merge` assignment
 - wait until the agent finishes the task
 - review the work and approve it
+
+
+### Events
+
+#### `pre-assignment-begins`
+- Triggered before each assignment begins
+- Can be used for logging, setup, or pre-processing tasks
+#### `post-assignment-completes`
+- Triggered after each assignment completes
+- Can be used for logging, cleanup, or post-processing tasks

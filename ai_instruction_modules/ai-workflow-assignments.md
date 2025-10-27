@@ -55,51 +55,6 @@ The format is made up of the following sections:
 - Orchestrator: [/orchestrate-dynamic-workflow.md](./ai-workflow-assignments/orchestrate-dynamic-workflow.md/orchestrate-dynamic-workflow.md)
 - Dynamic syntax: [dynamic-workflow-syntax.md](./ai-workflow-assignments/dynamic-workflows/dynamic-workflow-syntax.md)
 
-## Standardized Workflow Templates
-
-To ensure consistency, quality, and resilience across all workflow assignment executions, three standardized templates have been integrated into workflow assignments:
-
-### Template Types
-
-1. **BEFORE_STARTING_TEMPLATE** - Pre-execution validation and context gathering
-   - Verifies all prerequisites, inputs, and environmental conditions
-   - Establishes baseline understanding and clarifies ambiguities
-   - Prevents execution failures due to missing context or invalid assumptions
-   
-2. **PROGRESS_REPORTING_TEMPLATE** - Structured progress updates during execution
-   - Provides stakeholder visibility into ongoing work
-   - Documents decisions, blockers, and deviations in real-time
-   - Enables early course correction and intervention when needed
-
-3. **ERROR_RECOVERY_TEMPLATE** - Systematic error handling and remediation
-   - Diagnoses failures with root cause analysis
-   - Documents recovery attempts and outcomes
-   - Escalates appropriately when automated recovery is insufficient
-
-### Benefits
-
-- **Consistency**: All assignments follow the same validation, reporting, and error handling patterns
-- **Quality**: Early validation catches issues before costly execution begins
-- **Visibility**: Real-time progress updates keep stakeholders informed
-- **Resilience**: Structured error recovery reduces downtime and improves success rates
-
-### Integration Status
-
-The following workflow assignments currently integrate these templates:
-
-- `create-application-foundation` - Application core structure creation
-- `create-application-structure` - Full application scaffolding
-- `create-testing-infrastructure` - Test framework setup
-- `create-deployment-infrastructure` - Deployment pipeline configuration
-
-Additional assignments will adopt these templates incrementally as the framework matures.
-
-### Customization
-
-Each template includes placeholders for assignment-specific customization. Detailed guidance on template usage and customization is available in:
-
-**[Template Customization Guide](../docs/TEMPLATE_CUSTOMIZATION_GUIDE.md)**
-
 ### Section Descriptions
 
 * Assignment Title: A descriptive title for the assignment.
@@ -119,23 +74,29 @@ Each template includes placeholders for assignment-specific customization. Detai
 * [create-app-plan.md](ai-workflow-assignments/create-app-plan.md): This assignment involves creating a plan for a new application based on a filled-out application template. You will create a plan, document it in an issue, and once gaining approval, you will implement the plan.
 * [create-epic.md](ai-workflow-assignments/.wip/create-epic.md) (create-epic): This assignment involves creating a single epic sub-issue from a phase in the main application plan. The epic represents a major implementation phase with clear deliverables and contains detailed story breakdowns.
 * [create-story.md](ai-workflow-assignments/.wip/create-story.md) (create-story): This assignment involves creating a single story sub-issue from an epic issue. Stories are granular, executable tasks that can be implemented independently by developers.
+* [outline-epic.md](ai-workflow-assignments/outline-epic.md) (outline-epic): This assignment involves creating a comprehensive structural outline for an epic with all classes, interfaces, methods (no implementation), comprehensive XML documentation, and test stubs to enable Test-Driven Development.
 
 ### Initialization & Setup
 * [create-application.md](ai-workflow-assignments/create-application.md): This assignment involves creating a new application given the description from a new app template that has been filled out, including setting up the project structure, configuring necessary components, and ensuring the application meets specified requirements.
 * [create-app-from-plan-issue.md](ai-workflow-assignments/create-app-from-plan-issue.md): This assignment involves creating a new application from an initialized git repo and a filled-out development plan issue, implementing the project structure and components.
 * [create-app-from-plan-issue (unguided).md](ai-workflow-assignments/create-app-from-plan-issue%20(unguided).md): This assignment is an unguided variant of creating an application from a plan issue, providing less prescriptive steps.
+* [create-new-project.md](ai-workflow-assignments/create-new-project.md): This assignment involves creating a new project from scratch, including repository initialization, basic file structure setup, and initial configuration.
 * [create-project-structure.md](ai-workflow-assignments/create-project-structure.md): This assignment involves creating the actual project structure and scaffolding for a new application based on a comprehensive application plan. This involves setting up the repository, creating the solution structure, configuring initial project files, and establishing the development environment foundation.
 * [init-existing-repository.md](ai-workflow-assignments/init-existing-repository.md): This assignment involves initializing and configuring an existing repository, setting up project structure, labels, milestones, and renaming workspace/devcontainer files.
 
 ### Implementation & Execution
 * [continue-task-work.md](ai-workflow-assignments/continue-task-work.md) (continue-task-work): This assignment involves discovering, assessing, prioritizing, and resuming in-progress tasks to completion, ensuring proper integration, updates to issues/PRs, and stakeholder review.
+* [gather-context.md](ai-workflow-assignments/gather-context.md) (gather-context): This assignment involves systematically collecting, organizing, and analyzing all relevant information, documentation, and artifacts related to the current task or project to establish a comprehensive understanding before proceeding with implementation.
 * [perform-task.md](ai-workflow-assignments/perform-task.md): This assignment involves executing a specific task given to you by an orchestrator or stakeholder, using the task-based workflow process.  This includes understanding the task requirements, planning/gaining approval and gathering necessary resources, and delivering the expected outcome.
+* [recover-from-error.md](ai-workflow-assignments/recover-from-error.md) (recover-from-error): This assignment involves systematically diagnosing, analyzing, and recovering from errors that occur during workflow execution, including root cause analysis, remediation steps, and prevention measures.
+* [report-progress.md](ai-workflow-assignments/report-progress.md) (report-progress): This assignment involves creating structured progress reports that document work completed, current status, blockers, next steps, and metrics against acceptance criteria for stakeholder visibility.
 
 ### Review & QA
 * [create-test-cases.md](ai-workflow-assignments/create-test-cases.md): This assignment involves creating test cases for the application, ensuring that all critical functionality is covered and that the tests are properly integrated into the build process. You will create a plan, document it in an issue, and once gaining approval, you will implement the plan. You will also create (or upgrade, if necessary) an automated test pipeline.
 * [pr-approval-and-merge.md](ai-workflow-assignments/pr-approval-and-merge.md): This assignment involves resolving all pull request (PR) comments, getting the PR approved, and merging it upstream.
 * [pr-review-comments.md](ai-workflow-assignments/pr-review-comments.md) (pr-review-comments): This assignment involves reviewing and addressing comments on a pull request (PR). You will systematically resolve each comment, commit changes, reply with a description of changes, and mark the comment resolved. You need to ensure the PR is ready for approval and merge.
 * [request-approval.md](ai-workflow-assignments/request-approval.md) (request-approval): This assignment involves pausing execution to present relevant produced material to stakeholders, explicitly requesting their approval, and handling their decision to either proceed, revise, or escalate.
+* [validate-assignment-completion.md](ai-workflow-assignments/validate-assignment-completion.md) (validate-assignment-completion): This assignment involves systematically verifying that all acceptance criteria for a completed assignment have been met, with proper evidence and documentation before marking the assignment as complete.
 
 ### Documentation & Analysis
 * [analyze-plan-issue.md](ai-workflow-assignments/analyze-plan-issue.md): This assignment involves analyzing an application development plan issue to determine fitness for implementation, identify gaps, assess risks and mitigations, and provide recommendations for improvement.
@@ -145,6 +106,7 @@ Each template includes placeholders for assignment-specific customization. Detai
 * [update-plan-issue.md](ai-workflow-assignments/update-plan-issue.md) (update-plan-issue): This assignment involves creating a new, updated version of an application development plan issue by incorporating findings and recommendations from an analysis file, conducting delegate roundtable review, and obtaining stakeholder approval.
 
 ### Dynamic Workflows
+* [orchestrate-dynamic-workflow-input-syntax.md](ai-workflow-assignments/orchestrate-dynamic-workflow-input-syntax.md): This assignment defines the input syntax and parameter handling for dynamic workflow orchestration, including variable definitions, parameter validation, and input/output mapping for dynamic workflow execution.
 * [orchestrate-dynamic-workflow.md](ai-workflow-assignments/orchestrate-dynamic-workflow.md): Orchestrate a dynamic workflow as defined in a dynamic workflow file under the "Script" section—iterate through each specified assignment (by short ID) in order, oversee execution to completion, and obtain approval.
 * [validate-dynamic-workflow-script.md](ai-workflow-assignments/validate-dynamic-workflow-script.md): Validate a dynamic workflow script against the canonical DSL: check syntax, logical structure, existence of referenced assignment short IDs, and path correctness; provide pass/fail feedback with fixes if needed.
 
@@ -241,25 +203,32 @@ See [dynamic-workflow-syntax.md](ai-workflow-assignments/dynamic-workflows/dynam
 For detailed event syntax and conventions, see: [dynamic-workflow-syntax.md](ai-workflow-assignments/dynamic-workflows/dynamic-workflow-syntax.md#events)
 
 #### Available Dynamic Workflow Scripts
-* [single-workflow.md](ai-workflow-assignments/dynamic-workflows/single-workflow.md): Generic "cradle" workflow that executes any single workflow assignment. Takes a workflow assignment short ID as input and handles execution with validation, event hooks, and acceptance criteria verification. Useful for wrapping workflow assignments with dynamic workflow features.
+* [analyze-plan.md](ai-workflow-assignments/dynamic-workflows/analyze-plan.md): Dynamic workflow for analyzing application development plans.
+* [breakdown-epic.md](ai-workflow-assignments/dynamic-workflows/breakdown-epic.md): Dynamic workflow for breaking down a single epic into story issues. Auto-selects the next epic needing breakdown if none is specified.
+* [breakdown-plan.md](ai-workflow-assignments/dynamic-workflows/breakdown-plan.md): Dynamic workflow for breaking down plans into implementable components. Supports parallel epic creation.
+* [design-app-outline.md](ai-workflow-assignments/dynamic-workflows/design-app-outline.md): Dynamic workflow for creating application design outlines.
 * [implement-by-stories.md](ai-workflow-assignments/dynamic-workflows/implement-by-stories.md): Implements an application development plan by systematically completing story issues across all epics. Processes each epic in sequence, with support for parallel or serial story execution within each epic.
 * [implement-epic.md](ai-workflow-assignments/dynamic-workflows/implement-epic.md): Implements a single epic by systematically completing its story issues. Auto-selects the next incomplete epic if none is specified. Includes milestone completion and project progress tracking.
-* [analyze-plan.md](ai-workflow-assignments/dynamic-workflows/analyze-plan.md): Dynamic workflow for analyzing application development plans.
-* [breakdown-plan.md](ai-workflow-assignments/dynamic-workflows/breakdown-plan.md): Dynamic workflow for breaking down plans into implementable components. Supports parallel epic creation.
-* [breakdown-epic.md](ai-workflow-assignments/dynamic-workflows/breakdown-epic.md): Dynamic workflow for breaking down a single epic into story issues. Auto-selects the next epic needing breakdown if none is specified.
-* [design-app-outline.md](ai-workflow-assignments/dynamic-workflows/design-app-outline.md): Dynamic workflow for creating application design outlines.
+* [implement-story.md](ai-workflow-assignments/dynamic-workflows/implement-story.md): Implements a single story by executing the necessary development tasks, testing, and validation steps to complete the story's acceptance criteria.
+* [new-project.md](ai-workflow-assignments/dynamic-workflows/new-project.md): Complete end-to-end project creation workflow from repository initialization to first deployable application.
+* [optimize-plan.md](ai-workflow-assignments/dynamic-workflows/optimize-plan.md): Dynamic workflow for optimizing application development plans based on implementation feedback and performance metrics.
+* [project-setup.md](ai-workflow-assignments/dynamic-workflows/project-setup.md): Sets up a new project with all necessary configuration, environment setup, and initial components.
+* [project-setup-upgraded.md](ai-workflow-assignments/dynamic-workflows/project-setup-upgraded.md): Enhanced project setup workflow with additional validation and configuration steps.
+* [review-epic-prs.md](ai-workflow-assignments/dynamic-workflows/review-epic-prs.md): Reviews and validates pull requests associated with an epic to ensure quality and acceptance criteria compliance.
+* [sample-minimal.md](ai-workflow-assignments/dynamic-workflows/sample-minimal.md): Minimal sample dynamic workflow for reference and testing purposes.
+* [setup-project-and-create-app.md](ai-workflow-assignments/dynamic-workflows/setup-project-and-create-app.md): Sets up a new project environment and creates the initial application structure and components.
+* [single-workflow.md](ai-workflow-assignments/dynamic-workflows/single-workflow.md): Generic "cradle" workflow that executes any single workflow assignment. Takes a workflow assignment short ID as input and handles execution with validation, event hooks, and acceptance criteria verification. Useful for wrapping workflow assignments with dynamic workflow features.
 
 ## Work-In-Progress Assignments
 
 The following assignments are currently under development in the `.wip` directory and are not yet ready for use:
 
 ### Planning (WIP)
-* [breakdown-epic-and-plan.md](.wip/breakdown-epic-and-plan.md): Breaking down a high-level epic into granular, executable sub-issues.
-* [breakdown-stories-and-plan.md](.wip/breakdown-stories-and-plan.md): Converting a higher-level multi-task sub-phase epic sub-issue into granular, executable sub-issues (stories).
-* [create-app-plan-and-epics.md](.wip/create-app-plan-and-epics.md): Creating a comprehensive application plan and creating epic sub-issues for each phase in a single workflow.
-* [outline-epic.md](.wip/outline-epic.md) (outline-epic): Creating a comprehensive structural outline for an epic with all classes, interfaces, methods (no implementation), comprehensive XML documentation, and test stubs to enable Test-Driven Development.
-* [plan-epic.md](.wip/plan-epic.md): Planning an epic with detailed breakdown and requirements.
-* [plan-story.md](.wip/plan-story.md): Planning a story with detailed implementation steps.
+* [breakdown-epic-and-plan.md](ai-workflow-assignments/.wip/breakdown-epic-and-plan.md): Breaking down a high-level epic into granular, executable sub-issues.
+* [breakdown-stories-and-plan.md](ai-workflow-assignments/.wip/breakdown-stories-and-plan.md): Converting a higher-level multi-task sub-phase epic sub-issue into granular, executable sub-issues (stories).
+* [create-app-plan-and-epics.md](ai-workflow-assignments/.wip/create-app-plan-and-epics.md): Creating a comprehensive application plan and creating epic sub-issues for each phase in a single workflow.
+* [plan-epic.md](ai-workflow-assignments/.wip/plan-epic.md): Planning an epic with detailed breakdown and requirements.
+* [plan-story.md](ai-workflow-assignments/.wip/plan-story.md): Planning a story with detailed implementation steps.
 
 ### Specialized Tasks (WIP)
 * [convert-vs-color-theme-to-vscode.md](.wip/convert-vs-color-theme-to-vscode.md): Converting a Visual Studio color theme to a Visual Studio Code color theme.

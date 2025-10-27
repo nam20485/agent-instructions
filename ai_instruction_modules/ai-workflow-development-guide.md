@@ -17,6 +17,10 @@ All workflow files must follow the formatting standards defined in:
 - Include examples demonstrating syntax
 - See format guide for complete standards
 
+**GitHub Authentication:**
+* For GitHub authentication, reference the official documentation:
+  * [ai-gh-authentication](./ai-gh-authentication.md)
+
 ## When to Use This Guide
 - Creating new workflow assignment files
 - Creating new dynamic workflow scripts
@@ -565,7 +569,7 @@ ai_instruction_modules/ai-workflow-assignments/dynamic-workflows/dynamic-workflo
 
 ### Agent Script Engine
 For advanced workflow scripting concepts:
-- **[agent-script-engine.md](./agent-script-engine.md)**
+- **[ai-agent-script-engine.md](./ai-agent-script-engine.md)**
   - AOT vs JIT execution
   - Function declarations and script structure
   - Advanced examples

@@ -13,6 +13,10 @@ Notes
 <github_cli>
 ## GitHub CLI: Authentication
 
+**GitHub Authentication:**
+* For GitHub authentication, reference the official documentation:
+  * [ai-gh-authentication](./ai-gh-authentication.md)
+
 ```pwsh
 # Verify GitHub CLI auth status
 gh auth status

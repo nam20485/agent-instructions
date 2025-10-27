@@ -154,9 +154,9 @@ if `$epic` is provided:
 - log: "Created PR #{pull_request.number} for story #{story_issue.number}"
 
 # Step 4: Request automated reviews
-- post comment on `$pull_request`: "@gemini review"
 - post comment on `$pull_request`: "@claude review this PR"
-- wait until both automated reviews complete
+# GH Copilot will automatically begin his review on his own (once he sees the PR created)
+- wait until all three automated reviews complete
 - record reviews as `#implement-story.automated-reviews`
 - log: "Automated reviews complete for PR #{pull_request.number}"
 
@@ -164,27 +164,22 @@ if `$epic` is provided:
 - update_story_progress($story_issue, "PR #{pull_request.number} reviews complete, ready for approval")
 
 # Step 6: Automated PR approval and merge
-$approval_status = auto_approve_pr(#implement-story.pull-request, #implement-story.automated-reviews)
+- assign an agent the `pr-approval-and-merge` assignment with input:
+  - pull_request: `$pull_request`  
+- wait until the agent completes the `pr-approval-and-merge` assignment
+- record output as `#implement-story.pr-approval-and-merge`                                    
 
-if $approval_status is "approved":
-   - log: "PR #{pull_request.number} auto-approved, proceeding to merge"
-   $merge_status = auto_merge_pr(#implement-story.pull-request)
-   
-   if $merge_status is "merged":
-      - record merge as `#implement-story.pr-merged`
-      - log: "PR #{pull_request.number} successfully merged for story #{story_issue.number}"
-   else if $merge_status is "pending":
-      - log: "PR #{pull_request.number} merge pending additional checks, requires manual intervention"
-      - post comment on `$pull_request`: "⚠️ Automated merge pending: waiting for additional status checks to complete. Manual merge may be required."
-      - STOP workflow with message: "Manual intervention required: PR #{pull_request.number} merge is pending additional checks"
-   else:
-      - log: "PR #{pull_request.number} auto-merge failed, requires manual intervention"
-      - post comment on `$pull_request`: "❌ Automated merge failed: branch protection rules not satisfied or merge conflicts present. Manual intervention required."
-      - STOP workflow with message: "Manual intervention required: PR #{pull_request.number} could not be automatically merged"
+if `#implement-story.pr-approval-and-merge`.result is "merged":
+  - record merge as `#implement-story.pr-merged`
+  - log: "PR successfully merged"
+else if `#implement-story.pr-approval-and-merge`.result is "pending":
+  - log: "PR merge pending additional checks, requires manual intervention"
+  - post comment on `$pull_request`: "⚠️ Automated merge pending: waiting for additional status checks to complete. Manual merge may be required."
+  - STOP workflow with message: "Manual intervention required: PR merge is pending additional checks"
 else:
-   - log: "PR #{pull_request.number} requires manual approval"
-   - post comment on `$pull_request`: "⚠️ Automated approval criteria not met. Manual review and approval required."
-   - STOP workflow with message: "Manual intervention required: PR #{pull_request.number} needs manual approval"
+  - log: "PR auto-merge failed, requires manual intervention"
+  - post comment on `$pull_request`: "❌ Automated merge failed: branch protection rules not satisfied or merge conflicts present. Manual intervention required."
+  - STOP workflow with message: "Manual intervention required: PR could not be automatically merged"
 
 # Step 7: Final story update and closure
 - update_story_progress($story_issue, "PR merged, story implementation complete")

@@ -124,7 +124,7 @@ result = functionName(param)
 - **JIT (Just-In-Time)** - Line-by-line interpretation
 - **AOT (Ahead-Of-Time)** - Pre-compilation with optimization
 
-**Documentation:** `ai_instruction_modules/agent-script-engine.md`
+**Documentation:** `ai_instruction_modules/ai-agent-script-engine.md`
 
 ### 5. Remote Repository Integration
 

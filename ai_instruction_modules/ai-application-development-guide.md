@@ -64,6 +64,10 @@ Use this guide when creating, modifying, or refactoring applications. This compr
 - Unit + integration tests with substantial coverage
 - Structured logging to stdout/stderr + files
 
+**GitHub Authentication:**
+* For GitHub authentication, reference the official documentation:
+  * [ai-gh-authentication](./ai-gh-authentication.md)
+
 ### ASP.NET Core Quick Reference
 
 **Code Organization:**
