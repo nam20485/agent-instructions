@@ -1,5 +1,20 @@
 # Dynamic Workflow: Implement Story
 
+## ⚠️ MANDATORY: Pre-Execution Reading Chain (NO EXCEPTIONS)
+
+**STOP! Before executing this workflow, you MUST read these files in order and LOG each one:**
+
+1. **[ai-core-instructions.md](https://raw.githubusercontent.com/nam20485/agent-instructions/main/ai_instruction_modules/ai-core-instructions.md)** - Core protocol and rules
+   - Log: "✓ Read ai-core-instructions.md"
+2. **[dynamic-workflow-syntax.md](https://raw.githubusercontent.com/nam20485/agent-instructions/main/ai_instruction_modules/ai-workflow-assignments/dynamic-workflows/dynamic-workflow-syntax.md)** - Event system and DSL syntax
+   - Log: "✓ Read dynamic-workflow-syntax.md"
+3. **[orchestrate-dynamic-workflow.md](https://raw.githubusercontent.com/nam20485/agent-instructions/main/ai_instruction_modules/ai-workflow-assignments/orchestrate-dynamic-workflow.md)** - Orchestration rules and guardrails
+   - Log: "✓ Read orchestrate-dynamic-workflow.md"
+
+**After reading all three files, log: "✓ Completed mandatory reading chain for implement-story workflow"**
+
+**Do not proceed with workflow execution until all three files are read and logged.**
+
 ## Overview
 
 This dynamic workflow performs implementation of a single story from an epic. It is designed to be called from the `implement-epic` workflow (serial flow) or used standalone when you need to implement one specific story. This workflow handles the complete lifecycle of a story: implementation, PR creation, automated reviews, and merge.
@@ -16,6 +31,19 @@ This dynamic workflow performs implementation of a single story from an epic. It
 - `$repository` (optional)
   - Git repo containing the story issue
   - If not provided, use current workspace
+
+### Events
+
+#### `pre-assignment-begin`
+
+Before executing each assignment in this workflow, gather context and prepare:
+
+- assign the agent the `gather-context` assignment with input:
+  - upcoming_assignment: the assignment about to be executed
+  - workflow_context: current workflow state and previous outputs
+- wait until the agent completes context gathering
+- record output as `#events.pre-assignment-begin`
+- log: "✓ Context gathered for upcoming assignment"
 
 ### Declarations
 
