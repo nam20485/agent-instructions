@@ -38,7 +38,7 @@ This dynamic workflow performs implementation of a single story from an epic. It
 
 Before executing each assignment in this workflow, gather context and prepare:
 
-- assign the agent the `gather-context` assignment with input:
+- assign the agent the gather-context` assignment with input:
   - upcoming_assignment: the assignment about to be executed
   - workflow_context: current workflow state and previous outputs
 - wait until the agent completes context gathering
