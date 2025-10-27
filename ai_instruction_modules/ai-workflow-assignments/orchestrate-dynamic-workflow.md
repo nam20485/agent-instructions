@@ -5,104 +5,32 @@
 ## Overview
 The dynamic workflow orchestration assignment is different than static workflow assignments, in that it must orchestrate workflows for a dynamically specified list of workflow assignments, as specified in a dynamic workflow file. The dynamic workflow file specifies assignments to be performed in the "Script" section of the file.
 
+## MANDATORY: Instruction Reading Chain (NO EXCEPTIONS)
+
+**Before orchestrating ANY dynamic workflow** (new, resuming, or mid-assignment), read these files in order:
+
+1. `ai-core-instructions.md` - Core protocol and rules
+2. `dynamic-workflow-syntax.md` - **Event system** (pre-assignment-begin, etc.)
+3. `ai-workflow-assignments.md` - Assignment protocol
+4. `orchestrate-dynamic-workflow.md` - This file (orchestration rules)
+5. `dynamic-workflows/[workflow-name].md` - Your specific workflow
+6. `[assignment-name].md` - Each assignment before delegating to it
+7. **Execute pre-assignment-begin event** - Then delegate
+
+**Why**: Ensures you understand events, protocol, and current state before executing.
+
+**No exceptions** - even if told "work already started", read this chain to orient yourself.
+
 ## Inputs
 - `$workflow_name`: the dynamic workflow name to execute (string)
-- Additional inputs: Any other parameters specified in the dynamic workflow file's "Inputs" section
+- `{ Additional inputs }: Any other parameters specified in the dynamic workflow file's "Inputs" section
   - These are passed through to the workflow being orchestrated
   - Parameter names must match those defined in the workflow's "Inputs" section
   - Can be passed as individual parameters or as a structured object
 
 ### Input Passing Examples
 
-**Example 1: Direct parameter passing**
-```markdown
-/orchestrate-dynamic-workflow
-  - $workflow_name = `single-workflow`
-  - $workflow_assignment = `update-from-feedback`
-  - $assignment_inputs = { directory: `./debriefs` }
-```
-
-**Example 2: Using command arguments**
-```markdown
-/orchestrate-dynamic-workflow
-  - $workflow_name = `single-workflow`
-  - $workflow_assignment = `$ARGUMENTS[0]`
-  - $assignment_inputs = `$ARGUMENTS[1]`
-```
-
-**Example 3: Workflow with multiple inputs**
-```markdown
-/orchestrate-dynamic-workflow
-  - $workflow_name = `implement-epic`
-  - $epic = 42
-  - $repository = `myorg/myrepo`
-  - $parallel_execution = `false`
-```
-
-**Example 4: Using the orchestrate-single-workflow command**
-
-This command file wraps the orchestration for convenience:
-```bash
-# File: /home/nam20485/.config/opencode/command/orchestrate-single-workflow.md
-
-# Usage from command line:
-/orchestrate-single-workflow update-from-feedback { directory: "./debriefs" }
-```
-
-Internally it expands to:
-```markdown
-/orchestrate-dynamic-workflow
-  - $workflow_name = `single-workflow`
-  - $workflow_assignment = `update-from-feedback`  # from $ARGUMENTS[0]
-  - $assignment_inputs = { directory: "./debriefs" }  # from $ARGUMENTS[1]
-```
-
-**Example 5: Using the orchestrate-single-update-from-feedback command**
-
-This is a specialized command that pre-fills the assignment name:
-```bash
-# File: /home/nam20485/.config/opencode/command/orchestrate-single-update-from-feedback.md
-
-# Usage from command line:
-/orchestrate-single-update-from-feedback ./debriefs
-```
-
-Internally it expands to:
-```markdown
-/orchestrate-dynamic-workflow
-  - $workflow_name = `single-workflow`
-  - $workflow_assignment = `update-from-feedback`  # hard-coded
-  - $assignment_inputs = `./debriefs`  # from $ARGUMENTS[0] - directory path
-```
-
-Note: The `update-from-feedback` assignment expects:
-- Input: `$directory` (string) - path to directory containing feedback documents
-- Example paths: `./debriefs`, `./feedback`, `./docs/feedback/epic-7`
-
-**Example 6: Passing structured inputs**
-
-For assignments that need multiple parameters:
-```markdown
-/orchestrate-dynamic-workflow
-  - $workflow_name = `single-workflow`
-  - $workflow_assignment = `create-app-plan`
-  - $assignment_inputs = {
-      project_name: `my-project`,
-      description: `A web application for task management`,
-      features: [`authentication`, `task-crud`, `notifications`]
-    }
-```
-
-**Example 7: Passing through from command arguments**
-
-For flexible command wrappers:
-```markdown
-# Generic wrapper that takes any assignment and inputs
-/orchestrate-dynamic-workflow
-  - $workflow_name = `single-workflow`
-  - $workflow_assignment = `$ARGUMENTS[0]`  # e.g., "debrief-and-document"
-  - $assignment_inputs = `$ARGUMENTS[1]`    # e.g., { workflow: "implement-epic" }
-```
+For complex examples, see reference file: [orchestrate-dynamic-workflow-input-syntax.md](./ai-workflow-assignments/orchestrate-dynamic-workflow-input-syntax.md)
 
 The orchestrator will extract all parameters (except `$workflow_name`) and pass them to the dynamic workflow as its inputs.
 
@@ -138,10 +66,14 @@ Dynamic workflows may include an "Events" subsection that defines actions to exe
 **Standard Event Types**:
 - `pre-script-begin`: Runs once before any script steps begin
 - `post-script-complete`: Runs once after all script steps complete successfully
+
 - `pre-assignment-begin`: Runs before each assignment in a loop starts
 - `post-assignment-completion`: Runs after each assignment in a loop completes
+
+- `pre-step-begin`: Runs before each step (the high level headings) in an assignment starts
+- `post-step-completion`: Runs after each step (the high level headings) in an assignment completes
+
 - `on-assignment-failure`: Runs when an assignment fails
-- `on-script-failure`: Runs when the entire script fails (for cleanup/rollback)
 
 **Event Execution Requirements**:
 1. **Timing**: Events MUST execute at their designated lifecycle point
@@ -153,21 +85,6 @@ Dynamic workflows may include an "Events" subsection that defines actions to exe
 4. **Failure Handling**: Event failure causes workflow failure; failure events should not throw errors
 5. **Output Recording**: Record event outputs as `#events.<event-name>` or `#events.<event-name>.$assignment_name`
 
-**Example**:
-```markdown
-### Events
-
-#### `post-assignment-completion`
-
-`$assignments` = [`create-repository-summary`]
-
-For each `$assignment_name` in `$assignments`, you will:
-   - assign the agent the `$assignment_name` assignment
-   - wait until the agent finishes the task
-   - review the work and approve it
-   - record output as `#events.post-assignment-completion.$assignment_name`
-```
-
 See [dynamic-workflow-syntax.md](dynamic-workflows/dynamic-workflow-syntax.md#events) for complete event documentation.
 
 ## Acceptance Criteria
@@ -176,25 +93,10 @@ See [dynamic-workflow-syntax.md](dynamic-workflows/dynamic-workflow-syntax.md#ev
 3. All specified assignments are completed according to the instructions in the dynamic workflow file.
 4. All acceptance criteria for each specified assignment are met.
 5. All directives in the Script section of the dynamic workflow file are executed.
-6. **All event scripts (if present) are executed at their designated lifecycle points.**
+6. **All event handlerscripts (if present) are executed at their designated lifecycle points.**
 7. Approval is obtained for the final product.
 8. No unresolved items remain at completion; results are documented and cross-linked as appropriate.
 
-## Workflow Templates
-
-All assignments orchestrated through this workflow utilize three standardized templates:
-
-- **BEFORE_STARTING_TEMPLATE.md**: Pre-execution preparation checklist
-- **PROGRESS_REPORTING_TEMPLATE.md**: Progress tracking for long-running assignments  
-- **ERROR_RECOVERY_TEMPLATE.md**: Systematic error handling procedures
-
-These templates are integrated into assignment files and provide:
-- Consistent preparation, tracking, and recovery patterns
-- Reduced false starts and thorough issue handling
-- Clear progress visibility and status reporting
-- Structured error recovery to prevent workflow abandonment
-
-For customization guidance, see: [`docs/TEMPLATE_CUSTOMIZATION_GUIDE.md`](../../docs/TEMPLATE_CUSTOMIZATION_GUIDE.md)
 
 ## Guardrails (Authoritative, Non-Optional)
 These apply to all dynamic workflows.
@@ -211,11 +113,18 @@ These apply to all dynamic workflows.
 - Acceptance-criteria gating (Definition of Done)
   - Extract the Acceptance Criteria from each assignment file.
   - Treat each criterion as a must-pass gate. Do not declare success unless every criterion passes.
+
+  **ALL ACCEPTANCE CRITERIA MUST PASS OR ASSIGNMENT/STEP/SCRIPT/WORKFLOW ASSIGNMENT FAILS.**
+
+  **NO EXCEPTIONS, ACCEPTANCE CRITERIA ARE NON-NEGOTIABLE.**
+  
+  **NO LEAVING CRITERIA FOR MANUAL EXECUTION LATER**
+
 - Template and preflight enforcement
   - If the assignment specifies template/source-of-truth requirements (e.g., create repo from a template, enforce license/visibility, required scripts), enforce them.
   - If the target already exists but violates preconditions, either:
     - Recreate per spec; or
-  -  **IF** pre-existing artifcats strictly meet acceptance criteroa and/or instruction, leave them and record a non-creation event.
+  -  **IF** pre-existing artifacts strictly meet acceptance criteria and/or instruction, leave them and record a non-creation event.
 
 - Branch protection
   - For code changes: if the default branch is protected, use a feature branch + PR path; do not force-push to protected branches.
@@ -253,14 +162,18 @@ These apply to all dynamic workflows.
 1) Execute (per main script step, in order)
 - **If `pre-script-begin` event exists, execute it first**
 - For each main workflow step:
-  - **If `pre-assignment-begin` event exists and step contains loops, execute before each iteration**
-  - Perform the Detailed Steps exactly as written in the assignment file
-  - Honor preflight requirements (templates, scripts, visibility, licenses) before continuing
-  - If a required step cannot be executed (e.g., missing permission), trigger `on-assignment-failure` event (if present), then stop and report
-  - Do not continue performing any later step until you have successfully finished the current step, and all previous steps
-  - **If `post-assignment-completion` event exists and step contains loops, execute after each iteration**
-- **If all steps succeed and `post-script-complete` event exists, execute it**
-- **If any step fails and `on-script-failure` event exists, execute it for cleanup/rollback**
+    **If `pre-step-begin` event exists, execute it before the step**
+    - For each assignment in the step:
+      - **If `pre-assignment-begin` event exists and step contains loops, execute before each iteration**
+      - Perform the #DetailedSteps exactly as written in the assignment file
+      - Honor preflight requirements (templates, scripts, visibility, licenses) before continuing
+      - If any assignment fails:        
+        - **If `on-assignment-failure` event exists, execute it for cleanup/rollback**
+        - Stop execution of the current step and report failure
+      - Else
+          **If `post-assignment-completion` event exists, execute it**
+    **If `post-step-completion` event exists, execute it after the step**
+- **If `post-script-complete` event exists, execute it**
 
 1) Verify (Gated)
 - Evaluate each Acceptance Criterion (including event execution criteria).
@@ -313,45 +226,6 @@ These apply to all dynamic workflows.
 
 ## Completion
 After all steps have been completed and all Acceptance Criteria have passed (or explicitly approved deviations are recorded), notify the user that the workflow is complete and provide the Run Report.
-
-## Prompt Guidance (Embed in any chat prompt)
-Use this pre-execution preamble in any prompt that invokes this orchestrator to ensure consistent, acceptance-gated runs across tools and contexts.
-
-Before execution (must do):
-- Print the resolution trace (files + URLs/SHAs when available):
-  - orchestrate-dynamic-workflow → dynamic-workflows/$workflow_name → assignments → ai-workflow-assignments/<assignment>.md
-- Refuse to proceed if any file in the chain is unreadable.
-
-Execution rules (non-negotiable):
-- Execute steps strictly from the resolved assignment file(s); do not synthesize steps from dynamic workflow files.
-- Extract Acceptance Criteria from each assignment and treat them as gates.
-- Enforce template/source-of-truth and required scripts/visibility/license per assignment.
-- Respect branch protection (use feature branch + PR) for code changes.
-- Non-code changes (e.g., settings, metadata) can be made directly to the default branch, even if protected..
-
-Completion (Definition of Done):
-- Produce a Run Report containing:
-  - Resolution trace (files + URLs/SHAs)
-  - Actions executed (mirroring Detailed Steps)
-  - Acceptance Criteria: PASS/FAIL per item with evidence links
-  - Deviations (if any) with rationale
-  - Outcome: Success only if all criteria PASS (or explicitly approved deviations)
-
-Embeddable snippet:
-
-```
-Before any execution:
-- Print the resolution trace (files + URLs/SHAs) for: orchestrate-dynamic-workflow → dynamic-workflows/$workflow_name → assignments → ai-workflow-assignments/<assignment>.md
-- Refuse to proceed if any file cannot be read.
-
-Execution rules:
-- Use only the resolved assignment file(s) for executable steps.
-- Extract Acceptance Criteria and enforce them as gates (no partial done).
-- Enforce template/scripts/visibility/license per assignment; respect branch protection (feature branch + PR) and idempotency.
-
-Completion:
-- Produce a Run Report with: resolution trace, actions executed, PASS/FAIL per criterion with evidence, deviations, and final outcome.
-```
 
 ### References
 

@@ -827,7 +827,7 @@ Let me identify all files that need formatting review: Perfect! Now I can see th
 8. ✅ ai-instructions-format.md (new)
 
 **Need formatting review and updates:**
-9. agent-script-engine.md
+9. ai-agent-script-engine.md
 10. ai-application-development-guide.md
 11. ai-comprehensive-guides-architecture.md
 12. ai-comprehensive-guides-diagrams.md
@@ -1011,7 +1011,7 @@ Processed **all active instruction files** across 5 batches, applying consistent
 - ai-pr-comment-protocol.md - Already clean
 - ai-current-task-reminder.md - Already clean
 - ai-working-command-examples.md - Already clean
-- agent-script-engine.md - Already clean
+- ai-agent-script-engine.md - Already clean
 - ai-context-optimization-research.md - Already clean
 - ai-new-app-template.md - Fixed typo ("Containeriza tion" → "Containerization")
 

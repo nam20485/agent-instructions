@@ -4,7 +4,20 @@
 
 ### Goal
 
-Resolve all PR comments and get the PR approved
+Complete the full PR approval and merge process, including resolving all PR comments, obtaining approval, merging the PR, and closing associated issues.
+
+### Inputs
+- `$pr_num`: (required) 
+    - The pull request number to process
+
+### Outputs
+
+- `result` (required)
+  - The status of the PR approval and merge process
+  - Possible values:
+    - `"merged"`: PR was successfully approved and merged to target branch
+    - `"pending"`: PR merge is pending additional checks or manual intervention
+    - `"failed"`: PR could not be merged due to conflicts, failed checks, or other issues
 
 ### Acceptance Criteria
 
@@ -15,9 +28,14 @@ Resolve all PR comments and get the PR approved
 
 ### Assignment
 
-In this stage your assignment will be to iterate on the PR comments until they
-are all resolved and the PR is approved. Once PR comments are available
-you will work systematically to resolve each comment, one after another.
+In this stage your assignment will be to complete the full PR approval and merge process. This includes:
+
+1. Iterating on PR comments until they are all resolved
+2. Working with stakeholders to get the PR approved
+3. Executing the merge operation to integrate changes upstream
+4. Closing associated issues and branches
+
+Once PR comments are available you will work systematically to resolve each comment, one after another.
 
 ### Resolving Threads, Reply Content, and Commit Hygiene Protocol
 
@@ -31,9 +49,10 @@ It is important to the final quality of our product for everyone to perform thei
 
 ### Detailed Steps
 
-**NOTE** For a concise pseudocode version of this algorithm see the workflow assignment here:
+**NOTE** For a concise pseudocode version of the comment resolution algorithm see the workflow assignment here:
     - [PR Review Comments Assignment](./pr-review-comments.md)
 
+**Phase 1: Comment Resolution**
 1. Fetch and analyze all of the review comments for the assigned PR.
 2. Create an issue that lists each issue with a link, a description of the issue and its cause, and then your plan to resolve.
 3. After gaining an approval, create a branch off of the PR's base branch, link it to your issue, start a review, and then being resolving each issue systematically in order. After finishing resolution of each issue, commit your changes, update the issue, and reply with a comment explaining the outcome on the original review comment. Then mark the comment resolved.
@@ -71,6 +90,14 @@ Once you have addressed all of the comments to the degree with which you can for
 * Iterate in this manner until all comments and replies have been addressed.
 * Once all PR comments have been resolved, the stake-holder will approve the PR.
 
+**Phase 2: Merge and Completion**
+1. After PR approval is obtained, attempt to merge the PR to the target branch
+2. Determine the appropriate result value based on merge outcome:
+   - If merge succeeds: result = "merged"
+   - If merge is pending checks: result = "pending"
+   - If merge fails: result = "failed"
+3. Close associated issue and branch if merge was successful
+
 ### ⚠️ CRITICAL: Commit Changes Before Merge
 
 **BEFORE the PR is merged upstream, you MUST:**
@@ -81,9 +108,37 @@ Once you have addressed all of the comments to the degree with which you can for
 
 **Failure to commit and push changes will result in permanent loss of all implementation work when the branch is merged and deleted.**
 
-### Completion
+### Execution Flow and Result Determination
 
-Ask the stake-holder if they want you to merge the PR or if they would like to do so themselves.
-If so, then merge the PR, and close the issue and branch.
-Eat a cookie and have an espresso or a milkshake. You can have both if you want.
-Ask the stake-holder for your next assignment.
+The agent executing this assignment must follow these guidelines for different scenarios:
+
+**When to return `"merged"`:**
+- All PR comments have been resolved through the iterative process
+- Stakeholder approval has been obtained
+- Merge operation completes successfully without conflicts
+- Target branch now contains the merged changes
+
+**When to return `"pending"`:**
+- All PR comments have been resolved and approval obtained
+- Merge operation initiated but blocked by pending status checks (CI/CD, tests, etc.)
+- Manual intervention may be required when checks complete
+- The PR is ready to merge but waiting for external conditions
+
+**When to return `"failed"`:**
+- All PR comments have been resolved and approval obtained
+- Merge operation fails due to conflicts with target branch
+- Branch protection rules cannot be satisfied
+- Merge blocked by unresolvable technical issues
+- Required manual intervention for conflict resolution
+
+### Completion Process
+
+The completion process follows these steps:
+
+1. **PR Approval**: Wait for all PR comments to be resolved and get explicit approval from stakeholders
+2. **Merge Attempt**: Attempt to merge the PR to the target branch
+3. **Result Determination**: Based on the merge attempt outcome, determine the result value:
+   - If merge succeeds immediately: result = "merged"
+   - If merge is blocked by pending status checks: result = "pending"
+   - If merge fails due to conflicts, branch protection, or other issues: result = "failed"
+4. **Issue Closure**: Close the associated issue and branch (only if merge was successful)

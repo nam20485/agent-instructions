@@ -49,7 +49,7 @@ Your assignment is to create a complete new application based on a filled-out ap
 
 Given the following, implement the application as per the filled-out development plan issue:
 
-1. Iniiaoized Git repo
+1. Initiated Git repo
 2. Filled-out application template
 3. Application template supporting documentation
    a. in `plan_docs/` directory`

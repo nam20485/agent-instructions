@@ -303,7 +303,7 @@ This action plan addresses 10 feedback items identified during the execution of 
 3. ✅ Integrate ERROR_RECOVERY_TEMPLATE.md into `project-setup-upgraded`
 4. ✅ Integrate PROGRESS_REPORTING_TEMPLATE.md into `project-setup-upgraded`
 5. ⏭️ Test updated workflow with sample execution (pending)
-6. ⏭️ Update workflow documentation (pending - FB-011/FB-012)
+6. ⏭️ Update workflow documentation (pending - FB-011)
 7. ⏭️ Validate improvements function as intended (pending)
 
 **Acceptance Criteria Status**:

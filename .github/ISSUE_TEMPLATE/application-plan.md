@@ -30,6 +30,7 @@ Provide a concise summary of the application, the problem it solves, the desired
 - [Feature 3]
 
 ## System Architecture
+
 ### Core Services (if applicable)
 1. [ServiceName] — responsibility summary
 2. [ServiceName] — responsibility summary
@@ -65,12 +66,21 @@ Provide a concise summary of the application, the problem it solves, the desired
 - [ ] 1.5. Basic content processing/indexing (if applicable)
 
 ### Phase 2: Core Services / Core Engine
+
+#### Epic 2.1: Core Module/Service A
+
 - [ ] 2.1. Implement core module/service A
    - [ ] 2.1.1. Sub-task A
    - [ ] 2.1.2. Sub-task B
+
+#### Epic 2.2: Core Module/Service B
+
 - [ ] 2.2. Implement core module/service B
 
 ### Phase 3: UI/UX & Integration
+
+#### Epic 3.1: UI Foundation
+
 - [ ] 3.1. UI foundation and navigation
 - [ ] 3.2. ViewModels/State management
 - [ ] 3.3. Primary user flows (chat/task/…)
@@ -78,12 +88,18 @@ Provide a concise summary of the application, the problem it solves, the desired
 - [ ] 3.5. Settings/configuration
 
 ### Phase 4: Advanced Capabilities & Security
+
+#### Epic 4.1: Tooling & Agentic Features
+
 - [ ] 4.1. Tooling/Function calling/Agentic features (if applicable)
 - [ ] 4.2. Human-in-the-loop approval and auditing
 - [ ] 4.3. Performance optimizations and caching
 - [ ] 4.4. Observability and dashboards
 
 ### Phase 5: Testing, Docs, Packaging & Deployment
+
+#### Epic 5.1: Testing & Quality Assurance
+
 - [ ] 5.1. Test suites (unit/integration/e2e/perf)
 - [ ] 5.2. API/Developer documentation
 - [ ] 5.3. Containerization/installer packaging
