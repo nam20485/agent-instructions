@@ -5,6 +5,22 @@
 ## Overview
 The dynamic workflow orchestration assignment is different than static workflow assignments, in that it must orchestrate workflows for a dynamically specified list of workflow assignments, as specified in a dynamic workflow file. The dynamic workflow file specifies assignments to be performed in the "Script" section of the file.
 
+## MANDATORY: Instruction Reading Chain (NO EXCEPTIONS)
+
+**Before orchestrating ANY dynamic workflow** (new, resuming, or mid-assignment), read these files in order:
+
+1. `ai-core-instructions.md` - Core protocol and rules
+2. `dynamic-workflow-syntax.md` - **Event system** (pre-assignment-begin, etc.)
+3. `ai-workflow-assignments.md` - Assignment protocol
+4. `orchestrate-dynamic-workflow.md` - This file (orchestration rules)
+5. `dynamic-workflows/[workflow-name].md` - Your specific workflow
+6. `[assignment-name].md` - Each assignment before delegating to it
+7. **Execute pre-assignment-begin event** - Then delegate
+
+**Why**: Ensures you understand events, protocol, and current state before executing.
+
+**No exceptions** - even if told "work already started", read this chain to orient yourself.
+
 ## Inputs
 - `$workflow_name`: the dynamic workflow name to execute (string)
 - `{ Additional inputs }: Any other parameters specified in the dynamic workflow file's "Inputs" section
