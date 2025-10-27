@@ -3,19 +3,39 @@
 <shells>
 ## Shells
 
-### Windows
- 
- On Windows and/or in VS Code your shell is typicall Powershell Core.
+**IMPORTANT**: Never assume a default shell. Always detect the actual shell before running commands.
 
-### WSL, Linux
+### Shell Detection
 
- On Linux and/or in WSL your shell is typically bash.
+Detect your shell using one of these methods:
 
-### Devcontainer, Codespaces, and Copilot Agent Dev Environment
+```bash
+# Method 1: Check SHELL environment variable
+echo $SHELL
 
-In a devcontainer, codespace, or when running in your agent dev environment, your shell is configured by running the `setup-environment.sh` script.
-- You will have access to all of the tools and versions specified in the `setup-environment.sh` script
-- See the `setup-environment.sh` Script section below for more information on the tools available there 
+# Method 2: Check current process
+ps -p $$
+
+# Method 3: PowerShell detection
+if ($PSVersionTable) { "PowerShell" } else { "Not PowerShell" }
+```
+
+### Common Shell Environments
+
+- **Windows**: May be PowerShell Core (pwsh), Windows PowerShell, cmd, or bash (Git Bash, WSL)
+- **Linux/WSL**: Typically bash, but could be zsh, fish, or other shells
+- **VS Code**: Depends on user configuration - could be any shell
+- **Devcontainer/Codespaces**: Configured by `setup-environment.sh` script (typically bash)
+
+### Shell-Specific Behavior
+
+After detecting your shell, use appropriate syntax:
+
+- **PowerShell (pwsh)**: Use PowerShell cmdlets and syntax
+- **Bash/Zsh**: Use POSIX shell commands
+- **Cmd**: Use Windows command syntax
+
+**Never assume PowerShell on Windows** - users may have bash, zsh, or other shells configured.
 </shells>
 
 <setup_script>
