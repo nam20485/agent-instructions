@@ -21,10 +21,14 @@ Complete the full PR approval and merge process, including resolving all PR comm
 
 ### Acceptance Criteria
 
-1. All PR comments resolved.
-2. PR approved.
-3. Branch merged upstream.
-4. Issue closed.
+1. All PR comments have been addressed with code changes or explanations
+2. All PR comment threads are marked as resolved
+3. No (0) unresolved comments remain
+4. No (0) comment threads are left unresolved
+4. PR approved.
+5. Branch merged upstream.
+6. Source branch deleted.
+7. Issue closed.
 
 ### Assignment
 
