@@ -72,16 +72,22 @@ The format is made up of the following sections:
 
 ### Planning
 * [create-app-plan.md](ai-workflow-assignments/create-app-plan.md): This assignment involves creating a plan for a new application based on a filled-out application template. You will create a plan, document it in an issue, and once gaining approval, you will implement the plan.
-* [create-epic.md](ai-workflow-assignments/.wip/create-epic.md) (create-epic): This assignment involves creating a single epic sub-issue from a phase in the main application plan. The epic represents a major implementation phase with clear deliverables and contains detailed story breakdowns.
-* [create-story.md](ai-workflow-assignments/.wip/create-story.md) (create-story): This assignment involves creating a single story sub-issue from an epic issue. Stories are granular, executable tasks that can be implemented independently by developers.
+* [create-epic.md](ai-workflow-assignments/create-epic.md) (create-epic): This assignment involves creating a single epic sub-issue from a phase in the main application plan. The epic represents a major implementation phase with clear deliverables and contains detailed story breakdowns.
+* [create-epic-v2.md](ai-workflow-assignments/create-epic-v2.md) (create-epic-v2): Updated version of the epic creation assignment with enhanced guidelines and structure.
+* [create-story.md](ai-workflow-assignments/create-story.md) (create-story): This assignment involves creating a single story sub-issue from an epic issue. Stories are granular, executable tasks that can be implemented independently by developers.
+* [create-story-v2.md](ai-workflow-assignments/create-story-v2.md) (create-story-v2): Updated version of the story creation assignment with enhanced guidelines and structure.
 * [outline-epic.md](ai-workflow-assignments/outline-epic.md) (outline-epic): This assignment involves creating a comprehensive structural outline for an epic with all classes, interfaces, methods (no implementation), comprehensive XML documentation, and test stubs to enable Test-Driven Development.
 
 ### Initialization & Setup
 * [create-application.md](ai-workflow-assignments/create-application.md): This assignment involves creating a new application given the description from a new app template that has been filled out, including setting up the project structure, configuring necessary components, and ensuring the application meets specified requirements.
+* [create-application-foundation.md](ai-workflow-assignments/create-application-foundation.md): This assignment involves setting up the foundational infrastructure and core components for a new application.
+* [create-application-structure.md](ai-workflow-assignments/create-application-structure.md): This assignment involves creating the structural components and architecture of a new application.
 * [create-app-from-plan-issue.md](ai-workflow-assignments/create-app-from-plan-issue.md): This assignment involves creating a new application from an initialized git repo and a filled-out development plan issue, implementing the project structure and components.
 * [create-app-from-plan-issue (unguided).md](ai-workflow-assignments/create-app-from-plan-issue%20(unguided).md): This assignment is an unguided variant of creating an application from a plan issue, providing less prescriptive steps.
+* [create-deployment-infrastructure.md](ai-workflow-assignments/create-deployment-infrastructure.md): This assignment involves setting up deployment infrastructure, CI/CD pipelines, and production environment configuration.
 * [create-new-project.md](ai-workflow-assignments/create-new-project.md): This assignment involves creating a new project from scratch, including repository initialization, basic file structure setup, and initial configuration.
 * [create-project-structure.md](ai-workflow-assignments/create-project-structure.md): This assignment involves creating the actual project structure and scaffolding for a new application based on a comprehensive application plan. This involves setting up the repository, creating the solution structure, configuring initial project files, and establishing the development environment foundation.
+* [create-testing-infrastructure.md](ai-workflow-assignments/create-testing-infrastructure.md): This assignment involves setting up comprehensive testing infrastructure, test frameworks, and automated testing pipelines.
 * [init-existing-repository.md](ai-workflow-assignments/init-existing-repository.md): This assignment involves initializing and configuring an existing repository, setting up project structure, labels, milestones, and renaming workspace/devcontainer files.
 
 ### Implementation & Execution
@@ -206,6 +212,8 @@ For detailed event syntax and conventions, see: [dynamic-workflow-syntax.md](ai-
 * [analyze-plan.md](ai-workflow-assignments/dynamic-workflows/analyze-plan.md): Dynamic workflow for analyzing application development plans.
 * [breakdown-epic.md](ai-workflow-assignments/dynamic-workflows/breakdown-epic.md): Dynamic workflow for breaking down a single epic into story issues. Auto-selects the next epic needing breakdown if none is specified.
 * [breakdown-plan.md](ai-workflow-assignments/dynamic-workflows/breakdown-plan.md): Dynamic workflow for breaking down plans into implementable components. Supports parallel epic creation.
+* [create-epics-for-phase.md](ai-workflow-assignments/dynamic-workflows/create-epics-for-phase.md): Dynamic workflow for creating epic issues for a specific project phase.
+* [create-stories-for-epic.md](ai-workflow-assignments/dynamic-workflows/create-stories-for-epic.md): Dynamic workflow for creating story issues for a specific epic.
 * [design-app-outline.md](ai-workflow-assignments/dynamic-workflows/design-app-outline.md): Dynamic workflow for creating application design outlines.
 * [implement-by-stories.md](ai-workflow-assignments/dynamic-workflows/implement-by-stories.md): Implements an application development plan by systematically completing story issues across all epics. Processes each epic in sequence, with support for parallel or serial story execution within each epic.
 * [implement-epic.md](ai-workflow-assignments/dynamic-workflows/implement-epic.md): Implements a single epic by systematically completing its story issues. Auto-selects the next incomplete epic if none is specified. Includes milestone completion and project progress tracking.
@@ -229,9 +237,6 @@ The following assignments are currently under development in the `.wip` director
 * [create-app-plan-and-epics.md](ai-workflow-assignments/.wip/create-app-plan-and-epics.md): Creating a comprehensive application plan and creating epic sub-issues for each phase in a single workflow.
 * [plan-epic.md](ai-workflow-assignments/.wip/plan-epic.md): Planning an epic with detailed breakdown and requirements.
 * [plan-story.md](ai-workflow-assignments/.wip/plan-story.md): Planning a story with detailed implementation steps.
-
-### Specialized Tasks (WIP)
-* [convert-vs-color-theme-to-vscode.md](.wip/convert-vs-color-theme-to-vscode.md): Converting a Visual Studio color theme to a Visual Studio Code color theme.
 
 </mandatory_behaviors>
 </workflow_assignments>
