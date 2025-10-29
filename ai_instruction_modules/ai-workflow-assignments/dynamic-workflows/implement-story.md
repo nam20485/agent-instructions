@@ -137,6 +137,7 @@ else:
 - close the story issue with completion summary
 - record completion as `#implement-story.complete`
 - log: "Story #{story_issue.number} complete"
+- check parent epic progress and close if all stories are done (if `$epic` provided, otherwise check issue for reference link to parent epic)
 
 ### Events
 
