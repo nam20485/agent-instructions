@@ -15,6 +15,37 @@ This dynamic workflow creates story issues for a specific epic within an applica
 - When running in parallel, the orchestrator waits for all story-creation assignments to finish before moving on to downstream work
 - Story issues are created in GitHub's issue tracker, so concurrent execution does not modify repository files or create merge conflicts
 
+## Prerequisites
+
+**⚠️ MANDATORY: Pre-Execution Reading Chain (NO EXCEPTIONS)**
+
+**STOP! Before executing this workflow, you MUST read these files in order and LOG each one:**
+
+1. **[ai-core-instructions.md](https://raw.githubusercontent.com/nam20485/agent-instructions/main/ai_instruction_modules/ai-core-instructions.md)** – Core protocol and rules for all agents
+   - Log: "✓ Read ai-core-instructions.md"
+2. **[dynamic-workflow-syntax.md](https://raw.githubusercontent.com/nam20485/agent-instructions/main/ai_instruction_modules/ai-workflow-assignments/dynamic-workflows/dynamic-workflow-syntax.md)** – Canonical DSL structure and event system requirements
+   - Log: "✓ Read dynamic-workflow-syntax.md"
+3. **[orchestrate-dynamic-workflow.md](https://raw.githubusercontent.com/nam20485/agent-instructions/main/ai_instruction_modules/ai-workflow-assignments/orchestrate-dynamic-workflow.md)** – Orchestration rules, acceptance gating, and run-report guardrails
+   - Log: "✓ Read orchestrate-dynamic-workflow.md"
+4. **[create-story-v2.md](https://raw.githubusercontent.com/nam20485/agent-instructions/main/ai_instruction_modules/ai-workflow-assignments/create-story-v2.md)** – Assignment executed for each story issue that this workflow creates
+   - Log: "✓ Read create-story-v2.md"
+5. **[gather-context.md](https://raw.githubusercontent.com/nam20485/agent-instructions/main/ai_instruction_modules/ai-workflow-assignments/gather-context.md)** – Required for the `pre-assignment-begin` event handler executed before every assignment
+   - Log: "✓ Read gather-context.md"
+6. **[recover-from-error.md](https://raw.githubusercontent.com/nam20485/agent-instructions/main/ai_instruction_modules/ai-workflow-assignments/recover-from-error.md)** – Defines recovery procedures triggered by the `on-assignment-failure` event
+   - Log: "✓ Read recover-from-error.md"
+7. **[validate-assignment-completion.md](https://raw.githubusercontent.com/nam20485/agent-instructions/main/ai_instruction_modules/ai-workflow-assignments/validate-assignment-completion.md)** – Validation workflow enforced after each assignment completes
+   - Log: "✓ Read validate-assignment-completion.md"
+8. **[report-progress.md](https://raw.githubusercontent.com/nam20485/agent-instructions/main/ai_instruction_modules/ai-workflow-assignments/report-progress.md)** – Status reporting assignment invoked by the `post-step-completion` event
+   - Log: "✓ Read report-progress.md"
+9. **[debrief-and-document.md](https://raw.githubusercontent.com/nam20485/agent-instructions/main/ai_instruction_modules/ai-workflow-assignments/debrief-and-document.md)** – Final documentation workflow executed by the `post-script-complete` event
+   - Log: "✓ Read debrief-and-document.md"
+
+**After reading all nine files, log: "✓ Completed mandatory reading chain for create-stories-for-epic workflow"**
+
+**Do not proceed with workflow execution until the entire reading chain is logged.**
+
+**Before continuing, read the ## Events section in this file carefully—event handlers are mandatory for correct execution.**
+
 ## Script
 
 ### Inputs
