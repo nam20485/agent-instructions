@@ -53,7 +53,7 @@ Note: While total time is longer, the workflow produces higher quality results w
 
 #### 3. Automatic Validation
 
-The `post-assignment-completion` event provides:
+The `post-assignment-complete` event provides:
 
 - **Early error detection**: Issues caught immediately after each assignment
 - **Prevents cascading failures**: Invalid state blocks progression

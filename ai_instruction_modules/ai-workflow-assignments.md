@@ -123,7 +123,7 @@ Dynamic workflows support an event system that enables lifecycle-aware actions t
   - Use for: per-assignment setup, context preparation, logging
 
 **Post-Execution Events**:
-- `post-assignment-completion`: Executes after each assignment in a loop completes successfully
+- `post-assignment-complete`: Executes after each assignment in a loop completes successfully
   - Use for: cleanup, documentation updates, notifications, summary generation
 - `post-script-complete`: Executes once after all workflow steps complete successfully
   - Use for: final reporting, stakeholder notification, workflow metrics
@@ -151,7 +151,7 @@ Dynamic workflows support an event system that enables lifecycle-aware actions t
    2. For each main step:
       a. pre-assignment-begin (if loop, per iteration)
       b. assignment execution
-      c. post-assignment-completion (if loop, per iteration)
+      c. post-assignment-complete (if loop, per iteration)
    3. post-script-complete (once, if all succeed)
       OR
       on-script-failure (once, if any fail)
@@ -174,7 +174,7 @@ Events use the same DSL syntax as main workflow scripts:
 ```markdown
 ### Events
 
-#### `post-assignment-completion`
+#### `post-assignment-complete`
 
 `$assignments` = [`create-repository-summary`, `update-documentation`]
 
@@ -182,7 +182,7 @@ For each `$assignment_name` in `$assignments`, you will:
    - assign the agent the `$assignment_name` assignment
    - wait until the agent finishes the task
    - review the work and approve it
-   - record output as `#events.post-assignment-completion.$assignment_name`
+   - record output as `#events.post-assignment-complete.$assignment_name`
 ```
 
 ### Orchestrator Responsibilities for Events

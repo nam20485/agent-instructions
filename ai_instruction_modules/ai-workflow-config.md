@@ -50,7 +50,7 @@ Consistency, context awareness, learning from accumulated knowledge, systematic 
 ## Additional Steps
 - Before Plan: Resolve and print the assignment chain (orchestrator → dynamic-workflow → assignment files).
 - During Execute: Enforce template/source-of-truth and environment preflight checks where specified by the assignment.
-- **Event Execution**: Check for and execute event scripts at their designated lifecycle points (pre-script-begin, pre-assignment-begin, post-assignment-completion, post-script-complete, on-assignment-failure, on-script-failure).
+- **Event Execution**: Check for and execute event scripts at their designated lifecycle points (pre-script-begin, pre-assignment-begin, post-assignment-complete, post-script-complete, on-assignment-failure, on-script-failure).
 - After Execute: Gate completion on the assignment's Acceptance Criteria.
 - Report: Produce a Run Report mapped to Acceptance Criteria (with evidence links), include the resolution trace, and document all event executions.
 </additional_steps>
@@ -66,7 +66,7 @@ Dynamic workflows support lifecycle events that execute at specific points durin
    - Use for: Environment validation, prerequisite checks, initialization
 2. **pre-assignment-begin**: Before each assignment in a loop
    - Use for: Per-assignment setup, context preparation
-3. **post-assignment-completion**: After each assignment completes successfully
+3. **post-assignment-complete**: After each assignment completes successfully
    - Use for: Cleanup, summaries, documentation updates (as shown in the project-setup.md example)
 4. **post-script-complete**: After all workflow steps complete
    - Use for: Final reporting, notifications, metrics
@@ -87,7 +87,7 @@ Example from project-setup.md:
 ```markdown
 ### Events
 
-#### `post-assignment-completion`
+#### `post-assignment-complete`
 
 `$assignments` = [`create-repository-summary`]
 
@@ -95,7 +95,7 @@ For each `$assignment_name` in `$assignments`, you will:
    - assign the agent the `$assignment_name` assignment
    - wait until the agent finishes the task
    - review the work and approve it
-   - record output as `#events.post-assignment-completion.$assignment_name`
+   - record output as `#events.post-assignment-complete.$assignment_name`
 ```
 
 This event executes after EACH assignment in the main workflow completes, running the `create-repository-summary` assignment to document progress.

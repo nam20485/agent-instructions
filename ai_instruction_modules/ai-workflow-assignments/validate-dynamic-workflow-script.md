@@ -52,7 +52,7 @@ Your assignment is to validate the provided dynamic workflow script. This involv
 5. Verify that all referenced assignment short IDs exist in this repository (e.g., `create-app-plan`, `perform-task`).
 6. Verify that any referenced files/paths resolve (e.g., dynamic workflow file location and name).
 7. **Check for an "Events" subsection (if present) and validate event definitions**:
-   - Verify event names match standard types (`pre-script-begin`, `post-script-complete`, `pre-assignment-begin`, `post-assignment-completion`, `on-assignment-failure`, `on-script-failure`)
+   - Verify event names match standard types (`pre-script-begin`, `post-script-complete`, `pre-assignment-begin`, `post-assignment-complete`, `on-assignment-failure`, `on-script-failure`)
    - Ensure event scripts use valid DSL syntax
    - Verify all assignment short IDs referenced in event scripts exist
    - Confirm event output recording follows the convention: `#events.<event-name>` or `#events.<event-name>.$assignment_name`
@@ -91,7 +91,7 @@ After completing the above steps, you will have validated the provided dynamic w
 - No contradictory or unreachable instructions; steps proceed in a logical order
 - **If Events section present**:
   - Events are declared as fourth-level headings under a third-level "Events" heading (#### `event-name`)
-  - Event names match standard types: `pre-script-begin`, `post-script-complete`, `pre-assignment-begin`, `post-assignment-completion`, `on-assignment-failure`, `on-script-failure`
+  - Event names match standard types: `pre-script-begin`, `post-script-complete`, `pre-assignment-begin`, `post-assignment-complete`, `on-assignment-failure`, `on-script-failure`
   - Event scripts follow the same DSL syntax as main scripts
   - All assignment short IDs referenced in event scripts exist in the repository
   - Event output recording follows convention: `#events.<event-name>` or `#events.<event-name>.$assignment_name`

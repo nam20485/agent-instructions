@@ -31,14 +31,14 @@ For each `$assignment_name` in `$assignments`, you will:
 
 ### Events
 
-#### `pre-assignment-begins`
+#### `pre-assignment-begin`
 
 This event runs before EACH assignment begins to gather context and prepare for execution.
 
 - assign the agent the `gather-context` assignment
 - wait until the agent finishes the task
 - review the work and approve it
-- record output as `#events.pre-assignment-begins.gather-context`
+- record output as `#events.pre-assignment-begin.gather-context`
 
 #### `on-assignment-failure`
 
@@ -49,7 +49,7 @@ This event runs when ANY assignment fails to recover from errors systematically.
 - review the work and approve it
 - record output as `#events.on-assignment-failure.recover-from-error`
 
-#### `post-assignment-completion`
+#### `post-assignment-complete`
 
 This event runs after EACH assignment completes to report progress and validate the work.
 
@@ -66,7 +66,7 @@ For each `$pv_assignment_name` in `$progress_and_validation_assignments`, you wi
      - if `$pv_assignment_name` is `validate-assignment-completion`:
      - if validation failed, halt workflow and request manual intervention # Halt workflow to prevent further execution with invalid state
      - if validation passed, proceed to next assignment in `$progress_and_validation_assignments`
-   - record output as `#events.post-assignment-completion.$pv_assignment_name`
+   - record output as `#events.post-assignment-complete.$pv_assignment_name`
 
 ## Assignment Details
 

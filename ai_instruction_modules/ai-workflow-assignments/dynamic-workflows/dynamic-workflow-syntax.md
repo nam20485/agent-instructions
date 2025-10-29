@@ -83,27 +83,9 @@ Events are declared as fourth-level headings under a third-level "Events" step:
 - `pre-script-begin`: Executes once before any script steps begin
 - `post-script-complete`: Executes once after all script steps complete successfully
 - `pre-assignment-begin`: Executes before each assignment in an iteration starts
-- `post-assignment-completion`: Executes after each assignment in an iteration completes successfully
+- `post-assignment-complete`: Executes after each assignment in an iteration completes successfully
 - `on-assignment-failure`: Executes when an assignment fails (provides error context)
 - `on-script-failure`: Executes when the entire script fails (cleanup/rollback actions)
-
-## Event Handler Integration
-
-All assignments orchestrated through this workflow can utilize **Standard** event handlers for standardized lifecycle behaviors:
-
-- **pre-create-assignment-Standard**: Pre-execution preparation and validation
-- **post-step-complete-Standard**: Progress tracking and step completion handlers
-- **post-assignment-complete-Standard**: Assignment completion and wrap-up actions
-- **on-assignment-failure-Standard**: Systematic error handling and recovery procedures
-- **pre-script-begin-Standard**: Workflow initialization and setup
-
-The Standard event handlers are located in [`ai_instruction_modules/ai-workflow-assignments/event-handlers/`](../Standard-event-handlers) and provide:
-- Consistent preparation, tracking, and recovery patterns
-- Reduced false starts and thorough issue handling
-- Clear progress visibility and status reporting
-- Structured error recovery to prevent workflow abandonment
-
-~Event handlers are triggered automatically at their designated lifecycle points during workflow execution. See the [Events Section](../orchestrate-dynamic-workflow.md#scripts--events-section) above for integration details.~
 
 #### Event Execution Rules
 
@@ -114,7 +96,7 @@ The Standard event handlers are located in [`ai_instruction_modules/ai-workflow-
 
 2. **Scope and Context**:
    - `pre-script-begin` and `post-script-complete` execute once per workflow run
-   - `pre-assignment-begin` and `post-assignment-completion` execute once per assignment in loops
+   - `pre-assignment-begin` and `post-assignment-complete` execute once per assignment in loops
    - Events have access to the same variables and outputs as the parent script
    - Loop events can access the current iteration's `$assignment_name` and loop index
 
@@ -124,7 +106,7 @@ The Standard event handlers are located in [`ai_instruction_modules/ai-workflow-
    → main-step-1
       → pre-assignment-begin (if loop)
       → assignment execution
-      → post-assignment-completion (if loop)
+      → post-assignment-complete (if loop)
    → main-step-2
    → ...
    → post-script-complete
@@ -144,7 +126,7 @@ The Standard event handlers are located in [`ai_instruction_modules/ai-workflow-
 Event scripts use the same DSL syntax as main scripts:
 
 ```markdown
-#### `post-assignment-completion`
+#### `post-assignment-complete`
 
 `$assignments` = [`create-repository-summary`]
 
@@ -152,7 +134,7 @@ For each `$assignment_name` in `$assignments`, you will:
    - assign the agent the `$assignment_name` assignment
    - wait until the agent finishes the task
    - review the work and approve it
-   - record output as `#events.post-assignment-completion.$assignment_name`
+   - record output as `#events.post-assignment-complete.$assignment_name`
 ```
 
 ### Quoting Conventions
@@ -271,7 +253,7 @@ This example demonstrates a complete workflow with pre-script, loop iteration, a
 - validate assignment prerequisites
 - record preparation status as `#events.pre-assignment-begin.$assignment_name`
 
-#### `post-assignment-completion`
+#### `post-assignment-complete`
 
 `$cleanup_assignments` = [`create-repository-summary`, `update-documentation`]
 
@@ -279,7 +261,7 @@ For each `$assignment_name` in `$cleanup_assignments`, you will:
    - assign the agent the `$assignment_name` assignment with input $project_name
    - wait until the agent finishes the task
    - review the work and approve it
-   - record output as `#events.post-assignment-completion.$assignment_name`
+   - record output as `#events.post-assignment-complete.$assignment_name`
 
 #### `post-script-complete`
 - generate final workflow report
@@ -309,6 +291,6 @@ For each `$assignment_name` in `$main_assignments`, you will:
 3. For each assignment in loop:
    - `pre-assignment-begin` event executes (prepares assignment context)
    - Assignment executes
-   - `post-assignment-completion` event executes (creates summary and updates docs)
+   - `post-assignment-complete` event executes (creates summary and updates docs)
 4. After all assignments complete, `post-script-complete` event executes (generates report)
 5. If any failure occurs, `on-script-failure` event executes instead of `post-script-complete`

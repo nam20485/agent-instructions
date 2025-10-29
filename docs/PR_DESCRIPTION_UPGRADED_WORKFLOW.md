@@ -35,7 +35,7 @@ $assignments` = [
 
 ### Includes Automatic Validation
 
-**New Event** (`post-assignment-completion`):
+**New Event** (`post-assignment-complete`):
 ```markdown
 $poc_assignments` = [
     `validate-assignment-completion`,  # NEW - validates each assignment

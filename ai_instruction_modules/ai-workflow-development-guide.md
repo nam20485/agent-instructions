@@ -191,7 +191,7 @@ if $variable is false:                   # Conditional (false)
   - Use for: per-assignment setup, context preparation, logging
 
 **Post-Execution Events:**
-- `post-assignment-completion` - Executes after each assignment in a loop completes successfully
+- `post-assignment-complete` - Executes after each assignment in a loop completes successfully
   - Use for: cleanup, documentation updates, notifications, summary generation
 - `post-script-complete` - Executes once after all workflow steps complete successfully
   - Use for: final reporting, stakeholder notification, workflow metrics
@@ -214,7 +214,7 @@ Events are declared as fourth-level headings under a third-level "Events" step:
 - ensure authentication is configured
 - record validation results as `#events.pre-script-begin`
 
-#### `post-assignment-completion`
+#### `post-assignment-complete`
 
 `$cleanup_assignments` = [`create-repository-summary`, `update-documentation`]
 
@@ -222,7 +222,7 @@ For each `$assignment_name` in `$cleanup_assignments`, you will:
    - assign the agent the `$assignment_name` assignment
    - wait until the agent finishes the task
    - review the work and approve it
-   - record output as `#events.post-assignment-completion.$assignment_name`
+   - record output as `#events.post-assignment-complete.$assignment_name`
 ```
 
 ### Event Execution Rules
@@ -242,7 +242,7 @@ For each `$assignment_name` in `$cleanup_assignments`, you will:
    2. For each main step:
       a. pre-assignment-begin (if loop, per iteration)
       b. assignment execution
-      c. post-assignment-completion (if loop, per iteration)
+      c. post-assignment-complete (if loop, per iteration)
    3. post-script-complete (once, if all succeed)
       OR
       on-script-failure (once, if any fail)
@@ -373,14 +373,14 @@ For each `$assignment_name` in `$cleanup_assignments`, you will:
    - validate prerequisites
    - record results as `#events.pre-script-begin`
    
-   #### `post-assignment-completion`
+   #### `post-assignment-complete`
    `$cleanup_tasks` = [`create-repository-summary`]
    
    For each `$assignment_name` in `$cleanup_tasks`, you will:
       - assign the agent the `$assignment_name` assignment
       - wait until the agent finishes the task
       - review the work and approve it
-      - record output as `#events.post-assignment-completion.$assignment_name`
+      - record output as `#events.post-assignment-complete.$assignment_name`
    
    #### `post-script-complete`
    - generate final report
@@ -537,14 +537,14 @@ ai_instruction_modules/ai-workflow-assignments/dynamic-workflows/dynamic-workflo
    - validate environment
    - record as `#events.pre-script-begin`
    
-   #### `post-assignment-completion`
+   #### `post-assignment-complete`
    `$summary_tasks` = [`create-repository-summary`]
    
    For each `$assignment_name` in `$summary_tasks`, you will:
       - assign the agent the `$assignment_name` assignment
       - wait until the agent finishes the task
       - review the work and approve it
-      - record output as `#events.post-assignment-completion.$assignment_name`
+      - record output as `#events.post-assignment-complete.$assignment_name`
    
 3. Validate using `validate-dynamic-workflow-script`
 4. Test by orchestrating the workflow

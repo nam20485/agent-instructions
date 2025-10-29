@@ -45,14 +45,14 @@ This document summarizes the implementation of workflow improvements based on fe
 1. `ai_instruction_modules/ai-workflow-assignments/validate-assignment-completion.md`
 
 **Changes Made**:
-- Created validation assignment that can be called from `post-assignment-completion` events
+- Created validation assignment that can be called from `post-assignment-complete` events
 - Validates file outputs, runs verification commands, creates validation reports
 - Blocks progression if validation fails
 - Provides detailed remediation steps
 
 **Integration**:
 - Designed to work with existing event system in dynamic workflows
-- Can be added to any workflow's `post-assignment-completion` event
+- Can be added to any workflow's `post-assignment-complete` event
 - Example integration available in assignment documentation
 
 **Benefits**:
@@ -228,7 +228,7 @@ Add to workflow's Events section:
 ```markdown
 ### Events
 
-#### `post-assignment-completion`
+#### `post-assignment-complete`
 
 `$validation_assignments` = [`validate-assignment-completion`]
 
@@ -237,7 +237,7 @@ For each `$assignment_name` in `$validation_assignments`, you will:
    - wait until the agent finishes the task
    - review the validation results
    - if validation failed, halt workflow and request manual intervention
-   - if validation passed, record output as `#events.post-assignment-completion.$assignment_name`
+   - if validation passed, record output as `#events.post-assignment-complete.$assignment_name`
 ```
 
 ---

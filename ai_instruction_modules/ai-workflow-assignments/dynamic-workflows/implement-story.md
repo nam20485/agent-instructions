@@ -38,19 +38,6 @@ This dynamic workflow performs implementation of a single story from an epic. It
   - Git repo containing the story issue
   - If not provided, use current workspace
 
-### Events
-
-#### `pre-assignment-begin`
-
-Before executing each assignment in this workflow, gather context and prepare:
-
-- assign the agent the gather-context` assignment with input:
-  - upcoming_assignment: the assignment about to be executed
-  - workflow_context: current workflow state and previous outputs
-- wait until the agent completes context gathering
-- record output as `#events.pre-assignment-begin`
-- log: "✓ Context gathered for upcoming assignment"
-
 ### Declarations
 
 #### getstory($story, $repository)
@@ -91,48 +78,6 @@ Updates the story issue with current progress status.
   - Updates labels if needed (e.g., state:in-progress, state:review)
   - Links to PR if created
 - **Example:** `update_story_progress($story, "Implementation complete, PR created")` updates the story issue
-
-#### auto_approve_pr($pull_request, $validation_results)
-Automatically approves a pull request if all validation checks pass.
-- **Input:** Pull request object and validation results from automated reviews
-- **Returns:** Approval status (approved/pending_manual/failed)
-- **Approval criteria:**
-  - All automated CI/CD checks must pass (build, tests, linting)
-  - All automated review comments are informational or approved
-  - No requested changes from automated reviewers
-  - Code coverage meets or exceeds threshold
-  - No merge conflicts with target branch
-  - Branch protection rules satisfied
-- **Actions:**
-  - Evaluates validation results against approval criteria
-  - Posts approval review if all criteria met
-  - Adds approval comment with summary of validation results
-  - Returns approval status for workflow decision making
-- **Example:** `auto_approve_pr($pr, $validation_results)` returns `"approved"` if all checks pass
-
-#### auto_merge_pr($pull_request)
-Automatically merges a pull request if approved and all checks pass.
-- **Input:** Pull request object (must be approved)
-- **Returns:** Merge status (merged/pending/failed)
-- **Merge criteria:**
-  - PR must be approved (manual or automated)
-  - All required status checks must pass
-  - No merge conflicts with target branch
-  - Branch protection rules must be satisfied (required reviews, CI checks, etc.)
-  - PR cannot be in draft state
-- **Actions:**
-  - Validates PR is ready to merge against all branch protection rules
-  - Attempts merge using configured merge strategy (merge commit, squash, or rebase)
-  - Handles branch protection bypasses if authorized and necessary
-  - Deletes source branch after successful merge (if configured)
-  - Posts merge confirmation comment with commit SHA
-  - Returns merge status for workflow tracking
-- **Branch Protection Handling:**
-  - **Protected branches:** Respects all branch protection rules (required reviews, status checks)
-  - **Merge strategies:** Uses repository's configured default merge method
-  - **Bypass rules:** Only bypasses if explicitly authorized (admin/maintainer role) AND necessary
-  - **Failure handling:** Returns failed status if protection rules not met, allowing manual intervention
-- **Example:** `auto_merge_pr($pr)` returns `"merged"` if PR successfully merged, `"pending"` if waiting for checks, `"failed"` if merge blocked
 
 ### implement-story
 
@@ -195,14 +140,16 @@ else:
 
 ### Events
 
-#### `pre-assignment-begins`
+#### `pre-assignment-begin`
 
 This event runs before EACH assignment begins to gather context and prepare for execution.
 
-- assign the agent the `gather-context` assignment
-- wait until the agent finishes the task
-- review the work and approve it
-- record output as `#events.pre-assignment-begins.gather-context`
+- assign the agent the gather-context` assignment with input:
+  - upcoming_assignment: the assignment about to be executed
+  - workflow_context: current workflow state and previous outputs
+- wait until the agent completes context gathering
+- record output as `#events.pre-assignment-begin`
+- log: "✓ Context gathered for upcoming assignment"
 
 #### `on-assignment-failure`
 
@@ -213,7 +160,7 @@ This event runs when ANY assignment fails to recover from errors systematically.
 - review the work and approve it
 - record output as `#events.on-assignment-failure.recover-from-error`
 
-#### `post-assignment-completion`
+#### `post-assignment-complete`
 
 This event runs after EACH assignment completes to report progress and validate the work.
 
@@ -230,4 +177,10 @@ For each `$pv_assignment_name` in `$progress_and_validation_assignments`, you wi
      - if `$pv_assignment_name` is `validate-assignment-completion`:
      - if validation failed, halt workflow and request manual intervention # Halt workflow to prevent further execution with invalid state
      - if validation passed, proceed to next assignment in `$progress_and_validation_assignments`
-   - record output as `#events.post-assignment-completion.$pv_assignment_name`
+   - record output as `#events.post-assignment-complete.$pv_assignment_name`
+
+#### `post-script-complete`
+
+- assign an agent the `debrief-and-document.md` workflow assignment with input:
+  - project_context: current workflow state and outputs
+- wait until the debriefing workflow completes

@@ -258,14 +258,14 @@ else:
 - create checkpoint with PR current state (for rollback if needed)
 - record pre-assignment state as `#events.pre-assignment-begin.pr-{pr.number}`
 
-#### `post-assignment-completion`
+#### `post-assignment-complete`
 
 # This event runs after each pr-approval-and-merge assignment completes successfully
 - log: "Completed PR review for PR#{pr.number} (Story#{pr.story_number})"
 - verify PR was merged successfully
 - verify story issue was closed
 - update epic progress tracking
-- record post-assignment state as `#events.post-assignment-completion.pr-{pr.number}`
+- record post-assignment state as `#events.post-assignment-complete.pr-{pr.number}`
 
 #### `on-assignment-failure`
 
@@ -397,7 +397,7 @@ breakdown-epic
    - This maintains logical dependencies and reduces conflicts
 
 4. **Review Event Logs**
-   - Check `pre-assignment-begin` and `post-assignment-completion` events
+   - Check `pre-assignment-begin` and `post-assignment-complete` events
    - These provide detailed progress tracking for each PR
 
 5. **Handle Failures Gracefully**

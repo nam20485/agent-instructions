@@ -86,14 +86,14 @@ All implementation happens in subsequent assignments (create-application-foundat
 
 ### Events
 
-#### `pre-assignment-begins`
+#### `pre-assignment-begin`
 
 This event runs before the assignment begins to gather context and prepare for execution.
 
 - assign the agent the `gather-context` assignment
 - wait until the agent finishes the task
 - review the work and approve it
-- record output as `#events.pre-assignment-begins.gather-context`
+- record output as `#events.pre-assignment-begin.gather-context`
 
 #### `on-assignment-failure`
 
@@ -104,14 +104,14 @@ This event runs if the assignment fails to recover from errors systematically.
 - review the work and approve it
 - record output as `#events.on-assignment-failure.recover-from-error`
 
-#### `post-assignment-completion`
+#### `post-assignment-complete`
 
 This event runs after the assignment completes to report progress.
 
 - assign the agent the `report-progress` assignment
 - wait until the agent finishes the task
 - review the work and approve it
-- record output as `#events.post-assignment-completion.report-progress`
+- record output as `#events.post-assignment-complete.report-progress`
 
 ### Completion
 

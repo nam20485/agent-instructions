@@ -4,7 +4,7 @@
 
 ### Goal
 
-Validate that a completed assignment has successfully met all its acceptance criteria and that all outputs are functional. This assignment is typically called from the `post-assignment-completion` event in dynamic workflows.
+Validate that a completed assignment has successfully met all its acceptance criteria and that all outputs are functional. This assignment is typically called from the `post-assignment-complete` event in dynamic workflows.
 
 ### Prerequisites
 

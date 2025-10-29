@@ -66,7 +66,7 @@ For each `$assignment_name` in `$assignments`, you will:
 
 ### Events
 
-#### `pre-assignment-begins`
+#### `pre-assignment-begin`
 - Triggered before each assignment begins
 - Can be used for logging, setup, or pre-processing tasks
 #### `post-assignment-completes`

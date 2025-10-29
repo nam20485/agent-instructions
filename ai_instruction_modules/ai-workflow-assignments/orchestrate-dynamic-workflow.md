@@ -68,7 +68,7 @@ Dynamic workflows may include an "Events" subsection that defines actions to exe
 - `post-script-complete`: Runs once after all script steps complete successfully
 
 - `pre-assignment-begin`: Runs before each assignment in a loop starts
-- `post-assignment-completion`: Runs after each assignment in a loop completes
+- `post-assignment-complete`: Runs after each assignment in a loop completes
 
 - `pre-step-begin`: Runs before each step (the high level headings) in an assignment starts
 - `post-step-completion`: Runs after each step (the high level headings) in an assignment completes
@@ -81,7 +81,7 @@ Dynamic workflows may include an "Events" subsection that defines actions to exe
    - `post-*` events execute AFTER successful completion
    - `on-*-failure` events execute ONLY on failure
 2. **Scope**: Events have access to all script variables and outputs
-3. **Loop Events**: `pre-assignment-begin` and `post-assignment-completion` execute per iteration
+3. **Loop Events**: `pre-assignment-begin` and `post-assignment-complete` execute per iteration
 4. **Failure Handling**: Event failure causes workflow failure; failure events should not throw errors
 5. **Output Recording**: Record event outputs as `#events.<event-name>` or `#events.<event-name>.$assignment_name`
 
@@ -171,7 +171,7 @@ These apply to all dynamic workflows.
         - **If `on-assignment-failure` event exists, execute it for cleanup/rollback**
         - Stop execution of the current step and report failure
       - Else
-          **If `post-assignment-completion` event exists, execute it**
+          **If `post-assignment-complete` event exists, execute it**
     **If `post-step-completion` event exists, execute it after the step**
 - **If `post-script-complete` event exists, execute it**
 

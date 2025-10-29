@@ -174,7 +174,7 @@ Add to workflow's Events section:
 ```markdown
 ### Events
 
-#### `post-assignment-completion`
+#### `post-assignment-complete`
 
 `$validation_assignments` = [`validate-assignment-completion`]
 
@@ -183,7 +183,7 @@ For each `$assignment_name` in `$validation_assignments`, you will:
    - wait until the agent finishes the task
    - review the validation results
    - if validation failed, halt workflow and request manual intervention
-   - if validation passed, record output as `#events.post-assignment-completion.$assignment_name`
+   - if validation passed, record output as `#events.post-assignment-complete.$assignment_name`
 ```
 
 ---
