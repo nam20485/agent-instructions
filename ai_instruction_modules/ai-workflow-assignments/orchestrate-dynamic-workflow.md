@@ -148,6 +148,7 @@ These apply to all dynamic workflows.
 - Abort early if any file is missing or unreadable.
 
 1) Plan
+<!-- v2: Enhanced prompt validation and data interpolation (2025-10-29) -->
 - Parse the Script section and identify:
   - Main workflow steps (third-level headings)
   - Events subsection (if present) with lifecycle hooks
@@ -155,6 +156,7 @@ These apply to all dynamic workflows.
   - Parse Inputs, Detailed Steps, and Acceptance Criteria from the assignment file.
   - Expand steps into concrete actions and checks for the current environment (permissions, branch protection, etc.).
   - Decide direct-to-default-branch vs. feature-branch+PR route.
+  - For each delegation prompt: Validate completeness (scan for placeholders like "[paste ...]"; re-fetch data if needed, e.g., interpolate $epic JSON via string replacement). If invalid, log error and fix before delegating. Use sequential-thinking tool to confirm: "Is prompt data-complete? Yes/No + fix."
 - For each event (if present):
   - Identify event type and execution trigger
   - Parse event script and referenced assignments
@@ -170,8 +172,9 @@ These apply to all dynamic workflows.
       - If any assignment fails:        
         - **If `on-assignment-failure` event exists, execute it for cleanup/rollback**
         - Stop execution of the current step and report failure
-      - Else
-          **If `post-assignment-completion` event exists, execute it**
+       - Else
+           <!-- v2: Objective validation delegation to qa-test-engineer (2025-10-29) -->
+           **If `post-assignment-complete` event exists, execute it**: - Delegate `validate-assignment-completion` to a dedicated qa-test-engineer agent (not the same type as the executor, e.g., not developer if main was developer). This ensures objective, independent verification. Pass execution outputs but no self-reported success.
     **If `post-step-completion` event exists, execute it after the step**
 - **If `post-script-complete` event exists, execute it**
 
@@ -188,8 +191,10 @@ These apply to all dynamic workflows.
   - dynamic-workflows/$workflow_name.md
   - All referenced ai-workflow-assignments/<assignment>.md files
 - Environment:
+  <!-- v2: Added auth refresh for write operations (2025-10-29) -->
   - Required credentials/permissions available (e.g., GitHub repo create, labels, projects).
   - Branch protection understood; PR route planned if needed.
+  - Run gh auth refresh --scopes repo,write:issues,workflow (via desktop-commander_start_process) before writes. Log: "Auth refreshed for real operations."
 - Template/source-of-truth:
   - If specified by the assignment, verify template availability and policy; plan enforcement.
 
