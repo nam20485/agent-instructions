@@ -66,7 +66,7 @@ You will validate that the just-completed assignment has successfully met all it
 
 It is important to the final quality of our product for everyone to perform their assignment exactly as specified.
 
-Validation **must be delegated to an independent quality agent** (e.g., `qa-test-engineer`) who was not responsible for the original implementation work. This ensures objective evaluation and prevents self-validation bias.
+**MANDATORY INDEPENDENT VALIDATION:** Validation **MUST** be delegated to an independent `qa-test-engineer` agent who was **NOT** responsible for the original implementation work. This ensures objective evaluation, prevents self-validation bias, and provides unbiased quality assessment. The qa-test-engineer must operate autonomously with no influence from the implementing agent.
 
 ### Detailed Steps
 
@@ -101,9 +101,12 @@ Validation **must be delegated to an independent quality agent** (e.g., `qa-test
    - Check documentation is present
 
 3. For GitHub operations (issue/PR/project changes):
-   - Delegate a `github-expert` (or equivalent) agent to query live repository state (e.g., fetch the created issue or PR)
-   - Confirm existence, title, labels, blocking relationships, and milestone links
-   - If the resource is missing or mismatched, mark validation as **FAILED** and trigger `recover-from-error`
+    - **MANDATORY:** Delegate a `github-expert` agent to perform live GitHub API queries for real-state verification
+    - Query repository state using GitHub APIs: `gh api repos/{owner}/{repo}/issues/{number}`, `gh pr view {number}`, `gh project item-list {project-number}`
+    - Verify existence, title, body, labels, assignees, milestone, blocking relationships, and linked issues/PRs
+    - Cross-reference with assignment specifications to ensure exact match of requirements
+    - **CRITICAL:** If any GitHub resource is missing, mismatched, or incorrectly configured, mark validation as **FAILED** and auto-trigger `recover-from-error` workflow
+    - Document all API query results and comparisons in validation report for audit trail
 
 4. Record file verification results:
    - List of files checked
@@ -334,11 +337,12 @@ chmod +x deploy.sh
 
 2. Note: This validation must be executed by the independent `qa-test-engineer` (or equivalent) agent. Cross-check executor outputs, but rely on objective evidence such as repository queries, command logs, and validation reports before declaring PASS/FAIL.
 
-3. If failed, block progression:
-   - Do NOT proceed to next assignment
-   - Notify user of validation failure
-   - Provide link to validation report
-   - Request manual intervention
+3. If failed, block progression and auto-trigger recovery:
+    - **AUTO-TRIGGER:** Immediately invoke `recover-from-error` workflow with validation failure details
+    - Do NOT proceed to next assignment until recovery is successful
+    - Notify user of validation failure with specific remediation steps
+    - Provide link to validation report and recovery workflow status
+    - Request manual intervention only if automated recovery fails
 
 4. If passed, allow progression:
    - Log validation success
@@ -374,3 +378,13 @@ chmod +x deploy.sh
 - Keep validation reports for audit trail
 - Validation prevents cascading failures
 - Early validation catches issues before they compound
+
+### Objective Reporting Requirements
+
+**MANDATORY OBJECTIVE ASSESSMENT:**
+- All validation decisions must be based on verifiable evidence only (file existence, command exit codes, GitHub API responses)
+- qa-test-engineer must document all evidence sources and decision rationale
+- No subjective interpretation allowed - all criteria must have clear pass/fail evidence
+- Bias reduction: Implementing agent outputs are treated as untrusted until independently verified
+- Cross-validation: Multiple independent checks (files + commands + GitHub state) required for high-confidence validation
+- Audit trail: All validation steps, evidence, and decisions must be fully documented for review
