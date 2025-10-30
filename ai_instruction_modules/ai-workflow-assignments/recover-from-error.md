@@ -1,5 +1,7 @@
 # Assignment: Recover From Error During Workflow Assignment Execution
 
+<!-- v2: Introduced tiered retry protocol and objective escalation limits (2025-10-29) -->
+
 ## (recover-from-error)
 
 ### Goal
@@ -82,31 +84,39 @@ The assignment ensures that:
    - Identify possible causes such as configuration syntax errors, missing secrets, environment differences, or timeout issues
    - Try solutions in order: check CI configuration syntax, verify secrets, review CI logs, test commands locally, check environment differences, verify timeout settings
 
-#### 2. Follow Escalation Procedure for Persistent Errors
+#### 2. Follow Escalation Procedure for Persistent Errors (Tiered Retry Protocol)
 
-1. Document the error thoroughly:
+1. Document the error thoroughly (Diagnostic Log):
    - Capture full error message and stack trace
-   - Record steps that led to the error
-   - Document environment details (OS, runtime version, etc.)
-   - List what solutions were attempted
+   - Record steps that led to the error and the exact inputs used
+   - Document environment details (OS, runtime version, credentials)
+   - List attempted solutions and tag the log as `#recover-from-error.diagnosis`
 
-2. Create a GitHub issue with error details:
-   - Include all error documentation
-   - Tag with "bug" and "needs-investigation"
-   - Link to the assignment that failed
-   - Include reproduction steps if possible
+2. Attempt 1: Targeted Fix (Fast Remediation)
+   - Use sequential-thinking to identify the most likely root cause (e.g., missing data interpolation, stale context)
+   - Re-fetch required data (e.g., re-run `getepic` to rebuild `$full_epic_json`)
+   - Re-template prompts with interpolated values—remove placeholders such as "[paste ...]"
+   - Log: "Applied targeted fix; re-delegating with complete data."
+   - Retry the specific assignment once with the corrected inputs
 
-3. Notify stakeholders of the error:
-   - Report the error to appropriate stakeholders
-   - Provide error details and context
-   - Request manual intervention
-   - Suggest potential next steps
+3. If Attempt 1 Fails: Attempt 2 (Scratch Retry)
+   - Restart the assignment from a clean slate
+   - Re-run `pre-assignment-begin` (`gather-context`) to rebuild context
+   - Fetch fresh data and regenerate all prompts
+   - Treat the retry as brand new execution; log: "Scratch retry initiated due to persistent failure."
+   - Delegate the assignment again using the refreshed context
 
-4. Do not proceed with the failed assignment:
-   - Do not mark assignment as complete
-   - Do not proceed to next assignment
-   - Wait for error resolution
-   - Document the blocker
+4. If Attempt 2 Fails: Attempt 3 (Final Escalation)
+   - Halt the workflow and create a GitHub issue with the complete diagnostic log
+   - Tag issue with `bug` and `needs-investigation`, linking the failing assignment
+   - Notify stakeholders (orchestrator/user) with summary and request manual intervention
+   - Log: "Max retries exceeded; manual intervention required."
+   - Do **not** attempt further retries beyond this point
+
+5. Retry Limits and Objectivity
+   - Maximum of three attempts (targeted fix, scratch retry, final escalation)
+   - Use a different subagent persona (e.g., `qa-test-engineer`) during retries for independent perspective where practical
+   - Record outcomes of each attempt to prevent infinite loops and provide traceability
 
 #### 3. Execute Rollback Procedure When Needed
 

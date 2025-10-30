@@ -1,5 +1,7 @@
 # Assignment: Validate Assignment Completion
 
+<!-- v2: Enforced independent QA agents and GitHub state verification (2025-10-29) -->
+
 ## (validate-assignment-completion)
 
 ### Goal
@@ -64,6 +66,8 @@ You will validate that the just-completed assignment has successfully met all it
 
 It is important to the final quality of our product for everyone to perform their assignment exactly as specified.
 
+Validation **must be delegated to an independent quality agent** (e.g., `qa-test-engineer`) who was not responsible for the original implementation work. This ensures objective evaluation and prevents self-validation bias.
+
 ### Detailed Steps
 
 #### 1. Identify Assignment to Validate
@@ -96,7 +100,12 @@ It is important to the final quality of our product for everyone to perform thei
    - Verify code files have expected structure
    - Check documentation is present
 
-3. Record file verification results:
+3. For GitHub operations (issue/PR/project changes):
+   - Delegate a `github-expert` (or equivalent) agent to query live repository state (e.g., fetch the created issue or PR)
+   - Confirm existence, title, labels, blocking relationships, and milestone links
+   - If the resource is missing or mismatched, mark validation as **FAILED** and trigger `recover-from-error`
+
+4. Record file verification results:
    - List of files checked
    - Which files exist
    - Which files are missing
@@ -323,13 +332,15 @@ chmod +x deploy.sh
    ========================================
    ```
 
-2. If failed, block progression:
+2. Note: This validation must be executed by the independent `qa-test-engineer` (or equivalent) agent. Cross-check executor outputs, but rely on objective evidence such as repository queries, command logs, and validation reports before declaring PASS/FAIL.
+
+3. If failed, block progression:
    - Do NOT proceed to next assignment
    - Notify user of validation failure
    - Provide link to validation report
    - Request manual intervention
 
-3. If passed, allow progression:
+4. If passed, allow progression:
    - Log validation success
    - Save validation report
    - Proceed to next assignment

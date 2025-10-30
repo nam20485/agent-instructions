@@ -1,5 +1,7 @@
 # Dynamic Workflow: Create Stories for Epic
 
+<!-- v2: Added epic JSON interpolation and post-loop verification safeguards (2025-10-29) -->
+
 ## Overview
 
 This dynamic workflow creates story issues for a specific epic within an application development plan. It extracts the specified story bullets from an epic issue, then creates individual story issues for each story using the create-story-v2 assignment. The workflow now supports both serial and optional parallel execution so that multiple stories can be created at the same time when it is safe to do so.
@@ -76,12 +78,15 @@ Extracts story items from an epic issue.
 
 `$epic_issue` = getepic($epic_issue_number, $repository)
 `$stories` = getstories($epic_issue)
+`$full_epic_json` = JSON.stringify($epic_issue)
+log: "Interpolated epic JSON length: {length($full_epic_json)} characters"
 
 if `$parallel_execution` is `true`:
    # PARALLEL MODE: Create stories concurrently when safe
    For each `$story` in `$stories`, in parallel:
+      `$story_prompt` = "Execute create-story-v2 with full epic JSON: {$full_epic_json} and story: {$story}"
       if ! (`$story` has already been created as a story issue linked to `$epic_issue`):
-         - assign an available agent the `create-story-v2` assignment with inputs `$epic_issue` and `$story`
+         - assign an available agent the `create-story-v2` assignment with input `$story_prompt`
          - wait until the agent finishes the task
          - review the work and approve it
          - record output as `#create-stories-for-epic.create-story-v2`
@@ -89,19 +94,37 @@ if `$parallel_execution` is `true`:
          - log: "Skipping story creation because {$story->title} is already linked"
 
    - wait until all parallel story-creation assignments complete
+   - assign an available agent the `perform-task` assignment with input "github-expert: Query GitHub for linked stories to #{$epic_issue_number}. Return total count and list of missing stories."
+   - wait until the agent finishes the task
+   - record output as `#create-stories-for-epic.github-verification`
+   - if `#create-stories-for-epic.github-verification.result` does not equal length($stories):
+      - log: "Linked story count mismatch detected; initiating recovery workflow"
+      `$epic_issue` = getepic($epic_issue_number, $repository)
+      - assign the agent the `recover-from-error` assignment with input "Story creation mismatch detected for epic #{$epic_issue_number}. Expected {length($stories)} stories; review verification output {#create-stories-for-epic.github-verification}. Re-fetch epic JSON and apply tiered retry protocol."
+      - stop workflow and request manual intervention
    - record aggregated outputs as `#create-stories-for-epic.parallel-complete`
 
 else:
    # SERIAL MODE: Create stories one at a time
    For each `$story` in `$stories`, you will:
+      `$story_prompt` = "Execute create-story-v2 with full epic JSON: {$full_epic_json} and story: {$story}"
       if ! (`$story` has already been created as a story issue linked to `$epic_issue`):
-         - assign the agent the `create-story-v2` assignment with inputs `$epic_issue` and `$story`
+         - assign the agent the `create-story-v2` assignment with input `$story_prompt`
          - wait until the agent finishes the task
       else:
          - log: "Skipping story creation because {$story->title} is already linked"
 
       - review the work and approve it
       - record output as `#create-stories-for-epic.create-story-v2`
+
+   - assign the agent the `perform-task` assignment with input "github-expert: Query GitHub for linked stories to #{$epic_issue_number}. Return total count and list of missing stories."
+   - wait until the agent finishes the task
+   - record output as `#create-stories-for-epic.github-verification`
+   - if `#create-stories-for-epic.github-verification.result` does not equal length($stories):
+      - log: "Linked story count mismatch detected in serial mode; initiating recovery workflow"
+      `$epic_issue` = getepic($epic_issue_number, $repository)
+      - assign the agent the `recover-from-error` assignment with input "Story creation mismatch detected for epic #{$epic_issue_number}. Expected {length($stories)} stories; review verification output {#create-stories-for-epic.github-verification}. Re-fetch epic JSON and apply tiered retry protocol."
+      - stop workflow and request manual intervention
 
 ### Events
 

@@ -57,6 +57,15 @@ Standard pattern for delegating work to an agent:
 - `review the work and approve it`
 - `record output as #step.substep`
 
+## Error Recovery & Validation Standards
+
+- **Tiered Recovery Protocols**: When an assignment fails, trigger the `recover-from-error` assignment (or equivalent) via the `on-assignment-failure` event. Limit automated retries to the documented three-attempt sequence (targeted correction → scratch rerun → escalation) and capture logs for each pass.
+- **Independent Validation**: After successful execution, delegate validation to an objective QA agent such as `validate-assignment-completion`. The validator must not be the same agent that executed the work and must rely on observable evidence (logs, generated artifacts, repository state) before approving.
+- **Authoritative Verification**: Where applicable (e.g., GitHub artifact creation), perform post-run checks using authoritative integrations to confirm that external side effects actually occurred. Record the verification results in the run report.
+- **Prompt Completeness Checks**: Validate assignment prompts and inputs before delegation. Workflows should fail fast when mandatory context (issue JSON, repository metadata, etc.) is missing or placeholder-only.
+- **Versioning Notes**: Include HTML comments such as `<!-- version: v2 -->` at the top of workflows when revisions introduce new reliability expectations. This aids downstream tooling in applying the correct guardrails.
+- **Recovery Termination**: If all recovery tiers fail, stop the workflow and surface the failure along with captured context instead of looping indefinitely.
+
 ### Logging
 
 - `log: "message"` - output a log message during workflow execution

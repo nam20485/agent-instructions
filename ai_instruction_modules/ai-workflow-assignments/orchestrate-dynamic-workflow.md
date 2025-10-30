@@ -63,7 +63,7 @@ This section lists the input variables provided by the calling process or invoca
 
 Dynamic workflows may include an "Events" subsection that defines actions to execute at specific lifecycle points. Events enable context-aware behavior triggered by workflow state changes.
 
-**Standard Event Types**:
+**Event Types**:
 - `pre-script-begin`: Runs once before any script steps begin
 - `post-script-complete`: Runs once after all script steps complete successfully
 
@@ -155,6 +155,10 @@ These apply to all dynamic workflows.
   - Parse Inputs, Detailed Steps, and Acceptance Criteria from the assignment file.
   - Expand steps into concrete actions and checks for the current environment (permissions, branch protection, etc.).
   - Decide direct-to-default-branch vs. feature-branch+PR route.
+  - **Validate delegation prompts for completeness before use**:
+    - Interpolate required data (e.g., `$epic` JSON, plan metadata) directly into prompts; eliminate placeholder text such as "[paste ...]".
+    - Run sequential-thinking tool to answer "Is prompt data-complete?" with a yes/no decision and remediation steps.
+    - If incomplete, re-fetch data, patch the prompt, log the fix, and only then proceed.
 - For each event (if present):
   - Identify event type and execution trigger
   - Parse event script and referenced assignments
@@ -172,6 +176,10 @@ These apply to all dynamic workflows.
         - Stop execution of the current step and report failure
       - Else
           **If `post-assignment-complete` event exists, execute it**
+            - Delegate `validate-assignment-completion` to a dedicated `qa-test-engineer` (or equivalent independent validation agent).
+            - Provide the agent with execution outputs plus any relevant context, but do **not** rely on self-reported success from the executing agent.
+            - Capture independent PASS/FAIL evidence (e.g., repo queries, validation reports) before proceeding.
+            - **REQUIRE** evidence corroborating successful all statemeenst in valdidation. **DO NOT ** asccept self-reported or any validation without  supporting evidence.
     **If `post-step-completion` event exists, execute it after the step**
 - **If `post-script-complete` event exists, execute it**
 
