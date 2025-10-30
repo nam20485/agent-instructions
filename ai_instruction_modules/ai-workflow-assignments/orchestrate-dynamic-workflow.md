@@ -179,7 +179,7 @@ These apply to all dynamic workflows.
             - Delegate `validate-assignment-completion` to a dedicated `qa-test-engineer` (or equivalent independent validation agent).
             - Provide the agent with execution outputs plus any relevant context, but do **not** rely on self-reported success from the executing agent.
             - Capture independent PASS/FAIL evidence (e.g., repo queries, validation reports) before proceeding.
-            - **REQUIRE** evidence corroborating successful all statemeenst in valdidation. **DO NOT ** asccept self-reported or any validation without  supporting evidence.
+            - **REQUIRE** evidence corroborating successful completion for all statements in validation. **DO NOT** accept self-reported or any validation without supporting evidence.
     **If `post-step-completion` event exists, execute it after the step**
 - **If `post-script-complete` event exists, execute it**
 
