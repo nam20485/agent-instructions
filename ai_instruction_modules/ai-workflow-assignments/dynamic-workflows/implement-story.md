@@ -66,6 +66,7 @@ Requests automated reviews from AI bots on the pull request.
 - **Actions:**
   - Posts comment `@gemini review` to trigger Gemini bot review
   - Posts comment `@claude review this PR` to trigger Claude bot review
+  # GH Copilot will automatically begin his review on his own (once he sees the PR created)
   - Waits for automated reviews to complete
 - **Example:** `request_automated_reviews($pr)` triggers both AI bot reviews
 
@@ -105,9 +106,7 @@ if `$epic` is provided:
 - log: "Created PR #{pull_request.number} for story #{story_issue.number}"
 
 # Step 4: Request automated reviews
-- post comment on `$pull_request`: "@claude review this PR"
-# GH Copilot will automatically begin his review on his own (once he sees the PR created)
-- wait until all three automated reviews complete
+- request_automated_reviews($pull_request)
 - record reviews as `#implement-story.automated-reviews`
 - log: "Automated reviews complete for PR #{pull_request.number}"
 
@@ -145,7 +144,7 @@ else:
 
 This event runs before EACH assignment begins to gather context and prepare for execution.
 
-- assign the agent the gather-context` assignment with input:
+- assign the agent the `gather-context` assignment with input:
   - upcoming_assignment: the assignment about to be executed
   - workflow_context: current workflow state and previous outputs
 - wait until the agent completes context gathering
