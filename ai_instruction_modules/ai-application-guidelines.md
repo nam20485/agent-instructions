@@ -42,7 +42,7 @@
 
 ### Console
 - **TUI**: Spectre.Console + Cli + Testing ([best practices](https://spectreconsole.net/best-practices))
-- **Advanced TUI**: Consolonia
+- **Advanced TUI**: Consolonia ([ai-consolonia-instructions.md](./ai-consolonia-instructions.md))
 - **CLI Frameworks**: CliFx, Commanddotnet
 
 ### Database

@@ -392,6 +392,10 @@ For detailed specifications on specific topics, consult these canonical files:
 - [ai-design-principles.md](./ai-design-principles.md) - SOLID, 12-Factor App, DDD, patterns
 - [ai-instructions-aspnet-guidelines.md](./ai-instructions-aspnet-guidelines.md) - ASP.NET Core specifics
 
+##### Console & Text UI (Optional)
+Use this when building Avalonia-based console/TUI applications or porting desktop Avalonia apps to the terminal.
+- [ai-consolonia-instructions.md](./ai-consolonia-instructions.md) - Comprehensive Consolonia workflows covering templates, tooling, theming, testing, and Blazor integration.
+
 #### Deployment
 Use this as an example of how to configure a deployment environment.
 - It uses a specific application called `AgentAsAService`, but you can use it as a template for your own application.

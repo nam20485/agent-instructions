@@ -33,7 +33,7 @@ Use this guide when creating, modifying, or refactoring applications. This compr
 
 **UI Frameworks:**
 - Desktop: Avalonia UI, Fluent UI
-- Console/TUI: Spectre.Console, Consolonia
+- Console/TUI: Spectre.Console, Consolonia ([ai-consolonia-instructions.md](./ai-consolonia-instructions.md) for Avalonia-based console apps)
 - CLI: CliFx, Commanddotnet
 
 ### Core Design Principles (Quick Reference)
