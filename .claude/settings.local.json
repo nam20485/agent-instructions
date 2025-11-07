@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/nmill/OneDrive/Documents/PowerShell/**)",
+      "Read(//c/oh-my-posh/themes/**)",
+      "Bash(echo $env:USERPROFILE.claudesettings.json)",
+      "Bash(Test-Path \"$env:USERPROFILE\\.claude\\settings.json\")",
+      "Bash(powershell:*)",
+      "Bash(cmd /c \"type %USERPROFILE%\\.claude\\settings.json\")",
+      "Bash(dir C:Usersnmill.claudesettings.json)",
+      "Read(//c/Users/nmill/.claude/**)",
+      "Bash(test:*)",
+      "Read(//c/Users/nmill/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
