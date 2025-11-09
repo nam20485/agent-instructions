@@ -19,16 +19,23 @@ Complete the full PR approval and merge process, including resolving all PR comm
     - `"pending"`: PR merge is pending additional checks or manual intervention
     - `"failed"`: PR could not be merged due to conflicts, failed checks, or other issues
 
-### Acceptance Criteria
+### Acceptance Criteria (All Must Pass)
 
-1. All PR comments have been addressed with code changes or explanations
-2. All PR comment threads are marked as resolved
-3. No (0) unresolved comments remain
-4. No (0) comment threads are left unresolved
-4. PR approved.
-5. Branch merged upstream.
-6. Source branch deleted.
-7. Issue closed.
+**Review Comment Resolution**
+- [ ] `ai-pr-comment-protocol.md` workflow executed and logged (`✓ Read ai-pr-comment-protocol.md`).
+- [ ] `pr-review-comments` acceptance criteria satisfied (unique replies, explicit resolution via GraphQL/UI, summary comment posted).
+- [ ] GraphQL verification artifacts captured: `pr-unresolved-threads.json` (empty) and final query output demonstrating `isResolved: true` for every thread.
+- [ ] Evidence files and summary links attached to the run report and referenced in stakeholder communication.
+
+**Approval & Merge**
+- [ ] Stakeholder approval obtained after presenting resolution evidence.
+- [ ] Merge performed (or blocked reason documented) using repository policies.
+- [ ] Merge result recorded (`result` output set to `merged`, `pending`, or `failed` per guidance).
+
+**Post-Merge Hygiene**
+- [ ] Source branch deleted (if merge succeeded and policy allows).
+- [ ] Related issues/tickets closed or updated with resolution notes.
+- [ ] Run report updated with final status, evidence locations, and next steps.
 
 ### Assignment
 
@@ -41,9 +48,13 @@ In this stage your assignment will be to complete the full PR approval and merge
 
 Once PR comments are available you will work systematically to resolve each comment, one after another.
 
+> ⚠️ **Non-negotiable:** Before you begin, acknowledge and follow the canonical protocol (`ai-pr-comment-protocol.md`) and execute the `pr-review-comments` assignment. Skipping these prerequisites invalidates this assignment.
+
 ### Resolving Threads, Reply Content, and Commit Hygiene Protocol
 
 Reference the following documents for details on resolving threads, reply content, commit hygiene, and the script used to manage PR review threads:
+
+> 🚨 **Mandatory:** Failing to execute the canonical protocol exactly as written is an automatic failure of this assignment. Log your acknowledgement and capture artifacts as described.
 
 - [PR Comment Protocols](../ai-pr-comment-protocol.md)
 
@@ -53,54 +64,38 @@ It is important to the final quality of our product for everyone to perform thei
 
 ### Detailed Steps
 
-**NOTE** For a concise pseudocode version of the comment resolution algorithm see the workflow assignment here:
-    - [PR Review Comments Assignment](./pr-review-comments.md)
+> 🚨 **Do not proceed** until you log `✓ Read ai-pr-comment-protocol.md` and confirm familiarity with [`pr-review-comments.md`](./pr-review-comments.md). These files are gatekeepers for this assignment.
 
-**Phase 1: Comment Resolution**
-1. Fetch and analyze all of the review comments for the assigned PR.
-2. Create an issue that lists each issue with a link, a description of the issue and its cause, and then your plan to resolve.
-3. After gaining an approval, create a branch off of the PR's base branch, link it to your issue, start a review, and then being resolving each issue systematically in order. After finishing resolution of each issue, commit your changes, update the issue, and reply with a comment explaining the outcome on the original review comment. Then mark the comment resolved.
+#### Phase 0: Pre-flight Checklist
+1. Confirm you have the correct PR number, branch permissions, and authentication (`gh auth status`).
+2. Execute the GraphQL snapshot command from the protocol and store `.pr-thread-snapshot.json`.
+3. Create or update a work log/issue (if required) capturing the current state of review threads and planned actions.
 
-1. For each unresolved, non-outdated review comment:
+#### Phase 1: Resolve Review Comments (Execute `pr-review-comments`)
+1. Follow the mandated workflow:
+    - Implement fixes, push commits, reply using the template, and call the `resolveReviewThread` mutation for each unresolved, non-outdated thread.
+    - Re-run the snapshot query until `pr-unresolved-threads.json` is empty.
+2. Post the PR-wide summary comment that enumerates every thread (ID or link), associated commit SHA, and outcome.
+3. Archive evidence in the run report:
+    - Attach the final GraphQL output.
+    - Record the location of `pr-review-threads-summary.md` and other helper outputs.
+4. Notify the orchestrator/reviewer with links to the summary comment and evidence.
 
-    1. If you have already submitted a reply with a plan, then you must wait for the stake holder to review your plan and approve it before you can move any further to implement the changes.
-        1. Move on to the next comment.
-    1. If you have not yet submitted a reply, then you will need to review and address the comment.
-        1. This involves reading the comment and the entire context of this comment to gain a full understanding.
-        1. Including:
-            1. All the replies in this comment's thread
-            1. The PR's original code changes
-            1. Any code changes or plans resulting from previous iterations on this comment.
-            1. Have you already submitted any plans that were rejected?
-            1. At this point, go read the issue and PR again
-            1. Given the context determine the options to resolve the comment.
+#### Phase 2: Secure Approval
+1. Address any follow-up questions or additional review comments immediately, repeating Phase 1 as necessary.
+2. Once stakeholders confirm that all feedback is satisfied, record their approval (screenshot, link to approval comment, or review state change).
+3. Verify that CI checks are green and branch protection conditions are satisfied.
 
-            You must then leave a reply explaining the plan, and/or different options for them to choose from.
-            1. Using the original comment from the reviewer, reply to that comment so that the replies are all in the original thread.
-            2. If you have a recommendation, then state so and why.
-            3. Ask for approval, direction, or other required input/feedback to proceed.
-            4. Move on the next comment.
-            5. If you are unsure how to proceed, then ask for help in the chat or reply.
-            6. If the stake-holder reply contains approval for a previously submitted plan, then you will be able to implement the changes now.
-               1. After implementing the changes, commit your work, update the issue, and reply with a comment explaining the outcome on the original review comment. Then mark the comment resolved.
-            7. If the stake-holder reply contains a request for changes, then you will need to review the comment and ensure that you understand the feedback provided.
-            8. Address the feedback and update your implementation accordingly.
-            9.  Communicate your changes and seek further clarification if needed.
-
-Once you have addressed all of the comments to the degree with which you can for this round, then notify the orchestrator and reviewer that you are ready for them to look at your replies and then wait for them to noify you again.
-
-**After implementing each approved plan, leave a comment reply to the preceding approval comment informing stakeholders that you have completed implementing the indicated plan.** Include details of what was changed and confirm the implementation status.
-
-* Iterate in this manner until all comments and replies have been addressed.
-* Once all PR comments have been resolved, the stake-holder will approve the PR.
-
-**Phase 2: Merge and Completion**
-1. After PR approval is obtained, attempt to merge the PR to the target branch
-2. Determine the appropriate result value based on merge outcome:
-   - If merge succeeds: result = "merged"
-   - If merge is pending checks: result = "pending"
-   - If merge fails: result = "failed"
-3. Close associated issue and branch if merge was successful
+#### Phase 3: Merge Execution & Wrap-Up
+1. Attempt the merge using the repository’s preferred strategy (squash, rebase, merge).
+2. Set the `result` output:
+    - `"merged"` if the merge succeeds and the target branch now contains the changes.
+    - `"pending"` if waiting on status checks or additional approvals.
+    - `"failed"` if merge conflicts or policy blocks require intervention.
+3. On successful merge:
+    - Delete the source branch (if policy allows).
+    - Close or update related issues with links to the PR and summary comment.
+4. Update the run report with final status, evidence links, and next steps.
 
 ### ⚠️ CRITICAL: Commit Changes Before Merge
 
@@ -139,10 +134,11 @@ The agent executing this assignment must follow these guidelines for different s
 
 The completion process follows these steps:
 
-1. **PR Approval**: Wait for all PR comments to be resolved and get explicit approval from stakeholders
-2. **Merge Attempt**: Attempt to merge the PR to the target branch
+1. **PR Approval**: Present the resolution evidence, obtain explicit stakeholder approval, and log the approval link or review state.
+2. **Merge Attempt**: Attempt to merge the PR to the target branch using the repository’s preferred strategy.
 3. **Result Determination**: Based on the merge attempt outcome, determine the result value:
-   - If merge succeeds immediately: result = "merged"
-   - If merge is blocked by pending status checks: result = "pending"
-   - If merge fails due to conflicts, branch protection, or other issues: result = "failed"
-4. **Issue Closure**: Close the associated issue and branch (only if merge was successful)
+    - If merge succeeds immediately: result = "merged"
+    - If merge is blocked by pending status checks: result = "pending"
+    - If merge fails due to conflicts, branch protection, or other issues: result = "failed"
+4. **Evidence & Handoff**: Attach the final GraphQL output, empty `pr-unresolved-threads.json`, merge confirmation, and summary comment link to the run report. Notify stakeholders of completion and next steps.
+5. **Issue Closure / Follow-up**: Close the associated issue and source branch (only if merge was successful and policy allows) or document the remediation plan if the result is `pending` or `failed`.
