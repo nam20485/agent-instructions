@@ -146,6 +146,8 @@ To use this workflow:
 ```bash
 # Orchestrate the upgraded workflow
 orchestrate-dynamic-workflow project-setup-upgraded
+*or*
+orchestrate-dynamic-workflow  - $workflow_name = project-setup-upgraded
 ```
 
 ## Notes
