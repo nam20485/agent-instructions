@@ -167,6 +167,11 @@ This event runs after EACH step completes to report progress and validate the wo
 
 #### `post-script-complete`
 
-- assign an agent the `debrief-and-document.md` workflow assignment with input:
+- assign an agent the `debrief-and-document` assignment with input:
   - project_context: current workflow state and outputs
 - wait until the debriefing workflow completes
+- record output as `#events.post-script-complete.debrief-and-document`
+- assign an agent the `continuous-improvement` assignment with input:
+   - debrief_report: `#events.post-script-complete.debrief-and-document`
+- wait until the continuous improvement workflow completes
+- record output as `#events.post-script-complete.continuous-improvement`

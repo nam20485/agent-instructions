@@ -120,6 +120,7 @@ Every workflow assignment file MUST contain these sections:
 - **[analyze-progress-doc.md](./ai-workflow-assignments/analyze-progress-doc.md)** - Progress analysis
 - **[update-plan-issue.md](./ai-workflow-assignments/update-plan-issue.md)** - Plan updates from analysis
 - **[debrief-and-document.md](./ai-workflow-assignments/debrief-and-document.md)** - Post-workflow debriefs
+- **[continuous-improvement.md](./ai-workflow-assignments/continuous-improvement.md)** - Continuous improvement implementation
 
 #### Orchestration
 - **[orchestrate-new-project.md](./ai-workflow-assignments/orchestrate-new-project.md)** - End-to-end project orchestration

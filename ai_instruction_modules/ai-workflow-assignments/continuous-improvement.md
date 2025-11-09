@@ -122,6 +122,9 @@ Leverage the debrief report to identify improvement opportunities, prioritize th
    - Run and document required validations (unit tests, integration tests, linters, build pipelines, manual checks).
    - Update the backlog table with status `Complete`, evidence links (PRs, commits, tickets), and validation outcomes.
 2. If a fix cannot be completed immediately, document blockers, mitigation steps, and a scheduled follow-up date, then surface to the user for decision.
+3. If any Section A or B item uncovers new high-value, low-risk issues during implementation, pause and re-evaluate the backlog. Consider promoting these new items into Section A or B and adjust the plan accordingly before proceeding further.
+4. If any Section A or B item is found to be unfeasible during implementation, document the reasons and re-evaluate its importance and priority. Document and skip if necessary.
+5. **IMPORTANT** If any identified change is too risky, or long, or required too complex or too many files changed, DO NOT implement unattended. Document and skip.
 
 #### 9. Report Progress and Seek Approval
 

@@ -311,6 +311,11 @@ Organized by timeframe:
    - Inform orchestrator or user of completion
    - Archive report for future reference
 
+5. **Initiate Continuous Improvement Cycle**:
+   - Confirm the approved debrief report path and share it with the orchestrator
+   - Delegate the `continuous-improvement` assignment, providing the report location and any supplemental artifacts
+   - Highlight urgent improvement items so they are prioritized in the follow-on implementation plan
+
 ### Notes
 
 - Be thorough and specific in all sections
