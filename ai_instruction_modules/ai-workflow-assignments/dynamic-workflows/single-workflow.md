@@ -76,8 +76,10 @@ This event runs after EACH assignment completes to report progress and validate 
 
 `$progress_and_validation_assignments` = [
                      `create-repository-summary`,     
-                     `validate-assignment-completion`,
-                     `report-progress`
+                     `validate-assignment-completion`,                     
+                     `report-progress`,
+                     `debrief-and-document`
+
                  ]
 
 For each `$pv_assignment_name` in `$progress_and_validation_assignments`, you will:
