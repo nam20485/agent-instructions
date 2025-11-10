@@ -72,6 +72,7 @@ The format is made up of the following sections:
 
 ### Planning
 * [create-app-plan.md](ai-workflow-assignments/create-app-plan.md): This assignment involves creating a plan for a new application based on a filled-out application template. You will create a plan, document it in an issue, and once gaining approval, you will implement the plan.
+* [create-feature-plan.md](ai-workflow-assignments/create-feature-plan.md) (create-feature-plan): This assignment involves planning and documenting a major feature for an existing application, updating planning artifacts, and preparing milestones, labels, and rollout strategies.
 * [create-epic.md](ai-workflow-assignments/create-epic.md) (create-epic): This assignment involves creating a single epic sub-issue from a phase in the main application plan. The epic represents a major implementation phase with clear deliverables and contains detailed story breakdowns.
 * [create-epic-v2.md](ai-workflow-assignments/create-epic-v2.md) (create-epic-v2): Updated version of the epic creation assignment with enhanced guidelines and structure.
 * [create-story.md](ai-workflow-assignments/create-story.md) (create-story): This assignment involves creating a single story sub-issue from an epic issue. Stories are granular, executable tasks that can be implemented independently by developers.
