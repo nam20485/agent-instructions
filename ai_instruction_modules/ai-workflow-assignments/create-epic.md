@@ -158,7 +158,7 @@ Story1 2 3   Story4 5 6  Story7 8 9   ← Bottom level: Stories (granular tasks)
 2. **Return Epic Object:**
    - Return the created epic issue object to the calling workflow
    - The epic object will be used by the `breakdown-plan` workflow to:
-     - Extract stories for the `create-story` assignment (if `$PARALLEL_EPIC_BREAKDOWN` is true)
+     - Extract stories for the `create-story-v2` assignment (if `$PARALLEL_EPIC_BREAKDOWN` is true)
      - Track progress of epic creation
      - Enable downstream workflow processing
 

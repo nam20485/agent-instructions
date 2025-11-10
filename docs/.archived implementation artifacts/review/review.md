@@ -152,7 +152,7 @@ This PR implements comprehensive improvements to the AI instruction framework ba
 **Recommendation**:
 - Add similar "Scope Boundaries" sections to:
   - `create-epic.md`
-  - `create-story.md`
+  - `create-story-v2.md`
   - `orchestrate-dynamic-workflow.md`
 - Explicitly state what the assignment DOES and DOES NOT create/modify
 

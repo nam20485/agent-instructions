@@ -84,10 +84,10 @@ if `$PARALLEL_EPIC_BREAKDOWN` is `true`:
       $stories = getstories($epic)
 
       For each `$story` in `$stories`, you will:
-       - assign the agent the `create-story` assignment with input `$story`
+       - assign the agent the `create-story-v2` assignment with input `$story`
        - wait until the agent finishes the task
        - review the work and approve it
-       - record output as `#breakdown-plan.create-story`
+       - record output as `#breakdown-plan.create-story-v2`
 
 else:
    # Wait for all epics to be created before creating any stories
@@ -95,10 +95,10 @@ else:
       $stories = getstories($epic)
 
       For each `$story` in `$stories`, you will:
-         - assign the agent the `create-story` assignment with input `$story`
+         - assign the agent the `create-story-v2` assignment with input `$story`
          - wait until the agent finishes the task
          - review the work and approve it
-         - record output as `#breakdown-plan.create-story`
+         - record output as `#breakdown-plan.create-story-v2`
 
 ### Events
 

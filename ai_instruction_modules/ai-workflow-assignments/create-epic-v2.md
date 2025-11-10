@@ -189,7 +189,7 @@ St1 St2 St3  St4  St5 St6  St7 St8 St9  ← Bottom level: Story Issues (created 
 2. **Return Epic Object:**
    - Return the created epic issue object to the calling workflow
    - The epic object will be used by the `breakdown-plan` workflow to:
-     - Extract stories for the `create-story` assignment (if `$PARALLEL_EPIC_BREAKDOWN` is true)
+     - Extract stories for the `create-story-v2` assignment (if `$PARALLEL_EPIC_BREAKDOWN` is true)
      - Track progress of epic creation
      - Enable downstream workflow processing
 **Note:** Stakeholder review of individual epics is not required. The orchestrating workflow will handle review of all epics after they are created. The epic created by this assignment will contain checkbox-driven tasks from the line item and high-level story bullets for future story creation workflows.

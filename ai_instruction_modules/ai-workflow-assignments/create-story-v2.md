@@ -1,6 +1,6 @@
 # Assignment: Create Story
 
-## (create-story)
+## (create-story-v2)
 
 ### Goal
 

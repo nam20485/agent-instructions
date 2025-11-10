@@ -53,7 +53,7 @@ else:
 
 # Step 2: Create story issues for each story in the epic
 For each `$story` in `$stories`, you will:
-   - assign the agent the `create-story` assignment with input `$story`
+   - assign the agent the `create-story-v2` assignment with input `$story`
    - wait until the agent finishes the task
    - review the work and approve it
    - record output as `#breakdown-epic.create-story`

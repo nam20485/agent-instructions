@@ -50,17 +50,17 @@ For each `$phase` in `$phases`, you will:
       $stories = getstories(#breakdown-plan.create-epic)
 
       For each `$story` in `$stories`, you will:
-       - assign the agent the `create-story` assignment with input `$story`
+       - assign the agent the `create-story-v2` assignment with input `$story`
        - wait until the agent finishes the task
        - review the work and approve it
-       - record output as `#breakdown-plan.create-story`
+       - record output as `#breakdown-plan.create-story-v2`
 
 if `$PARALLEL_EPIC_BREAKDOWN` is `false`:
    For each `$epic` in `#breakdown-plan.create-epic`, you will:
       $stories = getstories($epic)
 
       For each `$story` in `$stories`, you will:
-         - assign the agent the `create-story` assignment with input `$story`
+         - assign the agent the `create-story-v2` assignment with input `$story`
          - wait until the agent finishes the task
          - review the work and approve it
-         - record output as `#breakdown-plan.create-story`
+         - record output as `#breakdown-plan.create-story-v2`
