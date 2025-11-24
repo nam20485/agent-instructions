@@ -1,3 +1,6 @@
+---
+context: opt-in
+---
 # Feedback Action Plan
 
 **Generated**: 2025-10-21  
@@ -492,3 +495,6 @@ No significant risks identified. All items represent incremental improvements wi
 **Document Version**: 1.0  
 **Last Updated**: 2025-10-21  
 **Next Review**: After Sprint 1 completion
+
+
+

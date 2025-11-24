@@ -1,3 +1,6 @@
+---
+context: opt-in
+---
 # Workflow Improvements Implementation Summary - Part 2
 
 ## Overview
@@ -338,3 +341,6 @@ When creating debrief reports:
 - The structured debrief template significantly improves report quality
 - Progress reporting is optional but recommended for assignments >30 minutes
 - Error recovery section should include assignment-specific errors
+
+
+

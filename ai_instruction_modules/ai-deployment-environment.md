@@ -1,38 +1,53 @@
+---
+description: Template and instructions for deploying ASP.NET Core + Blazor WASM apps to Google Cloud.
+scope: deployment
+prerequisites: none
+---
 # Google Cloud Deployment Template
 
+<xml>
+<instructions role="deployment-engineer" scope="deployment">
+
 <overview>
-Example deployment configuration for ASP.NET Core + Blazor WASM applications.
+## Overview
+Deployment configuration for ASP.NET Core + Blazor WASM applications on Google Cloud Platform (Cloud Run + Firebase Hosting).
 </overview>
 
 <prerequisites>
 ## Prerequisites
-- Google Cloud CLI: `gcloud auth login && gcloud config set project <PROJECT_ID>`
-- Firebase CLI: `npm install -g firebase-tools && firebase login`  
-- Docker (for local testing)
+-   **Google Cloud CLI:** `gcloud auth login && gcloud config set project <PROJECT_ID>`
+-   **Firebase CLI:** `npm install -g firebase-tools && firebase login`
+-   **Docker:** For local testing.
 </prerequisites>
 
-<setup_process>
+<process>
 ## Setup Process
-1. **Service Accounts**: Create service accounts with appropriate IAM roles
-2. **Environment Variables**: Configure OAuth, app IDs, secrets in Cloud Build triggers
-3. **Backend Deployment**: Deploy API services to Cloud Run
-4. **Frontend Deployment**: Deploy Blazor WASM to Firebase Hosting
-5. **Testing**: Verify endpoints, authentication, logging
-</setup_process>
+1.  **IAM:** Create service accounts with least privilege.
+2.  **Config:** Set env vars (OAuth, secrets) in Cloud Build triggers.
+3.  **Backend:** Deploy API services to Cloud Run.
+4.  **Frontend:** Deploy Blazor WASM to Firebase Hosting.
+5.  **Verify:** Test endpoints, auth flow, and logging.
+</process>
 
-<configuration_files>
-## Key Configuration Files
-- `appsettings.Production.json` - Backend configuration
-- `firebase.json` - Frontend hosting config
-- `cloudbuild.yaml` - CI/CD pipeline
-- Service account setup scripts
-</configuration_files>
+<files>
+## Key Configuration
+-   `appsettings.Production.json`: Backend config.
+-   `firebase.json`: Frontend hosting config.
+-   `cloudbuild.yaml`: CI/CD pipeline.
+</files>
 
 <monitoring>
 ## Monitoring
-- Cloud Run logs via Google Cloud Console
-- Firebase Hosting via Firebase Console  
-- Application metrics and error tracking
+-   **Logs:** Cloud Run (GCP Console).
+-   **Hosting:** Firebase Console.
+-   **Metrics:** Error tracking and APM.
 </monitoring>
 
-*Use as template - customize project IDs, service names, and authentication providers for your application.*
+<notes>
+## Notes
+-   Use as a template.
+-   Customize Project IDs, Service Names, and Auth Providers.
+</notes>
+
+</instructions>
+</xml>

@@ -1,53 +1,49 @@
-<template_structure>
-# New Application
+---
+description: Template for defining a new application project plan.
+scope: project-planning
+prerequisites: none
+---
+# New Application Template
 
+<xml>
+<template role="project-planner" scope="project-planning">
+
+<meta>
 ## App Title
-
-## Development Plan
+[Title]
 
 ## Description
+[Brief Overview]
+</meta>
 
-### Overview
+<requirements>
+## Requirements
+-   [ ] Requirement 1
+-   [ ] Requirement 2
+</requirements>
 
-### Document Links
+<tech_stack>
+## Tech Stack
+-   **Language:** C# (.NET 9.0)
+-   **Container:** Docker + Compose
+-   **Docs:** Swagger/OpenAPI
+-   **Logging:** Structured
+</tech_stack>
 
-### Requirements
+<structure>
+## Project Structure
+-   `src/`
+-   `tests/`
+-   `global.json` (SDK 9.0.0)
+</structure>
 
-### Features
-
-[x] Test cases
-[x] Logging
-[x] Containerization: Docker
-[x] Containerization: Docker Compose
-[x] Swagger/OpenAPI
-[x] Documentation
-
-## Language
-
-C#
-
-## Language Version
-
-.NET v9.0
-
-[x] Include global.json?
-
-```
-sdk: "9.0.0"
-rollForward: "latestFeature"
-```
-
-## Frameworks, Tools, Packages
-
-## Project Structure/Package System
-
-## GitHub
-
-## Repo
-
-<https://github.com/nam20485/>
-
-## Branch
-
+<deliverables>
 ## Deliverables
-</template_structure>
+-   [ ] Source Code
+-   [ ] Tests
+-   [ ] Dockerfiles
+-   [ ] Documentation
+</deliverables>
+
+</template>
+</xml>

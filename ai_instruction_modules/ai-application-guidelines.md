@@ -1,69 +1,53 @@
+---
+description: Technology stack and framework selection guidelines for applications.
+scope: application-guidelines
+prerequisites: ai-core-instructions.md
+---
 # Application Guidelines
+
+<xml>
+<instructions role="architect" scope="application-guidelines">
 
 <technology_stack>
 ## Technology Stack
 
-- **Always use latest versions**
-  - .NET 9.0.102
-
-- **https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-9/overview**
-
-- **Always use latest technologies listed in recent What's New?**
-- https://devblogs.microsoft.com/dotnet/announcing-net-9-0/
-
 ### Core
-- **Language**: C# + .NET ≥9.0.0 with global.json:
-  ```json
-  {
-    "sdk":
-     {
-        "version": "9.0.102",
-        "rollForward": "latestFeature"
-     }
-  }
-  ```
+- **Platform:** .NET 9.0.102+ (C# 10+).
+- **Config:** Use `global.json` to pin SDK version.
+- **References:** [What's New in .NET 9](https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-9/overview).
 
 ### Web Applications
+- **Backend:** ASP.NET Core Web API (Controllers preferred over Minimal APIs).
+- **Frontend:** Blazor WASM (or MAUI Hybrid for mobile).
+- **Container:** Docker, Aspire.
+- **Frameworks:** CommunityToolkit, ABP (large scale).
 
-#### Web Backend
+### Desktop & Console
+- **UI:** Avalonia UI (Cross-platform), Fluent UI.
+- **TUI:** Spectre.Console (CLI + Testing), Consolonia (Advanced).
+- **CLI:** CliFx, CommandDotNet.
 
-- ASP.NET Core Web API (use full controllers/not Minimal APIs)
-- Docker
-- Aspire
-- CommunityToolkit
-- ABP (large projects)
-
-#### Web Frontend Blazor
-- Blazor WASM (MAUI Hybrid if mobile support needed)
-  
-### Desktop
-- **UI**: Avalonia UI (cross-platform), Fluent UI
-- 
-
-### Console
-- **TUI**: Spectre.Console + Cli + Testing ([best practices](https://spectreconsole.net/best-practices))
-- **Advanced TUI**: Consolonia ([ai-consolonia-instructions.md](./ai-consolonia-instructions.md))
-- **CLI Frameworks**: CliFx, Commanddotnet
-
-### Database
-- **Options**: Redis, Memcache, Neo4J, MS SQL, PostgreSQL, MongoDB
-- **Testing/Small**: .NET Core InMemory, LiteDB  
-- **ORM**: EF Core (Fluent API, Code First)
+### Data & Storage
+- **Databases:** PostgreSQL, MSSQL, MongoDB, Redis, Neo4j.
+- **Testing:** EF Core InMemory, LiteDB.
+- **ORM:** EF Core (Code First, Fluent API).
 
 ### Development Practices
-- **Testing**: TDD/BDD, 80%+ coverage → see [ai-testing-validation.md](./ai-testing-validation.md)
-- **Containerization**: Docker + Docker Compose
-- **Documentation**: Swagger/OpenAPI, XML comments
-- **Logging**: Serilog structured (file + console)
+- **Testing:** TDD/BDD, >80% coverage. See [ai-testing-validation.md](./ai-testing-validation.md).
+- **Docs:** Swagger/OpenAPI, XML Comments (Required).
+- **Logging:** Serilog (Structured: File + Console).
+- **CI/CD:** Build, Test, Docker Push (GitHub Registry).
+- **IaC:** Terraform (Docker providers).
+- **Scripting:** PowerShell Core 7.1+.
 
-### CI/CD
-- **Required**: Build, tests, Docker push to GitHub registry
-- **Optional**: Static analysis, releases, deployment
+### Libraries
+- **Resilience:** Polly.
+- **Modules:** Carter, Nancy.
+- **Utils:** CommunityToolkit.
 
-### Infrastructure & Scripting
-- **IaC**: Terraform with Docker providers
-- **Scripts**: PowerShell Core ≥7.1.x
+## Examples
+<see example="examples/app-guidelines-examples.md" />
 
-### Optional Packages
-- Polly, ABP, Carter, Nancy, CommunityToolkit
 </technology_stack>
+</instructions>
+</xml>

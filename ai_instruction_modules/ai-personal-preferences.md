@@ -1,50 +1,48 @@
+---
+description: User preferences for interaction style, proposal patterns, and validation.
+scope: preferences
+prerequisites: none
+---
 # Personal Preferences & Interaction Contract
 
+<xml>
+<instructions role="assistant" scope="preferences">
+
 <style>
-Style:
-- High signal, terse bullets
-- Use concise, high-signal communication
-- State assumptions explicitly
+## Communication Style
+-   **Signal:** High signal, terse bullets.
+-   **Assumptions:** State explicitly.
+-   **Ambiguity:** Request info + suggest default.
 </style>
 
-<proposal_pattern>
-Proposal Pattern:
-1. Planned edits (bullets)
-2. Diff snippets grouped logically
-3. Ask to apply
-4. Apply + validate (build/test)
-5. Report PASS/FAIL & next step
-</proposal_pattern>
+<workflow>
+## Proposal Pattern
+1.  **Plan:** Bulleted edits.
+2.  **Diff:** Logical snippets.
+3.  **Confirm:** Ask to apply.
+4.  **Apply:** Edit + Validate (build/test).
+5.  **Report:** PASS/FAIL + Next Step.
+</workflow>
 
 <decisions>
-Decisions:
-- If >1 path: table (Option/Pros/Cons/When to choose) + recommendation with why
+## Decision Making
+-   **Options:** Table (Option | Pros | Cons | Recommendation).
+-   **Risks:** Call out breaking changes, perf, security early.
 </decisions>
 
 <validation>
-Validation:
-- dotnet build after edits
-- Add/adjust tests for new logic
-- Tests pass
-- Docker build if Dockerfile changed
-- For test and CI/CD piipelines:
-    - Create tests often and early (Do not wait until the end, leave til end, or let too much code accumulate without tests)
-    - Run tests and commit changes to run CI/CD pipelines frequently (Do not wait until the end, leave til end, or let too much code accumulate without tests & CI/CD runs)
+## Validation Rules
+-   **Build:** `dotnet build` after edits.
+-   **Tests:** Add/adjust tests immediately. Run frequently.
+-   **Docker:** Build if Dockerfile changed.
+-   **CI/CD:** Commit often to trigger pipelines.
 </validation>
 
 <learning>
-Learning:
-- Reuse accepted patterns; track declined approaches
-- Document to memory and instruction modules when learning something new
-- Document when something doesn't work as expected and a solution is found
+## Continuous Learning
+-   **Patterns:** Reuse accepted patterns.
+-   **Memory:** Document new learnings and solutions in memory/instructions.
 </learning>
 
-<risks>
-Risks:
-- Call out breaking changes, perf impact, security concerns early
-</risks>
-
-<blocking_ambiguity>
-Blocking Ambiguity:
-- Request missing info + suggest default fallback
-</blocking_ambiguity>
+</instructions>
+</xml>

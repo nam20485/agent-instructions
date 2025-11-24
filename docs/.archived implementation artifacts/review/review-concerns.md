@@ -1,3 +1,6 @@
+---
+context: opt-in
+---
 **Claude finished @nam20485's task** —— [View job](https://github.com/nam20485/agent-instructions/actions/runs/18710019578)
 
 ---
@@ -281,3 +284,4 @@ However, individual inline comments would still need manual creation through the
 ---
 
 <sub>Job run: https://github.com/nam20485/agent-instructions/actions/runs/xxxxx | Branch: feature/process-workflow-feedback</sub>
+

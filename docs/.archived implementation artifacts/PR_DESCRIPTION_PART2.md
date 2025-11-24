@@ -1,3 +1,6 @@
+---
+context: opt-in
+---
 # Add Error Recovery, Progress Reporting, and Context Gathering (Part 2)
 
 ## Overview
@@ -293,3 +296,6 @@ None. All changes are additive:
 ---
 
 **Ready for review and merge!** 🚀
+
+
+

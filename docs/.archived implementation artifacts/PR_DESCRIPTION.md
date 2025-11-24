@@ -1,3 +1,6 @@
+---
+context: opt-in
+---
 # Improve Workflow Assignments Based on Feedback (Part 1)
 
 ## Overview
@@ -182,3 +185,6 @@ None. This PR only adds new assignments. Existing workflows continue to work.
 - All feedback comments addressed
 - Core functionality complete, enhancements pending
 - Designed for maximum reusability across projects
+
+
+

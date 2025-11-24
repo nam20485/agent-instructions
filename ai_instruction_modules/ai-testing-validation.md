@@ -1,81 +1,75 @@
+---
+description: Instructions for testing, validation, and documentation standards.
+scope: testing-validation
+prerequisites: none
+---
 # Testing & Validation Instructions
+
+<xml>
+<instructions role="assistant" scope="testing-validation">
 
 <testing_approach>
 ## Testing Approach
-
-- Use the TDD (Test-Driven Development) approach for all code changes.
-- Write unit tests before implementing new features or changes.
-- Iterate, cycling between running tests and writing code until the feature is complete.
-- **After tests are written**, start implementing the feature.
-- **After the feature or a part of the feature is implemented**, run the tests to validate the implementation.
-- Coverage should be substantial, aim for at least 80% coverage.
-- Always run `dotnet build` before suggesting changes are complete
-- Use `dotnet test` for unit test validation  
-- Test Docker builds with `docker build` when Dockerfile changes are made
+- **Methodology:** TDD (Test-Driven Development) mandatory.
+- **Workflow:** Write tests -> Fail -> Implement -> Pass -> Refactor.
+- **Coverage:** Target ≥80%.
+- **Validation:**
+    - `dotnet build` (Mandatory before completion)
+    - `dotnet test` (Mandatory validation)
+    - `docker build` (If Dockerfile changed)
 </testing_approach>
 
 <frameworks>
-## Frameworks / Packages
+## Frameworks & Packages
 
-### For C#
-* xUnit
-* Moq
-* Bunit (Blazor)
-* Fluent Assertions
-* Coverlet
-* Coverage Reports
-#* Stryker.NET
-#* TesdtDriven.NET
-* [Testcontainers](https://testcontainers.com/guides/getting-started-with-testcontainers-for-dotnet/) 
+### C# / .NET
+- **Unit Testing:** xUnit
+- **Mocking:** Moq
+- **Blazor:** Bunit
+- **Assertions:** Fluent Assertions
+- **Coverage:** Coverlet
+- **Integration:** Testcontainers
 
-### Powershell
-* Pester
-
-### Docker
-* The best Docker testing frameworks you can find.
+### PowerShell
+- **Testing:** Pester
 
 ### C++
-* Catch2
+- **Testing:** Catch2
 </frameworks>
 
 <ci_cd>
 ## Continuous Integration
-- Use GitHub Actions for CI/CD workflows.
-- Include workflows for:
-  - Automated builds
-  - Automated tests
-  - Docker image builds and pushes to the repository's GitHub package registry
+- **Platform:** GitHub Actions.
+- **Workflows:**
+    - Automated builds.
+    - Automated tests.
+    - Docker image builds & push to registry.
 </ci_cd>
 
-<resources>
-## Links for TDD with AI Agents:
-- [Test-Driven Development with AI Agents](https://www.flowhunt.io/blog/test-driven-development-with-ai-agents/)
-- [TDD with AI Agents](https://www.flowhunt.io/blog/tdd-with-ai-agents/)
-
+<validation_steps>
 ## Validation Steps
+1.  **Compile/Build:** Verify no errors.
+2.  **Test:** Verify all tests pass.
+3.  **Verify:** Provide specific test commands to user.
+4.  **Resilience:** Include error handling/retry logic.
+</validation_steps>
 
-- Compile/build before marking tasks complete
-- Provide specific test commands for user verification
-- Include error handling and retry logic in instructions
-- Run tests to verify that they all pass begore decalaring implementation complete
-
+<documentation_standards>
 ## Documentation Standards
+- **Code:** XML doc comments on ALL members (public & non-public).
+- **API:** OpenAPI/Swagger with description attributes.
+- **Components:** Blazor component documentation.
+- **Infrastructure:** Terraform/Docker documentation.
+- **CI/CD:** GitHub Actions workflow documentation.
+</documentation_standards>
 
-- Include xml doc comments on all classes, fields, properties, and methods (including non-public)
-- Link to xml doc comments: <https://learn.microsoft.com/dotnet/csharp/language-reference/xmldoc/>
-- Enable project options for generating xml documentation.
-- For APIs, include OpenAPI/Swagger documentation.
-- Add Swagger description attributes to API endpoint/action controller methods.
-- For Blazor, include component documentation.
-- For desktop apps, include UI documentation.
-- For console apps, include command documentation.
-- For databases, include schema documentation.
-- For infrastructure, include Terraform documentation.
-- For Docker, include Dockerfile documentation.
-- For CI/CD, include GitHub Actions documentation.
-
+<resources>
 ## References
-- Include relevant Microsoft Learn links: <https://learn.microsoft.com/>
-- Reference Google Cloud docs: <https://cloud.google.com/docs>
-- Link to ASP.NET Core guides: <https://learn.microsoft.com/aspnet/core/>
+- [Microsoft Learn](https://learn.microsoft.com/)
+- [ASP.NET Core Guides](https://learn.microsoft.com/aspnet/core/)
+- [Google Cloud Docs](https://cloud.google.com/docs)
+- [XML Doc Comments](https://learn.microsoft.com/dotnet/csharp/language-reference/xmldoc/)
 </resources>
+
+</instructions>
+</xml>

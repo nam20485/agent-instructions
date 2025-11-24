@@ -1,46 +1,33 @@
+---
+description: Best practices for managing terminal sessions and processes.
+scope: terminal-management
+prerequisites: none
+---
 # Terminal Management Best Practices
+
+<xml>
+<instructions role="assistant" scope="terminal-management">
 
 <core_principle>
 ## Core Principle: Reuse Terminal Sessions
 
 ### Default Behavior (Recommended)
-```
-run_in_terminal with isBackground=false (or omitted)
-```
-- **Use for**: Sequential commands, builds, tests, file operations
-- **Behavior**: Reuses the same terminal session
-- **Benefits**: Efficient, maintains context, cleaner process list
+- **Command:** `run_in_terminal` with `isBackground=false` (or omitted)
+- **Use for:** Sequential commands, builds, tests, file operations
+- **Behavior:** Reuses the same terminal session
+- **Benefits:** Efficient, maintains context, cleaner process list
 
 ### Background Process Behavior (Use Sparingly)
-```
-run_in_terminal with isBackground=true
-```
-- **Use for**: Long-running services, servers, watch tasks, Docker containers
-- **Behavior**: Creates new terminal session that runs independently
-- **When to use**: Only when you need the process to continue running while executing other commands
-- **⚠️ IMPORTANT**: Always stop any existing background process BEFORE starting a new one to avoid port conflicts and resource waste
+- **Command:** `run_in_terminal` with `isBackground=true`
+- **Use for:** Long-running services, servers, watch tasks, Docker containers
+- **Behavior:** Creates new terminal session that runs independently
+- **When to use:** Only when you need the process to continue running while executing other commands
+- **⚠️ IMPORTANT:** Always stop any existing background process BEFORE starting a new one to avoid port conflicts and resource waste
 </core_principle>
 
 <examples>
 ## Examples
-
-### ✅ Correct Usage
-```
-# Sequential commands (reuse terminal)
-run_in_terminal: dotnet build (isBackground=false)
-run_in_terminal: dotnet test (isBackground=false)
-run_in_terminal: git status (isBackground=false)
-
-# Background service (new terminal)
-run_in_terminal: dotnet run --project WebApp (isBackground=true)
-```
-
-### ❌ Incorrect Usage
-```
-# Use isBackground=false for sequential commands (reuse terminal session)
-run_in_terminal: dotnet build (isBackground=true)  # WRONG - should use isBackground=false
-run_in_terminal: dotnet test (isBackground=true)   # WRONG - should use isBackground=false
-```
+<see example="examples/terminal-management-examples.md" />
 </examples>
 
 <system_impact>
@@ -58,5 +45,5 @@ run_in_terminal: dotnet test (isBackground=true)   # WRONG - should use isBackgr
 - Use `Get-Process` to check for resource usage
 </cleanup_strategy>
 
----
-*This practice ensures efficient terminal usage and better system resource management.*
+</instructions>
+</xml>

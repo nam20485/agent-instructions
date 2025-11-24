@@ -1,3 +1,6 @@
+---
+context: opt-in
+---
 # Project Setup Upgraded Workflow - Rationale and Benefits
 
 ## Purpose
@@ -268,3 +271,6 @@ For most projects, especially production applications and team collaborations, t
 - **Original Workflow**: `ai_instruction_modules/ai-workflow-assignments/dynamic-workflows/project-setup.md`
 - **Assignment Definitions**: `ai_instruction_modules/ai-workflow-assignments/`
 - **Implementation Artifacts**: `docs/implementation artifacts/`
+
+
+

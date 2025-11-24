@@ -1,3 +1,6 @@
+---
+context: opt-in
+---
 # Feedback Response Summary
 
 **Assignment:** `update-from-feedback`  
@@ -698,3 +701,4 @@ The feedback processing workflow has been successfully completed with **82% impl
 ---
 
 *End of Feedback Response Summary - Implementation Phase Complete*
+

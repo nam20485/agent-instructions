@@ -1,83 +1,57 @@
-<optimization_plan>
-# Custom Instructions Optimization to Improve Context Retention
+---
+description: Strategy and plan for optimizing custom instructions for context retention and performance.
+scope: optimization-strategy
+prerequisites: ai-context-optimization-research.md
+---
+# Custom Instructions Optimization Strategy
 
-<canonical_reference>
-## Canonical Format Reference
+<xml>
+<instructions role="optimizer" scope="optimization-strategy">
 
-All optimization strategies are documented and enforced in the canonical format guide:
-- [ai-instructions-format.md](./ai-instructions-format.md) - Complete formatting standards and guidelines
+<overview>
+## Overview
+This document outlines the active strategies for optimizing the instruction modules in this repository. The goal is to maximize context retention, reduce token usage, and improve instruction following across multiple AI agents.
+</overview>
 
-This document tracks the implementation plan for these strategies.
-</canonical_reference>
+<references>
+## Key References
+-   **Research Findings:** [ai-context-optimization-research.md](./ai-context-optimization-research.md)
+-   **Format Standard:** [ai-instructions-format.md](./ai-instructions-format.md)
+</references>
 
 <strategies>
-## Explicit Strategies
+## Active Strategies
 
-The following strategies will be employed. **Do not worry or waste time on any other strategies not listed here.**
+### 1. Structural Optimization (XML)
+-   **Action:** Wrap all content in semantic XML tags (e.g., `<instructions>`, `<overview>`, `<rules>`).
+-   **Benefit:** Improves parsing and section separation for LLMs.
 
-Given these strategies:
+### 2. Content Consolidation
+-   **Action:** Merge small, fragmented files into larger, cohesive modules.
+-   **Benefit:** Reduces context fragmentation and file switching overhead.
 
-- Implement XML tags for better structure and clarity
-- Maintain consistent formatting for improved parsing
+### 3. Example Curation
+-   **Action:** Extract verbose inline examples to dedicated files in `examples/`.
+-   **Action:** Reference examples using `<see example="..." />`.
+-   **Benefit:** Keeps core instructions concise; allows "lazy loading" of examples.
 
-- Consolidate related instructions into fewer, longer files
-    - This is two techniques in one: 
-        - Convert multiple short files into fewer longer files
-        - Remove redundant or overlapping instructions from multiple files
+### 4. Positive Phrasing
+-   **Action:** Convert "Don't do X" to "Do Y".
+-   **Benefit:** Reduces ambiguity and cognitive load.
 
-- Curate diverse few-shot examples to guide model behavior
-- Use explicit, positive instructions to reduce ambiguity
+### 5. Front Matter
+-   **Action:** Add YAML front matter (`description`, `scope`, `prerequisites`) to all files.
+-   **Benefit:** Standardizes metadata for indexing and retrieval.
 </strategies>
 
-<important_notes>
-## Important notes:
+<compatibility>
+## Agent Compatibility
+These strategies are designed to work across:
+-   GitHub Copilot
+-   Claude Code CLI
+-   Gemini Code Assist
+-   Opencode.ai
+</compatibility>
 
-- Remember that mulitple agents all use these same instrcution files:
-    - GitHub Copilot
-    - Claude Code CLI
-    - Gemini Code Asssist
-    - Gemini CLI
-    - Qwen Code CLI
-    - Opencode.ai
-</important_notes>
-
-<task>
-## Your Task
-
-- STEP 1
-Analyze the exiting custom instruction files to create a plan to implement the above strategies. 
-
-- You will not change anything yet.
-- You will only create a plan. 
-
-Use the promtpt below to guide your analysis.
-
-## Files to Analyze
-
-`ai_instruction_modules/`
-
-- everything except:
-    `ai-workflow-assignments/`
-    - anything in a `.wip/` folder
-
-
-**YOU USE THINKING STEPS TO BREAK DOWN THE PROBLEM AND REACH A SOLUTION. DO NOT RUSH.**
-**YOU MUST USE SEQUENTIAL REASONING and MEMORY TOOLS**
-
-
-## PROMPT
-
-```
-Do some research on the internet re: context & custom instruction optimization.
-
--List, document the techniques you find
--Analyze the options wrt implementation complexity vs. performance gain
--Identify a set of those with a good ratio of easily-implemented to performance gain
-
--Example: Anthropic's site states that using a form of formatted/marked up text like XML can help the model process the text more easily
--Example 2: fewer, longer files are better than many short ones
-
-Refer to the [ai-custom-instructions-optimization.md](/ai_instruction_modules/ai-custom-instructions-optimization.md) file for the strategies to be implemented.
-```
-</task>
-</optimization_plan>
+</instructions>
+</xml>

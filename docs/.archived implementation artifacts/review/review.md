@@ -1,3 +1,6 @@
+---
+context: opt-in
+---
 ## Pull Request Review: Feature/process workflow feedback
 
 ### Overall Assessment: ✅ **APPROVE WITH MINOR SUGGESTIONS**
@@ -308,3 +311,4 @@ This is a **high-quality PR** that significantly improves the AI instruction fra
 **Review Date**: 2025-10-22  
 **PR**: #30 (feature/process-workflow-feedback → main)  
 **Commits Reviewed**: 25 commits, 4,077 additions, 377 deletions
+

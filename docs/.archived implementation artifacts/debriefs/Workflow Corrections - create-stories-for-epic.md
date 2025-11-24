@@ -1,3 +1,6 @@
+---
+context: opt-in
+---
 # Workflow Corrections for create-stories-for-epic Failure Prevention
 
 ## Overview
@@ -160,3 +163,4 @@ Rationale: Makes these rules canonical for all dynamic workflows, preventing sim
 
 This document is ready for delegation or direct use. If you need expansions (e.g., full PR diffs) or a test simulation, let me know!
 Orchestrator x-ai/grok-4-fast (05:50 PM)
+

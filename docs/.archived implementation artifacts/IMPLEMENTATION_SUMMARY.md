@@ -1,3 +1,6 @@
+---
+context: opt-in
+---
 # Workflow Improvements Implementation Summary
 
 ## Overview
@@ -275,3 +278,6 @@ For each `$assignment_name` in `$validation_assignments`, you will:
 - Validation system integrates with existing event system
 - Pending changes are enhancements that can be implemented in follow-up PRs
 - Core functionality (split assignments and validation) is complete and ready for use
+
+
+

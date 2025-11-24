@@ -1,3 +1,6 @@
+---
+context: opt-in
+---
 # Add Upgraded Project Setup Workflow
 
 ## Overview
@@ -240,3 +243,6 @@ None. This is a new workflow file that doesn't affect existing workflows.
 ---
 
 **Ready for review and merge!** 🚀
+
+
+

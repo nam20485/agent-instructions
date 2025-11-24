@@ -1,31 +1,39 @@
+---
+description: Core software design principles, requirements, and code standards.
+scope: design-principles
+prerequisites: ai-core-instructions.md
+---
 # Software Design Principles
+
+<xml>
+<instructions role="architect" scope="design-principles">
 
 <principles>
 ## Core Principles
-- [12 Factor App](https://12factor.net/)
-- [SOLID Design](https://www.digitalocean.com/community/conceptual-articles/s-o-l-i-d-the-first-five-principles-of-object-oriented-design#introduction)
-- [GoF Design Patterns](https://www.digitalocean.com/community/tutorials/gangs-of-four-gof-design-patterns#gof-design-pattern-types) - use when appropriate
-- [SemVer v2.0.0](https://semver.org/) - for all versioning
-- [Domain Driven Design](https://www.digitalocean.com/community/tutorials/an-introduction-to-domain-driven-design)
-  - Fluent API
-  - Code First
+- **[12 Factor App](https://12factor.net/):** Cloud-native methodology.
+- **[SOLID](https://en.wikipedia.org/wiki/SOLID):** SRP, OCP, LSP, ISP, DIP.
+- **[GoF Patterns](https://en.wikipedia.org/wiki/Design_Patterns):** Use when appropriate.
+- **[SemVer](https://semver.org/):** v2.0.0 for all versioning.
+- **[DDD](https://en.wikipedia.org/wiki/Domain-driven_design):** Fluent API, Code First.
 </principles>
 
 <requirements>
 ## Application Requirements
-- **Testing**: Unit + integration tests with substantial coverage
-- **Documentation**: README, OpenAPI/Swagger for APIs
-- **Initialization**: Startup scripts for easy setup
-- **Containerization**: Docker + Docker Compose
-- **Logging**: Structured output to stdout/stderr + files
-- **Infrastructure**: Terraform definitions for deployable apps
+- **Test:** Unit + Integration (substantial coverage).
+- **Docs:** README, OpenAPI/Swagger.
+- **Init:** Startup scripts.
+- **Container:** Docker + Compose.
+- **Logs:** Structured (stdout/stderr + files).
+- **Infra:** Terraform.
 </requirements>
 
 <standards>
 ## Code Standards
-- Warnings as errors (disable specific warnings only when necessary)  **MANDATORY on all projects. Exceptions ONLY WITH EXPLANATION & APPROVAL**
-- XML documentation for **ALL** members (description, parameters, return, exceptions)
-- XML documentation on **ALL** types: classes, interfaces, fields, properties, and methods (including non-public)
-- Environment variables for configuration
-- Pin dependency versions precisely **NO RANGES**
+- **Warnings:** Treat as Errors (Mandatory). Exceptions require approval.
+- **Docs:** XML comments on ALL members (public & non-public).
+- **Config:** Environment variables only.
+- **Deps:** Pin exact versions (NO ranges).
 </standards>
+
+</instructions>
+</xml>

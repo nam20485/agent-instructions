@@ -1,9 +1,17 @@
-<workflow_development_guide>
+---
+description: Comprehensive guide for creating, modifying, and troubleshooting AI workflows.
+scope: workflow-development
+prerequisites: ai-core-instructions.md
+---
 # AI Workflow Development Guide
+
+<xml>
+<instructions role="workflow-developer" scope="workflow-development">
 
 <purpose>
 ## Purpose
-Use this guide when creating, modifying, or troubleshooting workflow assignments and dynamic workflows. This is the comprehensive reference for workflow system developers and orchestrators.
+**Use when:** Creating, modifying, or troubleshooting workflow assignments and dynamic workflows.
+**Role:** Workflow system developers and orchestrators.
 
 ## Formatting Standards
 
@@ -32,154 +40,36 @@ All workflow files must follow the formatting standards defined in:
 </purpose>
 
 <core_files>
-## Core Workflow System Files (Essential References)
+## Core Workflow System Files
 
-Before developing workflows, familiarize yourself with these foundational files:
-
-1. **[ai-workflow-assignments.md](./ai-workflow-assignments.md)**
-   - Master index of all available workflow assignments
-   - Assignment-based workflow overview
-   - Authoritative execution requirements
-   - Non-negotiable behaviors and guardrails
-   - Dynamic workflow event system documentation
-
-2. **[ai-workflow-config.md](./ai-workflow-config.md)**
-   - Core workflow configuration and tool usage patterns
-   - Event lifecycle points and orchestrator requirements
-   - Sequential thinking and memory tool integration
-   - Quality checklists and success metrics
-
-3. **[orchestrate-dynamic-workflow.md](./ai-workflow-assignments/orchestrate-dynamic-workflow.md)**
-   - Complete orchestration assignment specification
-   - Dynamic workflow file conventions
-   - Script and event execution requirements
-   - Guardrails, acceptance criteria, and run reports
-   - Execution algorithm (intake → plan → execute → verify → report)
-
-4. **[dynamic-workflow-syntax.md](./ai-workflow-assignments/dynamic-workflows/dynamic-workflow-syntax.md)**
-   - Canonical DSL syntax specification
-   - Variables, functions, control flow, and orchestration directives
-   - Event declaration and execution rules
-   - Complete workflow examples with events
-   - Output recording conventions
-
-5. **[validate-dynamic-workflow-script.md](./ai-workflow-assignments/validate-dynamic-workflow-script.md)**
-   - Validation assignment for workflow scripts
-   - Syntax and logical correctness checks
-   - Event validation requirements
-   - Quick DSL validation checklist
+1. **[ai-workflow-assignments.md](./ai-workflow-assignments.md):** Master index, execution requirements, event system docs.
+2. **[ai-workflow-config.md](./ai-workflow-config.md):** Config, tool usage, event lifecycle, success metrics.
+3. **[orchestrate-dynamic-workflow.md](./ai-workflow-assignments/orchestrate-dynamic-workflow.md):** Orchestration specs, execution algorithm.
+4. **[dynamic-workflow-syntax.md](./ai-workflow-assignments/dynamic-workflows/dynamic-workflow-syntax.md):** Canonical DSL syntax, event rules.
+5. **[validate-dynamic-workflow-script.md](./ai-workflow-assignments/validate-dynamic-workflow-script.md):** Validation assignment, syntax checks.
 
 ## Workflow Assignment Files Structure
 
 ### Location
-```
-ai_instruction_modules/
-  ai-workflow-assignments/
-    <assignment-short-id>.md           # Individual assignment files
-    ai-workflow-assignment-empty-template.md  # Template for new assignments
-    dynamic-workflows/
-      <workflow-name>.md                # Dynamic workflow scripts
-      dynamic-workflow-template.md      # Template for new dynamic workflows
-      dynamic-workflow-syntax.md        # Canonical DSL reference
-```
+- Assignments: `ai_instruction_modules/ai-workflow-assignments/<short-id>.md`
+- Dynamic Workflows: `ai_instruction_modules/ai-workflow-assignments/dynamic-workflows/<name>.md`
 
 ### Assignment Definition Format
-Every workflow assignment file MUST contain these sections:
-1. **Title** - Descriptive title
-2. **Short ID** - Unique identifier in parentheses (e.g., `(create-epic)`)
-3. **Goal** - Clear objective statement
-4. **Acceptance Criteria** - Numbered list of completion requirements
-5. **Assignment** - Detailed description
-6. **Detailed Steps** - Step-by-step execution guide
-7. **Completion** - Finalization instructions
+**Required Sections:**
+1. **Title**
+2. **Short ID** (e.g., `(create-epic)`)
+3. **Goal**
+4. **Acceptance Criteria** (Numbered list)
+5. **Assignment** (Description)
+6. **Detailed Steps**
+7. **Completion**
 
-### Key Assignment Files by Category
-
-#### Planning & Setup
-- **[create-app-plan.md](./ai-workflow-assignments/create-app-plan.md)** - Creating application development plans
-- **[create-epic.md](./ai-workflow-assignments/create-epic.md)** - Creating epic sub-issues from plan phases
-- **[create-story.md](./ai-workflow-assignments/create-story.md)** - Creating story sub-issues from epics
-- **[create-project-structure.md](./ai-workflow-assignments/create-project-structure.md)** - Setting up project scaffolding
-
-#### Initialization
-- **[init-existing-repository.md](./ai-workflow-assignments/init-existing-repository.md)** - Initializing existing repos
-- **[create-application.md](./ai-workflow-assignments/create-application.md)** - Creating new applications
-
-#### Execution & Implementation
-- **[perform-task.md](./ai-workflow-assignments/perform-task.md)** - Executing specific tasks
-- **[continue-task-work.md](./ai-workflow-assignments/continue-task-work.md)** - Resuming in-progress work
-
-#### Review & Quality
-- **[pr-review-comments.md](./ai-workflow-assignments/pr-review-comments.md)** - Addressing PR comments
-- **[pr-approval-and-merge.md](./ai-workflow-assignments/pr-approval-and-merge.md)** - PR approval workflow
-- **[request-approval.md](./ai-workflow-assignments/request-approval.md)** - Stakeholder approval process
-- **[create-test-cases.md](./ai-workflow-assignments/create-test-cases.md)** - Test case creation
-
-#### Analysis & Documentation
-- **[analyze-plan-issue.md](./ai-workflow-assignments/analyze-plan-issue.md)** - Plan fitness analysis
-- **[analyze-progress-doc.md](./ai-workflow-assignments/analyze-progress-doc.md)** - Progress analysis
-- **[update-plan-issue.md](./ai-workflow-assignments/update-plan-issue.md)** - Plan updates from analysis
-- **[debrief-and-document.md](./ai-workflow-assignments/debrief-and-document.md)** - Post-workflow debriefs
-- **[continuous-improvement.md](./ai-workflow-assignments/continuous-improvement.md)** - Continuous improvement implementation
-
-#### Orchestration
-- **[orchestrate-new-project.md](./ai-workflow-assignments/orchestrate-new-project.md)** - End-to-end project orchestration
-- **[orchestrate-dynamic-workflow.md](./ai-workflow-assignments/orchestrate-dynamic-workflow.md)** - Dynamic workflow orchestration
-
-### Available Dynamic Workflows
-- **[implement-by-stories.md](./ai-workflow-assignments/dynamic-workflows/implement-by-stories.md)** - Story-based implementation
-- **[implement-epic.md](./ai-workflow-assignments/dynamic-workflows/implement-epic.md)** - Single epic implementation
-- **[analyze-plan.md](./ai-workflow-assignments/dynamic-workflows/analyze-plan.md)** - Plan analysis workflow
-- **[breakdown-plan.md](./ai-workflow-assignments/dynamic-workflows/breakdown-plan.md)** - Breaking plans into epics
-- **[breakdown-epic.md](./ai-workflow-assignments/dynamic-workflows/breakdown-epic.md)** - Breaking epics into stories
-- **[design-app-outline.md](./ai-workflow-assignments/dynamic-workflows/design-app-outline.md)** - Application design workflow
+### Key Assignment Files
+See **[ai-workflow-assignments.md](./ai-workflow-assignments.md)** for the complete master index.
 
 ## Dynamic Workflow DSL Quick Reference
 
-### Variables
-```markdown
-`$variable` = <value>                    # Define variable
-`${variable}` = <value>                  # Define variable (brace format)
-const `$VARIABLE`: <value>               # Define constant
-`$variable`                              # Use variable
-${variable}                              # Use variable (brace format)
-```
-
-### Step References
-```markdown
-#<step>                                  # Reference output of a step
-#<step>.<substep>                        # Reference output of substep/assignment
-#events.<event-name>                     # Reference event output (singular)
-#events.<event-name>.$assignment_name    # Reference event output (loop)
-```
-
-### Functions and Data Structures
-```markdown
-get-function-name(<parameters>)          # Call a function
-[ item1, item2, item3 ]                  # Define a list
-$object_variable->property               # Access object property
-```
-
-### Control Flow
-```markdown
-For each $item in $list, you will:       # Iterate over a list
-  - indented action 1
-  - indented action 2
-  
-if $variable is true:                    # Conditional (true)
-  - indented action
-  
-if $variable is false:                   # Conditional (false)
-  - indented action
-```
-
-### Orchestration Directives (Standard Pattern)
-```markdown
-- assign the agent the 'assignment-id' assignment with input $variable
-- wait until the agent finishes the task
-- review the work and approve it
-- record output as #step.substep
-```
+<see template="templates/workflow-dsl-reference.md" />
 
 ## Dynamic Workflow Event System
 
@@ -500,71 +390,7 @@ ai_instruction_modules/ai-workflow-assignments/dynamic-workflows/dynamic-workflo
 
 ## Quick Start Examples
 
-### Example 1: Orchestrate an Existing Dynamic Workflow
-```markdown
-1. Read the workflow file: `ai_instruction_modules/ai-workflow-assignments/dynamic-workflows/breakdown-plan.md`
-2. Read the orchestration assignment: `ai_instruction_modules/ai-workflow-assignments/orchestrate-dynamic-workflow.md`
-3. Run validation: assign yourself `validate-dynamic-workflow-script` with $workflow_name=`breakdown-plan`
-4. If validation passes, assign yourself `orchestrate-dynamic-workflow` with $workflow_name=`breakdown-plan`
-5. Follow the orchestration assignment's detailed steps exactly
-6. Execute all events at their designated lifecycle points
-7. Produce the Run Report with evidence for all acceptance criteria
-```
-
-### Example 2: Create a New Simple Assignment
-```markdown
-1. Copy template: `ai_instruction_modules/ai-workflow-assignments/ai-workflow-assignment-empty-template.md`
-2. Save as: `ai_instruction_modules/ai-workflow-assignments/my-new-task.md`
-3. Fill in all sections:
-   - Title: "Create Feature Documentation"
-   - Short ID: (create-feature-docs)
-   - Goal: "Create comprehensive documentation for a new feature"
-   - Acceptance Criteria: List 5-10 specific, measurable criteria
-   - Assignment: Detailed description of the task
-   - Detailed Steps: Step-by-step instructions with sub-bullets
-   - Completion: Finalization steps
-4. Add to master index in `ai-workflow-assignments.md`
-5. Test by running the assignment
-```
-
-### Example 3: Add Events to Existing Dynamic Workflow
-```markdown
-1. Read the existing workflow file
-2. Add "Events" section as third-level heading under "Script":
-   
-   ### Events
-   
-   #### `pre-script-begin`
-   - validate environment
-   - record as `#events.pre-script-begin`
-   
-   #### `post-assignment-complete`
-   `$summary_tasks` = [`create-repository-summary`]
-   
-   For each `$assignment_name` in `$summary_tasks`, you will:
-      - assign the agent the `$assignment_name` assignment
-      - wait until the agent finishes the task
-      - review the work and approve it
-      - record output as `#events.post-assignment-complete.$assignment_name`
-   
-3. Validate using `validate-dynamic-workflow-script`
-4. Test by orchestrating the workflow
-5. Verify events execute at correct lifecycle points
-6. Confirm event outputs appear in Run Report
-```
-
-### Example 4: Validate Before Orchestrating
-```markdown
-1. Assign yourself: `validate-dynamic-workflow-script`
-2. Provide input: $workflow_name=`implement-by-stories`
-3. Check validation output:
-   - Syntax correctness
-   - All assignment IDs exist
-   - Event definitions valid (if present)
-   - Logical structure coherent
-4. If validation passes: proceed to orchestration
-5. If validation fails: fix issues and re-validate
-```
+<see example="examples/workflow-quick-start.md" />
 
 ## Additional Resources
 

@@ -1,3 +1,6 @@
+---
+context: opt-in
+---
 # Feedback-Driven Workflow Changes
 
 **Generated**: 2025-10-21  
@@ -581,3 +584,6 @@ After all changes implemented:
 **Document Version**: 1.1  
 **Last Updated**: 2025-10-22  
 **Next Review**: After implementation of remaining changes (FB-001, FB-002)
+
+
+

@@ -1,8 +1,14 @@
-<navigation_guide>
+---
+description: Quick start guide for navigating the AI instruction modules system.
+scope: quick-start
+prerequisites: none
+---
 # Quick Start: AI Instruction Modules Navigation
 
-This is your **quick reference card** for navigating the AI instruction modules system. Print this, bookmark it, or keep it open while working.
+<xml>
+<instructions role="assistant" scope="quick-start">
 
+<navigation_guide>
 ## 🎯 Start Here
 
 **Entry Point:** [ai-core-instructions.md](./ai-core-instructions.md)
@@ -14,6 +20,7 @@ This is your **quick reference card** for navigating the AI instruction modules 
 - Required for GitHub CLI operations
 - Covers both interactive and non-interactive authentication
 - Essential for workflow assignments that interact with GitHub
+</navigation_guide>
 
 <comprehensive_guides>
 ## 📚 Three Comprehensive Guides
@@ -72,9 +79,9 @@ Choose the guide that matches your current activity:
 - Terminal best practices
 - PowerShell patterns
 - GitHub CLI commands
+</comprehensive_guides>
 
----
-
+<guide_structure>
 ## 🔍 What's Inside Each Guide?
 
 All guides follow the same structure:
@@ -88,7 +95,9 @@ All guides follow the same structure:
 6. Examples                     ← Practical code samples
 7. Summary                      ← Key takeaways
 ```
+</guide_structure>
 
+<usage_guidelines>
 ## 📖 When to Use Canonical Files
 
 **Comprehensive guides** are for:
@@ -106,13 +115,15 @@ All guides follow the same structure:
 - ✅ Authoritative reference
 
 **Pro tip:** Start with the comprehensive guide, follow links to canonical files when you need more detail.
+</usage_guidelines>
 
+<visual_architecture>
 ## 🗺️ Visual Architecture
 
 See complete visual diagrams:
 - **Architecture Overview:** [ai-comprehensive-guides-architecture.md](./ai-comprehensive-guides-architecture.md)
 - **Mermaid Diagrams:** [ai-comprehensive-guides-diagrams.md](./ai-comprehensive-guides-diagrams.md)
-</comprehensive_guides>
+</visual_architecture>
 
 <common_scenarios>
 ## ⚡ Common Scenarios
@@ -144,7 +155,9 @@ See complete visual diagrams:
 1. Open [ai-application-development-guide.md](./ai-application-development-guide.md)
 2. Go to "Troubleshooting → Common Build Errors"
 3. Find "warnings as errors" issue with solution
+</common_scenarios>
 
+<canonical_reference>
 ## 📋 Canonical Files Reference
 
 ### Workflow Development (4 files)
@@ -163,7 +176,9 @@ See complete visual diagrams:
 - [ai-terminal-management.md](./ai-terminal-management.md)
 - [ai-powershell-instructions.md](./ai-powershell-instructions.md)
 - [ai-working-command-examples.md](./ai-working-command-examples.md)
+</canonical_reference>
 
+<learning_path>
 ## 🎓 Learning Path
 
 ### Day 1: Getting Oriented
@@ -180,7 +195,7 @@ See complete visual diagrams:
 1. Deep dive into canonical files for your specialty area
 2. Understand when to use guides vs canonical files
 3. Contribute improvements to guides or files
-</common_scenarios>
+</learning_path>
 
 <pro_tips>
 ## 💡 Pro Tips
@@ -206,7 +221,9 @@ See complete visual diagrams:
 ### Still stuck?
 1. Check [ai-comprehensive-guides-architecture.md](./ai-comprehensive-guides-architecture.md) for system overview
 2. Review [ai-comprehensive-guides-diagrams.md](./ai-comprehensive-guides-diagrams.md) for visual explanations
+</pro_tips>
 
+<stats>
 ## 📊 Quick Stats
 
 - **Total Comprehensive Guides:** 3 (1,501 lines)
@@ -215,19 +232,15 @@ See complete visual diagrams:
 - **Common Workflows:** 15 across all guides
 - **Troubleshooting Sections:** 12 categories
 - **Code Examples:** 16 practical samples
+</stats>
 
+<update_frequency>
 ## 🔄 Update Frequency
 
 - **Comprehensive Guides:** Updated when new patterns emerge or workflows change
 - **Canonical Files:** Updated when specifications change (single source of truth)
 - **This Quick Start:** Updated when guide structure changes
+</update_frequency>
 
----
-
-**Remember:** This is a hybrid system:
-- **Guides** = Navigation + Quick Reference + Workflows
-- **Canonical Files** = Complete Specifications + Authority
-
-Use both! Start with guides, reference canonical files for details. 🚀
-</pro_tips>
-</navigation_guide>
+</instructions>
+</xml>

@@ -1,9 +1,16 @@
+---
+description: Visual architecture of the comprehensive guides and their relationship to canonical instruction modules.
+scope: architecture
+prerequisites: ai-core-instructions.md
+---
 # AI Instruction Modules: Comprehensive Guides Architecture
+
+<xml>
+<instructions role="architect" scope="architecture">
 
 <overview>
 ## Overview
-
-This document provides a visual representation of how comprehensive guides relate to canonical instruction module files, showing the hybrid architecture that balances discoverability with authoritative specifications.
+This document visualizes the hybrid architecture connecting comprehensive guides to canonical instruction modules, balancing discoverability with authoritative specifications.
 
 ## High-Level Architecture
 
@@ -214,163 +221,26 @@ This document provides a visual representation of how comprehensive guides relat
       └─────────────────────────────────────────────────────────┘
 ```
 
-## Information Flow and Access Patterns
+## Information Flow
 
 ### Pattern 1: Quick Reference Lookup
-
-```
-User Question: "What version of .NET should I use?"
-      │
-      ▼
-ai-core-instructions.md
-      │ (Meta-guide directs to Application Development Guide)
-      ▼
-ai-application-development-guide.md
-      │ (Quick Reference section)
-      ▼
-Answer: ".NET 9.0.102 or later"
-```
+User Question -> `ai-core-instructions.md` -> Guide -> Quick Reference -> Answer.
 
 ### Pattern 2: Workflow Execution
-
-```
-User Task: "Create a new REST API"
-      │
-      ▼
-ai-core-instructions.md
-      │ (Meta-guide directs to Application Development Guide)
-      ▼
-ai-application-development-guide.md
-      │ (Common Workflows → Creating a New Application)
-      ▼
-8-step workflow with links to canonical files
-      │
-      ├─► ai-application-guidelines.md (for tech stack details)
-      ├─► ai-design-principles.md (for SOLID principles)
-      └─► ai-instructions-aspnet-guidelines.md (for API patterns)
-```
+User Task -> `ai-core-instructions.md` -> Guide -> Common Workflows -> Canonical Files.
 
 ### Pattern 3: Troubleshooting
+User Problem -> `ai-core-instructions.md` -> Guide -> Troubleshooting -> Canonical Files.
 
-```
-User Problem: "NVM not found after installation"
-      │
-      ▼
-ai-core-instructions.md
-      │ (Meta-guide directs to Development Environment Guide)
-      ▼
-ai-development-environment-guide.md
-      │ (Troubleshooting → Environment Setup Issues)
-      ▼
-Problem + Cause + Solution + Prevention
-      │ (If more detail needed)
-      ▼
-ai-local-environment.md (canonical file)
-```
+### Pattern 4: Deep Dive
+User Need -> `ai-core-instructions.md` -> Guide -> Quick Reference/Examples -> Canonical Files.
 
-### Pattern 4: Deep Dive into Specifications
+## Benefits
+- **Discoverability:** Clear entry points and focused guides.
+- **Authority:** Canonical files remain the single source of truth.
+- **Maintainability:** Updates happen in one place; guides reference them.
 
-```
-User Need: "Complete PowerShell module structure"
-      │
-      ▼
-ai-core-instructions.md
-      │ (Meta-guide directs to Development Environment Guide)
-      ▼
-ai-development-environment-guide.md
-      │ (Quick Reference → PowerShell Patterns)
-      │ (Example → PowerShell Module with Tests)
-      │ (Links to canonical file for complete specs)
-      ▼
-ai-powershell-instructions.md
-      │ (Complete module development section)
-      ▼
-Full specification with:
-  - Module layout
-  - Manifest creation
-  - Export patterns
-  - Autoloading
-  - Publishing
-```
-
-## Architecture Benefits
-
-### For Discoverability
-- ✅ Clear entry points via meta-guide in ai-core-instructions.md
-- ✅ Three focused guides for major activity areas
-- ✅ Quick reference sections for common lookups
-- ✅ Common workflows for standard procedures
-- ✅ Troubleshooting sections for common issues
-- ✅ Practical examples for implementation patterns
-
-### For Authority
-- ✅ Canonical files remain unchanged (single source of truth)
-- ✅ Comprehensive guides link to canonical files
-- ✅ Detailed specifications preserved in original files
-- ✅ Backward compatibility maintained
-- ✅ Granular access when needed
-- ✅ Clear separation between navigation and specification
-
-### For Maintainability
-- ✅ Updates to specs happen in one place (canonical file)
-- ✅ Guides reference canonical files (no duplication)
-- ✅ Hybrid pattern scales to additional guides if needed
-- ✅ Clear relationship between guides and canonical files
-- ✅ Visual architecture documents the system
-
-## Usage Statistics
-
-### File Counts
-- **Comprehensive Guides**: 3 files (1,501 total lines)
-  - ai-workflow-development-guide.md: 451 lines
-  - ai-application-development-guide.md: 450 lines
-  - ai-development-environment-guide.md: 600 lines
-
-- **Canonical Files**: 11 files (consolidates 21 original instruction modules)
-  - Workflow: 4 files (ai-workflow-assignments.md, orchestrate-dynamic-workflow.md, dynamic-workflow-syntax.md, validate-dynamic-workflow-script.md)
-  - Application: 3 files (ai-application-guidelines.md, ai-design-principles.md, ai-instructions-aspnet-guidelines.md)
-  - Environment: 4 files (ai-local-environment.md, ai-terminal-management.md, ai-powershell-instructions.md, ai-working-command-examples.md)
-
-### Content Organization
-Each comprehensive guide follows this structure:
-1. Purpose & When to Use (~50 lines)
-2. Quick Reference (~150 lines)
-3. Canonical Reference Files (~50 lines)
-4. Common Workflows (~200 lines)
-5. Troubleshooting (~100 lines)
-6. Examples (~150 lines)
-7. Summary (~50 lines)
-
-## Future Expansion
-
-The hybrid architecture can accommodate additional comprehensive guides as needed:
-
-```
-Potential Future Guides:
-  - AI Testing & Validation Guide
-    └─ Consolidates: ai-testing-validation.md, test patterns, CI/CD
-  
-  - AI Deployment & Operations Guide
-    └─ Consolidates: ai-deployment-environment.md, cloud configs, monitoring
-  
-  - AI Team Collaboration Guide
-    └─ Consolidates: ai-pr-comment-protocol.md, code review, Git workflows
-```
-
-Each new guide would:
-1. Follow the established structure (Purpose → Quick Ref → Workflows → Troubleshooting → Examples)
-2. Link to canonical files as authoritative sources
-3. Be added to the meta-guide in ai-core-instructions.md
-4. Update the visual architecture diagram
-
-## Conclusion
-
-This hybrid architecture provides:
-- **Navigation** through comprehensive guides
-- **Authority** through canonical files
-- **Discoverability** through the meta-guide
-- **Scalability** for future additions
-- **Maintainability** through single source of truth
-
-The system serves both newcomers (who need orientation and quick reference) and experienced users (who need detailed specifications), while maintaining clear relationships between all components.
+</overview>
+</instructions>
+</xml>
 </overview>

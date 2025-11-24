@@ -1,57 +1,48 @@
+---
+description: Quick reference card for AI tools, workflows, and commands.
+scope: quick-reference
+prerequisites: none
+---
 # Quick AI Tool Reference Card
 
-<tools>
-## 🧠 Sequential Thinking - Use for:
-- ✅ Complex problems requiring breakdown
-- ✅ Multi-step planning and analysis  
-- ✅ Decision trees and branching logic
-- ✅ Architecture and design decisions
-- ✅ Debugging systematic approaches
-- ✅ Any task with 3+ logical steps
+<xml>
+<instructions role="assistant" scope="quick-reference">
 
-## 🧠 Memory Tools - Use for:
-- ✅ Tracking project context and progress
-- ✅ Maintaining component relationships
-- ✅ Recording user preferences/decisions
-- ✅ Building project knowledge graph
-- ✅ Linking related concepts and patterns
-- ✅ Preserving lessons learned
+<tools>
+## Tools
+-   **Sequential Thinking:** Use for complex problems, planning, debugging (3+ steps).
+-   **Memory:** Use for context tracking, relationships, preferences, lessons learned.
 </tools>
 
 <workflow>
-## 🔄 Default Workflow:
-1. **Start**: Check memory for relevant context
-2. **Plan**: Use sequential thinking for complex tasks
-3. **Execute**: Apply systematic approach
-4. **Record**: Update memory with outcomes
+## Default Workflow
+1.  **Start:** Check memory.
+2.  **Plan:** Sequential thinking.
+3.  **Execute:** Systematic approach.
+4.  **Record:** Update memory.
 </workflow>
 
-<quality_checklist>
-## 📋 Quality Checklist:
-- [ ] Used sequential thinking for complex analysis?
-- [ ] Checked memory for relevant context?
-- [ ] Updated memory with new insights?
-- [ ] Considered ASP.NET Core + Google Cloud context?
-</quality_checklist>
+<checklist>
+## Quality Checklist
+-   [ ] Used sequential thinking?
+-   [ ] Checked/Updated memory?
+-   [ ] Considered ASP.NET Core + GCP context?
+</checklist>
 
-<testing_validation>
+<validation>
 ## Testing & Validation
-- Use the TDD (Test-Driven Development) approach for all code changes.
-- Write unit tests before implementing new features or changes.
-- Iterate, cycling between writing tests and code until the feature is complete.
-- Coverage should be substantial, aiming for at least 80% coverage.
-- Always run `dotnet build` before suggesting changes are complete
-- Use `dotnet test` for unit test validation
+-   **TDD:** Tests first.
+-   **Coverage:** Target ≥80%.
+-   **Build:** `dotnet build` mandatory.
+-   **Test:** `dotnet test` mandatory.
+</validation>
 
-Refer to [ai-testing-validation.md](./ai-testing-validation.md) for more details.
-</testing_validation>
-
-<terminal_commands>
+<terminal>
 ## Terminal Commands
-- Use `run_in_terminal` for all terminal interactions
-- Set `isBackground` to `true` for long-running processes only
-- Refer to [ai-terminal-management.md](./ai-terminal-management.md) for more details
-- Refer to [ai-working-command-examples.md](./ai-working-command-examples.md) before running any commands in the terminal
+-   **Tool:** `run_in_terminal`.
+-   **Background:** `isBackground=true` only for long-running.
+-   **Reference:** [ai-working-command-examples.md](./ai-working-command-examples.md).
+</terminal>
 
-*Reference: See `ai-workflow-config.md` for complete guidelines*
-</terminal_commands>
+</instructions>
+</xml>

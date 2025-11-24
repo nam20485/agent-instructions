@@ -1,35 +1,54 @@
-<aspnet_guidelines>
+---
+description: Guidelines for ASP.NET Core development, code style, and best practices.
+scope: aspnet-core
+prerequisites: ai-application-development-guide.md
+---
 # ASP.NET Core Guidelines
+
+<xml>
+<instructions role="aspnet-developer" scope="aspnet-core">
 
 <code_style>
 ## Code Style
-- Concise, idiomatic C#; standard folder structure (Controllers, Services, Models, Data)
-- OOP/FP patterns, LINQ/lambdas, descriptive naming, separation of concerns
-- **Naming**: PascalCase (classes/methods), camelCase (locals/privates), UPPERCASE (constants), "I" prefix (interfaces)
+- **Structure:** Standard folders (Controllers, Services, Models, Data).
+- **Patterns:** OOP/FP, LINQ, Separation of Concerns.
+- **Naming:** `PascalCase` (public), `camelCase` (private), `UPPERCASE` (const), `IInterface`.
 </code_style>
 
 <csharp_features>
 ## C# Features
-- C# 10+ features (records, pattern matching, null-coalescing)
-- ASP.NET Core + Community Toolkit libraries, EF Core with DbContext/repository patterns
-
-## Error Handling & APIs
-- Exceptions for exceptional cases only, built-in logging, Data Annotations/Fluent Validation
-- Global exception middleware, appropriate HTTP status codes, RESTful design
-- Attribute-based routing, action filters for cross-cutting concerns
-
-## Performance & Architecture  
-- async/await for I/O, IMemoryCache/IDistributedCache, efficient LINQ, pagination
-- Built-in DI, repository pattern/EF Core, AutoMapper for DTOs, IHostedService for background tasks
-- DDD principles, clean architecture, avoid unnecessary dependencies
-
-## Testing & Security
-- xUnit/NUnit/MSTest, Moq/NSubstitute mocking, TestServer integration tests
-- ASP.NET Core Identity, JWT/cookie auth, HTTPS/SSL, CORS policies, claims-based authorization
-
-## Documentation
-- Swagger/OpenAPI, XML comments for controllers/DTOs
-
-*Reference official Microsoft/ASP.NET Core/Community Toolkit docs for best practices.*
+- **Modern:** C# 10+ (records, pattern matching, null-coalescing).
+- **Libraries:** Community Toolkit, EF Core (DbContext/Repo).
 </csharp_features>
-</aspnet_guidelines>
+
+<error_handling_api>
+## Error Handling & APIs
+- **Exceptions:** Exceptional cases only. Global middleware.
+- **Validation:** Data Annotations / Fluent Validation.
+- **API:** RESTful, Attribute Routing, Action Filters.
+</error_handling_api>
+
+<performance_architecture>
+## Performance & Architecture
+- **Async:** `async/await` for ALL I/O.
+- **Caching:** `IMemoryCache`, `IDistributedCache`.
+- **Data:** Efficient LINQ, Pagination.
+- **DI:** Built-in container.
+- **Design:** DDD, Clean Architecture.
+</performance_architecture>
+
+<testing_security>
+## Testing & Security
+- **Test:** xUnit/NUnit, Moq/NSubstitute, TestServer.
+- **Auth:** Identity, JWT/Cookie, Claims.
+- **Security:** HTTPS, CORS, SSL.
+</testing_security>
+
+<documentation>
+## Documentation
+- **API:** Swagger/OpenAPI.
+- **Code:** XML comments on Controllers/DTOs.
+</documentation>
+
+</instructions>
+</xml>

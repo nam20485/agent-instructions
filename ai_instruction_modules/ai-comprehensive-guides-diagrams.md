@@ -1,7 +1,15 @@
+---
+description: Visual architecture diagrams for the comprehensive guides system using Mermaid.
+scope: architecture-diagrams
+prerequisites: ai-comprehensive-guides-architecture.md
+---
 # AI Instruction Modules: Visual Architecture Diagrams
 
+<xml>
+<instructions role="architect" scope="architecture-diagrams">
+
 <diagrams>
-This document contains Mermaid diagrams that visualize the comprehensive guides architecture. These diagrams can be rendered in GitHub, VS Code with Mermaid extensions, or other Mermaid-compatible viewers.
+This document contains Mermaid diagrams that visualize the comprehensive guides architecture.
 
 ## High-Level System Architecture
 
@@ -406,3 +414,5 @@ All diagrams can be rendered in:
 - Mermaid Live Editor (https://mermaid.live)
 - Any Mermaid-compatible viewer
 </diagrams>
+</instructions>
+</xml>

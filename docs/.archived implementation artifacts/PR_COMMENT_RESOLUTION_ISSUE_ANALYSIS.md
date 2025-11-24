@@ -1,3 +1,6 @@
+---
+context: opt-in
+---
 # PR Comment Resolution Issue Analysis
 
 ## Executive Summary
@@ -772,3 +775,6 @@ This document provides a comprehensive analysis of the PR review thread resoluti
 5. **Agent specialization** for github-expert to own this competency
 
 By implementing these changes, the success rate for thread resolution should increase from the current failure rate to 95%+ completion on first attempt.
+
+
+

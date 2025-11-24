@@ -1,3 +1,6 @@
+---
+context: opt-in
+---
 # OpenCode Command Arguments Guide
 
 ## Overview
@@ -378,3 +381,6 @@ Understanding these fundamentals prevents confusion and enables effective comman
 - [OpenCode GitHub Repository](https://github.com/opencode-ai/opencode)
 - Source file: `internal/tui/components/dialog/custom_commands.go`
 - Test file: `internal/tui/components/dialog/custom_commands_test.go`
+
+
+

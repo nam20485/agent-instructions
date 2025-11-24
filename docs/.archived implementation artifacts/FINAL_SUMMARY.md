@@ -1,3 +1,6 @@
+---
+context: opt-in
+---
 # Implementation Complete - Final Summary
 
 ## 🎉 Implementation Status: READY FOR REVIEW
@@ -238,3 +241,6 @@ If you have any questions or need clarification on any of the changes:
 Thank you for approving these improvements. The new assignments will make project setup workflows more efficient, reliable, and maintainable across different tech stacks.
 
 **Ready to merge when you are!** 🚀
+
+
+

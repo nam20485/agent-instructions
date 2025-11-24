@@ -1,3 +1,6 @@
+---
+context: opt-in
+---
 ## Recommendations
 
 1. **Documentation Maintenance:** Update README and planning docs as implementation progresses
@@ -70,3 +73,5 @@ No functional impact. Project is operational and correctly configured. This is p
             b. error recovery - [ERROR_RECOVERY_TEMPLATE.md](ai_instruction_modules/ai-workflow-assignments/templates/ERROR_RECOVERY_TEMPLATE.md)
             c. progress reporting - [PROGRESS_REPORTING_TEMPLATE.md](ai_instruction_modules/ai-workflow-assignments/templates/PROGRESS_REPORTING_TEMPLATE.md)
         2. Test the updated workflow to ensure that the improvements function as intended without introducing new issues.
+
+

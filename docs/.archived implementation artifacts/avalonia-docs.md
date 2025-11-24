@@ -1,3 +1,6 @@
+---
+context: opt-in
+---
 I created aan agent-inbsrutcions file to each the agent hopw to build and use console apps/projects using consolonia.
 
 #https://github.com/jinek/Consolonia
@@ -42,3 +45,6 @@ The dedicated Consolonia playbook now lives in `ai_instruction_modules/ai-consol
 - Tooling overview: https://github.com/jinek/Consolonia/wiki/Tools
    - PreviewHost: https://github.com/jinek/Consolonia/wiki/Tools#consoloniapreviewhost
 - Overview article: https://medium.com/@tomlairdmcconnell/consolonia-avalonia-for-console-applications-4eb13b3d487b
+
+
+

@@ -1,3 +1,6 @@
+---
+context: opt-in
+---
 # Assignment Refactoring - Session Complete
 
 ## Executive Summary
@@ -98,3 +101,6 @@ Template sections ("Before Starting", "Progress Reporting", "Error Recovery") ha
 **Files Modified**: 13  
 **Lines Removed**: ~1,815+  
 **Status**: ✅ COMPLETE
+
+
+
