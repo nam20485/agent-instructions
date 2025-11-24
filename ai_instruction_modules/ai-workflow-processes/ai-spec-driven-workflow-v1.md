@@ -23,7 +23,7 @@ Bridge the gap between requirements and implementation.
 - **Summary:** Use only for concise artifacts (changelogs, PRs).
 
 ### Templates
-<see template="templates/spec-driven-templates.md" />
+<see template="../templates/spec-driven-templates.md" />
 </documentation_framework>
 
 <execution_workflow>

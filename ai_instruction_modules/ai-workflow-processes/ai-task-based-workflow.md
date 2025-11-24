@@ -78,7 +78,7 @@ The task-based workflow ensures all work is planned, documented, and tracked via
 
 <examples>
 ## Examples
-<see example="examples/task-workflow-examples.md" />
+<see example="../examples/task-workflow-examples.md" />
 </examples>
 
 </instructions>

@@ -78,7 +78,7 @@ role: System Orchestrator
 
   <policy name="single_source_of_truth">
     <statement>
-      The remote canonical repository is the ONLY authoritative source for dynamic workflows and assignments.
+      The remote canonical repository is the ONLY authoritative source for dynamic workflows and workflow assignments.
     </statement>
     <rules>
       <rule>Do not use local mirrors or cached plans to derive steps.</rule>

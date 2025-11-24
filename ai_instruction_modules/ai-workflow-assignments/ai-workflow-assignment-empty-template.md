@@ -1,83 +1,56 @@
-# Assignment: [Long Title]
+---
+description: Template for creating new workflow assignments
+scope: workflow-assignment
+role: System Orchestrator
+---
 
-## ([short-id])
+<instructions role="assistant" scope="workflow-assignment">
+  <overview>
+    <goal>[Clear, concise statement of what this assignment accomplishes]</goal>
+    <context>[Optional: When and why this assignment is used]</context>
+  </overview>
 
-### Goal
+  <prerequisites>
+    <item>[Prerequisite 1]</item>
+    <item>[Prerequisite 2]</item>
+    <note>For gh project/repo permissions, see `scripts/test-github-permissions.ps1` and `scripts/gh-auth.ps1`.</note>
+  </prerequisites>
 
-[Clear, concise statement of what this assignment accomplishes]
+  <acceptance_criteria>
+    <criterion>[Criterion 1 - specific, measurable]</criterion>
+    <criterion>[Criterion 2 - specific, measurable]</criterion>
+    <criterion>[Criterion 3 - specific, measurable]</criterion>
+  </acceptance_criteria>
 
-### Prerequisites
+  <workflow>
+    <step number="1">
+      <title>[Step 1 Title]</title>
+      <description>[Description of step 1]</description>
+      <actions>
+        <action>[Action 1]</action>
+        <action>[Action 2]</action>
+      </actions>
+    </step>
 
-- [Prerequisite 1]
-- [Prerequisite 2]
-- [Prerequisite 3]
+    <step number="2">
+      <title>[Step 2 Title]</title>
+      <description>[Description of step 2]</description>
+      <actions>
+        <action>[Action 1]</action>
+        <action>[Action 2]</action>
+      </actions>
+    </step>
+  </workflow>
 
-> For gh project/repo permissions-related issues, see the [scripts/test-github-permissions.ps1](../../scripts/test-github-permissions.ps1) script for verification and troubleshooting, and the [scripts/gh-auth.ps1](../../scripts/gh-auth.ps1) helper script for authentication assistance.
+  <validation>
+    <step>Verify [Assignment Name] is Complete</step>
+    <step>Present to Stakeholder</step>
+    <step>Stakeholder Review Process</step>
+    <step>Finalization (Commit, Mark Complete)</step>
+  </validation>
 
-### Acceptance Criteria
-
-1. [Criterion 1 - specific, measurable]
-2. [Criterion 2 - specific, measurable]
-3. [Criterion 3 - specific, measurable]
-4. [Criterion 4 - specific, measurable]
-5. [Criterion 5 - specific, measurable]
-
-### Assignment
-
-[Assignment description - what will be done, why it's important]
-
-**Always follow instructions exactly as listed here.**
-
-It is important to the final quality of our product for everyone to perform their assignment exactly as specified.
-
-### Detailed Steps
-
-#### 1. [Step 1 Title]
-
-1. [Substep 1]
-   - [Detail]
-   - [Detail]
-
-2. [Substep 2]
-   - [Detail]
-   - [Detail]
-
-#### 2. [Step 2 Title]
-
-1. [Substep 1]
-   - [Detail]
-   - [Detail]
-
-2. [Substep 2]
-   - [Detail]
-   - [Detail]
-
-[Continue for all steps...]
-
-### Completion
-
-1. **Verify [Assignment Name] is Complete:**
-   - [Verification step 1]
-   - [Verification step 2]
-   - [Verification step 3]
-
-2. **Present to Stakeholder:**
-   - [What to demonstrate]
-   - [What to show]
-   - [What to explain]
-
-3. **Stakeholder Review Process:**
-   - Ask if they approve the [deliverable]
-   - Address any questions or requests for modifications
-   - Make revisions if needed based on feedback
-
-4. **Finalization:**
-   - Commit all [deliverable] files
-   - Mark the [assignment name] as complete once approved
-   - Proceed to next assignment
-
-### Notes
-
-- [Important note 1]
-- [Important note 2]
-- [Important note 3]
+  <notes>
+    <note>[Important note 1]</note>
+    <note>[Important note 2]</note>
+  </notes>
+</instructions>

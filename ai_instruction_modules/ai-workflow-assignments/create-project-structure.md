@@ -1,112 +1,93 @@
-# Assignment: Create Project Structure
+---
+description: Create project structure and scaffolding
+scope: workflow-assignment
+role: System Orchestrator
+---
 
-## (create-project-structure)
+<instructions role="assistant" scope="workflow-assignment">
+  <overview>
+    <goal>Create the actual project structure and scaffolding for a new application based on a comprehensive application plan.</goal>
+    <prerequisites>
+      <item>Complete application plan.</item>
+      <item>Application template and supporting docs.</item>
+    </prerequisites>
+  </overview>
 
-### Goal
+  <acceptance_criteria>
+    <criterion>Solution structure created.</criterion>
+    <criterion>Project files and directories established.</criterion>
+    <criterion>Initial config files created.</criterion>
+    <criterion>CI/CD pipeline structure established.</criterion>
+    <criterion>Documentation structure created.</criterion>
+    <criterion>Dev environment configured.</criterion>
+    <criterion>Repository summary created.</criterion>
+  </acceptance_criteria>
 
-Create the actual project structure and scaffolding for a new application based on a comprehensive application plan. This involves creating the solution structure, configuring initial project files, and establishing the development environment foundation.
+  <workflow>
+    <step number="1">
+      <title>Solution Structure</title>
+      <actions>
+        <action>Create solution file.</action>
+        <action>Set up global.json.</action>
+        <action>Create project directories and files.</action>
+        <action>Configure references and settings.</action>
+      </actions>
+    </step>
 
-* Complete and thorough application plan documented in issue and/or .md file.
-  * This can be found in the masi planning issue
-  * Sometimes also documented in `APP_PLAN.md` file in the root of the repository.
-* Application template and linked supporting documents.
-  * This can be found in the `plan_docs/ai-new-app-template.md` file in the root of the repository.
-  * Supporting documents are linked from the app template and are also included in the `plan_docs/` directory.  
+    <step number="2">
+      <title>Infrastructure</title>
+      <actions>
+        <action>Create Dockerfiles and docker-compose.yml.</action>
+        <action>Set up config files (appsettings.json, .env).</action>
+      </actions>
+    </step>
 
-### Acceptance Criteria
+    <step number="3">
+      <title>Dev Environment</title>
+      <actions>
+        <action>Create setup scripts.</action>
+        <action>Configure DB and tools.</action>
+        <action>Create test project structure.</action>
+      </actions>
+    </step>
 
-1. Solution structure created following established guidelines
-3. All required project files and directories established
-4. Initial configuration files created (global.json, Docker, etc.)
-5. Basic CI/CD pipeline structure established
-6. Documentation structure created (README, docs folder, etc.)
-7. Development environment properly configured and validated
-8. Initial commit made with complete project scaffolding
-9. Stakeholder approval obtained for the project structure
-10. Repository summary document is created.
+    <step number="4">
+      <title>Documentation</title>
+      <actions>
+        <action>Create README.md and docs directory.</action>
+        <action>Set up API docs and ADRs.</action>
+      </actions>
+    </step>
 
-### Assignment
+    <step number="5">
+      <title>CI/CD</title>
+      <actions>
+        <action>Create .github/workflows.</action>
+        <action>Set up build and quality workflows.</action>
+      </actions>
+    </step>
 
-You will create the actual project structure and scaffolding for a new application based on the provided application plan. This involves systematic setup of all infrastructure components, following established guidelines, and delivering a ready-to-develop project foundation.
+    <step number="6">
+      <title>Validation & Summary</title>
+      <actions>
+        <action>Verify solution builds.</action>
+        <action>Validate Docker and dev env.</action>
+        <action>Create repository summary (`.ai-repository-summary.md`).</action>
+      </actions>
+    </step>
 
-**Always follow instructions exactly as listed here.**
+    <step number="7">
+      <title>Finalize</title>
+      <actions>
+        <action>Make initial commit.</action>
+        <action>Create project status docs.</action>
+      </actions>
+    </step>
+  </workflow>
 
-It is important to the final quality of our product for everyone to perform their assignment exactly as specified.
-
-### Detailed Steps
-
-1. **Create Solution Structure**
-   1. Create .NET solution file with appropriate name
-   2. Set up global.json with specified .NET version
-   3. Create project directories following established naming conventions
-   4. Generate initial project files for each component
-   5. Configure project references and dependencies
-   6. Configure projects settings and options 
-      a."Treat warnings as errors": true
-      b. "Create XML documentation files": true
-
-2. **Establish Infrastructure Foundation**
-   1. Create Dockerfile for each service/component
-   2. Create docker-compose.yml for local development
-   3. Set up configuration files (appsettings.json templates)
-   4. Create environment variable templates
-   <!-- 5. Set up logging and monitoring configuration -->
-
-3. **Create Development Environment**
-   1. Create scripts for environment setup
-   2. Set up development database configurations
-   3. Create initial test project structure
-   4. Configure build and development tools
-   5. Set up debugging configurations
-
-4. **Establish Documentation Structure**
-   1. Create comprehensive README.md
-   2. Set up docs/ directory with template files
-   3. Create API documentation structure
-   4. Set up architecture decision records (ADRs)
-   5. Create deployment and setup guides
-
-5. **Initialize CI/CD Foundation**
-   1. Create .github/workflows directory
-   2. Set up basic build workflow template
-   3. Configure quality gates templates
-   4. Set up deployment workflow structure
-   5. Create security scanning configurations
-
-6. **Quality Validation**
-   1. Verify solution builds successfully
-   2. Validate Docker configurations
-   3. Test development environment setup
-   4. Verify all documentation is accessible
-   5. Ensure project follows established guidelines
-
-7. **Respository Summary Document**
-   1. Respository summary document is committed to the repository.
-   2. Respository summary document is linked to from the README.md file.
-   3. The repository summary is located at the root of the repository in a file called `.ai-repository-summary.md`.
-   4. The repository summary is created by following the instructions in the [ai-create-repository-summary.md](https://github.com/nam20485/agent-instructions/blob/main/ai_instruction_modules/ai-create-repository-summary.md) file.
-
-8. **Initial Commit and Documentation**
-   1. Make initial commit with complete structure
-   2. Create project status documentation
-   3. Document setup and development procedures
-   4. Create issue templates for future work
-   5. Set up project management structure
-
-### Completion
-
-1. **Present project structure to stakeholder:**
-   - Demonstrate that the solution builds successfully
-   - Show that all infrastructure components are configured
-   - Present the documentation and development environment
-
-2. **Stakeholder review process:**
-   - Ask if they approve the project structure and setup
-   - Address any questions or requests for modifications
-   - Make revisions if needed based on feedback
-
-3. **Finalization:**
-   - Mark the project structure creation as complete once approved
-   - Ensure all team members have access to the repository
-   <!-- - After approval, assign a copilot the breakdown-issue.md assignment to each -->
-   - Ask the stakeholder for your next assignment 
+  <validation>
+    <step>Present structure to stakeholder.</step>
+    <step>Verify build and configuration.</step>
+    <step>Obtain approval.</step>
+  </validation>
+</instructions>

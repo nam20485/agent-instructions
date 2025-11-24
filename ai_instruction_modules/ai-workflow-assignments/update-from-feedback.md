@@ -1,1126 +1,143 @@
-# Assignment: Update from Feedback
-
-## (update-from-feedback)
-
-### Goal
-
-Incorporate feedback received from the previous assignment to improve the overall quality and effectiveness of the work. This includes addressing any specific points raised by reviewers and making necessary adjustments to the existing implementation, documentation, or plans.
-
-### Inputs
-
-- $directory: string
-      path to directory containing feedback documents for review
-
-### Acceptance Criteria
-
-1. All reviewer comments have been addressed.
-2. All feedback items have been categorized and prioritized.
-3. Action plan has been created with specific, actionable items for each feedback category.
-4. Implementation issues (epics/stories/tasks/bugs) have been created or updated in GitHub.
-5. Documentation has been updated to reflect changes made.
-6. Workflow changes have been documented with specific file locations and modifications.
-7. Any new issues identified during the review have been logged and prioritized.
-8. Improvements identified in the feedback have been implemented or scheduled.
-9. Changes have been validated against acceptance criteria.
-10. A comprehensive summary report has been created documenting all changes.
-11. Success metrics have been defined for tracking improvement impact.
-
-### Assignment
-
-You will review all documents in the feedback directory, categorize and prioritize feedback items, create detailed action plans for each category, implement or schedule changes, and document the entire process. This workflow handles multiple types of feedback including implementation gaps, quality issues, architectural concerns, performance problems, documentation needs, workflow improvements, testing gaps, and lessons learned.
-
-### Feedback Categories Overview
-
-This workflow handles 8 primary feedback categories, each requiring different types of actions:
-
-1. **Implementation Status & Gaps** - Missing features, incomplete implementations, deferred items
-2. **Quality & Validation Issues** - Build errors, lint warnings, TypeScript errors, code quality
-3. **Architecture & Design Issues** - Incorrect configurations, design pattern violations, architectural misalignments
-4. **Performance & Optimization** - Bundle size, rendering performance, memory usage, load times
-5. **Documentation Gaps** - Missing docs, outdated content, incomplete API documentation
-6. **Process & Workflow Improvements** - Workflow changes, agent enhancements, prompt improvements
-7. **Testing & Quality Assurance** - Missing tests, coverage gaps, test infrastructure needs
-8. **Lessons Learned & Best Practices** - What worked, what didn't, recommendations for future
-
-### Detailed Steps
-
-## Step 1: Review Feedback Documents
-
-### 1.1 Access and Inventory Feedback
-- Access the specified directory containing feedback documents
-- Create an inventory of all feedback documents found
-- Note the type of each document (debrief, test report, state report, execution summary, etc.)
-- Record document metadata (date, author, workflow, status)
-
-### 1.2 Read and Extract Feedback Items
-For each document:
-- Read through the entire document carefully
-- Extract all feedback items, issues, suggestions, and recommendations
-- Note the severity/priority indicated (critical, major, minor, enhancement)
-- Capture context for each item (which story, feature, or component it relates to)
-- Identify any metrics or measurements provided (coverage %, build time, bundle size, etc.)
-
-### 1.3 Create Feedback Items List
-Create a structured list with:
-- **Item ID** (sequential numbering: FB-001, FB-002, etc.)
-- **Source Document** (which feedback file it came from)
-- **Category** (to be assigned in next step)
-- **Title** (brief description)
-- **Description** (full details)
-- **Current State** (what exists now)
-- **Desired State** (what should exist)
-- **Severity** (Critical, High, Medium, Low)
-- **Estimated Effort** (Small, Medium, Large)
-
+---
+description: Incorporate feedback to improve work quality and effectiveness
+role: assistant
+scope: workflow-assignment
 ---
 
-## Step 2: Categorize Feedback Items
-
-For each feedback item extracted, assign it to one or more categories:
-
-### Category 1: Implementation Status & Gaps
-
-**Identification Criteria:**
-- Mentions "missing", "not implemented", "incomplete", "partial", "deferred"
-- Describes functionality that should exist but doesn't
-- Lists features marked as TODO or not started
-- Identifies incomplete acceptance criteria
-- Notes features that work partially
-
-**Examples from Feedback:**
-- "useBoardData hook exists but is never invoked"
-- "Missing retry logic with exponential backoff"
-- "No unit tests for API client"
-- "React Error Boundary not implemented"
-
-**Action Type:** Implementation Gaps
-
----
-
-### Category 2: Quality & Validation Issues
-
-**Identification Criteria:**
-- Build failures or warnings
-- Linting errors or warnings
-- TypeScript compilation errors
-- Type safety issues
-- Code style violations
-- Formatting problems
-- Failed validation checks
-
-**Examples from Feedback:**
-- "5 files with Prettier formatting issues"
-- "Type assertions using 'any' instead of proper types"
-- "ESLint warnings found"
-- "TypeScript strict mode violations"
-
-**Action Type:** Implementation Gaps (Bug Fixes)
-
----
-
-### Category 3: Architecture & Design Issues
-
-**Identification Criteria:**
-- Incorrect component/service configuration
-- Design pattern violations
-- Architectural misalignments
-- Separation of concerns issues
-- Improper dependency structure
-- Violates core requirements or specifications
-
-**Examples from Feedback:**
-- "Camera configured as perspective instead of orthographic (violates core requirement)"
-- "Missing error boundaries"
-- "Tight coupling between components"
-- "Should use dependency injection instead of singletons"
-
-**Action Type:** Planning Changes + Implementation Gaps (Refactoring)
-
----
-
-### Category 4: Performance & Optimization
-
-**Identification Criteria:**
-- Bundle size issues
-- Slow build times
-- Rendering performance problems
-- Memory leaks or high memory usage
-- Slow API responses
-- Inefficient algorithms
-- Missing optimizations (caching, lazy loading, etc.)
-
-**Examples from Feedback:**
-- "Three.js vendor chunk exceeds 500KB"
-- "No virtualization for large feature sets"
-- "Missing caching layer"
-- "No lazy loading implemented"
-
-**Action Type:** Planning Changes + Implementation Gaps
-
----
-
-### Category 5: Documentation Gaps
-
-**Identification Criteria:**
-- Missing documentation
-- Outdated documentation
-- Incomplete API docs
-- Missing code comments
-- No examples provided
-- Unclear instructions
-- Missing troubleshooting guides
-
-**Examples from Feedback:**
-- "No API documentation for public interfaces"
-- "Missing user manual for Board Viewer features"
-- "README doesn't explain environment variables"
-- "No inline code comments for complex logic"
-
-**Action Type:** Implementation Gaps (Documentation Tasks)
-
----
-
-### Category 6: Process & Workflow Improvements
-
-**Identification Criteria:**
-- Suggestions for workflow changes
-- Agent behavior improvements
-- Prompt enhancements
-- Script improvements
-- Process inefficiencies
-- Automation opportunities
-- Better practices identified
-
-**Examples from Feedback:**
-- "Split create-project-structure assignment into smaller tasks"
-- "Add validation step between assignments"
-- "Agents should report progress for long-running tasks"
-- "Setup scripts should validate installation success"
-
-**Action Type:** Workflow Changes
-
----
-
-### Category 7: Testing & Quality Assurance
-
-**Identification Criteria:**
-- Missing tests
-- Low or zero test coverage
-- No test infrastructure
-- Missing test types (unit, integration, E2E)
-- Test quality issues
-- No test automation
-
-**Examples from Feedback:**
-- "Test Coverage: 0% (no tests yet)"
-- "No integration tests with mock server"
-- "Missing E2E tests for critical paths"
-- "Vitest configured but no test files exist"
-
-**Action Type:** Implementation Gaps + Planning Changes
-
----
-
-### Category 8: Lessons Learned & Best Practices
-
-**Identification Criteria:**
-- "What worked well" sections
-- "What could be improved" sections
-- "Lessons learned" lists
-- "Recommendations for future" sections
-- Complex challenges solved
-- Best practices identified
-
-**Examples from Feedback:**
-- "Parallel execution significantly reduced total time"
-- "Comprehensive planning pays off"
-- "TypeScript strict mode requires careful setup"
-- "AI-focused documentation is essential"
-
-**Action Type:** Workflow Changes + Planning Changes + Documentation
-
----
-
-### 2.1 Categorization Process
-For each feedback item:
-1. Read the item description carefully
-2. Match against identification criteria for each category
-3. Assign primary category (most relevant)
-4. Assign secondary categories if applicable (items can have multiple categories)
-5. Record rationale for categorization
-
----
-
-## Step 3: Prioritize Feedback Items
-
-### 3.1 Assign Priority Levels
-
-Use this prioritization matrix:
-
-**Critical (P0) - Fix Immediately**
-- Blocks core functionality
-- Violates core requirements
-- Causes build failures
-- Security vulnerabilities
-- Data loss risks
-
-**High (P1) - Fix Soon**
-- Significant functionality gaps
-- Major performance issues
-- Important features missing
-- High-impact user experience issues
-- Technical debt that will compound
-
-**Medium (P2) - Schedule for Next Phase**
-- Moderate improvements
-- Nice-to-have features
-- Documentation gaps
-- Minor performance issues
-- Code quality improvements
-
-**Low (P3) - Backlog**
-- Future enhancements
-- Optimization opportunities
-- Process improvements
-- Long-term refactoring
-
-### 3.2 Estimate Effort
-
-For each item, estimate effort:
-- **Small (S)**: < 2 hours, single file change, straightforward fix
-- **Medium (M)**: 2-8 hours, multiple files, moderate complexity
-- **Large (L)**: > 8 hours, multiple components, high complexity, requires design
-
-### 3.3 Calculate Priority Score
-Priority Score = (Severity Weight × Impact) / Effort
-
-Severity Weights:
-- Critical: 10
-- High: 5
-- Medium: 2
-- Low: 1
-
-Impact (1-5 scale):
-- 5: Affects all users, core functionality
-- 4: Affects many users, important feature
-- 3: Affects some users, useful feature
-- 2: Affects few users, minor feature
-- 1: Affects very few users, edge case
-
-Sort feedback items by priority score (highest first).
-
----
-
-## Step 4: Document Action Plan
-
-Create a comprehensive action plan document with the following structure:
-
-### 4.1 Action Plan Template
-
-<see template="templates/feedback-action-plan.md" />
-
-
----
-
-## Step 5: Create/Update GitHub Issues
-
-### 5.1 Issue Creation Guidelines
-
-For each actionable feedback item in the plan:
-
-#### When to Create an Epic
-- Multiple related stories needed (>3 stories)
-- Large feature or significant refactoring
-- Spans multiple components or areas
-- Duration > 2 weeks
-- Requires coordination across team members
-
-**Epic Template:**
-## Content from Epic Template
-[epic.md](.github/ISSUE_TEMPLATE/epic.md)
-
-(Append following content)
----
-```markdown
-## Related Feedback Items
-- FB-XXX: [title]
-- FB-XXX: [title]
-```
----
-
-#### When to Create a Story
-- Single feature or capability
-- Multiple tasks required (2-5 tasks)
-- Duration: 1-5 days
-- Clear user value or technical outcome
-- Can be completed independently
-
-**Story Template:**
-## Content from Story Template
-[pstory.md](.github/ISSUE_TEMPLATE/epic.md)
-
-(Append following content)
----
-```markdown
-## Related Feedback
-FB-XXX: [title and link to action plan]
-```
----
-
-#### When to Create a Task
-- Single, focused piece of work
-- No sub-tasks needed
-- Duration: <1 day
-- Clear, specific action
-- Part of a story or can stand alone
-
-**Task Template:**
-## Content from Task Template
-[task.md](.github/ISSUE_TEMPLATE/task.md)
-
-(Append following content)
----
-```markdown
-## Related Feedback
-FB-XXX: [title and link to action plan]
-FB-XXX: [title and link to action plan]
-```
----
-
-#### When to Create a Bug
-- Existing functionality broken
-- Does not meet original acceptance criteria
-- Regression from previous work
-- Quality issue in delivered code
-
-**Bug Template:**
-## Content from Bug Template
-[bug.md](.github/ISSUE_TEMPLATE/bug.md)
-
-(Append following content)
----
-```markdown
-## Related Feedback
-FB-XXX: [title and link to action plan]
-FB-XXX: [title and link to action plan]
-```
----
-
-### 5.2 Issue Creation Process
-
-For each feedback item requiring a GitHub issue:
-
-1. **Determine Issue Type**
-   - Refer to guidelines above
-   - Check if related issues already exist
-   - Decide: Epic, Story, Task, or Bug
-
-2. **Create Issue in GitHub**
-   - Use `gh issue create` or GitHub web UI
-   - Use appropriate template
-   - Fill in all sections completely
-   - Reference feedback item (FB-XXX) in description
-
-3. **Apply Labels**
-   - Type: epic, story, task, bug
-   - Category: implementation, quality, architecture, performance, documentation, workflow, testing
-   - Priority: priority-critical, priority-high, priority-medium, priority-low
-   - Effort: effort-small, effort-medium, effort-large
-
-4. **Link to Plan Epic/Milestone**
-   - If part of existing epic, link via "Epic: #[number]"
-   - If part of milestone, assign milestone
-   - If creates new epic, create epic first, then link stories
-
-5. **Update Action Plan**
-   - Record issue number in action plan
-   - Update "GitHub Issue: #[number]" field
-   - Mark as created in tracking list
-
-6. **Create Dependencies**
-   - Use GitHub's "blocked by" to show dependencies
-   - Document in issue description
-
-### 5.3 Update Existing Issues
-
-For items that enhance existing issues:
-
-1. **Identify Existing Issue**
-   - Search GitHub for related issue
-   - Verify it's the right issue to update
-
-2. **Add Comment**
-   ```markdown
-   ## Feedback Item Added: FB-XXX
-   
-   Based on feedback review, adding the following to this issue:
-   
-   **New Acceptance Criteria:**
-   - [ ] [Criterion]
-   
-   **Additional Tasks:**
-   - [ ] [Task]
-   
-   **Context:** [From feedback document]
-   ```
-
-3. **Update Issue Description**
-   - Edit original description if needed
-   - Add new acceptance criteria
-   - Add new tasks to checklist
-
-4. **Update Labels**
-   - Add any new relevant labels
-   - Update priority if changed
-
-### 5.4 Track Issue Creation
-
-Create a tracking table in your action plan:
-
-| FB-ID  | Category       | Priority | Issue Type | GitHub Issue | Status  |
-| ------ | -------------- | -------- | ---------- | ------------ | ------- |
-| FB-001 | Implementation | P0       | Bug        | #42          | Created |
-| FB-002 | Quality        | P1       | Task       | #43          | Created |
-| FB-003 | Architecture   | P1       | Story      | #44          | Created |
-| ...    | ...            | ...      | ...        | ...          | ...     |
-
----
-
-## Step 6: Implement Changes
-
-### 6.1 Immediate Implementation (P0/P1)
-
-For items marked as immediate priority that can be fixed quickly:
-
-#### Code Changes
-1. **Create Feature Branch**
-   ```bash
-   git checkout -b feedback/FB-XXX-brief-description
-   ```
-
-2. **Implement Fix**
-   - Follow the solution outlined in action plan
-   - Write clean, tested code
-   - Follow project conventions
-
-3. **Validate Fix**
-   <procedure ref="validation-basic"/>
-   - Manual testing if applicable
-
-4. **Commit Changes**
-   ```bash
-   git add .
-   git commit -m "fix: [FB-XXX] Brief description
-   
-   Addresses feedback item FB-XXX from [document name].
-   
-   Changes:
-   - [Change 1]
-   - [Change 2]
-   
-   Closes #[issue-number]"
-   ```
-
-5. **Create Pull Request**
-   - Push branch
-   - Create PR with feedback context
-   - Link to issue
-   - Request review
-
-#### Documentation Changes
-1. **Identify Files to Update**
-   - From action plan, get list of doc files
-
-2. **Update Documentation**
-   - Add missing sections
-   - Update outdated content
-   - Add examples if needed
-   - Fix formatting issues
-
-3. **Validate Documentation**
-   - Check markdown rendering
-   - Verify links work
-   - Ensure examples are correct
-
-4. **Commit Documentation**
-   ```bash
-   git commit -m "docs: [FB-XXX] Update documentation
-   
-   - Added [section]
-   - Updated [content]
-   - Fixed [issue]
-   
-   Addresses FB-XXX"
-   ```
-
-### 6.2 Schedule Future Implementation (P2/P3)
-
-For items that cannot be implemented immediately:
-
-1. **Ensure GitHub Issues Created**
-   - Verify all items have corresponding issues
-
-2. **Assign to Milestone/Sprint**
-   - P2 items: Next milestone
-   - P3 items: Backlog
-
-3. **Add to Project Board**
-   - Move to appropriate column (To Do, Backlog)
-
-4. **Update Dependencies**
-   - Ensure blockers are identified
-
-### 6.3 Workflow Changes Implementation
-
-Workflow changes cannot be implemented directly (they're in a different repo). Document them completely:
-
-1. **Create Workflow Changes Document**
-   <see template="templates/feedback-workflow-changes.md" />
-
-2. **Save Document**
-   - Save as `docs/FEEDBACK_WORKFLOW_CHANGES.md` in current repo
-   - Include in action plan summary
-
-3. **Create Issue in agent-instructions Repo**
-   - Create issue in nam20485/agent-instructions
-   - Link to workflow changes document
-   - Assign appropriate labels
-
----
-
-## Step 7: Validate Changes
-
-### 7.1 Validation Checklist
-
-For each implemented change, verify:
-
-#### Code Changes Validation
-- [ ] Build succeeds without errors
-- [ ] No new lint warnings or errors
-- [ ] No new TypeScript errors
-- [ ] All tests pass
-- [ ] Code review completed
-- [ ] PR approved and merged
-- [ ] Original feedback item addressed
-
-#### Documentation Changes Validation
-- [ ] Documentation is accurate
-- [ ] Examples work as documented
-- [ ] Links are valid
-- [ ] Formatting is correct
-- [ ] Spelling and grammar checked
-- [ ] Code review completed
-
-#### Issue Creation Validation
-- [ ] All feedback items have corresponding issues
-- [ ] Issues are properly labeled
-- [ ] Issues are linked to epics/milestones
-- [ ] Dependencies are documented
-- [ ] Acceptance criteria are clear
-
-#### Workflow Changes Validation
-- [ ] All changes documented completely
-- [ ] Rationale provided for each change
-- [ ] Examples included
-- [ ] Impact assessed
-- [ ] Implementation steps clear
-
-### 7.2 Metrics Validation
-
-Compare before/after metrics:
-
-| Metric              | Before | After | Target | Status      |
-| ------------------- | ------ | ----- | ------ | ----------- |
-| Test Coverage       | 0%     | 35%   | 80%    | In Progress |
-| Build Time          | 6.7s   | 6.5s  | <7s    | ✅ Met       |
-| Bundle Size         | 838KB  | 820KB | <500KB | In Progress |
-| Lint Errors         | 5      | 0     | 0      | ✅ Met       |
-| TypeScript Errors   | 0      | 0     | 0      | ✅ Met       |
-| Documentation Pages | 9      | 12    | 15     | In Progress |
-
-### 7.3 Acceptance Criteria Check
-
-For each feedback item:
-- [ ] Review original feedback
-- [ ] Review acceptance criteria defined in action plan
-- [ ] Verify all criteria met or scheduled
-- [ ] Document any deviations or partial completion
-
----
-
-## Step 8: Document Summary
-
-### 8.1 Create Feedback Response Summary
-
-Create a comprehensive summary document:
-
-<see template="templates/feedback-response-summary.md" />
-
-### 8.2 Update Original Feedback Documents
-
-If feedback documents are in your repository:
-1. Add a header indicating feedback was addressed
-2. Link to response summary
-3. Mark items as "Addressed", "Scheduled", or "Deferred"
-
-### 8.3 Communicate Results
-
-1. **Internal Communication**
-   - Share summary with team
-   - Present in stand-up or team meeting
-   - Update project status
-
-2. **Stakeholder Communication**
-   - Create stakeholder-friendly summary
-   - Highlight key improvements
-   - Show metrics improvement
-
-3. **Documentation Updates**
-   - Update project README if needed
-   - Update CHANGELOG
-   - Update any status documents
-
----
-
-## Category-Specific Instructions
-
-### Detailed Instructions for Each Category
-
-#### Category 1: Implementation Status & Gaps
-
-**When reviewing feedback in this category:**
-1. Identify what functionality is missing vs. incomplete
-2. Check if original acceptance criteria covered these items
-3. Determine if this is a true gap or just deferred work
-
-**Actions to take:**
-1. **For missing functionality (P0/P1):**
-   - Create Story or Task in GitHub
-   - Add to current epic or milestone
-   - Estimate effort and assign
-
-2. **For incomplete implementations (P1/P2):**
-   - Update existing story with additional tasks
-   - OR create new task linked to story
-   - Add checklist items to original issue
-
-3. **For deferred items (P2/P3):**
-   - Create issue in backlog
-   - Document why deferred
-   - Set milestone for future phase
-
-**GitHub Labels:**
-- `implementation-gap`
-- `feature-missing`
-- `incomplete`
-
-**Planning Updates:**
-- Update epic to reflect new scope
-- Adjust timeline estimates
-- Update risk assessment
-
----
-
-#### Category 2: Quality & Validation Issues
-
-**When reviewing feedback in this category:**
-1. Determine if it's a regression or never worked
-2. Check current build/test status
-3. Assess impact on users
-
-**Actions to take:**
-1. **For build/compile errors (P0):**
-   - Create Bug issue
-   - Fix immediately
-   - Add to CI checks
-
-2. **For lint/format warnings (P1):**
-   - Create Task
-   - Fix in batch
-   - Configure pre-commit hooks
-
-3. **For type safety issues (P1):**
-   - Create Bug or Task
-   - Fix systematically
-   - Update TypeScript config if needed
-
-**GitHub Labels:**
-- `bug`
-- `quality`
-- `type-safety`
-- `lint-warning`
-
-**Validation:**
-<procedure ref="validation-basic"/>
-- Run `npm run type-check`
-- All must pass
-
----
-
-#### Category 3: Architecture & Design Issues
-
-**When reviewing feedback in this category:**
-1. Understand the architectural principle violated
-2. Assess impact on maintainability
-3. Consider refactoring scope
-
-**Actions to take:**
-1. **For requirement violations (P0):**
-   - Create Story for refactoring
-   - Document correct architecture
-   - Create implementation plan
-
-2. **For design pattern issues (P1):**
-   - Create Story or Task
-   - Document pattern to use
-   - Provide examples
-
-3. **For structural improvements (P2):**
-   - Create Story in next phase
-   - Document desired architecture
-   - Update architecture docs
-
-**Planning Updates:**
-- Update `docs/architecture.md` or plan issue
-- Add architecture decision record (ADR)
-- Update design patterns documentation
-
-**GitHub Labels:**
-- `architecture`
-- `refactoring`
-- `design-pattern`
-
----
-
-#### Category 4: Performance & Optimization
-
-**When reviewing feedback in this category:**
-1. Identify current metrics
-2. Define target metrics
-3. Determine if it's a blocker
-
-**Actions to take:**
-1. **For critical performance issues (P0/P1):**
-   - Create Story with performance goals
-   - Define success metrics
-   - Create benchmarking task
-
-2. **For bundle size issues (P1/P2):**
-   - Create Task for optimization
-   - Define size budget
-   - Add bundle analyzer
-
-3. **For future optimizations (P2/P3):**
-   - Document in backlog
-   - Set performance goals
-   - Review in next phase
-
-**Planning Updates:**
-- Add performance requirements to plan
-- Define performance budgets
-- Update success metrics
-
-**GitHub Labels:**
-- `performance`
-- `optimization`
-- `bundle-size`
-
-**Include Metrics:**
-- Current: [metric]
-- Target: [metric]
-- How to measure: [method]
-
----
-
-#### Category 5: Documentation Gaps
-
-**When reviewing feedback in this category:**
-1. Identify audience (users, developers, AI)
-2. Determine documentation type needed
-3. Assess urgency
-
-**Actions to take:**
-1. **For missing critical docs (P0/P1):**
-   - Create Task for each document
-   - Write immediately if small
-   - Assign to appropriate owner
-
-2. **For incomplete docs (P1/P2):**
-   - Create Task to update
-   - List sections to add
-   - Add examples
-
-3. **For nice-to-have docs (P3):**
-   - Add to backlog
-   - Prioritize for next phase
-
-**Documentation Types:**
-- **User Documentation**: How to use the application
-- **Developer Documentation**: How to work with the code
-- **API Documentation**: Public interface specifications
-- **Architecture Documentation**: System design and decisions
-- **AI Documentation**: `.ai-repository-summary.md`, workflow guides
-
-**GitHub Labels:**
-- `documentation`
-- `user-docs`
-- `dev-docs`
-- `api-docs`
-
-**For each doc task, specify:**
-- File path
-- Sections to add/update
-- Examples needed
-- Diagrams needed
-
----
-
-#### Category 6: Process & Workflow Improvements
-
-**When reviewing feedback in this category:**
-1. Understand current workflow pain point
-2. Identify root cause
-3. Design improvement
-
-**Actions to take:**
-1. **For workflow assignment changes:**
-   - Document change in detail
-   - Show before/after
-   - Explain rationale
-   - Save to workflow changes document
-
-2. **For agent instruction changes:**
-   - Document new behavior needed
-   - Provide examples
-   - Update agent guidelines
-
-3. **For script improvements:**
-   - Create Task to update script
-   - Test thoroughly
-   - Update documentation
-
-**Workflow Changes Document Structure:**
-<see template="templates/feedback-workflow-change-structure.md" />
-
-**GitHub Labels:**
-- `workflow-improvement`
-- `process-improvement`
-- `agent-enhancement`
-
----
-
-#### Category 7: Testing & Quality Assurance
-
-**When reviewing feedback in this category:**
-1. Assess current test coverage
-2. Identify coverage gaps
-3. Prioritize test types
-
-**Actions to take:**
-1. **For test infrastructure (P1):**
-   - Create Story for test setup
-   - Configure test framework
-   - Add CI integration
-
-2. **For missing tests (P1/P2):**
-   - Create Task for each test suite
-   - Add to existing stories
-   - Define coverage goals
-
-3. **For test types:**
-   - **Unit Tests**: Test individual functions/classes
-   - **Integration Tests**: Test component interactions
-   - **E2E Tests**: Test full user workflows
-
-**Planning Updates:**
-- Add testing phase to plan
-- Define coverage targets
-- Update acceptance criteria
-
-**GitHub Labels:**
-- `testing`
-- `test-coverage`
-- `unit-tests`
-- `integration-tests`
-- `e2e-tests`
-
-**For each test task:**
-- Components to test: [list]
-- Test framework: [name]
-- Target coverage: [%]
-- Priority: [level]
-
----
-
-#### Category 8: Lessons Learned & Best Practices
-
-**When reviewing feedback in this category:**
-1. Extract actionable insights
-2. Identify patterns
-3. Determine what to change
-
-**Actions to take:**
-1. **Document Best Practices:**
-   - Create or update `docs/BEST_PRACTICES.md`
-   - Add to workflow instructions
-   - Share with team
-
-2. **Update Workflows:**
-   - Apply lessons to workflow assignments
-   - Add to checklists
-   - Update templates
-
-3. **Update Planning:**
-   - Incorporate into future plans
-   - Update estimation approach
-   - Adjust risk assessment
-
-4. **Create Future Recommendations:**
-   - Document for next project
-   - Add to project template
-   - Share across organization
-
-**Documentation Updates:**
-- `docs/BEST_PRACTICES.md`
-- `docs/LESSONS_LEARNED.md`
-- Workflow assignment files
-- Planning templates
-
-**GitHub Labels:**
-- `best-practice`
-- `process-improvement`
-- `documentation`
-
----
-
-## Completion Criteria
-
-This assignment is complete when:
-
-1. ✅ All feedback documents have been reviewed and inventoried
-2. ✅ All feedback items have been extracted and assigned unique IDs
-3. ✅ All feedback items have been categorized (primary and secondary categories)
-4. ✅ All feedback items have been prioritized (P0-P3) with effort estimates
-5. ✅ Comprehensive action plan has been created following the template
-6. ✅ All required GitHub issues have been created (epics, stories, tasks, bugs)
-7. ✅ All issues have been properly labeled and linked
-8. ✅ Issue creation has been tracked in a table
-9. ✅ All immediate (P0/P1) items have been implemented or have PRs created
-10. ✅ All workflow changes have been documented in detail
-11. ✅ Workflow changes document has been saved and issue created in agent-instructions repo
-12. ✅ All changes have been validated (build, lint, tests pass)
-13. ✅ Metrics have been captured (before/after comparison)
-14. ✅ Feedback response summary has been created
-15. ✅ Summary includes all sections: accomplishments, items addressed, scheduled items, deferred items, metrics, next steps
-16. ✅ Stakeholders have been notified of changes
-17. ✅ All documentation has been updated
-18. ✅ No feedback items remain unaddressed (all are either fixed, scheduled, or deferred with rationale)
-
----
-
-## Deliverables
-
-1. **Feedback Items List** - CSV or markdown table with all extracted items
-2. **Action Plan Document** - Comprehensive plan following template
-3. **GitHub Issues** - All epics, stories, tasks, bugs created
-4. **Issue Tracking Table** - Shows FB-ID → GitHub issue mapping
-5. **Workflow Changes Document** - Details of all workflow modifications needed
-6. **Pull Requests** - For immediate fixes implemented
-7. **Metrics Report** - Before/after comparison
-8. **Feedback Response Summary** - Comprehensive summary document
-9. **Updated Documentation** - Any docs updated during this process
-
----
-
-## Tips for Success
-
-### Effective Feedback Review
-- Read each document completely before extracting items
-- Look for both explicit and implicit feedback
-- Consider context (what phase, what was the goal)
-- Note patterns across multiple documents
-
-### Categorization
-- Items can have multiple categories (use primary + secondary)
-- When in doubt, ask "what action does this require?"
-- Group related items together
-
-### Prioritization
-- Be realistic about "Critical" - reserve for true blockers
-- Consider implementation dependencies
-- Balance quick wins with important work
-
-### Issue Creation
-- Write clear, actionable titles
-- Include all context in description
-- Link related issues
-- Use consistent labeling
-
-### Workflow Changes
-- Be very specific about file and location
-- Show before/after examples
-- Explain the "why" not just the "what"
-- Consider unintended consequences
-
-### Communication
-- Keep stakeholders informed
-- Celebrate accomplishments
-- Be transparent about deferred items
-- Share lessons learned
-
----
-
-## Examples
-
-### Example: Handling a Complex Feedback Item
-
-<see example="examples/feedback-complex-item.md" />
-
----
-
-### Example: Handling a Workflow Improvement
-
-<see example="examples/feedback-workflow-improvement.md" />
-
----
-
-## Appendix: Quick Reference
-
-### Priority Levels
-- **P0 (Critical)**: Blocks functionality, fix immediately
-- **P1 (High)**: Important gap or issue, fix soon
-- **P2 (Medium)**: Moderate improvement, next phase
-- **P3 (Low)**: Nice-to-have, backlog
-
-### Effort Sizes
-- **Small**: <2 hours, single file
-- **Medium**: 2-8 hours, multiple files
-- **Large**: >8 hours, complex change
-
-### Issue Types
-- **Epic**: Multiple stories, >2 weeks, coordination needed
-- **Story**: Single feature, 1-5 days, clear value
-- **Task**: Focused work, <1 day, specific action
-- **Bug**: Something broken, regression
-
-### Categories
-1. Implementation Status & Gaps
-2. Quality & Validation Issues
-3. Architecture & Design Issues
-4. Performance & Optimization
-5. Documentation Gaps
-6. Process & Workflow Improvements
-7. Testing & Quality Assurance
-8. Lessons Learned & Best Practices
-
-### Key Labels
-- Type: epic, story, task, bug
-- Category: implementation, quality, architecture, performance, documentation, workflow, testing
-- Priority: priority-critical, priority-high, priority-medium, priority-low
-- Effort: effort-small, effort-medium, effort-large
-
----
-
-**End of Assignment**
-
-
+<instructions role="assistant" scope="workflow-assignment">
+  <overview>
+    Incorporate feedback received from the previous assignment to improve the overall quality and effectiveness of the work. This includes addressing any specific points raised by reviewers and making necessary adjustments to the existing implementation, documentation, or plans.
+  </overview>
+
+  <input_schema>
+    <parameter name="directory" type="string" required="true">
+      <description>path to directory containing feedback documents for review</description>
+    </parameter>
+  </input_schema>
+
+  <validation>
+    <criteria>All reviewer comments have been addressed.</criteria>
+    <criteria>All feedback items have been categorized and prioritized.</criteria>
+    <criteria>Action plan has been created with specific, actionable items for each feedback category.</criteria>
+    <criteria>Implementation issues (epics/stories/tasks/bugs) have been created or updated in GitHub.</criteria>
+    <criteria>Documentation has been updated to reflect changes made.</criteria>
+    <criteria>Workflow changes have been documented with specific file locations and modifications.</criteria>
+    <criteria>Any new issues identified during the review have been logged and prioritized.</criteria>
+    <criteria>Improvements identified in the feedback have been implemented or scheduled.</criteria>
+    <criteria>Changes have been validated against acceptance criteria.</criteria>
+    <criteria>A comprehensive summary report has been created documenting all changes.</criteria>
+    <criteria>Success metrics have been defined for tracking improvement impact.</criteria>
+  </validation>
+
+  <workflow>
+    <step name="Review Feedback Documents">
+      <action>Access and inventory feedback documents in the specified directory</action>
+      <action>Read and extract feedback items, noting severity, context, and metrics</action>
+      <action>Create a structured list of feedback items with ID, source, title, description, current/desired state, severity, and effort</action>
+    </step>
+
+    <step name="Categorize Feedback Items">
+      <action>Assign primary and secondary categories to each feedback item (see Categories section)</action>
+      <action>Record rationale for categorization</action>
+    </step>
+
+    <step name="Prioritize Feedback Items">
+      <action>Assign priority levels (P0-P3) based on the prioritization matrix</action>
+      <action>Estimate effort (Small, Medium, Large)</action>
+      <action>Calculate priority score: (Severity Weight × Impact) / Effort</action>
+      <action>Sort feedback items by priority score</action>
+    </step>
+
+    <step name="Document Action Plan">
+      <action>Create a comprehensive action plan document using the template</action>
+    </step>
+
+    <step name="Create/Update GitHub Issues">
+      <action>Determine issue type (Epic, Story, Task, Bug) for each actionable item</action>
+      <action>Create issues in GitHub with appropriate labels and links to the action plan</action>
+      <action>Update existing issues with new acceptance criteria or tasks if applicable</action>
+      <action>Track issue creation in a table in the action plan</action>
+    </step>
+
+    <step name="Implement Changes">
+      <substep name="Immediate Implementation (P0/P1)">
+        <action>Create feature branch</action>
+        <action>Implement fix (code or documentation)</action>
+        <action>Validate fix</action>
+        <action>Commit changes and create Pull Request</action>
+      </substep>
+      <substep name="Schedule Future Implementation (P2/P3)">
+        <action>Ensure GitHub issues are created</action>
+        <action>Assign to milestone/sprint</action>
+        <action>Add to project board</action>
+      </substep>
+      <substep name="Workflow Changes Implementation">
+        <action>Create Workflow Changes Document</action>
+        <action>Save as `docs/FEEDBACK_WORKFLOW_CHANGES.md`</action>
+        <action>Create issue in `agent-instructions` repo linking to the document</action>
+      </substep>
+    </step>
+
+    <step name="Validate Changes">
+      <action>Verify code changes (build, lint, test, PR approved)</action>
+      <action>Verify documentation changes (accurate, valid links, formatting)</action>
+      <action>Verify issue creation (labeled, linked, clear criteria)</action>
+      <action>Verify workflow changes (documented, rationale provided)</action>
+      <action>Compare before/after metrics</action>
+      <action>Check acceptance criteria for each feedback item</action>
+    </step>
+
+    <step name="Document Summary">
+      <action>Create Feedback Response Summary document</action>
+      <action>Update original feedback documents with status (Addressed, Scheduled, Deferred)</action>
+      <action>Communicate results to team and stakeholders</action>
+    </step>
+  </workflow>
+
+  <categories>
+    <category name="Implementation Status & Gaps">
+      <criteria>Missing features, incomplete implementations, deferred items</criteria>
+      <action_type>Implementation Gaps</action_type>
+    </category>
+    <category name="Quality & Validation Issues">
+      <criteria>Build errors, lint warnings, TypeScript errors, code quality</criteria>
+      <action_type>Implementation Gaps (Bug Fixes)</action_type>
+    </category>
+    <category name="Architecture & Design Issues">
+      <criteria>Incorrect configurations, design pattern violations, architectural misalignments</criteria>
+      <action_type>Planning Changes + Implementation Gaps (Refactoring)</action_type>
+    </category>
+    <category name="Performance & Optimization">
+      <criteria>Bundle size, rendering performance, memory usage, load times</criteria>
+      <action_type>Planning Changes + Implementation Gaps</action_type>
+    </category>
+    <category name="Documentation Gaps">
+      <criteria>Missing docs, outdated content, incomplete API documentation</criteria>
+      <action_type>Implementation Gaps (Documentation Tasks)</action_type>
+    </category>
+    <category name="Process & Workflow Improvements">
+      <criteria>Workflow changes, agent enhancements, prompt improvements</criteria>
+      <action_type>Workflow Changes</action_type>
+    </category>
+    <category name="Testing & Quality Assurance">
+      <criteria>Missing tests, coverage gaps, test infrastructure needs</criteria>
+      <action_type>Implementation Gaps + Planning Changes</action_type>
+    </category>
+    <category name="Lessons Learned & Best Practices">
+      <criteria>What worked, what didn't, recommendations for future</criteria>
+      <action_type>Workflow Changes + Planning Changes + Documentation</action_type>
+    </category>
+  </categories>
+
+  <templates>
+    <template name="Action Plan">
+      <path>../templates/feedback-action-plan.md</path>
+    </template>
+    <template name="Workflow Changes">
+      <path>../templates/feedback-workflow-changes.md</path>
+    </template>
+    <template name="Response Summary">
+      <path>../templates/feedback-response-summary.md</path>
+    </template>
+  </templates>
+</instructions>
