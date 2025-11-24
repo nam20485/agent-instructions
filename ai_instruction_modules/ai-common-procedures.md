@@ -8,7 +8,7 @@ role: System Orchestrator
   <overview>
     <purpose>
       Defines standard procedures for recurring tasks to ensure consistency and quality across all workflow assignments.
-      Assignments reference these procedures using <procedure ref="category.procedure-name"/>.
+      Assignments reference these procedures using `<procedure ref="category.procedure-name"/>`.
     </purpose>
   </overview>
 
@@ -18,17 +18,16 @@ role: System Orchestrator
         <title>Branch Naming Convention</title>
         <steps>
           <step>Use kebab-case.</step>
-          <step>Prefix with type: eature/, ugfix/, docs/, chore/.</step>
-          <step>Include issue number if applicable: eature/123-add-login.</step>
+          <step>Prefix with type: `feature/`, `bugfix/`, `docs/`, `chore/`.</step>
+          <step>Include issue number if applicable: `feature/123-add-login`.</step>
         </steps>
       </procedure>
 
       <procedure name="commit-messages">
         <title>Commit Message Standard</title>
         <steps>
-          <step>Use Conventional Commits format: 	ype(scope): description.</step>
-          <step>Types: feat, ix, docs, style, 
-efactor, 	est, chore.</step>
+          <step>Use Conventional Commits format: `type(scope): description`.</step>
+          <step>Types: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`.</step>
           <step>Keep subject under 50 characters.</step>
           <step>Use imperative mood ("Add feature" not "Added feature").</step>
         </steps>
@@ -37,8 +36,8 @@ efactor, 	est, chore.</step>
       <procedure name="pr-creation">
         <title>Pull Request Creation</title>
         <steps>
-          <step>Create PR using gh pr create.</step>
-          <step>Link to related issue using Fixes #123 or Connects to #123.</step>
+          <step>Create PR using `gh pr create`.</step>
+          <step>Link to related issue using `Fixes #123` or `Connects to #123`.</step>
           <step>Fill out the PR template completely.</step>
           <step>Self-review code before requesting review.</step>
         </steps>
@@ -61,7 +60,7 @@ efactor, 	est, chore.</step>
         <steps>
           <step>Add issue to the repository's GitHub Project.</step>
           <step>Assign to the correct Milestone (e.g., "Phase 1").</step>
-          <step>Apply appropriate labels (e.g., ug, nhancement, documentation).</step>
+          <step>Apply appropriate labels (e.g., `bug`, `enhancement`, `documentation`).</step>
           <step>If it's a sub-task, link to the parent issue using "Parent issue: #123".</step>
         </steps>
       </procedure>
@@ -81,7 +80,7 @@ efactor, 	est, chore.</step>
         <title>Template Validation</title>
         <steps>
           <step>Verify all sections of the template are filled.</step>
-          <step>Ensure no placeholders (e.g., [TODO]) remain.</step>
+          <step>Ensure no placeholders (e.g., `[TODO]`) remain.</step>
           <step>Check that links to other documents are valid.</step>
         </steps>
       </procedure>
@@ -91,10 +90,9 @@ efactor, 	est, chore.</step>
       <procedure name="powershell-execution">
         <title>PowerShell Execution</title>
         <steps>
-          <step>Use 
-un_in_terminal tool.</step>
-          <step>Prefer pwsh over powershell (Windows PowerShell).</step>
-          <step>Handle errors using 	ry...catch in scripts.</step>
+          <step>Use `run_in_terminal` tool.</step>
+          <step>Prefer `pwsh` over `powershell` (Windows PowerShell).</step>
+          <step>Handle errors using `try...catch` in scripts.</step>
         </steps>
       </procedure>
     </category>
