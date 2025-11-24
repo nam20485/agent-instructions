@@ -103,3 +103,17 @@ Review "Comprehensive Guides" (e.g., `ai-workflow-development-guide.md`) to ensu
 ### Phase 3: Architecture (Long-term)
 1. Restructure `ai-core-instructions.md` to strictly enforce the Tiered Loading model.
 2. Audit Comprehensive Guides for redundancy.
+
+### Phase 4: Concision & Simplification (New)
+**Goal:** Apply Strategy 3 (Condense & Simplify Language) to high-impact files.
+1. **Review and Rewrite Guides:**
+   - `ai-application-development-guide.md`
+   - `ai-workflow-development-guide.md`
+   - `ai-development-environment-guide.md`
+2. **Review and Rewrite Core Modules:**
+   - `ai-design-principles.md`
+   - `ai-testing-validation.md`
+   - `ai-application-guidelines.md`
+3. **Audit & General Cleanup:**
+   - Scan remaining files in `ai_instruction_modules/` for conversational filler.
+   - Ensure all instructions use imperative mood (e.g., "Do X" instead of "Please make sure to do X").
