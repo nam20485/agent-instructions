@@ -1,4 +1,4 @@
-# Orchestrator Role
+---\ncontext: opt-in\n---\n---\ncontext: opt-in\n---\n# Orchestrator Role
 
 ## Definition
 
@@ -286,3 +286,5 @@ Expected completion: [date]
 - Code reviews maintained quality while enabling progress
 - Communication was clear and blockers were resolved promptly
 - Knowledge was shared effectively across team members
+
+

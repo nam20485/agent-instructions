@@ -1,4 +1,4 @@
-# AI Workflow Roles
+---\ncontext: opt-in\n---\n---\ncontext: opt-in\n---\n# AI Workflow Roles
 
 This module defines the ai instruction module workflow roles concept. When working in the repository and using the rest of the instructions modules, the actual and specific workflow you will follow will be defined by the role that is assigned to you.
 
@@ -35,3 +35,5 @@ Once you have finished reading your role definition instructions you will be exp
 * Ask for approval of your plan.
 * Upon approval, begin executing your workflow.
 * When finished, notify user and present a summary to the user.
+
+

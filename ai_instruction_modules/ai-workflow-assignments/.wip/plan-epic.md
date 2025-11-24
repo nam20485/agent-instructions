@@ -1,4 +1,4 @@
-# Assignment: Create Application Plan
+---\ncontext: opt-in\n---\n---\ncontext: opt-in\n---\n# Assignment: Create Application Plan
 
 ## (create-app-plan)
 
@@ -98,3 +98,5 @@ Template has been moved to [application-plan.md](/.github/ISSUE_TEMPLATE/applica
 Use the template below when you create a sub-issue for each phase in the application plan in step 4. It aligns with the Phases and covers all mandatory areas (testing, docs, containerization, CI/CD, security, risks, etc.). Create a sub-issue off of the main plan issue for each phase, using the template below, and then fill in the placeholders.
 
 Template has been moved to [epic.md](/.github/ISSUE_TEMPLATE/epic.md)
+
+

@@ -1,4 +1,4 @@
-# Assignment: Initiate New Repository
+---\ncontext: opt-in\n---\n---\ncontext: opt-in\n---\n# Assignment: Initiate New Repository
 
 ## (initiate-new-repository)
 
@@ -68,3 +68,5 @@ Your assignment is to initiate and set up a new repository for a project. This i
 ### Completion
 
 After all steps have been completed, notify the orchestrator that the repository and obtain approval to move to the next step. The repository has been initiated and is ready for the next step.
+
+

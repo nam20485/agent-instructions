@@ -1,4 +1,4 @@
-# ABP .NET Copilot Instructions
+---\ncontext: opt-in\n---\n---\ncontext: opt-in\n---\n# ABP .NET Copilot Instructions
 
 ## Code Style and Structure
 - Write concise, idiomatic C# code.
@@ -72,3 +72,5 @@
 - Follow ABP’s guidelines for documenting modules and services.
 
 Refer to official Microsoft, ASP.NET Core, and ABP documentation for best practices in routing, domain-driven design, controllers, modules, and other ABP components.
+
+

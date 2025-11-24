@@ -1,4 +1,4 @@
-# Dynamic Workflow: Breakdown Plan
+---\ncontext: opt-in\n---\n---\ncontext: opt-in\n---\n# Dynamic Workflow: Breakdown Plan
 
 ## Overview
 
@@ -64,3 +64,4 @@ if `$PARALLEL_EPIC_BREAKDOWN` is `false`:
          - wait until the agent finishes the task
          - review the work and approve it
          - record output as `#breakdown-plan.create-story-v2`
+

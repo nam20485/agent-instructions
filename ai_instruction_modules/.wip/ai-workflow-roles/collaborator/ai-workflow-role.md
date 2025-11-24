@@ -1,4 +1,4 @@
-# Collaborator Role
+---\ncontext: opt-in\n---\n---\ncontext: opt-in\n---\n# Collaborator Role
 
 ## Definition
 
@@ -155,3 +155,5 @@ You are an implementation specialist who executes work assigned by the orchestra
 - Test thoroughly before submitting PRs
 - Seek help when needed rather than struggling alone
 - Maintain clean, organized code and branch structure
+
+

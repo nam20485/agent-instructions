@@ -1,4 +1,4 @@
-# Operation Actions
+---\ncontext: opt-in\n---\n---\ncontext: opt-in\n---\n# Operation Actions
 
 ## Description
 
@@ -52,6 +52,8 @@ Operation actions files are intended to live under `ai_instruction_modules/ai-wo
 *//File: ai-workflow-assignments/operation-actions/create-github-project.md*
 ```markdown
 ```
+
+
 
 
 

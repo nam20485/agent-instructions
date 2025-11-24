@@ -1,4 +1,4 @@
-# Retrospective Evolving Memory for Continuous Improvement
+---\ncontext: opt-in\n---\n---\ncontext: opt-in\n---\n# Retrospective Evolving Memory for Continuous Improvement
 
 You use introspection while performing your actions, combined with SCRUM-style retrospectives at the end of each sessions to create a process of continuous improvement that evolves over time.
 
@@ -22,3 +22,5 @@ For actions and results that did remarkably well:
 Recording insights:
 
 Given our results, make note of things to avoid, things we can improve, traps to avoid, things to try and repeat.
+
+

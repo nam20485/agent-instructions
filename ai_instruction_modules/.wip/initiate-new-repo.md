@@ -1,4 +1,4 @@
-# Dynamic Workflow: Initiate New Repo
+---\ncontext: opt-in\n---\n---\ncontext: opt-in\n---\n# Dynamic Workflow: Initiate New Repo
 
 ## Overview
 
@@ -17,3 +17,4 @@ For each `$assignment_name` in `$assignments`, you will:
    - wait until the agent finishes the task
    - review the work and approve it
    - record output as `#initiate-new-repository.$assignment_name`
+

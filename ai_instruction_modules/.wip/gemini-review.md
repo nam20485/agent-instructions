@@ -1,4 +1,4 @@
-# Gemini Review: ai_instruction_modules
+---\ncontext: opt-in\n---\n---\ncontext: opt-in\n---\n# Gemini Review: ai_instruction_modules
 
 - Timestamp: 2025-08-20 00:48:25 -07:00
 - Model: gemini-2.5-pro
@@ -51,3 +51,5 @@ The instruction set is comprehensive and well-structured, with a clear hierarchy
 I have identified the following safe, specific changes that can be applied immediately to improve the documentation.
 
 I will now apply these changes.
+
+

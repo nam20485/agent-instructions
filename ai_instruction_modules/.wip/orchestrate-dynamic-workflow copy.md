@@ -1,4 +1,4 @@
-# Assignment: Orchestrate Dynamic Workflow
+---\ncontext: opt-in\n---\n---\ncontext: opt-in\n---\n# Assignment: Orchestrate Dynamic Workflow
 
 ## (orchestrate-dynamic-workflow)
 
@@ -41,3 +41,5 @@ For each assignment *assignment_n* specified by name in the dynamic workflow fil
 ### Completion
 
 After all steps have been completed, notify the user that the workflow is complete and obtain approval. Upon obtaining approval, the workflow is complete and the orchestrator's assignment is finished.
+
+

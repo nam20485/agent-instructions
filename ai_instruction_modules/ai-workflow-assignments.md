@@ -18,25 +18,12 @@ prerequisites: none
 
 <definition_format>
 ## Workflow Assignment Definition Format
-- **Sections:** Title, Short ID, Goal, Acceptance Criteria, Assignment, Detailed Steps, Completion.
-- **Authority:** Single source of truth for steps and Acceptance Criteria.
-- **Mandatory:**
-    - Resolution trace before execution.
-    - Assignment-first execution (no synthesis).
-    - Acceptance-criteria gating.
-    - Preflight enforcement.
-    - Branch-protection awareness.
-    - Run Report mapped to Acceptance Criteria.
+See **[ai-workflow-development-guide.md](../ai-workflow-development-guide.md)** for definition format and mandatory behaviors.
 </definition_format>
 
 <mandatory_behaviors>
 ## Non-Negotiable Behaviors
-1.  **Resolution Trace:** Print dereference chain (files + URLs/SHAs).
-2.  **Assignment-First:** Execute steps ONLY from resolved assignment file(s).
-3.  **Acceptance Gate:** Mark complete ONLY when all criteria pass.
-4.  **Preflight:** Enforce template/source-of-truth & environment prerequisites.
-5.  **Protection-Aware:** Respect branch protection (Feature Branch + PR).
-6.  **Report:** Produce Run Report mapped to Acceptance Criteria.
+See **[ai-workflow-development-guide.md](../ai-workflow-development-guide.md)** for non-negotiable behaviors.
 </mandatory_behaviors>
 
 <references>

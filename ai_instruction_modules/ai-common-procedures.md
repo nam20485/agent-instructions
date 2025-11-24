@@ -1,72 +1,102 @@
-# Common Procedures
+---
+description: Centralized standard operating procedures for common tasks
+scope: common-procedures
+role: System Orchestrator
+---
 
-<xml>
-<instructions role="reference" scope="common">
-This file contains centralized procedures referenced by other instruction modules.
+<instructions role="assistant" scope="common-procedures">
+  <overview>
+    <purpose>
+      Defines standard procedures for recurring tasks to ensure consistency and quality across all workflow assignments.
+      Assignments reference these procedures using <procedure ref="category.procedure-name"/>.
+    </purpose>
+  </overview>
+
+  <procedures>
+    <category name="git-flow">
+      <procedure name="branch-naming">
+        <title>Branch Naming Convention</title>
+        <steps>
+          <step>Use kebab-case.</step>
+          <step>Prefix with type: eature/, ugfix/, docs/, chore/.</step>
+          <step>Include issue number if applicable: eature/123-add-login.</step>
+        </steps>
+      </procedure>
+
+      <procedure name="commit-messages">
+        <title>Commit Message Standard</title>
+        <steps>
+          <step>Use Conventional Commits format: 	ype(scope): description.</step>
+          <step>Types: feat, ix, docs, style, 
+efactor, 	est, chore.</step>
+          <step>Keep subject under 50 characters.</step>
+          <step>Use imperative mood ("Add feature" not "Added feature").</step>
+        </steps>
+      </procedure>
+
+      <procedure name="pr-creation">
+        <title>Pull Request Creation</title>
+        <steps>
+          <step>Create PR using gh pr create.</step>
+          <step>Link to related issue using Fixes #123 or Connects to #123.</step>
+          <step>Fill out the PR template completely.</step>
+          <step>Self-review code before requesting review.</step>
+        </steps>
+      </procedure>
+    </category>
+
+    <category name="github-management">
+      <procedure name="issue-creation">
+        <title>Issue Creation</title>
+        <steps>
+          <step>Check for duplicates first.</step>
+          <step>Use the appropriate issue template.</step>
+          <step>Fill all required fields.</step>
+          <step>Assign to yourself if you are working on it immediately.</step>
+        </steps>
+      </procedure>
+
+      <procedure name="issue-linking">
+        <title>Linking Issues and Projects</title>
+        <steps>
+          <step>Add issue to the repository's GitHub Project.</step>
+          <step>Assign to the correct Milestone (e.g., "Phase 1").</step>
+          <step>Apply appropriate labels (e.g., ug, nhancement, documentation).</step>
+          <step>If it's a sub-task, link to the parent issue using "Parent issue: #123".</step>
+        </steps>
+      </procedure>
+    </category>
+
+    <category name="validation">
+      <procedure name="basic-validation">
+        <title>Basic Validation Steps</title>
+        <steps>
+          <step>Run build to ensure no compilation errors.</step>
+          <step>Run linter to ensure code style compliance.</step>
+          <step>Run unit tests to ensure no regressions.</step>
+        </steps>
+      </procedure>
+
+      <procedure name="template-validation">
+        <title>Template Validation</title>
+        <steps>
+          <step>Verify all sections of the template are filled.</step>
+          <step>Ensure no placeholders (e.g., [TODO]) remain.</step>
+          <step>Check that links to other documents are valid.</step>
+        </steps>
+      </procedure>
+    </category>
+
+    <category name="tool-usage">
+      <procedure name="powershell-execution">
+        <title>PowerShell Execution</title>
+        <steps>
+          <step>Use 
+un_in_terminal tool.</step>
+          <step>Prefer pwsh over powershell (Windows PowerShell).</step>
+          <step>Handle errors using 	ry...catch in scripts.</step>
+        </steps>
+      </procedure>
+    </category>
+  </procedures>
 </instructions>
-</xml>
-
-## 1. Git & GitHub Workflow
-
-<procedure id="git-flow">
-1. **Branching**:
-   - Always create a new branch for your work.
-   - Naming convention: `type/description` (e.g., `feat/add-login`, `fix/memory-leak`).
-   - Never commit directly to `main` or `master`.
-
-2. **Committing**:
-   - Commit often with clear, descriptive messages.
-   - Format: `type: description` (e.g., `feat: add login component`).
-   - Include issue references if applicable (e.g., `Closes #123`).
-
-3. **Pull Requests**:
-   - Create a PR when the work is ready for review.
-   - Fill out the PR template completely.
-   - Link related issues.
-   - Request review from appropriate team members.
-</procedure>
-
-## 2. Validation Procedures
-
-<procedure id="validation-basic">
-1. **Build**:
-   - Run the build command for the project (e.g., `npm run build`, `dotnet build`).
-   - Ensure there are no errors.
-
-2. **Lint**:
-   - Run the lint command (e.g., `npm run lint`).
-   - Fix all linting errors.
-
-3. **Test**:
-   - Run unit tests (e.g., `npm test`, `dotnet test`).
-   - Ensure all tests pass.
-   - Add new tests for new functionality.
-</procedure>
-
-## 3. Tool Usage
-
-<procedure id="tool-usage">
-1. **Terminal**:
-   - Use `run_in_terminal` for executing commands.
-   - Chain commands with `&&` or `;` where appropriate, but prefer separate calls for clarity if complex.
-   - Check output for errors.
-
-2. **File Editing**:
-   - Use `replace_string_in_file` for precise edits.
-   - Use `insert_edit_into_file` only when necessary or for large insertions.
-   - Always read the file first to ensure context.
-</procedure>
-
-## 4. Issue Management
-
-<procedure id="issue-workflow">
-1. **Creation**:
-   - Use the appropriate template (Epic, Story, Task, Bug).
-   - Fill in all required fields.
-   - Add labels and milestones.
-
-2. **Updates**:
-   - Keep issues updated with progress.
-   - Link PRs to issues.
-   - Close issues when completed.
-</procedure>
