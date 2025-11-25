@@ -28,11 +28,9 @@ scope: workflow-assignment
       <action>Run the GraphQL snapshot command from the protocol and store the result (defaults to `.pr-thread-snapshot.json`).</action>
     </step>
 
-    <step name="Process Each Thread">
-      <action>For every unresolved, non-outdated thread:</action>
-      <substep>Implement and commit the fix (or document why no change is required).</substep>
-      <substep>Reply using the mandated template, referencing the commit SHA.</substep>
-      <substep>Call the `resolveReviewThread` mutation with the correct thread ID.</substep>
+    <step name="Process Threads">
+      <action>Execute the standard resolution procedure:</action>
+      <action><procedure ref="git-flow.pr-comment-resolution"/></action>
     </step>
 
     <step name="Re-verify & Capture Evidence">

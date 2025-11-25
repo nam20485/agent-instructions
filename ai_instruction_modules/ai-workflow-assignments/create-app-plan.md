@@ -43,9 +43,16 @@ role: System Orchestrator
       <actions>
         <action>Create Issue documenting plan using template.</action>
         <action>Create milestones based on phases.</action>
-        <action>Link issue to GitHub Project.</action>
-        <action>Assign to "Phase 1: Foundation" milestone.</action>
-        <action>Apply labels ("planning", "documentation").</action>
+        <action><procedure ref="github-management.issue-linking"/></action>
+      </actions>
+    </step>
+
+    <step number="4">
+      <title>Phase Sub-Issues</title>
+      <actions>
+        <action>Create a sub-issue for each phase of the plan.</action>
+        <action>Use the "Epic" template for these sub-issues.</action>
+        <action><procedure ref="github-management.sub-issue-creation"/></action>
       </actions>
     </step>
   </workflow>

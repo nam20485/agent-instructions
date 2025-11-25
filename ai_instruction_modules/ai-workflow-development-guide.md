@@ -54,15 +54,25 @@ All workflow files must follow the formatting standards defined in:
 - Assignments: `ai_instruction_modules/ai-workflow-assignments/<short-id>.md`
 - Dynamic Workflows: `ai_instruction_modules/ai-workflow-assignments/dynamic-workflows/<name>.md`
 
-### Assignment Definition Format
+### Assignment Definition Format (XML)
+Assignments use XML semantic tags within markdown. See `ai-workflow-assignment-empty-template.md` for the canonical template.
+
 **Required Sections:**
-1. **Title**
-2. **Short ID** (e.g., `(create-epic)`)
-3. **Goal**
-4. **Acceptance Criteria** (Numbered list)
-5. **Assignment** (Description)
-6. **Detailed Steps**
-7. **Completion**
+1. **Front Matter** — YAML with `description`, `scope`, `role`
+2. **`<overview>`** — `<goal>`, optional `<context>`, `<input>`, `<output>`
+3. **`<acceptance_criteria>`** — List of `<criterion>` elements
+4. **`<workflow>`** — Numbered `<step>` elements with `<title>` and `<actions>`
+5. **`<validation>`** — Final verification steps
+
+**Optional Sections:**
+- **`<prerequisites>`** — Items needed before starting
+- **`<events>`** — Lifecycle hooks (`pre-assignment-begin`, `on-assignment-failure`, etc.)
+- **`<notes>`** — Important notes
+- **`<references>`** — Links to related docs
+- **`<appendix>`** — Supporting templates or details
+
+**Procedure References:**
+- Use `<procedure ref="category.procedure-name"/>` to invoke common procedures from `ai-common-procedures.md`
 
 ### Key Assignment Files
 See **[ai-workflow-assignments.md](./ai-workflow-assignments.md)** for the complete master index.

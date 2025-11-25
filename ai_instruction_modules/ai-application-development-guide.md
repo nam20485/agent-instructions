@@ -10,14 +10,9 @@ prerequisites: ai-core-instructions.md
 
 <purpose>
 ## Purpose
-**Use when:** Creating, modifying, or refactoring applications.
-**Role:** Application developers and architects.
-
-## When to Use This Guide
-- Creating new applications (Web API, Blazor, Console)
-- Adding features or refactoring existing code
-- Making architectural decisions (DDD, SOLID)
-- Reviewing code for best practices
+- **Use for:** Planning or changing application code.
+- **Audience:** Application developers and architects.
+- **Covers:** New apps, feature work, refactors, and design reviews.
 </purpose>
 
 <quick_reference>
@@ -42,15 +37,9 @@ prerequisites: ai-core-instructions.md
 - **Security:** Identity, JWT/Cookie, HTTPS, input validation.
 
 ## Canonical Reference Files
-
-**[ai-application-guidelines.md](./ai-application-guidelines.md)**
-- Detailed tech stack, framework selection, global.json config.
-
-**[ai-design-principles.md](./ai-design-principles.md)**
-- 12-Factor, SOLID, GoF patterns, DDD, SemVer.
-
-**[ai-instructions-aspnet-guidelines.md](./ai-instructions-aspnet-guidelines.md)**
-- ASP.NET Core style guide, error handling, EF Core, testing.
+- [ai-application-guidelines.md](./ai-application-guidelines.md) — Tech stack, framework selection, `global.json` rules.
+- [ai-design-principles.md](./ai-design-principles.md) — 12-Factor, SOLID, patterns, SemVer.
+- [ai-instructions-aspnet-guidelines.md](./ai-instructions-aspnet-guidelines.md) — ASP.NET, EF Core, testing standards.
 
 ## Common Workflows
 

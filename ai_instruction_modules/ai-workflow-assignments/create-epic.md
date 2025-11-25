@@ -59,9 +59,8 @@ role: System Orchestrator
     <step number="5">
       <title>Link to Plan</title>
       <actions>
-        <action>Follow <procedure ref="github-management.issue-linking"/> to link issue to Project and Milestone.</action>
-        <action>Link as sub-issue to parent plan.</action>
-        <action>Mark as blocking parent issue.</action>
+        <action><procedure ref="github-management.issue-linking"/></action>
+        <action><procedure ref="github-management.sub-issue-creation"/></action>
       </actions>
     </step>
   </workflow>
