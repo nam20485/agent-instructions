@@ -2,6 +2,7 @@
 description: Documentation for the Agent Script Engine, enabling custom workflows for AI agents.
 scope: agent-script-engine
 prerequisites: ai-workflow-assignments/dynamic-workflows/dynamic-workflow-syntax.md
+context: opt-in
 ---
 # Agent Script Engine
 

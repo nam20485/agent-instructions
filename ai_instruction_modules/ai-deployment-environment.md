@@ -2,6 +2,7 @@
 description: Template and instructions for deploying ASP.NET Core + Blazor WASM apps to Google Cloud.
 scope: deployment
 prerequisites: none
+context: opt-in
 ---
 # Google Cloud Deployment Template
 

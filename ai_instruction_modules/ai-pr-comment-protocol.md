@@ -2,6 +2,7 @@
 description: Protocol for resolving PR review comments and managing review threads.
 scope: pr-management
 prerequisites: none
+context: opt-in
 ---
 # PR Comment Protocols
 

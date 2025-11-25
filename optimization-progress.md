@@ -153,6 +153,18 @@ This document tracks the progress of the instruction optimization initiative def
 - **Result:** 18KB → 6KB (**12KB saved, 67% reduction**)
 - **Impact:** File still provides all navigation/orientation but points to canonical sources instead of duplicating
 
+### 11. Extended `context: opt-in` for Niche/Specialized Files (Complete)
+- **Strategy A5 (Retire Archived/Reference Artifacts)**
+- **Date:** 2025-11-24
+- **Files marked `context: opt-in` (5 additional):**
+  - `ai-agent-script-engine.md` (1.4KB) - Advanced scripting feature
+  - `ai-current-task-reminder.md` (1.7KB) - Memory tool utility
+  - `ai-pr-comment-protocol.md` (1.7KB) - PR review specific
+  - `ai-deployment-environment.md` (1.5KB) - Deployment specific
+  - `ai-new-app-template.md` (0.8KB) - Template, on-demand
+- **Total opt-in files now:** 10 (31.5KB no longer auto-loads)
+- **Auto-loaded files:** 18 files (59.2KB)
+
 ---
 
 ## Pending Tasks
@@ -187,11 +199,11 @@ This document tracks the progress of the instruction optimization initiative def
 | Net lines reduced           | ~6,959 (15,225 deletions vs 8,297 insertions) |
 | Percentage reduction        | ~30% from original                            |
 | Auto-loaded WIP files       | 12 → 0                                        |
-| Auto-loaded reference files | 5 → 0 (~24.4KB saved via opt-in)              |
+| Opt-in files                | 10 files (~31.5KB saved via opt-in)           |
 | Meta-docs moved to docs/    | 4 files (~34.2KB removed from corpus)         |
 | Guide refactor (B5)         | 18KB → 6KB (12KB saved)                       |
-| **Total context removed**   | **~70.6KB no longer auto-loads**              |
-| **Current ai-*.md corpus**  | **28 files, 89KB total**                      |
+| **Auto-loaded ai-* corpus** | **18 files, 59.2KB**                          |
+| **Total context removed**   | **~77.7KB no longer auto-loads**              |
 
 ### Estimated Remaining Gains
 | Category                      | Est. Reduction |

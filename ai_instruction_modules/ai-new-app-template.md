@@ -2,6 +2,7 @@
 description: Template for defining a new application project plan.
 scope: project-planning
 prerequisites: none
+context: opt-in
 ---
 # New Application Template
 

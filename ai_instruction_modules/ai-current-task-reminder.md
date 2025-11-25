@@ -2,6 +2,7 @@
 description: Instructions for using the "Current Task Reminder" memory tool to maintain context.
 scope: task-management
 prerequisites: none
+context: opt-in
 ---
 # Current Task Reminder
 
