@@ -199,6 +199,15 @@ The Gemin-authored `optimization-strategies.md` file (produced from the same `ag
 | 5. Remove comprehensive-guide redundancy | ✅ Now included as Tier B **B5** | New section added above to implement Gemin's guide-to-index refactor suggestion. |
 
 Additionally, Gemin's three-phase roadmap (De-bloat → Standardize → Architect) maps directly to the Tier A/B/C track in this document, so delivery sequencing stays aligned while adding richer telemetry and governance requirements.
+
+## Related Documentation
+
+| Document                                                                        | Description                                                                                                                         |
+| ------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| [Context Delivery Strategies](docs/context-delivery-strategies.md)              | Detailed implementation plans for branch parameterization, RAG-based MCP server, and hybrid approaches for dynamic context delivery |
+| [Context Optimization Research](docs/ai-context-optimization-research.md)       | Research notes on Anthropic/OpenAI context engineering best practices                                                               |
+| [Custom Instructions Optimization](docs/ai-custom-instructions-optimization.md) | Analysis of custom instruction patterns and optimization opportunities                                                              |
+
 ## Closing Notes
 
 - This document fulfills the plan from `agent-instructions-optimization.md` by (1) researching proven reduction methods, (2) analyzing the current corpus, (3) brainstorming actionable strategies, and (4) documenting each option with cost/benefit tiers.
