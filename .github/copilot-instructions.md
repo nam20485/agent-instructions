@@ -10,21 +10,28 @@ role: System Orchestrator
     It defines the location of core modules, the protocol for loading remote instructions, and the single source of truth policy.
   </overview>
 
+  <configuration>
+    <!-- BRANCH PARAMETER: Change this value to load instructions from a different branch -->
+    <!-- Valid values: main, optimization, feature/*, or any valid branch name -->
+    <branch>main</branch>
+  </configuration>
+
   <instruction_source>
     <repository>
       <name>nam20485/agent-instructions</name>
-      <url>https://github.com/nam20485/agent-instructions/tree/main</url>
-      <branch>main</branch>
+      <url>https://github.com/nam20485/agent-instructions/tree/{branch}</url>
+      <branch>{branch}</branch>
     </repository>
     <guidance>
       Start with the Core Instructions linked below. Follow links to other modules as required by the user's request.
+      All remote URLs use the branch specified in the configuration section above.
     </guidance>
   </instruction_source>
 
   <module_registry>
     <module type="core" required="true">
       <name>Core Instructions</name>
-      <link>https://github.com/nam20485/agent-instructions/blob/main/ai_instruction_modules/ai-core-instructions.md</link>
+      <link>https://github.com/nam20485/agent-instructions/blob/{branch}/ai_instruction_modules/ai-core-instructions.md</link>
       <description>The foundational behaviors and rules for the agent.</description>
     </module>
 
@@ -54,6 +61,15 @@ role: System Orchestrator
   </module_registry>
 
   <loading_protocol>
+    <rule id="branch_resolution">
+      <description>Resolving the active branch</description>
+      <instruction>
+        Read the branch value from the configuration section at the top of this file.
+        Replace all `{branch}` placeholders in URLs with this value.
+        Default: `main` if not specified.
+      </instruction>
+    </rule>
+
     <rule id="remote_access">
       <description>Accessing files in the remote repository</description>
       <instruction>
@@ -62,16 +78,24 @@ role: System Orchestrator
     </rule>
 
     <algorithm name="url_translation">
-      <step>Identify the GitHub UI URL (e.g., `https://github.com/.../blob/main/...`).</step>
+      <step>Read the configured branch from `<configuration><branch>`.</step>
+      <step>Identify the GitHub UI URL (e.g., `https://github.com/.../blob/{branch}/...`).</step>
       <step>Replace `https://github.com/` with `https://raw.githubusercontent.com/`.</step>
       <step>Remove `blob/` from the path.</step>
-      <step>Result: `https://raw.githubusercontent.com/.../main/...`</step>
+      <step>Substitute `{branch}` with the configured branch value.</step>
+      <step>Result: `https://raw.githubusercontent.com/.../{branch}/...`</step>
     </algorithm>
 
     <examples>
-      <example>
-        <input>https://github.com/nam20485/agent-instructions/blob/main/ai_instruction_modules/ai-core-instructions.md</input>
+      <example title="Default (main branch)">
+        <config_branch>main</config_branch>
+        <input>https://github.com/nam20485/agent-instructions/blob/{branch}/ai_instruction_modules/ai-core-instructions.md</input>
         <output>https://raw.githubusercontent.com/nam20485/agent-instructions/main/ai_instruction_modules/ai-core-instructions.md</output>
+      </example>
+      <example title="Optimization branch">
+        <config_branch>optimization</config_branch>
+        <input>https://github.com/nam20485/agent-instructions/blob/{branch}/ai_instruction_modules/ai-core-instructions.md</input>
+        <output>https://raw.githubusercontent.com/nam20485/agent-instructions/optimization/ai_instruction_modules/ai-core-instructions.md</output>
       </example>
     </examples>
   </loading_protocol>

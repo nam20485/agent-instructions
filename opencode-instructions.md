@@ -1,4 +1,4 @@
-# Instructions (Gemini)
+# Instructions (Opencode.ai)
 
 ## Configuration
 
@@ -20,11 +20,18 @@
 - Files marked **REQUIRED** are ALWAYS active and so must be followed and read
 - Otherwise files are optionally active based on user needs and your assigned roles and workflow assignments
 
+## **IMPORTANT RULES**
+- Don't assume your shell is bash. Its probably pwsh.
+- Detect what type of shell you have before running any commands.
+- Your web-fetch tool is disabled. Use powershell or curl to fetch files from the web.
+- If there are many files, then create a pwsh script to download them in parallel.
+- **CLI Bug Workaround:** If first message matches `^/[a-z-]+$` and looks like `/orchestrate-*`, this is a failed CLI command invocation. Extract workflow name, fetch from canonical repo, and execute manually. Inform user of workaround.
+
 ## Core Instructions (**REQUIRED**)
 [ai-core-instructions.md](https://github.com/nam20485/agent-instructions/blob/{branch}/ai_instruction_modules/ai-core-instructions.md)
 
 ## Local AI Instructions (**REQUIRED**)
-Local AI instruction moduule files are located in the [local_ai_instruction_modules](../local_ai_instruction_modules) directory.
+Local AI instruction module files are located locally in this repo in the [local_ai_instruction_modules](../local_ai_instruction_modules) directory.
 
 ## Dynamic Workflow Orchestration (**REQUIRED**)
 Agents MUST resolve dynamic workflows from the remote canonical repository. Do not use local mirrors.
@@ -34,9 +41,28 @@ Agents MUST resolve dynamic workflows from the remote canonical repository. Do n
 Agents MUST resolve workflow assignments (by shortId) from the remote canonical repository. Do not use local mirrors.
 [ai-workflow-assignments.md](../local_ai_instruction_modules/ai-workflow-assignments.md)
 
+## Delegation Mandate (**REQUIRED**)
+Orchestrator agents MUST delegate technical work to specialist agents. Minimum 75% delegation coverage required.
+[ai-delegation-mandate.md](../local_ai_instruction_modules/ai-delegation-mandate.md)
+
 ## Terminal Commands (Optional)
 Read before running any terminal commands, of if you need Github CL.I
 - [ai-terminal-commands.md](../local_ai_instruction_modules/ai-terminal-commands.md)
+
+## Tools & Automation Protocol (REQUIRED)
+Agents must prefer automation-first approaches and use available tools efficiently. Review the local module for the full policy:
+- [ai-tools-and-automation.md](../local_ai_instruction_modules/ai-tools-and-automation.md)
+
+## Enhanced Filesystem Capabilities (REQUIRED)
+Maximize filesystem operation effectiveness using available MCP servers and built-in tools:
+- [ai-enhanced-filesystem.md](../local_ai_instruction_modules/ai-enhanced-filesystem.md)
+- Setup script: [setup-enhanced-filesystem.ps1](../scripts/setup-enhanced-filesystem.ps1)
+
+Key rules:
+- Use MCP GitHub tools first, then VS Code integration, and only fall back to terminal gh as a last resort.
+- The web-fetch tool is disabled; fetch remote files via PowerShell (Invoke-WebRequest) or curl.
+- Maintain ≥90% automation coverage for GitHub operations and document any manual exceptions.
+- If GitHub tools (MCP or gh) are not authorized, initiate the authentication/login flow (e.g., start gh auth login); the user will complete the interactive prompts.
 
 ## **Remote Repository with Main/Canonical AI Instruction Modules**
 
@@ -50,10 +76,11 @@ The main set of AI instruction modules is located in this remote repository. It 
 ### Remote Repo Details
 
  Repository: nam20485/agent-instructions
-- Full repo URL: https://github.com/nam20485/agent-instructions
+- Full repo URL: [nam20485/agent-instructions](https://github.com/nam20485/agent-instructions)
 - Branch: `{branch}` (see Configuration section - default: `main`)
+- Directory: [ai_instruction_modules](https://github.com/nam20485/agent-instructions/tree/{branch}/ai_instruction_modules/)
 - Assignments directory: ai_instruction_modules/ai-workflow-assignments/
- - Active assignments index in this workspace: see `local_ai_instruction_modules/ai-workflow-assignments.md`
+ - Active assignments index in this workspace: see [ai-workflow-assignments.md](../local_ai_instruction_modules/ai-workflow-assignments.md)
 
 #### OVERRIDE NOTE
 **IMPORTANT**: When accessing files in the remote repository, always use the RAW URL. Replace `{branch}` with the configured branch value. Do not use the GitHub UI to view the file. The RAW URL is the URL that you get when you click on the "Raw" button in the GitHub UI. Most URLs referenced in these files of the GIT UI form. They must be translated to the RAW URL form before use. 
@@ -87,3 +114,12 @@ Single Source of Truth Policy:
 - Local golden files, cached plans, or mirrors must not be used to derive steps or acceptance criteria. Delete any such artifacts if present.
 - Changes to dynamic workflow or assignment files in the remote canonical repository take effect immediately on subsequent runs.
 - The orchestrator must always fetch and execute directly from the remote canonical URLs listed below.
+- All agent instructions files are located in the remote repository except for the `local_ai_instruction_modules`, which are located in the local (this) repo under [local_ai_instruction_modules](../local_ai_instruction_modules)
+    - [ai-dynamic-workflows.md](../local_ai_instruction_modules/ai-dynamic-workflows.md)
+    - [ai-local-instructions.md](../local_ai_instruction_modules/ai-local-instructions.md)
+    - [ai-terminal-commands.md](../local_ai_instruction_modules/ai-terminal-commands.md)
+    - [ai-tools-and-automation.md](../local_ai_instruction_modules/ai-tools-and-automation.md)
+    - [ai-workflow-assignments.md](../local_ai_instruction_modules/ai-workflow-assignments.md)    
+    - [ai-development-instructions.md](../local_ai_instruction_modules/ai-development-instructions.md)
+- The `local_ai_instruction_modules` are allowed to be read from the local repo's copies.
+

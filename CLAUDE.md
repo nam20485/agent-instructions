@@ -2,6 +2,14 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Configuration
+
+<!-- BRANCH PARAMETER: Change this value to load instructions from a different branch -->
+<!-- Valid values: main, optimization, feature/*, or any valid branch name -->
+**Active Branch:** `main`
+
+All remote URLs in this document use the configured branch above. Replace `{branch}` placeholders with the active branch value.
+
 ## Repository Overview
 
 This repository contains a comprehensive AI instruction framework designed for orchestrating AI agents (Claude, Copilot, Gemini, etc.) through complex software development workflows. The framework provides modular instructions, dynamic workflows, and role-based execution patterns.
@@ -132,9 +140,11 @@ result = functionName(param)
 
 **URL Translation Pattern:**
 ```
-GitHub UI: https://github.com/nam20485/agent-instructions/blob/main/<file-path>
-Raw URL:   https://raw.githubusercontent.com/nam20485/agent-instructions/main/<file-path>
+GitHub UI: https://github.com/nam20485/agent-instructions/blob/{branch}/<file-path>
+Raw URL:   https://raw.githubusercontent.com/nam20485/agent-instructions/{branch}/<file-path>
 ```
+
+Replace `{branch}` with the configured branch from the Configuration section (default: `main`).
 
 **Single Source of Truth:**
 - Dynamic workflows and assignments MUST be fetched from remote canonical repository
