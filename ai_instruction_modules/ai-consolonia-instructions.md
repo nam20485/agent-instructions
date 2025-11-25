@@ -2,6 +2,7 @@
 description: Guide for building console applications with Consolonia (Avalonia UI for terminal).
 scope: consolonia
 prerequisites: ai-application-development-guide.md
+context: opt-in
 ---
 # Consolonia Development Instructions
 

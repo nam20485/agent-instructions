@@ -2,6 +2,7 @@
 description: Quick start guide for navigating the AI instruction modules system.
 scope: quick-start
 prerequisites: none
+context: opt-in
 ---
 # Quick Start: AI Instruction Modules Navigation
 

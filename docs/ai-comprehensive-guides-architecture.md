@@ -2,6 +2,7 @@
 description: Visual architecture of the comprehensive guides and their relationship to canonical instruction modules.
 scope: architecture
 prerequisites: ai-core-instructions.md
+context: opt-in
 ---
 # AI Instruction Modules: Comprehensive Guides Architecture
 

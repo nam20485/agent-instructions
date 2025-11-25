@@ -2,6 +2,7 @@
 description: Instructions for creating a custom repository summary file (.ai-repository-summary.md).
 scope: repo-summary
 prerequisites: ai-instructions-format.md
+context: opt-in
 ---
 # Creating Repository Custom Instructions
 

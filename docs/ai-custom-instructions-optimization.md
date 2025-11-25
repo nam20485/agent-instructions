@@ -2,6 +2,7 @@
 description: Strategy and plan for optimizing custom instructions for context retention and performance.
 scope: optimization-strategy
 prerequisites: ai-context-optimization-research.md
+context: opt-in
 ---
 # Custom Instructions Optimization Strategy
 

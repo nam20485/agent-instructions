@@ -68,24 +68,30 @@
 - **Actions:** Apply a "one idea = one bullet" edit pass starting with `ai-core-instructions.md`, `ai-workflow-assignments.md`, and `ai-instructions-format.md`. Enforce style with Vale or a custom markdown lint preset.
 - **Impact:** 10–20% reduction per edited file plus improved compliance thanks to direct imperatives (per Anthropic guidance).
 - **Effort / Risk:** 1 week editorial sweep, low risk because edits are semantic-preserving.
-#### A3. Centralize Common Procedures
+#### A3. Centralize Common Procedures ✅ COMPLETE
+- **Status:** Completed 2025-11-24
 - **Problem:** Git/GitHub workflow, validation steps, and terminal etiquette repeat across assignments.
 - **Actions:** Create `ai-common-procedures.md` with numbered sections (Issue workflow, Validation, Tool usage) and replace repeated blocks with references. Update assignments to include `<procedure ref="validation-basic"/>` style markers.
+- **Result:** Created `ai-common-procedures.md` with 10 procedures; assignments updated to use `<procedure ref="..."/>` syntax.
 - **Impact:** Removes ~15 KB of duplicated text per assignment and guarantees consistent wording.
 - **Effort / Risk:** 3 dev-days for synthesis + link updates; risk low if we augment with automated tests ensuring references resolve.
 
-#### A4. Standard Front Matter & Anthropic-Style XML Tagging
+#### A4. Standard Front Matter & Anthropic-Style XML Tagging ✅ COMPLETE
+- **Status:** Completed 2025-11-24
 - **Problem:** Files mix markdown, ad-hoc bold labels, and inconsistent heading levels that force models to relearn structure each time, and they often omit the `<xml>` root metadata Anthropic recommends for disambiguating instructions.
 - **Actions:**
   1. Prepend every required file with a compact front matter block (purpose, scope, prerequisites) followed by consistent XML sections (`<persona>`, `<workflow>`, `<validation>`).
   2. Wrap each instruction packet in a top-level `<xml>` block whose child elements include descriptive attributes (e.g., `<instructions role="workflow" scope="tier1">…</instructions>`), mirroring [Anthropic's XML tagging guidance](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/use-xml-tags).
   3. Provide a lint rule that fails CI when tags are missing/out of order or when attributes do not describe the enclosed content.
+- **Result:** All 37 workflow assignments + all 31 root instruction files verified XML format.
 - **Impact:** Up to 8% token savings from removing duplicated prose, plus improved parsing accuracy and Claude compliance thanks to semantically rich XML metadata.
 - **Effort / Risk:** 1 sprint for tooling; requires coordination but minimal semantic change.
 
-#### A5. Retire Archived Artifacts from Default Context
+#### A5. Retire Archived Artifacts from Default Context ✅ COMPLETE
+- **Status:** Completed 2025-11-24
 - **Problem:** Files under `docs/.archived` still appear in aggregated prompts even though they exist only for historical reference.
 - **Actions:** Add a manifest flag `context: opt-in` and update loaders to exclude flagged files unless explicitly requested.
+- **Result:** 12 `.wip/` files + 3 large reference files (`ai-comprehensive-guides-*.md`, `ai-working-command-examples.md`) marked `context: opt-in`. ~38.7KB no longer auto-loads.
 - **Impact:** Immediate 7–10% drop in baseline tokens with zero editing work.
 - **Effort / Risk:** <1 day; ensure documentation teaches agents how to fetch archived material when needed.
 

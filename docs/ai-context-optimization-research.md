@@ -2,6 +2,7 @@
 description: Research findings on optimizing context windows and custom instructions for AI models.
 scope: context-optimization
 prerequisites: ai-core-instructions.md
+context: opt-in
 ---
 # Context & Custom Instruction Optimization Research
 

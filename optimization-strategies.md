@@ -117,3 +117,84 @@ Review "Comprehensive Guides" (e.g., `ai-workflow-development-guide.md`) to ensu
 3. **Audit & General Cleanup:**
    - Scan remaining files in `ai_instruction_modules/` for conversational filler.
    - Ensure all instructions use imperative mood (e.g., "Do X" instead of "Please make sure to do X").
+
+---
+
+## Progress Tracking
+
+### Completed ✅
+
+| Task                                                     | Date       | Notes                                                                                                                       |
+| -------------------------------------------------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------- |
+| A5: Mark `.wip/` files `context: opt-in`                 | 2025-11-24 | 12 files no longer auto-load                                                                                                |
+| A3: Create `ai-common-procedures.md`                     | 2025-11-24 | 10 procedures centralized                                                                                                   |
+| Format Consistency: Workflow assignments                 | 2025-11-24 | All 37 files converted to XML format                                                                                        |
+| Format Consistency: Root instruction files               | 2025-11-24 | All 31 `ai-*.md` files verified XML format                                                                                  |
+| Documentation: Update `ai-workflow-development-guide.md` | 2025-11-24 | New assignment format documented                                                                                            |
+| Recovery: Restore 4 lost files from git                  | 2025-11-24 | `recover-from-error.md`, `validate-assignment-completion.md`, `validate-dynamic-workflow-script.md`, `update-plan-issue.md` |
+| Quick Win: `ai-comprehensive-guides-architecture.md`     | 2025-11-24 | Added `context: opt-in` (17.2KB no longer auto-loads)                                                                       |
+| Quick Win: `ai-comprehensive-guides-diagrams.md`         | 2025-11-24 | Added `context: opt-in` (12.5KB no longer auto-loads)                                                                       |
+| Quick Win: `ai-working-command-examples.md`              | 2025-11-24 | Added `context: opt-in` (9.0KB no longer auto-loads)                                                                        |
+
+### In Progress 🔄
+
+*None currently*
+
+### Pending 📋
+
+#### Quick Wins (Low effort)
+*All quick wins completed!*
+
+#### Medium Effort (Redundancy Reduction)
+- [ ] Consolidate GitHub auth instructions (currently in 4 files)
+  - Files: `ai-gh-authentication.md`, `ai-common-procedures.md`, `ai-development-environment-guide.md`, `ai-working-command-examples.md`
+  - Decision needed: Which file is canonical? Others should reference it.
+- [ ] Remove DSL duplication from `ai-workflow-development-guide.md` (~4KB)
+  - Currently duplicates content from `dynamic-workflow-syntax.md`
+  - Should use `<see ref="..."/>` pattern instead
+
+#### Concision Pass (Phase 4)
+Target files by size (largest first):
+- [ ] `ai-workflow-development-guide.md` (18.0KB, 448 lines)
+- [ ] `ai-quickstart.md` (8.3KB, 247 lines)
+- [ ] `ai-workflow-assignments.md` (7.6KB, 123 lines)
+- [ ] `ai-core-instructions.md` (5.8KB, 149 lines)
+- [ ] `ai-application-development-guide.md` (4.8KB, 120 lines)
+- [ ] `ai-development-environment-guide.md` (4.7KB, 128 lines)
+
+---
+
+## Metrics Summary
+
+### Token Reduction Achieved
+- **Net lines reduced:** ~6,959 (15,225 deletions vs 8,297 insertions)
+- **Percentage:** ~30% reduction from original
+- **Auto-loaded WIP files:** 12 → 0
+- **Auto-loaded reference files:** 3 → 0 (additional ~38.7KB no longer auto-loads)
+
+### Estimated Remaining Gains
+| Category                           | Est. Reduction  |
+| ---------------------------------- | --------------- |
+| ~~Quick wins (`context: opt-in`)~~ | ~~40KB~~ ✅ Done |
+| Redundancy elimination             | ~6KB            |
+| Concision pass                     | ~8-10KB         |
+| **Total potential remaining**      | **~15KB**       |
+
+---
+
+## Redundancy Analysis (Root Instruction Files)
+
+### Topics Found in Multiple Files
+
+| Topic                                   | Files                                                                                                                         | Recommendation                                                |
+| --------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| GitHub Auth (`gh auth`, `GITHUB_TOKEN`) | `ai-gh-authentication.md`, `ai-common-procedures.md`, `ai-development-environment-guide.md`, `ai-working-command-examples.md` | Make `ai-common-procedures.md` canonical; others reference it |
+| PR Creation (`gh pr create`)            | `ai-common-procedures.md`, `ai-development-environment-guide.md`, `ai-working-command-examples.md`                            | Already in common-procedures; remove from others              |
+| Issue Creation                          | `ai-common-procedures.md` only                                                                                                | ✅ Already centralized                                         |
+| Commit Messages                         | `ai-common-procedures.md` only                                                                                                | ✅ Already centralized                                         |
+
+### Files That Should Reference Common Procedures
+These files contain inline instructions that should be replaced with `<procedure ref="..."/>`:
+- `ai-gh-authentication.md` → Could be deprecated or simplified to just reference common-procedures
+- `ai-development-environment-guide.md` → Replace auth/PR sections with refs
+- `ai-working-command-examples.md` → Consider moving to `examples/` dir with `context: opt-in`

@@ -2,6 +2,7 @@
 description: Visual architecture diagrams for the comprehensive guides system using Mermaid.
 scope: architecture-diagrams
 prerequisites: ai-comprehensive-guides-architecture.md
+context: opt-in
 ---
 # AI Instruction Modules: Visual Architecture Diagrams
 

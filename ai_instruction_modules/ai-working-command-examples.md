@@ -2,6 +2,7 @@
 description: Validated, copy-pasteable command examples for PowerShell, GitHub CLI, and Git.
 scope: working-commands
 prerequisites: none
+context: opt-in
 ---
 # AI API and CLI Examples (Working Commands)
 

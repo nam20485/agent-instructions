@@ -74,13 +74,126 @@ This document tracks the progress of the instruction optimization initiative def
   - `ai_instruction_modules/ai-workflow-assignments/validate-assignment-completion.md`: Optimized.
   - `ai_instruction_modules/ai-workflow-assignments/validate-dynamic-workflow-script.md`: Optimized.
 
+### 5. Common Procedures Centralization (Complete)
+- **Strategy A3 (Centralize Common Procedures)**
+- **Date:** 2025-11-24
+- **Files:**
+  - `ai_instruction_modules/ai-common-procedures.md`: Created with 10 centralized procedures
+    - `git-flow.branch-naming`
+    - `git-flow.commit-messages`
+    - `git-flow.pr-creation`
+    - `git-flow.pr-comment-resolution` (uses `scripts/query.ps1`)
+    - `github-management.authentication` (uses `scripts/gh-auth.ps1`)
+    - `github-management.issue-creation`
+    - `github-management.issue-linking`
+    - `github-management.sub-issue-creation` (mandates native GitHub sub-issues)
+    - `validation.basic-validation`
+    - `validation.template-validation`
+    - `tool-usage.powershell-execution`
+  - Updated assignments to use `<procedure ref="..."/>` syntax
+
+### 6. Retire Archived/Reference Artifacts (Complete)
+- **Strategy A5 (Retire Archived Artifacts)**
+- **Date:** 2025-11-24
+- **Files marked `context: opt-in`:**
+  - `.wip/` directory (12 files) - no longer auto-load
+  - `ai-working-command-examples.md` (9.0KB)
+- **Impact:** ~9KB of reference content no longer auto-loads
+
+### 7. Remove Meta-Documentation from Instruction Corpus (Complete)
+- **Date:** 2025-11-24
+- **Action:** Moved meta-documentation files to `docs/` (outside instruction corpus entirely)
+- **Files moved:**
+  - `ai-comprehensive-guides-architecture.md` (17.2KB) → `docs/`
+  - `ai-comprehensive-guides-diagrams.md` (12.5KB) → `docs/`
+  - `ai-context-optimization-research.md` (2.5KB) → `docs/`
+  - `ai-custom-instructions-optimization.md` (2.0KB) → `docs/`
+- **Rationale:** These files describe guide structure or optimization strategy - meta-documentation not needed by agents doing actual work.
+- **Impact:** ~34.2KB permanently removed from instruction corpus
+  - `ai-comprehensive-guides-diagrams.md` (12.5KB) → `docs/`
+- **Rationale:** These files describe the guide structure but contain no actionable instructions. Human-readable reference only.
+- **Impact:** ~30KB permanently removed from instruction corpus (0% chance of context loading)
+
+### 8. File Recovery & Format Consistency
+- **Date:** 2025-11-24
+- **Issue:** 4 workflow assignment files were found empty (content lost)
+- **Resolution:** Recovered from git commit `8acf6c1` and converted to new XML format
+- **Files recovered:**
+  - `recover-from-error.md`
+  - `validate-assignment-completion.md`
+  - `validate-dynamic-workflow-script.md`
+  - `update-plan-issue.md`
+
+### 8. Root Instruction Files Audit (Complete)
+- **Strategy A4 (Standard Front Matter & XML Tagging)**
+- **Date:** 2025-11-24
+- **Result:** All 31 `ai-*.md` files in root of `ai_instruction_modules/` verified to use XML format
+- **Exception:** `ai-new-app-template.md` uses `<template>` tag (correct for its purpose)
+
+### 9. Extended `context: opt-in` for Reference Files (Complete)
+- **Strategy A5 (Retire Archived/Reference Artifacts)**
+- **Date:** 2025-11-24
+- **Files marked `context: opt-in` (4 additional, 2 later moved to docs):**
+  - `ai-quickstart.md` (8.4KB) - Navigation/onboarding guide
+  - `ai-instructions-format.md` (2.7KB) - Meta-documentation about format
+  - `ai-consolonia-instructions.md` (1.9KB) - Niche technology (Consolonia UI)
+  - `ai-creating-repository-summary.md` (2.4KB) - Reference for repo summaries
+- **Total opt-in files now:** 5 (24.4KB no longer auto-loads)
+- **Combined with docs/ moves:** 58.6KB total removed from auto-load context
+
+---
+
 ## Pending Tasks
 
 ### Tier A - Quick Wins
-- [x] **Batch Optimization of Workflow Assignments**: Apply standard formatting to the remaining ~20 files in `ai_instruction_modules/ai-workflow-assignments/`.
-- [ ] **Strategy A3 (Centralize Common Procedures)**: Create `ai-common-procedures.md` and refactor assignments to reference it.
-- [ ] **Strategy A5 (Retire Archived Artifacts)**: Audit and flag archived docs.
+- [x] **A4: Batch Optimization of Workflow Assignments**: All 37 files in XML format ✅
+- [x] **A3: Centralize Common Procedures**: `ai-common-procedures.md` created ✅
+- [x] **A5: Retire Archived Artifacts**: `.wip/` and reference files marked `context: opt-in` ✅
+- [x] **A5b: Extended opt-in**: 6 additional reference/onboarding files marked ✅
+- [ ] **A2: Concision Pass on Root Instruction Files**: Target files by size:
+  - [ ] `ai-workflow-development-guide.md` (18.0KB, 448 lines)
+  - [x] `ai-quickstart.md` (8.3KB) - Marked `context: opt-in` instead ✅
+  - [ ] `ai-workflow-assignments.md` (7.6KB, 123 lines) - Essential index, keep
+  - [ ] `ai-core-instructions.md` (5.8KB, 149 lines)
+  - [ ] `ai-application-development-guide.md` (4.8KB, 120 lines) - Already good model
+  - [ ] `ai-development-environment-guide.md` (4.7KB, 128 lines)
+- [ ] **A6: Redundancy Elimination**: Consolidate duplicated content
+  - GitHub auth in 4 files → make `ai-common-procedures.md` canonical
+  - DSL content duplicated in `ai-workflow-development-guide.md`
 
 ### Tier B - Structural
-- [ ] **Strategy B1 (Tiered Context Loader)**: Implement manifest and loading logic.
-- [ ] **Strategy B5 (Guide-as-Index Refactor)**: Refactor comprehensive guides to be lightweight indexes.
+- [ ] **B1: Tiered Context Loader**: Implement manifest and loading logic
+- [ ] **B5: Guide-as-Index Refactor**: Refactor comprehensive guides to be lightweight indexes
+
+---
+
+## Metrics Summary
+
+### Token Reduction Achieved (as of 2025-11-24)
+| Metric                      | Value                                         |
+| --------------------------- | --------------------------------------------- |
+| Net lines reduced           | ~6,959 (15,225 deletions vs 8,297 insertions) |
+| Percentage reduction        | ~30% from original                            |
+| Auto-loaded WIP files       | 12 → 0                                        |
+| Auto-loaded reference files | 5 → 0 (~24.4KB saved via opt-in)              |
+| Meta-docs moved to docs/    | 4 files (~34.2KB removed from corpus)         |
+| **Total context removed**   | **~58.6KB no longer auto-loads**              |
+
+### Estimated Remaining Gains
+| Category                      | Est. Reduction |
+| ----------------------------- | -------------- |
+| Redundancy elimination        | ~6KB           |
+| Concision pass (A2)           | ~8-10KB        |
+| **Total potential remaining** | **~15KB**      |
+
+---
+
+## Redundancy Analysis
+
+### Topics Found in Multiple Files
+| Topic           | Files                                                                                                                         | Status                              |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
+| GitHub Auth     | `ai-gh-authentication.md`, `ai-common-procedures.md`, `ai-development-environment-guide.md`, `ai-working-command-examples.md` | Pending consolidation               |
+| PR Creation     | `ai-common-procedures.md`, `ai-development-environment-guide.md`, `ai-working-command-examples.md`                            | Pending - remove from non-canonical |
+| Issue Creation  | `ai-common-procedures.md` only                                                                                                | ✅ Centralized                       |
+| Commit Messages | `ai-common-procedures.md` only                                                                                                | ✅ Centralized                       |

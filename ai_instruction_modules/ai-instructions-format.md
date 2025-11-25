@@ -2,6 +2,7 @@
 description: Canonical reference for formatting AI instruction modules (XML tags, Markdown, structure).
 scope: formatting-standards
 prerequisites: none
+context: opt-in
 ---
 # AI Instructions Format Guide
 
