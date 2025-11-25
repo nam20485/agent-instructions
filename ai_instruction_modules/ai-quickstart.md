@@ -121,9 +121,9 @@ All guides follow the same structure:
 <visual_architecture>
 ## 🗺️ Visual Architecture
 
-See complete visual diagrams:
-- **Architecture Overview:** [ai-comprehensive-guides-architecture.md](./ai-comprehensive-guides-architecture.md)
-- **Mermaid Diagrams:** [ai-comprehensive-guides-diagrams.md](./ai-comprehensive-guides-diagrams.md)
+See complete visual diagrams in `docs/`:
+- **Architecture Overview:** [ai-comprehensive-guides-architecture.md](../docs/ai-comprehensive-guides-architecture.md)
+- **Mermaid Diagrams:** [ai-comprehensive-guides-diagrams.md](../docs/ai-comprehensive-guides-diagrams.md)
 </visual_architecture>
 
 <common_scenarios>
@@ -220,8 +220,8 @@ See complete visual diagrams:
 3. Review troubleshooting sections
 
 ### Still stuck?
-1. Check [ai-comprehensive-guides-architecture.md](./ai-comprehensive-guides-architecture.md) for system overview
-2. Review [ai-comprehensive-guides-diagrams.md](./ai-comprehensive-guides-diagrams.md) for visual explanations
+1. Check [ai-comprehensive-guides-architecture.md](../docs/ai-comprehensive-guides-architecture.md) for system overview
+2. Review [ai-comprehensive-guides-diagrams.md](../docs/ai-comprehensive-guides-diagrams.md) for visual explanations
 </pro_tips>
 
 <stats>

@@ -66,11 +66,6 @@ prerequisites: none
 3.  **[Development Environment Guide](./ai-development-environment-guide.md)**
     - **Use for:** Setup, terminals, PowerShell, Git, tools.
     - **Consolidates:** `ai-local-environment.md`, `ai-terminal-management.md`, `ai-powershell-instructions.md`.
-
-> **See Also:**
-> - [QUICK-START.md](./QUICK-START.md) for orientation.
-> - [ai-comprehensive-guides-diagrams.md](./ai-comprehensive-guides-diagrams.md) for visual architecture.
-> - [ai-comprehensive-guides-architecture.md](./ai-comprehensive-guides-architecture.md) for details.
 </comprehensive_guides>
 
 <workflow>

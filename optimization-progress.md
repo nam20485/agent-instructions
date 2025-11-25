@@ -141,6 +141,18 @@ This document tracks the progress of the instruction optimization initiative def
 - **Total opt-in files now:** 5 (24.4KB no longer auto-loads)
 - **Combined with docs/ moves:** 58.6KB total removed from auto-load context
 
+### 10. Guide-as-Index Refactor (B5) - `ai-workflow-development-guide.md` (Complete)
+- **Strategy B5 (Guide-as-Index Refactor)**
+- **Date:** 2025-11-24
+- **Action:** Refactored bloated guide into lightweight navigation/index file
+- **Changes:**
+  - Removed duplicated Event System (~100 lines) → reference `ai-workflow-config.md`
+  - Removed duplicated Orchestrator Responsibilities (~60 lines) → reference `orchestrate-dynamic-workflow.md`
+  - Removed duplicated Assignment Format (~40 lines) → reference template file
+  - Replaced verbose content with quick-reference tables and links
+- **Result:** 18KB → 6KB (**12KB saved, 67% reduction**)
+- **Impact:** File still provides all navigation/orientation but points to canonical sources instead of duplicating
+
 ---
 
 ## Pending Tasks
@@ -151,7 +163,7 @@ This document tracks the progress of the instruction optimization initiative def
 - [x] **A5: Retire Archived Artifacts**: `.wip/` and reference files marked `context: opt-in` ✅
 - [x] **A5b: Extended opt-in**: 6 additional reference/onboarding files marked ✅
 - [ ] **A2: Concision Pass on Root Instruction Files**: Target files by size:
-  - [ ] `ai-workflow-development-guide.md` (18.0KB, 448 lines)
+  - [x] `ai-workflow-development-guide.md` (18.0KB → 6KB) - B5 refactor complete ✅
   - [x] `ai-quickstart.md` (8.3KB) - Marked `context: opt-in` instead ✅
   - [ ] `ai-workflow-assignments.md` (7.6KB, 123 lines) - Essential index, keep
   - [ ] `ai-core-instructions.md` (5.8KB, 149 lines)
@@ -177,7 +189,9 @@ This document tracks the progress of the instruction optimization initiative def
 | Auto-loaded WIP files       | 12 → 0                                        |
 | Auto-loaded reference files | 5 → 0 (~24.4KB saved via opt-in)              |
 | Meta-docs moved to docs/    | 4 files (~34.2KB removed from corpus)         |
-| **Total context removed**   | **~58.6KB no longer auto-loads**              |
+| Guide refactor (B5)         | 18KB → 6KB (12KB saved)                       |
+| **Total context removed**   | **~70.6KB no longer auto-loads**              |
+| **Current ai-*.md corpus**  | **28 files, 89KB total**                      |
 
 ### Estimated Remaining Gains
 | Category                      | Est. Reduction |
