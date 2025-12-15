@@ -1,79 +1,34 @@
 ---
-description: Canonical reference for formatting AI instruction modules (XML tags, Markdown, structure).
+description: Formatting standards for AI instruction modules
 scope: formatting-standards
-prerequisites: none
 context: opt-in
 ---
-# AI Instructions Format Guide
+# Instructions Format
 
-<xml>
-<instructions role="format-specialist" scope="formatting-standards">
+## Principles
 
-<overview>
-## Overview
-This document defines the **canonical format** for all AI instruction modules. Adherence ensures optimal parsing, context retention, and multi-agent compatibility.
-</overview>
+1. **XML Tags:** Wrap sections in semantic tags (`<persona>`, `<workflow>`, etc.)
+2. **Markdown:** H1 title, H2 sections, `-` lists, triple-backtick code
+3. **Concision:** Target 8-16k tokens, max 32k
+4. **Positive:** "Do X" not "Don't do Y"
+5. **Examples:** Few-shot for complex behaviors
 
-<principles>
-## Core Principles
-1.  **XML Tags:** Wrap all major sections in semantic tags (e.g., `<persona>`, `<workflow>`).
-2.  **Markdown:** Use standard H1/H2 hierarchy, lists, and code blocks.
-3.  **Concision:** Keep files under 32k tokens (target 8-16k). Consolidate where possible.
-4.  **Positive Phrasing:** Use "Do X" instead of "Don't do Y".
-5.  **Examples:** Use few-shot examples to demonstrate complex behaviors.
-</principles>
+## XML Rules
 
-<xml_rules>
-## XML Tag Guidelines
--   **Naming:** Lowercase with underscores (e.g., `<core_behaviors>`).
--   **Nesting:** Nest tags for hierarchy.
--   **Closing:** Always close tags (`</tag>`).
--   **Common Tags:**
-    -   `<persona>`: Role definition.
-    -   `<hierarchy>`: Conflict resolution.
-    -   `<core_behaviors>`: Expected actions.
-    -   `<constraints>`: Limitations.
-    -   `<workflow>`: Process steps.
-    -   `<validation>`: Testing rules.
-    -   `<examples>`: Few-shot examples.
-</xml_rules>
+- Lowercase with underscores: `<core_behaviors>`
+- Always close: `</tag>`
+- Common: `<persona>`, `<hierarchy>`, `<workflow>`, `<constraints>`, `<validation>`
 
-<markdown_rules>
-## Markdown Standards
--   **H1:** File title (one per file).
--   **H2:** Major sections (inside XML tags).
--   **Lists:** Use `-` for unordered, `1.` for ordered.
--   **Code:** Triple backticks with language ID.
--   **Links:** Relative for internal (`./file.md`), absolute for external.
-</markdown_rules>
+## Markdown Rules
 
-<consolidation>
-## Consolidation Strategy
--   **Goal:** Reduce fragmentation and token usage.
--   **Trigger:** Consolidate if files are < 50 lines or cover overlapping topics.
--   **Limit:** Split if file approaches 32k tokens.
-</consolidation>
+- H1: File title (one per file)
+- H2: Major sections
+- Links: Relative internal (`./file.md`), absolute external
 
-<examples>
-## Templates & Examples
-<see example="examples/format-examples.md" />
-</examples>
+## Checklist
 
-<checklist>
-## Validation Checklist
--   [ ] H1 Title present.
--   [ ] YAML Front Matter present.
--   [ ] All sections wrapped in XML tags.
--   [ ] Positive instructions used.
--   [ ] Examples extracted to `examples/` if verbose.
--   [ ] Validated with token counter (if large).
-</checklist>
-
-<references>
-## References
--   [Anthropic: Use XML Tags](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/use-xml-tags)
--   [Anthropic: Context Engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)
-</references>
-
-</instructions>
-</xml>
+- [ ] YAML front matter
+- [ ] H1 title
+- [ ] XML-wrapped sections
+- [ ] Positive instructions
+- [ ] Under 32k tokens

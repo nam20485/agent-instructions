@@ -1,69 +1,28 @@
 ---
-description: Instructions for authenticating GitHub CLI in unattended environments (AI agents).
+description: GitHub CLI authentication for unattended agents
 scope: authentication
-prerequisites: none
 ---
-# GitHub Authentication for Unattended Agents
+# GitHub Authentication
 
-<xml>
-<instructions role="auth-manager" scope="authentication">
+## Methods
 
-<overview>
-## Overview
-Reliable authentication for unattended agents to perform GitHub operations (repos, issues, PRs). Supports PAT (recommended) and interactive OAuth.
-</overview>
+**1. PAT (Recommended)**
+- Set `GITHUB_AUTH_TOKEN` env var
+- Scopes: `repo`, `project`, `read:project`, `read:user`, `user:email`
 
-<prerequisites>
-## Prerequisites
--   **Tool:** GitHub CLI (`gh`) in PATH.
--   **Shell:** PowerShell (Windows) or Bash (Linux).
-</prerequisites>
+**2. Interactive**
+- `gh auth login` for initial setup
 
-<methods>
-## Authentication Methods
-
-### 1. PAT (Recommended)
--   **Env Var:** `GITHUB_AUTH_TOKEN`
--   **Scopes:** `repo`, `project`, `read:project`, `read:user`, `user:email`.
--   **Usage:** Scripts auto-detect this variable.
-
-### 2. Interactive
--   **Command:** `gh auth login`
--   **Use Case:** Initial setup or fallback.
-</methods>
-
-<scripts>
 ## Helper Scripts
--   `scripts/gh-auth.ps1`: `Initialize-GitHubAuth` function.
--   `scripts/test-github-permissions.ps1`: Verifies permissions and scopes.
-</scripts>
+- `scripts/gh-auth.ps1` - `Initialize-GitHubAuth`
+- `scripts/test-github-permissions.ps1` - Verify permissions
 
-<integration>
-## Workflow Integration
-1.  **Set Env:** `$env:GITHUB_AUTH_TOKEN` and `$env:GITHUB_USERNAME`.
-2.  **Init:** Call `Initialize-GitHubAuth`.
-3.  **Verify:** Run `test-github-permissions.ps1`.
-</integration>
+## Workflow
+1. Set `GITHUB_AUTH_TOKEN` and `GITHUB_USERNAME`
+2. Call `Initialize-GitHubAuth`
+3. Verify with `test-github-permissions.ps1`
 
-<troubleshooting>
 ## Troubleshooting
--   **Missing Tool:** Install `gh`.
--   **Auth Failed:** Check PAT validity and scopes.
--   **Missing Scope:** `gh auth refresh -s <scope>` or regenerate PAT.
--   **Verify:** `gh auth status`, `gh api user`.
-</troubleshooting>
-
-<security>
-## Security
--   **Storage:** Env vars only (never in code).
--   **Scopes:** Least privilege.
--   **Rotation:** Rotate tokens regularly.
-</security>
-
-<examples>
-## Examples
-<see example="examples/gh-auth-examples.md" />
-</examples>
-
-</instructions>
-</xml>
+- **Auth failed:** Check PAT validity and scopes
+- **Missing scope:** `gh auth refresh -s <scope>`
+- **Verify:** `gh auth status`, `gh api user`
