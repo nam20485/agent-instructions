@@ -137,7 +137,7 @@ This document tracks the progress of the instruction optimization initiative def
   - `ai-quickstart.md` (8.4KB) - Navigation/onboarding guide
   - `ai-instructions-format.md` (2.7KB) - Meta-documentation about format
   - `ai-consolonia-instructions.md` (1.9KB) - Niche technology (Consolonia UI)
-  - `ai-creating-repository-summary.md` (2.4KB) - Reference for repo summaries
+  - `ai-create-reposioty-summary.md` (2.4KB) - Reference for repo summaries
 - **Total opt-in files now:** 5 (24.4KB no longer auto-loads)
 - **Combined with docs/ moves:** 58.6KB total removed from auto-load context
 

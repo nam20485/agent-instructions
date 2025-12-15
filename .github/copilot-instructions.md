@@ -13,7 +13,7 @@ role: System Orchestrator
   <configuration>
     <!-- BRANCH PARAMETER: Change this value to load instructions from a different branch -->
     <!-- Valid values: main, optimization, feature/*, or any valid branch name -->
-    <branch>main</branch>
+    <branch>optimization</branch>
   </configuration>
 
   <instruction_source>

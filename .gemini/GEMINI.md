@@ -1,4 +1,6 @@
-# Instructions (Gemini)
+# GEMINI.md
+
+This file provides guidance to Gemini agents when working with code in this repository.
 
 ## Configuration
 
@@ -6,84 +8,199 @@
 <!-- Valid values: main, optimization, feature/*, or any valid branch name -->
 **Active Branch:** `main`
 
-## Where to Find Your Instructions
-- Your custom instructions are located in the files inside of the [nam20485/agent-instructions](https://github.com/nam20485/agent-instructions/tree/{branch}) repository
-- Look at the files in the configured branch above (default: `main`)
-- Start with your core instructions (linked below)
-- Then follow the links to the other instruction files in that repo as required or needed.
-- You will need to follow the links and read the files to understand your instructions
+All remote URLs in this document use the configured branch above. Replace `{branch}` placeholders with the active branch value.
 
-## How to Read Your Instructions
-- Read the core instructions first
-- Then follow the links from the core instructions to the other instruction files
-- Some files are **REQUIRED** and some are **OPTIONAL**
-- Files marked **REQUIRED** are ALWAYS active and so must be followed and read
-- Otherwise files are optionally active based on user needs and your assigned roles and workflow assignments
+## Repository Overview
 
-## Core Instructions (**REQUIRED**)
-[ai-core-instructions.md](https://github.com/nam20485/agent-instructions/blob/{branch}/ai_instruction_modules/ai-core-instructions.md)
+This repository contains a comprehensive AI instruction framework designed for orchestrating AI agents (Claude, Copilot, Gemini, etc.) through complex software development workflows. The framework provides modular instructions, dynamic workflows, and role-based execution patterns.
 
-## Local AI Instructions (**REQUIRED**)
-Local AI instruction moduule files are located in the [local_ai_instruction_modules](../local_ai_instruction_modules) directory.
+**Key Capabilities:**
+- Modular AI instruction system for reusable agent behaviors
+- Dynamic workflow orchestration using a custom DSL (Domain Specific Language)
+- Role-based agent execution (Orchestrator/Collaborator patterns)
+- Assignment-based workflow definitions with acceptance criteria
+- Integration with GitHub Copilot instructions
 
-## Dynamic Workflow Orchestration (**REQUIRED**)
-Agents MUST resolve dynamic workflows from the remote canonical repository. Do not use local mirrors.
-[ai-dynamic-workflows.md](../local_ai_instruction_modules/ai-dynamic-workflows.md)
+## Development Commands
 
-## Workflow Assignments (**REQUIRED**)
-Agents MUST resolve workflow assignments (by shortId) from the remote canonical repository. Do not use local mirrors.
-[ai-workflow-assignments.md](../local_ai_instruction_modules/ai-workflow-assignments.md)
+### PowerShell Scripts (Windows)
+Located in `scripts/` directory:
+- `setup-environment.ps1` - Environment setup
+- `init-repo.ps1` - Repository initialization
+- `import-labels.ps1` - Import GitHub labels
+- `create-milestones.ps1` - Create project milestones
+- `query.ps1` - Query utilities
 
-## Terminal Commands (Optional)
-Read before running any terminal commands, of if you need Github CL.I
-- [ai-terminal-commands.md](../local_ai_instruction_modules/ai-terminal-commands.md)
+## Architecture
 
-## **Remote Repository with Main/Canonical AI Instruction Modules**
+### 1. AI Instruction Modules System
 
-[nam20485/agent-instructions Repository](https://github.com/nam20485/agent-instructions/main)
+The repository uses a hierarchical instruction system located in `ai_instruction_modules/`:
 
-The main set of AI instruction modules is located in this remote repository. It contains the following:
-- Dynamic workflows
-- Workflow assignments
-- Main AI instruction modules
+**Core Instructions (REQUIRED - always read):**
+- `ai-core-instructions.md` - Base behaviors, validation, change flow
+- `ai-executive-summary.md` - High-level development processes
+- `ai-personal-preferences.md` - User preferences
+- `ai-workflow-config.md` - Workflow configuration
+- `ai-local-environment.md` - Local environment setup
 
-### Remote Repo Details
+**Optional Instructions (context-dependent):**
+- `ai-terminal-management.md` - Terminal command handling
+- `ai-testing-validation.md` - Test and validation processes
+- `ai-application-guidelines.md` - Application development patterns
+- `ai-instructions-aspnet-guidelines.md` - ASP.NET Core specifics
+- `ai-design-principles.md` - SOLID, 12-Factor, DDD principles
+- `ai-powershell-instructions.md` - PowerShell scripting
 
- Repository: nam20485/agent-instructions
-- Full repo URL: https://github.com/nam20485/agent-instructions
-- Branch: `{branch}` (see Configuration section - default: `main`)
-- Assignments directory: ai_instruction_modules/ai-workflow-assignments/
- - Active assignments index in this workspace: see `local_ai_instruction_modules/ai-workflow-assignments.md`
+### 2. Workflow Architecture
 
-#### OVERRIDE NOTE
-**IMPORTANT**: When accessing files in the remote repository, always use the RAW URL. Replace `{branch}` with the configured branch value. Do not use the GitHub UI to view the file. The RAW URL is the URL that you get when you click on the "Raw" button in the GitHub UI. Most URLs referenced in these files of the GIT UI form. They must be translated to the RAW URL form before use. 
+#### Workflow Roles (`ai_instruction_modules/ai-workflow-roles/`)
+- **Orchestrator** - Directs and coordinates team of collaborator agents
+- **Collaborator** - Executes assigned tasks under orchestrator direction
 
-Examples: 
+Role definitions: `ai_instruction_modules/ai-workflow-roles/<role_name>/ai-workflow-role.md`
 
-- GitHub UI for the `ai-core-instructions.md` file is: https://github.com/nam20485/agent-instructions/blob/main/ai_instruction_modules/ai-core-instructions.md
+#### Workflow Assignments (`ai_instruction_modules/ai-workflow-assignments/`)
+Structured task definitions with:
+- **Title & Short ID** - Unique identifier (kebab-case)
+- **Goal** - What to achieve
+- **Acceptance Criteria** - Definition of Done
+- **Detailed Steps** - Step-by-step execution guide
 
-- RAW URL for the `ai-core-instructions.md` file is: https://raw.githubusercontent.com/nam20485/agent-instructions/main/ai_instruction_modules/ai-core-instructions.md.
+**Available Assignments:**
+- `orchestrate-new-project.md` - End-to-end project initialization
+- `create-app-plan.md` - Application planning
+- `create-application.md` - App creation from template
+- `create-project-structure.md` - Scaffolding setup
+- `perform-task.md` - Task execution
+- `pr-approval-and-merge.md` - PR approval workflow
+- `pr-review-comments.md` - PR comment resolution
+- `analyze-plan-issue.md` - Plan analysis and validation
+- `orchestrate-dynamic-workflow.md` - Dynamic workflow orchestration
 
-##### Translating URLs
-To translate a GitHub UI URL to a RAW URL, replace `https://github.com/` with `https://raw.githubusercontent.com/`.
+### 3. Dynamic Workflow System
 
-*https://github.com/nam20485/agent-instructions/blob/main/<file-path> --> https://raw.githubusercontent.com/nam20485/agent-instructions/main/<file-path>*
+**Location:** `ai_instruction_modules/ai-workflow-assignments/dynamic-workflows/`
 
-For example, the followingGitHub UI URL: https://github.com/nam20485/agent-instructions/blob/main/ai_instruction_modules/ai-core-instructions.md 
+#### Dynamic Workflow DSL
+Custom scripting language for defining agent workflows:
 
-is translated to the following RAW URL: https://raw.githubusercontent.com/nam20485/agent-instructions/main/ai_instruction_modules/ai-core-instructions.md
+**Core Syntax:**
+```markdown
+### step-name (kebab-case)
+$variable = value
+const $CONSTANT: value
+$assignments = [assignment-id-1, assignment-id-2]
 
-Examples:
+For each $item in $list, you will:
+  - assign the agent the '$assignment-id' assignment with input $variable
+  - wait until the agent finishes the task
+  - review the work and approve it
+  - record output as #step.substep
 
-- GitHub UI: https://github.com/nam20485/agent-instructions/blob/main/ai_instruction_modules/ai-core-instructions.md
-- Raw URL:   https://raw.githubusercontent.com/nam20485/agent-instructions/main/ai_instruction_modules/ai-core-instructions.md
+if $variable is true:
+  - conditional actions
+```
 
-- GitHub UI: https://github.com/nam20485/agent-instructions/blob/main/ai_instruction_modules/ai-workflow-assignments/initiate-new-repository.md
-- Raw URL:   https://raw.githubusercontent.com/nam20485/agent-instructions/main/ai_instruction_modules/ai-workflow-assignments/initiate-new-repository.md
+**Key Features:**
+- Variable definitions: `$variable` or `${variable}`
+- Constants: `const $CONSTANT: value`
+- Step references: `#step` or `#step.substep`
+- Lists: `[item1, item2]`
+- Object properties: `$object->property`
+- Control flow: `For each`, `if`/`is true`/`is false`
 
-Single Source of Truth Policy:
+**Documentation:** `ai_instruction_modules/ai-workflow-assignments/dynamic-workflows/dynamic-workflow-syntax.md`
 
-- Dynamic workflow files (under `ai_instruction_modules/ai-workflow-assignments/dynamic-workflows/`) and workflow assignment files (under `ai_instruction_modules/ai-workflow-assignments/`) in the `nam20485/agent-instructions` repository are the ONLY authoritative sources for steps and acceptance criteria.
-- Local golden files, cached plans, or mirrors must not be used to derive steps or acceptance criteria. Delete any such artifacts if present.
-- Changes to dynamic workflow or assignment files in the remote canonical repository take effect immediately on subsequent runs.
-- The orchestrator must always fetch and execute directly from the remote canonical URLs listed below.
+### 4. Agent Script Engine
+
+**Purpose:** Extends AI agent capabilities through declarative scripting without implementation
+
+**Structure:**
+```markdown
+## Inputs
+- parameter: type - description
+
+## Declarations
+function functionName(param: type): returnType
+
+## Script
+result = functionName(param)
+```
+
+**Execution Modes:**
+- **JIT (Just-In-Time)** - Line-by-line interpretation
+- **AOT (Ahead-Of-Time)** - Pre-compilation with optimization
+
+**Documentation:** `ai_instruction_modules/ai-agent-script-engine.md`
+
+### 5. Remote Repository Integration
+
+**Canonical Source:** `nam20485/agent-instructions` repository on GitHub
+
+**URL Translation Pattern:**
+```
+GitHub UI: https://github.com/nam20485/agent-instructions/blob/{branch}/<file-path>
+Raw URL:   https://raw.githubusercontent.com/nam20485/agent-instructions/{branch}/<file-path>
+```
+
+Replace `{branch}` with the configured branch from the Configuration section (default: `main`).
+
+**Single Source of Truth:**
+- Dynamic workflows and assignments MUST be fetched from remote canonical repository
+- Local mirrors/caches must not be used for deriving steps or acceptance criteria
+- Changes take effect immediately on fetch
+
+## Key Workflows
+
+### Orchestrator Pattern
+1. Read assignment file from canonical source
+2. Compile context for delegation
+3. Extract and enforce Acceptance Criteria as Definition of Done
+4. Print resolution trace
+5. Produce Run Report mapped to Acceptance Criteria
+
+### Assignment Execution
+1. Resolution trace (print files + URLs/SHAs)
+2. Execute steps from resolved assignment file only
+3. Gate on Acceptance Criteria (Definition of Done)
+4. Respect branch protection (feature branch + PR for protected branches)
+5. Produce Run Report with evidence
+
+### Change Flow (from core instructions)
+1. **Context gather** - Search/read relevant files
+2. **Plan** - Bullet-point implementation plan
+3. **Diff proposals** - Present changes
+4. **Confirm** - Get approval
+5. **Apply & validate** - Build/test validation
+6. **Report** - Status (PASS/FAIL) + next steps
+
+## Validation Requirements
+
+**Minimum Validation:**
+- `dotnet build` (clean build)
+- `dotnet test` (affected/new tests)
+- Docker build (if container artifacts changed)
+- Lint/static analysis (if configured)
+
+## Branch Strategy
+
+- **Main branch:** `main` (development happens here)
+- **Development branch:** `development` (default for PRs)
+- Protected branches require feature branch + PR workflow
+
+## Important Constraints
+
+**Do NOT:**
+- Make large refactors or add major dependencies without approval
+- Add speculative features outside scope
+- Skip validation steps
+- Change more code than strictly necessary
+- Use local mirrors for dynamic workflows or assignments
+
+**Always:**
+- Fetch dynamic workflows/assignments from remote canonical repository
+- Make smallest, least risky code changes
+- Provide resolution trace before executing workflows
+- Map Run Reports 1:1 to Acceptance Criteria
+- Use sequential-thinking and memory tools for every request
