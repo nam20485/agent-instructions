@@ -1,5 +1,5 @@
 <repo_summary_instructions>
-# Creating Repository Custom Instructions
+# Create Repository Custom Instructions
 
 This file contains instructions for creating a custom summary of a repository.
 

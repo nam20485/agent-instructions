@@ -62,30 +62,30 @@ All instruction files MUST use XML tags to structure content into logical sectio
 
 Common tag patterns used across instruction files:
 
-| Tag Name | Purpose | Example Content |
-|----------|---------|-----------------|
-| `<persona>` | Defines AI agent role/expertise | Technical skills, knowledge domains |
-| `<hierarchy>` | Priority/conflict resolution | Order of precedence for instructions |
-| `<core_behaviors>` | Expected agent behaviors | How agent should act/respond |
-| `<constraints>` | What NOT to do | Limitations, forbidden actions |
-| `<tools>` | Available tools/utilities | MCP servers, APIs, frameworks |
-| `<workflow>` | Process flows | Step-by-step procedures |
-| `<validation>` | Testing/verification rules | Build, test, validation requirements |
-| `<output_style>` | Response formatting | How to structure responses |
-| `<error_handling>` | Error response patterns | How to handle failures |
-| `<security_config>` | Security guidelines | Authentication, secrets, permissions |
-| `<performance>` | Performance considerations | Optimization guidelines |
-| `<documentation>` | Documentation standards | Comment styles, API docs |
-| `<principles>` | Design principles | SOLID, DRY, architectural patterns |
-| `<requirements>` | Application requirements | Must-have features, capabilities |
-| `<standards>` | Code quality standards | Formatting, warnings as errors |
-| `<technology_stack>` | Tech specifications | Languages, frameworks, versions |
-| `<testing_approach>` | Testing methodology | TDD, coverage requirements |
-| `<frameworks>` | Testing frameworks | xUnit, Moq, Jest, etc. |
-| `<ci_cd>` | CI/CD requirements | Pipeline, automation rules |
-| `<resources>` | External references | Links, documentation |
-| `<additional_modules>` | Related instruction files | Links to other modules |
-| `<examples>` | Few-shot examples | Demonstration of desired behavior |
+| Tag Name               | Purpose                         | Example Content                      |
+| ---------------------- | ------------------------------- | ------------------------------------ |
+| `<persona>`            | Defines AI agent role/expertise | Technical skills, knowledge domains  |
+| `<hierarchy>`          | Priority/conflict resolution    | Order of precedence for instructions |
+| `<core_behaviors>`     | Expected agent behaviors        | How agent should act/respond         |
+| `<constraints>`        | What NOT to do                  | Limitations, forbidden actions       |
+| `<tools>`              | Available tools/utilities       | MCP servers, APIs, frameworks        |
+| `<workflow>`           | Process flows                   | Step-by-step procedures              |
+| `<validation>`         | Testing/verification rules      | Build, test, validation requirements |
+| `<output_style>`       | Response formatting             | How to structure responses           |
+| `<error_handling>`     | Error response patterns         | How to handle failures               |
+| `<security_config>`    | Security guidelines             | Authentication, secrets, permissions |
+| `<performance>`        | Performance considerations      | Optimization guidelines              |
+| `<documentation>`      | Documentation standards         | Comment styles, API docs             |
+| `<principles>`         | Design principles               | SOLID, DRY, architectural patterns   |
+| `<requirements>`       | Application requirements        | Must-have features, capabilities     |
+| `<standards>`          | Code quality standards          | Formatting, warnings as errors       |
+| `<technology_stack>`   | Tech specifications             | Languages, frameworks, versions      |
+| `<testing_approach>`   | Testing methodology             | TDD, coverage requirements           |
+| `<frameworks>`         | Testing frameworks              | xUnit, Moq, Jest, etc.               |
+| `<ci_cd>`              | CI/CD requirements              | Pipeline, automation rules           |
+| `<resources>`          | External references             | Links, documentation                 |
+| `<additional_modules>` | Related instruction files       | Links to other modules               |
+| `<examples>`           | Few-shot examples               | Demonstration of desired behavior    |
 
 #### **Tag Example: Complete File Structure**
 
@@ -229,7 +229,7 @@ Use tables for comparison, options, or structured data:
 
 ```markdown
 | Column 1 | Column 2 | Column 3 |
-|----------|----------|----------|
+| -------- | -------- | -------- |
 | Value 1  | Value 2  | Value 3  |
 | Value A  | Value B  | Value C  |
 ```
@@ -698,7 +698,7 @@ Before committing instruction file changes:
 ### **Related Documentation**
 
 - [ai-core-instructions.md](./ai-core-instructions.md) - Core agent behaviors and guidelines
-- [ai-creating-repository-summary.md](./ai-creating-repository-summary.md) - Repository summary creation
+- [ai-create-repository-summary.md](./ai-create-repository-summary.md) - Repository summary creation
 - [ai-custom-instructions-optimization.md](./ai-custom-instructions-optimization.md) - Optimization strategies research
 
 ### **Tools**
