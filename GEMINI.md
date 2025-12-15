@@ -1,6 +1,6 @@
-# opencode-instructions.md
+# GEMINI.md
 
-Guidance for OpenCode CLI agent.
+Guidance for Gemini.
 
 ## Configuration
 
@@ -12,8 +12,7 @@ Guidance for OpenCode CLI agent.
 
 **Then:** [ai-core-instructions.md](ai_instruction_modules/ai-core-instructions.md) for core behaviors.
 
-## OpenCode-Specific
+## Gemini-Specific
 
-- Prefer terminal-based file operations
-- Use git commands directly when available
-- Minimize interactive prompts
+- Use sequential-thinking for complex multi-step reasoning
+- Prefer concise responses with code examples
