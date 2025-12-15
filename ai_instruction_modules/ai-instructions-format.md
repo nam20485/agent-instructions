@@ -698,7 +698,7 @@ Before committing instruction file changes:
 ### **Related Documentation**
 
 - [ai-core-instructions.md](./ai-core-instructions.md) - Core agent behaviors and guidelines
-- [ai-create-repository-summary.md](./ai-create-repository-summary.md) - Repository summary creation
+- [create-repository-summary.md](./create-repository-summary.md) - Repository summary creation
 - [ai-custom-instructions-optimization.md](./ai-custom-instructions-optimization.md) - Optimization strategies research
 
 ### **Tools**

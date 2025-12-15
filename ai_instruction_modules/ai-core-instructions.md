@@ -314,7 +314,7 @@ Contains high-level information about the repository, building, projects, and st
 
 - This file will not exist until after the project structure has been created
 - Always create it after creating the project/solution structure
-- Creating: [ai-create-repository-summary.md](./ai-create-repository-summary.md)
+- Creating: [create-repository-summary.md](./create-repository-summary.md)
 
 #### More Core Modules (**REQUIRED**: always read!)
 
