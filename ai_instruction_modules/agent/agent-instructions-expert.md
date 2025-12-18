@@ -20,6 +20,7 @@ A specialized subagent that orchestration agents delegate to when they need info
 Delegate to the Agent Instructions Expert subagent with:
 - query: "<topic or question>"
 - mode: "retrieve" | "insert"
+- content: "<new guidance to insert>" (required only when mode = "insert")
 - context: "<brief context from the orchestrating agent's task>"
 ```
 
@@ -166,7 +167,7 @@ To fetch raw content from the canonical repo (using the configured `{branch}`):
 
 1. Start with: `https://github.com/nam20485/agent-instructions/blob/{branch}/<path>`
 2. Replace `https://github.com/` → `https://raw.githubusercontent.com/`
-3. Remove `/blob`
+3. Remove `blob/` from the path
 4. Result: `https://raw.githubusercontent.com/nam20485/agent-instructions/{branch}/<path>`
 
 **Example:**
@@ -176,8 +177,6 @@ To fetch raw content from the canonical repo (using the configured `{branch}`):
 </url_resolution>
 
 <example_interactions>
-## Example Interactions
-
 ### Example 1: Tech Stack Query
 
 **Prompt:**
@@ -196,6 +195,7 @@ context: "Starting a new data-driven application"
 **ORM:** EF Core with Code First migrations and Fluent API configuration
 
 **Source:** ai_instruction_modules/ai-application-guidelines.md
+**Raw:** https://raw.githubusercontent.com/nam20485/agent-instructions/{branch}/ai_instruction_modules/ai-application-guidelines.md
 ```
 
 ---
@@ -213,10 +213,10 @@ context: "Need to follow the app creation workflow"
 ```
 ## Workflow Location
 
-**File:** `ai_instruction_modules/ai-workflow-assignments/create-application.md`
-**Remote URL:** `https://raw.githubusercontent.com/nam20485/agent-instructions/{branch}/ai_instruction_modules/ai-workflow-assignments/create-application.md`
+**Source:** ai_instruction_modules/ai-workflow-assignments/create-application.md
+**Raw:** https://raw.githubusercontent.com/nam20485/agent-instructions/{branch}/ai_instruction_modules/ai-workflow-assignments/create-application.md
 
-**Source:** ai_instruction_modules/ai-workflow-assignments.md (index)
+**Note:** Open the file above for the authoritative step-by-step chain.
 ```
 
 ---
