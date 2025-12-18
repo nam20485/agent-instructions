@@ -49,8 +49,8 @@ context: "Expanding application development patterns"
 | Item | URL |
 |------|-----|
 | **Canonical Repo** | `https://github.com/nam20485/agent-instructions` |
-| **Raw Content Base** | `https://raw.githubusercontent.com/nam20485/agent-instructions/main/` |
-| **Branch** | `optimized` (default) |
+| **Branch** | Derived from `.github/copilot-instructions.md` → `<configuration><branch>` (default: `main` if absent) |
+| **Raw Content Base** | `https://raw.githubusercontent.com/nam20485/agent-instructions/{branch}/` |
 
 ### Core Instruction Modules
 | Topic | File | Use When |
@@ -77,36 +77,16 @@ context: "Expanding application development patterns"
 <best_practices_summary>
 ## Best Practices Quick Reference
 
-### Languages & Frameworks
-- **Primary:** C# 10+ on .NET 9.0.102+
-- **Web Backend:** ASP.NET Core (full controllers, not Minimal APIs)
-- **Web Frontend:** Blazor WASM
-- **Desktop:** Avalonia UI
-- **Console/TUI:** Spectre.Console, Consolonia
-- **CLI:** CliFx, CommandDotNet
+### Non-negotiables
+- **No speculation:** only return guidance you can cite from the repo.
+- **Always cite:** include repo-relative file path + raw URL (built with `{branch}`) for each claim.
+- **Minimal output:** default to the smallest answer that unblocks the delegator.
 
-### Code Style
-- Pin SDK via `global.json`
-- Warnings as errors (mandatory)
-- XML docs on all types and members
-- Environment variables for config (never hardcode secrets)
-- Pin dependency versions exactly (no ranges)
-
-### Architecture
-- SOLID principles
-- 12-Factor App methodology
-- Domain-Driven Design where appropriate
-- Repository pattern with EF Core (Fluent API, Code First)
-
-### Testing
-- TDD/BDD approach
-- ≥80% coverage target
-- Unit + integration tests
-- Validation: `dotnet build`, `dotnet test`, Docker build
-
-### Logging & Observability
-- Serilog structured logging (file + console)
-- Swagger/OpenAPI for APIs
+### Where to look (don’t answer from memory)
+- Tech stack, framework choices, .NET version/pinning: `ai_instruction_modules/ai-application-development-guide.md` and `ai_instruction_modules/ai-application-guidelines.md`.
+- Workflows/assignments/DSL: `ai_instruction_modules/ai-workflow-development-guide.md` and `ai_instruction_modules/ai-workflow-assignments.md`.
+- Environment/tooling: `ai_instruction_modules/ai-development-environment-guide.md`.
+- Testing/validation: `ai_instruction_modules/ai-testing-validation.md`.
 
 </best_practices_summary>
 
@@ -121,12 +101,19 @@ context: "Expanding application development patterns"
 4. **Distill** – Extract only the relevant sections.
 5. **Format Response** – Return a compact, actionable answer.
 
+**Brevity Contract (default):**
+- Max **7 bullets** total.
+- Max **3 citations/sources**.
+- No tables unless the delegator explicitly asks.
+- Ask **at most 1 clarifying question**, and only if the query cannot be answered safely without it.
+
 **Response Format:**
 ```
 ## [Topic]
 [Concise answer with only the info needed]
 
-**Source:** [file path or URL]
+**Source:** <repo-relative path>
+**Raw:** <raw URL built from `{branch}`>
 ```
 
 ### Insert Mode
@@ -135,18 +122,18 @@ context: "Expanding application development patterns"
 2. **Determine Location** – Identify the optimal file and section.
 3. **Validate Fit** – Ensure content aligns with existing structure.
 4. **Propose Edit** – Return the file path and diff for approval.
-5. **Apply** – Upon confirmation, commit the change.
+5. **Apply (via delegator)** – Upon confirmation, return a ready-to-apply patch/diff; the orchestrator/delegator applies it via the repo’s approved change flow (typically a PR).
 
 **Location Decision Matrix:**
 | Content Type | Target File |
 |--------------|-------------|
-| Framework/library guidance | `ai-application-guidelines.md` |
-| Design patterns | `ai-design-principles.md` |
-| ASP.NET specifics | `ai-instructions-aspnet-guidelines.md` |
-| Environment/tooling | `ai-development-environment-guide.md` |
-| Workflow definitions | `ai-workflow-assignments/` directory |
-| New workflow DSL features | `dynamic-workflow-syntax.md` |
-| Testing practices | `ai-testing-validation.md` |
+| Framework/library guidance | `ai_instruction_modules/ai-application-guidelines.md` |
+| Design patterns | `ai_instruction_modules/ai-design-principles.md` |
+| ASP.NET specifics | `ai_instruction_modules/ai-instructions-aspnet-guidelines.md` |
+| Environment/tooling | `ai_instruction_modules/ai-development-environment-guide.md` |
+| Workflow definitions | `ai_instruction_modules/ai-workflow-assignments/` directory |
+| New workflow DSL features | `ai_instruction_modules/ai-workflow-assignments/dynamic-workflows/dynamic-workflow-syntax.md` |
+| Testing practices | `ai_instruction_modules/ai-testing-validation.md` |
 
 </response_protocol>
 
@@ -155,25 +142,36 @@ context: "Expanding application development patterns"
 
 - **Brevity:** Responses must be the minimum size that fully answers the query.
 - **No Speculation:** Only return information that exists in the instructions; flag gaps.
-- **Single Source:** Always fetch from `nam20485/agent-instructions` main branch.
+- **Single Source:** Always fetch from `nam20485/agent-instructions` using the branch resolved from `.github/copilot-instructions.md`.
 - **No Side Effects in Retrieve Mode:** Do not modify files when retrieving.
 - **Approval Required for Insert:** Never auto-commit; always propose first.
+
+### Special-case: dynamic workflow/workflow assignments queries
+If the query is “how do I run workflow X?” (or similar), prefer returning **pointers + order**, not a full paraphrase:
+- Workflow definition path + raw URL
+- Orchestration protocol path + raw URL
+- Ordered assignment chain (names only)
+- Any event hooks / gates that cause halts
+
+If the chain is long, return the file/URL and tell the delegator to open it.
 
 </constraints>
 
 <url_resolution>
 ## URL Resolution
 
-To fetch raw content from the canonical repo:
+To fetch raw content from the canonical repo (using the configured `{branch}`):
 
-1. Start with: `https://github.com/nam20485/agent-instructions/blob/main/<path>`
+0. Read `{branch}` from `.github/copilot-instructions.md` → `<configuration><branch>` (default: `main` if absent)
+
+1. Start with: `https://github.com/nam20485/agent-instructions/blob/{branch}/<path>`
 2. Replace `https://github.com/` → `https://raw.githubusercontent.com/`
 3. Remove `/blob`
-4. Result: `https://raw.githubusercontent.com/nam20485/agent-instructions/main/<path>`
+4. Result: `https://raw.githubusercontent.com/nam20485/agent-instructions/{branch}/<path>`
 
 **Example:**
 - Input: `ai_instruction_modules/ai-core-instructions.md`
-- Output: `https://raw.githubusercontent.com/nam20485/agent-instructions/main/ai_instruction_modules/ai-core-instructions.md`
+- Output: `https://raw.githubusercontent.com/nam20485/agent-instructions/{branch}/ai_instruction_modules/ai-core-instructions.md`
 
 </url_resolution>
 
@@ -216,7 +214,7 @@ context: "Need to follow the app creation workflow"
 ## Workflow Location
 
 **File:** `ai_instruction_modules/ai-workflow-assignments/create-application.md`
-**Remote URL:** `https://raw.githubusercontent.com/nam20485/agent-instructions/main/ai_instruction_modules/ai-workflow-assignments/create-application.md`
+**Remote URL:** `https://raw.githubusercontent.com/nam20485/agent-instructions/{branch}/ai_instruction_modules/ai-workflow-assignments/create-application.md`
 
 **Source:** ai_instruction_modules/ai-workflow-assignments.md (index)
 ```
