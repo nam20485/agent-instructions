@@ -44,6 +44,12 @@ if $condition is true:
 
 **Canonical:** `nam20485/agent-instructions`
 
+### Branch configuration authority
+
+- **MUST:** All agent-specific entrypoints MUST read `{branch}` from [`../.github/copilot-instructions.md`](../.github/copilot-instructions.md) → `<configuration><branch>`.
+- **Fallback:** If the bootstrap config cannot be read, default to `main`.
+- **MUST NOT:** Do not hardcode branch values in entrypoints.
+
 **URL Translation:**
 - UI: `https://github.com/.../blob/{branch}/...`
 - Raw: `https://raw.githubusercontent.com/.../{branch}/...`

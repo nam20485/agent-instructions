@@ -129,6 +129,9 @@ prerequisites: none
 - **[Repository Summary](../ai-repo-summary.md):** High-level repo info.
 - **Core:** [Executive Summary](./ai-executive-summary.md), [Preferences](./ai-personal-preferences.md), [Quick Ref](./ai-quick-reference.md), [Workflow Config](./ai-workflow-config.md).
 
+### Expert Consultation
+- **[Agent Instructions Expert](./agent/agent-instructions-expert.md):** MUST delegate instruction/workflow lookups (workflows, assignments, canonical URLs, branch resolution rules) to this subagent.
+
 ### Optional (Activity Based)
 - **Environment:** [Local](./ai-local-environment.md), [Terminal](./ai-terminal-management.md), [PowerShell](./ai-powershell-instructions.md).
 - **Testing:** [Validation](./ai-testing-validation.md).

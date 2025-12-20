@@ -4,7 +4,7 @@ Guidance for Qwen.
 
 ## Configuration
 
-**Active Branch:** `main`
+**Branch:** MUST be read from [`.github/copilot-instructions.md`](.github/copilot-instructions.md) → `<configuration><branch>`. MUST NOT be hardcoded elsewhere.
 
 ## Instructions
 
