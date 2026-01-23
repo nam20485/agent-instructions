@@ -43,6 +43,8 @@ See **[ai-workflow-development-guide.md](../ai-workflow-development-guide.md)** 
 
 **Execution:** `continue-task-work`, `gather-context`, `perform-task`, `recover-from-error`, `report-progress`
 
+**Validation:** `validate-agent-instructions-expert-usage`
+
 **Review:** `create-test-cases`, `pr-approval-and-merge`, `pr-review-comments`, `request-approval`, `validate-assignment-completion`
 
 **Documentation:** `analyze-plan-issue`, `analyze-progress-doc`, `debrief-and-document`, `continuous-improvement`, `update-from-feedback`, `update-plan-issue`
@@ -55,7 +57,7 @@ See **[ai-workflow-development-guide.md](../ai-workflow-development-guide.md)** 
 
 **Events:** `pre-script-begin`, `pre-assignment-begin`, `post-assignment-complete`, `post-script-complete`, `on-assignment-failure`, `on-script-failure`
 
-**Scripts:** `analyze-plan`, `breakdown-epic`, `breakdown-plan`, `create-epics-for-phase`, `create-stories-for-epic`, `design-app-outline`, `implement-by-stories`, `implement-epic`, `implement-story`, `new-project`, `optimize-plan`, `project-setup`, `project-setup-upgraded`, `review-epic-prs`, `sample-minimal`, `setup-project-and-create-app`, `single-workflow`
+**Scripts:** `analyze-plan`, `breakdown-epic`, `breakdown-plan`, `create-epics-for-phase`, `create-stories-for-epic`, `design-app-outline`, `implement-by-stories`, `implement-epic`, `implement-story`, `new-project`, `optimize-plan`, `project-setup`, `project-setup-upgraded`, `review-epic-prs`, `sample-minimal`, `setup-project-and-create-app`, `single-workflow`, `validate-branch-deferral-stdout`, `validate-expert-invocation`
 
 *All at:* `ai-workflow-assignments/dynamic-workflows/<name>.md`
 

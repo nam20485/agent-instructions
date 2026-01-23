@@ -4,11 +4,9 @@ This file provides guidance to Qwen agents when working with code in this reposi
 
 ## Configuration
 
-<!-- BRANCH PARAMETER: Change this value to load instructions from a different branch -->
-<!-- Valid values: main, optimization, feature/*, or any valid branch name -->
-**Active Branch:** `main`
+**Branch:** MUST be read from [`../.github/copilot-instructions.md`](../.github/copilot-instructions.md) → `<configuration><branch>`. MUST NOT be hardcoded elsewhere.
 
-All remote URLs in this document use the configured branch above. Replace `{branch}` placeholders with the active branch value.
+All remote URLs in this document use the branch configured in `../.github/copilot-instructions.md`. Replace `{branch}` placeholders with that value.
 
 ## Repository Overview
 
@@ -144,7 +142,7 @@ GitHub UI: https://github.com/nam20485/agent-instructions/blob/{branch}/<file-pa
 Raw URL:   https://raw.githubusercontent.com/nam20485/agent-instructions/{branch}/<file-path>
 ```
 
-Replace `{branch}` with the configured branch from the Configuration section (default: `main`).
+Replace `{branch}` with the branch configured in [`../.github/copilot-instructions.md`](../.github/copilot-instructions.md) → `<configuration><branch>` (fallback: `main` only if unavailable).
 
 **Single Source of Truth:**
 - Dynamic workflows and assignments MUST be fetched from remote canonical repository
@@ -185,9 +183,9 @@ Replace `{branch}` with the configured branch from the Configuration section (de
 
 ## Branch Strategy
 
-- **Main branch:** `main` (development happens here)
-- **Development branch:** `development` (default for PRs)
-- Protected branches require feature branch + PR workflow
+- **Branch:** MUST be read from [`../.github/copilot-instructions.md`](../.github/copilot-instructions.md) → `<configuration><branch>`.
+- **MUST NOT:** Do not hardcode branch values in entrypoints.
+- **Common conventions:** `main` and `development` may exist, but agents must follow the configured branch.
 
 ## Important Constraints
 

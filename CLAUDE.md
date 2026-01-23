@@ -4,8 +4,7 @@ Guidance for Claude Code (claude.ai/code).
 
 ## Configuration
 
-<!-- BRANCH: Change to load from different branch (main, optimization, feature/*) -->
-**Active Branch:** `main`
+**Branch:** MUST be read from [`.github/copilot-instructions.md`](.github/copilot-instructions.md) → `<configuration><branch>`. MUST NOT be hardcoded elsewhere.
 
 ## Instructions
 

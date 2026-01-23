@@ -4,7 +4,7 @@ Guidance for AI agents working in this repository.
 
 ## Configuration
 
-**Active Branch:** `main` <!-- Change for: main, optimization, feature/* -->
+**Branch:** MUST be read from [`.github/copilot-instructions.md`](.github/copilot-instructions.md) → `<configuration><branch>`. MUST NOT be hardcoded elsewhere.
 
 ## Quick Start
 
