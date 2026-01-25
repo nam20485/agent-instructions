@@ -1,41 +1,55 @@
-# Dynamic Workflow: Project Setup
+# Dynamic Workflow: Project Setup (Upgraded)
 
-## Overview
-
-This dynamic workflow file specifies the workflow for initiating a new repo. It is intended to be used with the `orchestrate-dynamic-workflow` assignment.
+Modern project setup across all tech stacks with validation.
 
 ## Script
-
-### Inputs
 
 ### initiate-new-repository
 
 `$assignments` = [  
-                    `init-existing-repository`,
-                    `create-app-plan`, 
-                    `create-project-structure`,
-                    `debrief-and-document`
-                 ]
+   `init-existing-repository`,
+   `create-app-plan`,
+   `create-application-foundation`,
+   `create-application-structure`,
+   `create-testing-infrastructure`,
+   `create-deployment-infrastructure`,
+   `pr-approval-and-merge`,
+   `debrief-and-document`
+]
 
 For each `$assignment_name` in `$assignments`, you will:
    - assign the agent the `$assignment_name` assignment
-   - wait until the agent finishes the task
-   - review the work and approve it
-   - record output as `#init-existing-repository.$assignment_name`
-  
+   - wait until agent finishes
+   - review and approve
+   - record as `#initiate-new-repository.$assignment_name`
 
 ### Events
 
+#### `pre-assignment-begin`
+- assign agent `gather-context`
+- record as `#events.pre-assignment-begin`
+
+#### `on-assignment-failure`
+- assign agent `recover-from-error`
+- record as `#events.on-assignment-failure`
+
 #### `post-assignment-complete`
+- assign agent `validate-assignment-completion`
+- if validation failed: halt workflow
+- assign agent `create-repository-summary`
+- assign agent `report-progress`
+- record as `#events.post-assignment-complete`
 
-`$poc_assignments` = [  
-                    `create-repository-summary`
-                 ]
+## Assignment Summary
 
-For each `$poc_assignment_name` in `$poc_assignments`, you will:
-   - assign the agent the `$poc_assignment_name` assignment
-   - wait until the agent finishes the task
-   - review the work and approve it
-   - record output as `#events.post-assignment-complete.$poc_assignment_name`
+| Assignment | Purpose |
+|------------|---------|
+| `init-existing-repository` | Git setup, structure |
+| `create-app-plan` | Architecture, scope |
+| `create-application-foundation` | Dependencies, build, linting |
+| `create-application-structure` | Entry point, architecture |
+| `create-testing-infrastructure` | Test framework, smoke tests |
+| `create-deployment-infrastructure` | Docker, CI/CD, IaC |
+| `debrief-and-document` | Final report, lessons learned |
 
-
+**Total time:** ~90-120 min
