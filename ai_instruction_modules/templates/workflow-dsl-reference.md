@@ -1,5 +1,9 @@
 # Dynamic Workflow DSL Reference
 
+Canonical spec: [dynamic-workflow-syntax.md](../ai-workflow-assignments/dynamic-workflows/dynamic-workflow-syntax.md)
+
+Event handlers resolve to assignments at `ai-workflow-assignments/<short-id>.md` (halt if missing; do not stub).
+
 ## Variables
 ```markdown
 `$variable` = <value>                    # Define variable

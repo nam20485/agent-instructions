@@ -4,7 +4,7 @@ Guidance for AI agents working in this repository.
 
 ## Configuration
 
-**Active Branch:** `main` <!-- Change for: main, optimization, feature/* -->
+**Active Branch:** `optimization` <!-- Change for: main, optimization, feature/* -->
 
 ## Quick Start
 
@@ -42,6 +42,9 @@ AI instruction framework for orchestrating agents through software development w
 **Change Flow:** Context gather → Plan → Diff → Confirm → Apply/validate → Report
 
 **Assignment Execution:** Resolution trace → Execute steps → Gate on acceptance criteria → Run report
+
+For dynamic workflows, follow the orchestration rules in `ai-workflow-development-guide.md` and `ai-workflow-assignments/orchestrate-dynamic-workflow.md`.
+Resolve each assignment file before execution. Do not synthesize steps outside resolved assignment files.
 
 ## Constraints
 

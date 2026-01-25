@@ -37,6 +37,18 @@ scope: workflow-config
 
 **Orchestrator must:** Parse events → Execute at lifecycle point → Record outputs → Gate on success.
 
+## Failure Criteria
+
+- Non-zero command exit
+- Timeout or aborted action
+- Acceptance criteria not met
+
+On any failure: execute `on-assignment-failure`, record evidence, and halt unless explicitly instructed to continue.
+
+## Post-Assignment Validation
+
+- Run validation for the assignment and confirm PASS before proceeding to the next assignment.
+
 ## Quality Checklist
 
 - [ ] Sequential breakdown before solutions?

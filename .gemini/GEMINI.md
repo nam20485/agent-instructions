@@ -160,6 +160,9 @@ Replace `{branch}` with the configured branch from the Configuration section (de
 4. Print resolution trace
 5. Produce Run Report mapped to Acceptance Criteria
 
+For dynamic workflows, follow the orchestration rules in `ai-workflow-development-guide.md` and `ai-workflow-assignments/orchestrate-dynamic-workflow.md`.
+Resolve each assignment file before execution. Do not synthesize steps outside resolved assignment files.
+
 ### Assignment Execution
 1. Resolution trace (print files + URLs/SHAs)
 2. Execute steps from resolved assignment file only

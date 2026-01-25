@@ -36,6 +36,16 @@ prerequisites: none
 - **Minimalism:** Make the smallest, least risky changes necessary.
 </core_behaviors>
 
+<workflow_orchestration>
+
+## Workflow Orchestration Hard Gates
+
+- **Resolution Trace:** Required before executing any dynamic workflow.
+- **Review & Approve:** Must pause and wait for explicit approval when the workflow says “review and approve.”
+- **Run Report:** Required for orchestrated workflows; include PASS/FAIL + evidence per acceptance criterion.
+
+</workflow_orchestration>
+
 <constraints>
 ## Constraints (Do Not)
 - **No Big Bangs:** Large refactors require approval; propose incremental changes.

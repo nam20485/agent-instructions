@@ -13,6 +13,7 @@ role: System Orchestrator
   <acceptance_criteria>
     <criterion>Application template analyzed.</criterion>
     <criterion>Plan documented in an issue using Appendix A template.</criterion>
+    <criterion>GitHub issue created (no local .md substitutes).</criterion>
     <criterion>Milestones created and issues linked.</criterion>
     <criterion>Tech stack and architecture documented.</criterion>
     <criterion>Plan linked to GitHub Project.</criterion>
@@ -42,6 +43,7 @@ role: System Orchestrator
       <title>Documentation</title>
       <actions>
         <action>Create Issue documenting plan using template.</action>
+        <action>Use the GitHub issue template in `.github/ISSUE_TEMPLATE/application-plan.md`; do not replace with a local markdown file. If issue creation is not possible, halt and report.</action>
         <action>Create milestones based on phases.</action>
         <action><procedure ref="github-management.issue-linking"/></action>
       </actions>

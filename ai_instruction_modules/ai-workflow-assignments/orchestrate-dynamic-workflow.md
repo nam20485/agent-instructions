@@ -27,6 +27,7 @@ role: System Orchestrator
       <title>Intake & Plan</title>
       <actions>
         <action>Resolve workflow file and assignment chain.</action>
+        <action>Produce a resolution trace listing the workflow file and each assignment file (raw URL or local path).</action>
         <action>Parse Script section and Events.</action>
         <action>Validate inputs and permissions.</action>
       </actions>
@@ -37,9 +38,8 @@ role: System Orchestrator
       <actions>
         <action>Execute `pre-script-begin` event (if present).</action>
         <action>Iterate through main workflow steps.</action>
-        <action>Execute `pre-step-begin` event.</action>
-        <action>Execute assignments in step (honoring `pre/post-assignment` events).</action>
-        <action>Execute `post-step-completion` event.</action>
+        <action>For each assignment in the Script: execute `pre-assignment-begin`, assign and wait for completion, review and approve, record output, then execute `post-assignment-complete`.</action>
+        <action>On assignment failure (non-zero exit, timeout, or failed acceptance criteria), execute `on-assignment-failure` and halt.</action>
         <action>Execute `post-script-complete` event.</action>
       </actions>
     </step>
@@ -49,7 +49,7 @@ role: System Orchestrator
       <actions>
         <action>Evaluate Acceptance Criteria for all assignments.</action>
         <action>Record PASS/FAIL with evidence.</action>
-        <action>Produce Run Report.</action>
+        <action>Produce Run Report with resolution trace, per-assignment status, event execution log, and evidence for each acceptance criterion.</action>
       </actions>
     </step>
   </workflow>
@@ -58,6 +58,7 @@ role: System Orchestrator
     <rule>Resolution trace mandatory before execution.</rule>
     <rule>Execute steps strictly from assignment files (no synthesis).</rule>
     <rule>Acceptance Criteria are non-negotiable gates.</rule>
+    <rule>Event handlers resolve to assignment files in `ai-workflow-assignments/<short-id>.md`; missing handlers halt the workflow and report.</rule>
     <rule>Enforce template and preflight requirements.</rule>
     <rule>Respect branch protection (PRs for code).</rule>
   </guardrails>

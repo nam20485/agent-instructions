@@ -9,6 +9,8 @@ Canonical DSL for workflow files. Location: `ai-workflow-assignments/dynamic-wor
 
 ## Syntax Reference
 
+See also: [workflow-dsl-reference.md](../../templates/workflow-dsl-reference.md)
+
 ### Variables & Constants
 ```
 $variable = <value>           # define variable
@@ -61,6 +63,11 @@ $items = [item1, item2, item3]
 | `on-assignment-failure` | When assignment fails |
 | `on-script-failure` | When workflow fails |
 
+## Event Handler Resolution
+
+- Event handler names resolve to assignment files at `ai-workflow-assignments/<short-id>.md`.
+- If a handler assignment is missing, halt the workflow and report the missing file (do not synthesize or stub).
+
 ## Error Recovery
 
 1. **Retry sequence**: targeted fix → scratch rerun → escalation (max 3)
@@ -80,5 +87,7 @@ $items = [item1, item2, item3]
 For each `$assignment_name` in `$assignments`, you will:
    - assign the agent the `$assignment_name` assignment with input $project
    - wait until the agent finishes
+   - review the work and approve it
    - record output as `#initialize.$assignment_name`
+   - record output as `#events.post-assignment-complete.$assignment_name`
 ```

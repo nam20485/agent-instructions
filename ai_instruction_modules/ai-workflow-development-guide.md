@@ -57,6 +57,7 @@ prerequisites: ai-core-instructions.md
 ## Dynamic Workflow DSL
 
 **Canonical syntax specification:** [dynamic-workflow-syntax.md](./ai-workflow-assignments/dynamic-workflows/dynamic-workflow-syntax.md)
+**Supplemental reference:** [workflow-dsl-reference.md](./templates/workflow-dsl-reference.md)
 
 **Quick patterns:**
 ```markdown
@@ -101,6 +102,18 @@ If `$condition` then:
 **Full orchestrator specification:** [orchestrate-dynamic-workflow.md](./ai-workflow-assignments/orchestrate-dynamic-workflow.md)
 </orchestrator_rules>
 
+<orchestrator_checklist>
+
+## Orchestrator Checklist
+
+- [ ] Resolution trace printed (workflow + assignment file paths/URLs)
+- [ ] Event handlers executed at lifecycle points
+- [ ] “Review and approve” gates honored
+- [ ] Acceptance criteria PASS/FAIL with evidence
+- [ ] Run Report produced and complete
+
+</orchestrator_checklist>
+
 <common_tasks>
 ## Common Tasks
 
@@ -129,6 +142,9 @@ If `$condition` then:
 | Output reference fails | Loop: `#events.<event>.$name`, Singular: `#events.<event>`                                                           |
 | DSL syntax error       | Compare against [dynamic-workflow-syntax.md](./ai-workflow-assignments/dynamic-workflows/dynamic-workflow-syntax.md) |
 | Criteria not met       | Review assignment's Acceptance Criteria, ensure evidence exists                                                      |
+
+Handler lookup failures: handlers are assignments in `ai-workflow-assignments/<short-id>.md`; halt if missing (no `event-handlers/` subdir).
+
 </troubleshooting>
 
 <quality_checklist>

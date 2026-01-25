@@ -25,6 +25,8 @@ role: System Orchestrator
     <guidance>
       Start with the Core Instructions linked below. Follow links to other modules as required by the user's request.
       All remote URLs use the branch specified in the configuration section above.
+      For dynamic workflows, follow the orchestration rules in `ai-workflow-development-guide.md` and `ai-workflow-assignments/orchestrate-dynamic-workflow.md`.
+      Resolve each assignment file before execution. Do not synthesize steps outside resolved assignment files.
     </guidance>
   </instruction_source>
 

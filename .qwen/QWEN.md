@@ -6,7 +6,7 @@ This file provides guidance to Qwen agents when working with code in this reposi
 
 <!-- BRANCH PARAMETER: Change this value to load instructions from a different branch -->
 <!-- Valid values: main, optimization, feature/*, or any valid branch name -->
-**Active Branch:** `main`
+**Active Branch:** `optimization`
 
 All remote URLs in this document use the configured branch above. Replace `{branch}` placeholders with the active branch value.
 
@@ -159,6 +159,9 @@ Replace `{branch}` with the configured branch from the Configuration section (de
 3. Extract and enforce Acceptance Criteria as Definition of Done
 4. Print resolution trace
 5. Produce Run Report mapped to Acceptance Criteria
+
+For dynamic workflows, follow the orchestration rules in `ai-workflow-development-guide.md` and `ai-workflow-assignments/orchestrate-dynamic-workflow.md`.
+Resolve each assignment file before execution. Do not synthesize steps outside resolved assignment files.
 
 ### Assignment Execution
 1. Resolution trace (print files + URLs/SHAs)
