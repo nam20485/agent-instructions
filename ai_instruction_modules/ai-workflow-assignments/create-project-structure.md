@@ -16,14 +16,14 @@ Create the actual project structure and scaffolding for a new application based 
 ### Acceptance Criteria
 
 1. Solution structure created following established guidelines
-3. All required project files and directories established
-4. Initial configuration files created (global.json, Docker, etc.)
-5. Basic CI/CD pipeline structure established
-6. Documentation structure created (README, docs folder, etc.)
-7. Development environment properly configured and validated
-8. Initial commit made with complete project scaffolding
-9. Stakeholder approval obtained for the project structure
-10. Repository summary document is created.
+2. All required project files and directories established
+3. Initial configuration files created (global.json, Docker, etc.)
+4. Basic CI/CD pipeline structure established
+5. Documentation structure created (README, docs folder, etc.)
+6. Development environment properly configured and validated
+7. Initial commit made with complete project scaffolding
+8. Stakeholder approval obtained for the project structure
+9. Repository summary document is created.
 
 ### Assignment
 
@@ -81,8 +81,8 @@ It is important to the final quality of our product for everyone to perform thei
    5. Ensure project follows established guidelines
 
 7. **Respository Summary Document**
-   1. Respository summary document is committed to the repository.
-   2. Respository summary document is linked to from the README.md file.
+   1. Repository summary document is committed to the repository.
+   2. Repository summary document is linked to from the README.md file.
    3. The repository summary is located at the root of the repository in a file called `.ai-repository-summary.md`.
    4. The repository summary is created by following the instructions in the [create-repository-summary.md](https://github.com/nam20485/agent-instructions/blob/main/ai_instruction_modules/create-repository-summary.md) file.
 
@@ -92,6 +92,37 @@ It is important to the final quality of our product for everyone to perform thei
    3. Document setup and development procedures
    4. Create issue templates for future work
    5. Set up project management structure
+
+### Validation
+
+1. Present the structure to the stakeholder
+2. Verify build and configuration
+3. Obtain approval
+
+### Example Project Structure (dotnet)
+
+Use this project structure for all .NET projects unless otherwise specified by the stakeholder. Adjust the structure as needed based on the specific requirements of the application and the guidelines provided in the application plan and template documents.
+
+```
+/ 
+   SolutionName/
+      ProjectName.API/
+         Controllers/
+         Models/
+         Services/
+         ProjectName.API.csproj
+      ProjectName.Application/
+         Interfaces/
+      ...
+      ProjectName.XYZ/
+      Tests/
+         TestProjectName/
+            TestClasses.cs
+            TestProjectName.csproj
+         ...
+         Tests.slnx
+      SolutionName.slnx
+```
 
 ### Completion
 
