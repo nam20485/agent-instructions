@@ -13,6 +13,7 @@ Perform a comprehensive debriefing session that captures key learnings, insights
 3. All required sections are complete and comprehensive
 4. The report is reviewed and approved by all relevant stakeholders
 5. Report is committed and pushed to the project repo
+6. The execution trace of the assignment is documented and saved in the repository
 
 ### Assignment
 
@@ -29,6 +30,7 @@ It is important to the final quality of our product for everyone to perform thei
    - Fill in all required sections
    - Provide specific, actionable information
    - Include evidence and examples where applicable
+   - Create execution trace output document of all actions performed during the assignment, including commands run, files created/modified, and interactions with the user or orchestrator. The output from the terminal should be included. Save this as `debrief-and-document/trace.md` in the repository.
 
 2. **Review**
    - Post the report in the chat
