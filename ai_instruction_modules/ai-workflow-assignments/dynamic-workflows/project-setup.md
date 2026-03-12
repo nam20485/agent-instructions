@@ -15,6 +15,7 @@ This dynamic workflow file specifies the workflow for initiating a new repo. It 
                     `create-app-plan`,
                     `create-project-structure`,
                     `create-repository-summary`,
+                    `create-agents-md-file`,
                     `debrief-and-document`
                  ]
 
