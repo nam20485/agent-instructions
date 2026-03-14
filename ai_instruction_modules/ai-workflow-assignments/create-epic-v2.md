@@ -1,6 +1,6 @@
 # Assignment: Create Epic
 
-## (create-epic)
+## (create-epic-v2)
 
 ### Goal
 
@@ -29,6 +29,7 @@ Transform a single task-list line item from a parent application plan into its o
   "phase": "$phase",
   "line_item": "$line_item"
 }
+```
 
 ### Acceptance Criteria
 
