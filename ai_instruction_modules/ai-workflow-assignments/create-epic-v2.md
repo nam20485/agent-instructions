@@ -1,4 +1,4 @@
-# Assignment: Create Epic
+# Assignment: Create Epic v2
 
 ## (create-epic-v2)
 
