@@ -88,6 +88,15 @@ For flexible command wrappers:
   - $assignment_inputs = `$ARGUMENTS[1]`    # e.g., { workflow: "implement-epic" }
 ```
 
+<!-- v2: Added error recovery, validation standards, and env considerations (2025-10-29) -->
+### Error Recovery & Validation Standards
+- On any failure: Follow tiered retry in recover-from-error.md (targeted fix → scratch retry → escalate after 3 attempts).
+- Validation: Always use a dedicated qa-test-engineer agent for post-assignment-complete events. Input: Execution outputs + real state query (e.g., GitHub API). Output: Independent PASS/FAIL with evidence (e.g., "Repo query confirms issue #X exists").
+- Prompt Standard: Include explicit data interpolation (e.g., $full_epic_json) and validation check before delegation.
+### Environment Considerations
+- For write-heavy workflows (e.g., GitHub issues): Ensure gh CLI auth (gh auth login) before run. If in simulated env, auto-escalate to manual as per recover-from-error.
+- Test: Run with --dry-run flag to validate without writes.
+
 ## Prompt Guidance (Embed in any chat prompt)
 Use this pre-execution preamble in any prompt that invokes this orchestrator to ensure consistent, acceptance-gated runs across tools and contexts.
 
