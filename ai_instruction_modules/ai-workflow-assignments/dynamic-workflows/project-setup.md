@@ -20,10 +20,11 @@ This dynamic workflow file specifies the workflow for initiating a new repo. It 
                  ]
 
 For each `$assignment_name` in `$assignments`, you will:
-   - assign the agent the `$assignment_name` assignment
-   - wait until the agent finishes the task
-   - review the work and approve it
-   - record output as `#initiate-new-repository.$assignment_name`
+
+- assign the agent the `$assignment_name` assignment
+- wait until the agent finishes the task
+- review the work and approve it
+- record output as `#initiate-new-repository.$assignment_name`
 
 ### Events
 
@@ -41,7 +42,8 @@ For each `$assignment_name` in `$assignments`, you will:
                  ]
 
 For each `$poc_assignment_name` in `$poc_assignments`, you will:
-   - assign the agent the `$poc_assignment_name` assignment
-   - wait until the agent finishes the task
-   - review the work and approve it
-   - record output as `#events.post-assignment-complete.$poc_assignment_name`
+
+- assign the agent the `$poc_assignment_name` assignment
+- wait until the agent finishes the task
+- review the work and approve it
+- record output as `#events.post-assignment-complete.$poc_assignment_name`
