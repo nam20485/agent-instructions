@@ -54,6 +54,7 @@ Transform a single task-list line item from a parent application plan into its o
 16. Epic is linked to the appropriate milestone
 17. Epic is marked as blocking the parent plan issue
 18. Epic issue object is returned for downstream workflow processing
+19. "implementation:ready" label has been added to the epic issue to indicate it is ready for implementation by downstream workflows
 
 ### Assignment
 
@@ -64,6 +65,7 @@ Your assignment is to transform a single task-list line item from a parent appli
 3. Transforming the line item's task list into a checkbox-driven implementation plan within the epic
 4. Creating a comprehensive epic issue from the line item using the official template
 5. Properly linking the epic to the parent plan issue using GitHub's sub-issue feature
+6. Adding the "implementation:ready" label to indicate the epic is ready for downstream implementation workflows
 
 The parent application plan issue should already exist and contain the high-level phases with task-list line items. You will be creating ONE epic for ONE specific line item of ONE specific phase as provided in the $line_item input parameter.
 
@@ -189,6 +191,7 @@ St1 St2 St3  St4  St5 St6  St7 St8 St9  ← Bottom level: Story Issues (created 
    - Verify milestone assignment is correct
    - Ensure epic is marked as blocking the parent issue
    - Verify all template sections are complete
+   - Add the "implementation:ready" label has been added to indicate readiness for downstream workflows
    - **DO NOT IMPLEMENT OR WRITE ANY CODE.** This assignment is planning only.
 
 2. **Return Epic Object:**
