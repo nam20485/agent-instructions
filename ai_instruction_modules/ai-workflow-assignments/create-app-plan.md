@@ -25,6 +25,7 @@ Your goal is to create a plan for application, using the template in Appendix A,
 15. Created issue has been added to the GitHub Project for tracking.
 16. Created issue has been assigned to the appropriate milestone (typically "Phase 1: Foundation").
 17. Appropriate labels have been applied to the issue (typically "planning", "documentation").
+18. `implementation:ready` label has been applied to the issue to indicate it is ready for implementation by downstream workflows.
 
 ### Assignment
 
@@ -43,6 +44,7 @@ It is important to the final quality of our product for everyone to perform thei
 ### Important: Planning Only - No Implementation
 
 This assignment is **PLANNING ONLY**. You will:
+
 - ✅ Document the plan in an issue
 - ✅ Create planning documents (tech-stack.md, architecture.md)
 - ✅ Create milestones and link issues
@@ -53,11 +55,11 @@ This assignment is **PLANNING ONLY**. You will:
 
 All implementation happens in subsequent assignments (create-application-foundation, create-application-structure, etc.).
 
-### References:
+### References
 
-* Excellent examples of previously-completed plans created for different applications: 
-    * https://github.com/nam20485/advanced-memory3/issues/12
-    * https://github.com/nam20485/support-assistant/issues/2
+- Excellent examples of previously-completed plans created for different applications:
+  - <https://github.com/nam20485/advanced-memory3/issues/12>
+  - <https://github.com/nam20485/support-assistant/issues/2>
 
 ### Detailed Steps
 
@@ -72,7 +74,7 @@ All implementation happens in subsequent assignments (create-application-foundat
 2. **Design Plan**
    - Create a detailed design plan based on the new app template
    - Document the planned project structure, including directories, files, and naming conventions
-   
+
    **Note**: You are documenting the PLAN for the project structure, not creating the actual directories or files. Actual file creation happens in the 'create-application-foundation' assignment.
    - Identify necessary frameworks, tools, and packages to be used
    - Plan for testing, documentation, containerization, and other mandatory requirements
@@ -81,8 +83,7 @@ All implementation happens in subsequent assignments (create-application-foundat
    - Link created issue to the GitHub Project for unified tracking
    - Assign issue to appropriate milestone (typically the first phase: "Phase 1: Foundation")
    - Apply appropriate labels to issue from the imported label set (typically: "planning", "documentation")
-
-
+   - Apply the `implementation:ready` label to the issue to indicate it is ready for implementation by downstream workflows.
 
 ### Events
 
@@ -116,8 +117,11 @@ This event runs after the assignment completes to report progress.
 ### Completion
 
 - Ask the stake-holder if they are happy with the plan and can approve it. If not then make the requested changes and iterate asking for approval and making changes until approval is gained.
-- **DO NOT IMPLEMENT OR WRITE ANY CODE.** 
+- **DO NOT IMPLEMENT OR WRITE ANY CODE.**
 - This assignment is planning only.
+
+   **Finally, once everything is verified, apply the `implementation:ready` label to the epic issue to indicate it is ready for implementation by downstream workflows.**
+
 - Ask the stake-holder for your next assignment.
 
 ## Appendix A: Application Plan Issue Template (Copy-Paste)
@@ -127,5 +131,3 @@ Use the template below when you “Create Issue documenting plan” in step 2. I
 **TEMPLATE MOVED**.
 
 Template has been moved to [application-plan.md](/.github/ISSUE_TEMPLATE/application-plan.md) file under the [.github/ISSUE_TEMPLATE/](/.github/ISSUE_TEMPLATE/) directory in the root of the repository.
-
-

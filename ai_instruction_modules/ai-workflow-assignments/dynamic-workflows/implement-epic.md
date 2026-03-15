@@ -9,7 +9,9 @@ This dynamic workflow performs implementation of a single epic by systematically
 The orchestrator should evaluate whether stories within an epic can be implemented in parallel by multiple agents:
 
 ### When to Use Parallel Execution
+
 Stories are suitable for parallel execution when:
+
 - ✅ Stories have **minimal or no dependencies** on each other
 - ✅ Stories work on **different files or components** with no overlap
 - ✅ Stories have **clear, independent acceptance criteria**
@@ -18,7 +20,9 @@ Stories are suitable for parallel execution when:
 - ✅ The epic's architecture supports **loose coupling** between stories
 
 ### When to Use Serial Execution
+
 Stories must be executed serially when:
+
 - ❌ Stories have **dependencies** (Story B requires Story A to be complete)
 - ❌ Stories modify the **same files or components** (merge conflicts likely)
 - ❌ Stories require **shared resources** that can't be accessed concurrently
@@ -27,6 +31,7 @@ Stories must be executed serially when:
 - ❌ The epic's architecture has **tight coupling** between components
 
 ### Orchestrator Decision Process
+
 1. **Analyze epic structure** and story dependencies
 2. **Identify independent story clusters** that can run in parallel
 3. **Assess merge conflict risk** based on files each story will modify
@@ -37,13 +42,16 @@ Stories must be executed serially when:
    - **Serial**: Assign one story at a time in sequence
 
 ### Implementation Notes
+
 - When executing in parallel, the orchestrator should track all agent assignments
 - Wait for all parallel stories to complete before reviewing the epic as a whole
 - Be prepared to handle merge conflicts when integrating parallel work
 - Serial execution is the **safe default** when dependencies are unclear
 
 ### Parallel Execution and Workspace Management
+
 **How Parallel Execution Works:**
+
 - Each agent assigned a story creates their own feature branch: `issues/<story-number>-<description>`
 - Agents work in their feature branches independently and push to remote
 - The orchestrator coordinates assignments but agents don't work simultaneously in the same local directory
@@ -53,6 +61,7 @@ Stories must be executed serially when:
   3. **Remote coordination**: All work pushed to remote; integration happens via PRs
 
 **Conflict Resolution:**
+
 - Feature branches allow independent development
 - Conflicts are resolved during PR merge, not during development
 - Frequent commits and pushes reduce merge conflict risk
@@ -61,6 +70,7 @@ Stories must be executed serially when:
 ## Script
 
 ### Inputs
+
 - `$epic` (optional)
   - Epic issue object or issue number containing the epic to implement
   - If not provided, the workflow will find the next incomplete epic automatically
@@ -74,7 +84,9 @@ Stories must be executed serially when:
 ### Declarations
 
 #### find_next_incomplete_epic($repository)
+
 Finds the next epic issue that has not been fully completed.
+
 - **Input:** Repository path
 - **Returns:** Epic issue object for the next incomplete epic
 - **Search criteria:**
@@ -111,19 +123,25 @@ Finds the next epic issue that has not been fully completed.
 - **Example:** `find_next_incomplete_epic("myorg/myrepo")` returns the next epic issue object that needs work
 
 #### getepic($epic, $repository)
+
 Retrieves the epic issue from the specified repository.
+
 - **Input:** Epic issue number or object and repository path
 - **Returns:** Epic issue object containing the epic description and requirements
 - **Example:** `getepic(15, "myorg/myrepo")` returns epic issue #15 from myorg/myrepo
 
 #### getstories($epic)
+
 Extracts story items from an epic issue.
+
 - **Input:** Epic issue object
 - **Returns:** Array of story descriptions to be converted into story issues
 - **Example:** `getstories($epic)` returns `["Story 1: User login", "Story 2: Password reset", ...]`
 
 #### analyze_story_dependencies($stories)
+
 Analyzes stories to determine if they can be safely executed in parallel.
+
 - **Input:** Array of story objects
 - **Returns:** Boolean indicating whether stories are independent (`true`) or have dependencies (`false`)
 - **Analysis includes:**
@@ -134,7 +152,9 @@ Analyzes stories to determine if they can be safely executed in parallel.
 - **Example:** `analyze_story_dependencies($stories)` returns `true` if stories are independent, `false` if dependencies exist
 
 #### create_pull_request($story)
+
 Creates a pull request for the completed story implementation.
+
 - **Input:** Story object with completed implementation
 - **Returns:** Pull request object containing PR number, URL, and metadata
 - **Actions:**
@@ -147,7 +167,9 @@ Creates a pull request for the completed story implementation.
 - **Example:** `create_pull_request($story)` returns PR object for story implementation
 
 #### request_automated_reviews($pull_request)
+
 Requests automated reviews from AI bots on the pull request.
+
 - **Input:** Pull request object
 - **Returns:** Review request confirmation
 - **Actions:**
@@ -157,7 +179,9 @@ Requests automated reviews from AI bots on the pull request.
 - **Example:** `request_automated_reviews($pr)` triggers both AI bot reviews
 
 #### mark_milestone_complete($epic)
+
 Marks the epic's associated milestone as complete.
+
 - **Input:** Epic issue object
 - **Returns:** Confirmation of milestone completion
 - **Actions:**
@@ -167,7 +191,9 @@ Marks the epic's associated milestone as complete.
 - **Example:** `mark_milestone_complete($epic)` closes the milestone for the completed epic
 
 #### update_project_progress($epic, $repository)
+
 Updates the GitHub project board with the epic's completion status.
+
 - **Input:** Epic issue object and repository path
 - **Returns:** Confirmation of project update
 - **Actions:**
@@ -177,12 +203,14 @@ Updates the GitHub project board with the epic's completion status.
   - Updates any parent tracking issues or project views
 - **Example:** `update_project_progress($epic, "myorg/myrepo")` updates project board status
 
- ### implement-epic
+### implement-epic
 
 # Step 0: Determine which epic to work on
+
 if `$epic` is not provided:
    `$epic_issue` = find_next_incomplete_epic($repository)
-   - log: "Auto-selected epic: {epic_issue.number} - {epic_issue.title}"
+
+- log: "Auto-selected epic: {epic_issue.number} - {epic_issue.title}"
 else:
    `$epic_issue` = getepic($epic, $repository)
 
@@ -190,6 +218,7 @@ else:
 `$can_parallelize` = analyze_story_dependencies($stories)
 
 # Decision: Parallel or Serial execution
+
 if `$parallel_execution` is `true` AND `$can_parallelize` is `true`:
       # PARALLEL EXECUTION MODE
       # Assign all stories to agents simultaneously
@@ -198,7 +227,7 @@ if `$parallel_execution` is `true` AND `$can_parallelize` is `true`:
         - assign an available agent the `perform-task` assignment with input `$story`
         - wait until the agent completes the story implementation
         - record output as `#implement-epic.perform-task`
-          
+
           # Step 2: Create pull request for the story
           $pull_request = create_pull_request(#implement-epic.perform-task)
           - record PR as `#implement-epic.pull-request`
@@ -244,7 +273,7 @@ if `$parallel_execution` is `true` AND `$can_parallelize` is `true`:
       - update_project_progress($epic_issue, $repository)
       - close the epic issue with completion summary
       - record completion as `#implement-epic.complete`
-   
+
 else:
        # SERIAL EXECUTION MODE (Default/Safe)
        # Assign stories one at a time in sequence
@@ -253,7 +282,7 @@ else:
          - assign the agent the `perform-task` assignment with input `$story`
          - wait until the agent completes the story implementation
          - record output as `#implement-epic.perform-task`
-           
+
            # Step 2: Create pull request for the story
            $pull_request = create_pull_request(#implement-epic.perform-task)
            - record PR as `#implement-epic.pull-request`

@@ -45,6 +45,7 @@ It is essential to the overall product quality that everyone performs their assi
 ### Important: Planning Only - No Implementation
 
 This assignment is **PLANNING ONLY**. You will:
+
 - ✅ Document the feature plan in an issue
 - ✅ Update planning documents (tech-stack.md, architecture.md, feature briefs/specs)
 - ✅ Verify integration with existing systems and document necessary changes
@@ -58,10 +59,10 @@ Implementation tasks occur in follow-on assignments (feature implementation, tes
 
 ### References
 
-* Review existing application plan issues or feature plans for similar features in this repository or related projects (if available) to align structure and expectations.
-* Example planning issues:
-    * https://github.com/nam20485/advanced-memory3/issues/12 (full application plan example)
-    * https://github.com/nam20485/support-assistant/issues/2 (full application plan example)
+- Review existing application plan issues or feature plans for similar features in this repository or related projects (if available) to align structure and expectations.
+- Example planning issues:
+  - <https://github.com/nam20485/advanced-memory3/issues/12> (full application plan example)
+  - <https://github.com/nam20485/support-assistant/issues/2> (full application plan example)
 
 ### Detailed Steps
 

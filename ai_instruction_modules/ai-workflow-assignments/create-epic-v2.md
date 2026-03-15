@@ -7,10 +7,12 @@
 Transform a single task-list line item from a parent application plan into its own epic sub-issue. The epic inherits context from both the parent plan and phase while preserving the line item's checkbox-driven implementation guidance, providing a focused implementation roadmap for that specific line item.
 
 ### Inputs
-- `$phase`: Phase object containing the phase name, description, requirements, and entire content from the parent plan issue including parent issue metadata
-- `$line_item`: Line item object containing the identifier, title, description, acceptance criteria, dependencies, and source task-list structure from the parent plan
+
+- `$phase`: Phase object containing the phase name, description, requirements, and entire content from the parent plan issue including parent issue metadata (or find lowest phase with line items not created as epics yet, if not provided directly)
+- `$line_item`: Line item object containing the identifier, title, description, acceptance criteria, dependencies, and source task-list structure from the parent plan (or lowest phase + line item1204 not yet created as epic, if not provided directly)
 
 ### Output
+
 - Returns the created epic issue object containing the following data for downstream processing:
   - Epic issue ID: Unique identifier of the created epic issue
   - Epic issue URL: Full URL to access the created epic issue
@@ -20,6 +22,7 @@ Transform a single task-list line item from a parent application plan into its o
   - Line item data: The original line item object that was transformed into this epic
 
 #### Structure of Returned Epic Issue Object
+
 ```json
 {
   "id": 123456789,
@@ -51,6 +54,7 @@ Transform a single task-list line item from a parent application plan into its o
 16. Epic is linked to the appropriate milestone
 17. Epic is marked as blocking the parent plan issue
 18. Epic issue object is returned for downstream workflow processing
+19. Epic issue has "implementation:ready" label applied
 
 ### Assignment
 
@@ -100,18 +104,19 @@ St1 St2 St3  St4  St5 St6  St7 St8 St9  ← Bottom level: Story Issues (created 
 
 ### References
 
-* Excellent example of a completed epic sub-issue:
-    * https://github.com/nam20485/advanced-memory3/issues/13 (Foundation & Core Services Epic)
-    * https://github.com/nam20485/support-assistant/issues/3 (Phase 1 Epic)
+- Excellent example of a completed epic sub-issue:
+  - <https://github.com/nam20485/advanced-memory3/issues/13> (Foundation & Core Services Epic)
+  - <https://github.com/nam20485/support-assistant/issues/3> (Phase 1 Epic)
 
-* Example parent plan issues:
-    * https://github.com/nam20485/advanced-memory3/issues/12
-    * https://github.com/nam20485/support-assistant/issues/2
+- Example parent plan issues:
+  - <https://github.com/nam20485/advanced-memory3/issues/12>
+  - <https://github.com/nam20485/support-assistant/issues/2>
 
-* GitHub Documentation:
-    * GitHub Sub-Issues: https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/adding-sub-issues
-    * GitHub Tasklists: https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/about-tasklists
-    * GitHub Sub-Issues REST API: https://docs.github.com/en/rest/issues/sub-issues?apiVersion=2022-11-28
+- GitHub Documentation:
+  - GitHub Sub-Issues: <https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/adding-sub-issues>
+  - GitHub Tasklists: <https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/about-tasklists>
+  - GitHub Sub-Issues REST API: <https://docs.github.com/en/rest/issues/sub-issues?apiVersion=2022-11-28>
+
 ### Detailed Steps
 
 1. **Review Phase and Line Item Input**
@@ -163,10 +168,10 @@ St1 St2 St3  St4  St5 St6  St7 St8 St9  ← Bottom level: Story Issues (created 
    - Create the epic issue in the repository
    - Link the epic to the GitHub Project for unified tracking
    - Use GitHub's sub-issue feature to link the epic to the parent plan issue
-     - Reference: https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/adding-sub-issues
+     - Reference: <https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/adding-sub-issues>
    - Link the epic to the appropriate milestone matching the phase
    - Add the epic as a blocking dependency in the parent plan issue
-     - Reference: https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/creating-issue-dependencies
+     - Reference: <https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/creating-issue-dependencies>
    - Apply appropriate labels (e.g., `epic`, `plan`, `phase-name`, `line-item-epic`)
 
 7. **Quality Validation**
@@ -187,6 +192,8 @@ St1 St2 St3  St4  St5 St6  St7 St8 St9  ← Bottom level: Story Issues (created 
    - Verify all template sections are complete
    - **DO NOT IMPLEMENT OR WRITE ANY CODE.** This assignment is planning only.
 
+   **Finally, once everything is verified, apply the `implementation:ready` label to the epic issue to indicate it is ready for implementation by downstream workflows.**
+
 2. **Return Epic Object:**
    - Return the created epic issue object to the calling workflow
    - The epic object will be used by the `breakdown-plan` workflow to:
@@ -195,13 +202,13 @@ St1 St2 St3  St4  St5 St6  St7 St8 St9  ← Bottom level: Story Issues (created 
      - Enable downstream workflow processing
 **Note:** Stakeholder review of individual epics is not required. The orchestrating workflow will handle review of all epics after they are created. The epic created by this assignment will contain checkbox-driven tasks from the line item and high-level story bullets for future story creation workflows.
 
-
 ## Epic Template Reference
 
 The official epic template is located at:
 `.github/ISSUE_TEMPLATE/epic.md`
 
 Use this template when creating the epic issue. It contains the complete structure including:
+
 - Overview and goals
 - Technology stack
 - Epic stories breakdown
