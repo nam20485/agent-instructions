@@ -93,12 +93,14 @@ Create a structured workflow execution plan document with the following sections
 ---
 
 **1. Overview**
+
 - Workflow name and file reference
 - Project name and brief description (from `plan_docs/`)
 - Total number of assignments
 - High-level summary of what the workflow accomplishes
 
 **2. Project Context Summary**
+
 - Key facts extracted from `plan_docs/` that are relevant to execution
 - Technology stack, repository details, special constraints, known risks
 
@@ -118,9 +120,11 @@ For each assignment (in execution order), document:
 | **Events** | Any `pre-`/`post-`/`on-failure` events that will fire |
 
 **4. Sequencing Diagram** (optional, text-based)
+
 - A simple ordered flow showing assignment dependencies
 
 **5. Open Questions**
+
 - Any ambiguities in the planning docs or workflow that need stakeholder input before execution begins
 
 ---
@@ -140,9 +144,11 @@ For each assignment (in execution order), document:
 
 1. Save the approved plan as `plan_docs/workflow-plan.md` in the repository.
 2. Commit the file with a descriptive message:
+
    ```
    docs: add workflow execution plan for <workflow-name>
    ```
+
 3. Push the commit to the current working branch (create one if none exists yet, following the branch naming convention `dynamic-workflow-<workflow-name>`).
 4. Verify the file is accessible in the repository.
 
