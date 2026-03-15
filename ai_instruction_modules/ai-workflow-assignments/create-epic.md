@@ -7,9 +7,11 @@
 Create a single epic sub-issue for a specific phase from the main application plan. The epic will break down the phase into detailed stories and tasks, providing a comprehensive implementation roadmap for that phase.
 
 ### Inputs
+
 - `$phase`: Phase object containing the phase name, description, requirements, and entire content from the parent plan issue
 
 ### Output
+
 - Single epic sub-issue created and linked to the parent plan issue
 - Epic contains detailed breakdown of stories and tasks for the phase
 - Epic is assigned to the appropriate milestone
@@ -79,13 +81,13 @@ Story1 2 3   Story4 5 6  Story7 8 9   ← Bottom level: Stories (granular tasks)
 
 ### References
 
-* Excellent example of a completed epic sub-issue:
-    * https://github.com/nam20485/advanced-memory3/issues/13 (Foundation & Core Services Epic)
-    * https://github.com/nam20485/support-assistant/issues/3 (Phase 1 Epic)
+- Excellent example of a completed epic sub-issue:
+  - <https://github.com/nam20485/advanced-memory3/issues/13> (Foundation & Core Services Epic)
+  - <https://github.com/nam20485/support-assistant/issues/3> (Phase 1 Epic)
 
-* Example parent plan issues:
-    * https://github.com/nam20485/advanced-memory3/issues/12
-    * https://github.com/nam20485/support-assistant/issues/2
+- Example parent plan issues:
+  - <https://github.com/nam20485/advanced-memory3/issues/12>
+  - <https://github.com/nam20485/support-assistant/issues/2>
 
 ### Detailed Steps
 
@@ -132,10 +134,10 @@ Story1 2 3   Story4 5 6  Story7 8 9   ← Bottom level: Stories (granular tasks)
    - Create the epic issue in the repository
    - Link the epic to the GitHub Project for unified tracking
    - Use GitHub's sub-issue feature to link the epic to the parent plan issue
-     - Reference: https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/adding-sub-issues
+     - Reference: <https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/adding-sub-issues>
    - Link the epic to the appropriate milestone matching the phase
    - Add the epic as a blocking dependency in the parent plan issue
-     - Reference: https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/creating-issue-dependencies
+     - Reference: <https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/creating-issue-dependencies>
    - Apply appropriate labels (e.g., `epic`, `plan`, `phase-name`)
 
 6. **Quality Validation**
@@ -170,6 +172,7 @@ The official epic template is located at:
 `.github/ISSUE_TEMPLATE/epic.md`
 
 Use this template when creating the epic issue. It contains the complete structure including:
+
 - Overview and goals
 - Technology stack
 - Epic stories breakdown
