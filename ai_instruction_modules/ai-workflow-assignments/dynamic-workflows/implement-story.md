@@ -19,7 +19,7 @@ This dynamic workflow performs implementation of a single story from an epic. It
 
 **After reading all three files, log: "✓ Completed mandatory reading chain for implement-story workflow"**
 
-** DO NOT PROCEED until you have read the ## Events section later in This file.**
+**DO NOT PROCEED until you have read the ## Events section later in This file.**
 
 - It contains critical event handlers required for proper execution of this workflow and its assignments.
 
@@ -28,6 +28,7 @@ This dynamic workflow performs implementation of a single story from an epic. It
 ## Script
 
 ### Inputs
+
 - `$story` (required)
   - Story issue object or issue number containing the story to implement
   - Can be passed from `implement-epic` workflow or specified directly
@@ -41,13 +42,17 @@ This dynamic workflow performs implementation of a single story from an epic. It
 ### Declarations
 
 #### getstory($story, $repository)
+
 Retrieves the story issue from the specified repository.
+
 - **Input:** Story issue number or object and repository path
 - **Returns:** Story issue object containing the story description, acceptance criteria, and requirements
 - **Example:** `getstory(42, "myorg/myrepo")` returns story issue #42 from myorg/myrepo
 
 #### create_pull_request($story)
+
 Creates a pull request for the completed story implementation.
+
 - **Input:** Story object with completed implementation
 - **Returns:** Pull request object containing PR number, URL, and metadata
 - **Actions:**
@@ -60,18 +65,24 @@ Creates a pull request for the completed story implementation.
 - **Example:** `create_pull_request($story)` returns PR object for story implementation
 
 #### request_automated_reviews($pull_request)
+
 Requests automated reviews from AI bots on the pull request.
+
 - **Input:** Pull request object
 - **Returns:** Review request confirmation
 - **Actions:**
   - Posts comment `@gemini review` to trigger Gemini bot review
   - Posts comment `@claude review this PR` to trigger Claude bot review
+
   # GH Copilot will automatically begin his review on his own (once he sees the PR created)
+
   - Waits for automated reviews to complete
 - **Example:** `request_automated_reviews($pr)` triggers both AI bot reviews
 
 #### update_story_progress($story, $status)
+
 Updates the story issue with current progress status.
+
 - **Input:** Story object and status message
 - **Returns:** Confirmation of update
 - **Actions:**
@@ -83,6 +94,7 @@ Updates the story issue with current progress status.
 ### implement-story
 
 # Step 0: Get story details
+
 if `$story` is an issue number:
    `$story_issue` = getstory($story, $repository)
 else:
@@ -90,48 +102,57 @@ else:
 
 - log: "Implementing story: {story_issue.number} - {story_issue.title}"
 if `$epic` is provided:
-   - log: "Parent epic: {epic.number} - {epic.title}"
+  - log: "Parent epic: {epic.number} - {epic.title}"
 
 # Step 1: Implement the story
+
 - assign the agent the `perform-task` assignment with input `$story_issue`
 - wait until the agent completes the story implementation
 - record output as `#implement-story.perform-task`
 
 # Step 2: Update story progress
+
 - update_story_progress($story_issue, "Implementation complete, creating PR")
 
 # Step 3: Create pull request for the story
+
 `$pull_request` = create_pull_request(#implement-story.perform-task)
+
 - record PR as `#implement-story.pull-request`
 - log: "Created PR #{pull_request.number} for story #{story_issue.number}"
 
 # Step 4: Request automated reviews
+
 - request_automated_reviews($pull_request)
 - record reviews as `#implement-story.automated-reviews`
 - log: "Automated reviews complete for PR #{pull_request.number}"
 
 # Step 5: Update story with review status
+
 - update_story_progress($story_issue, "PR #{pull_request.number} reviews complete, ready for approval")
 
 # Step 6: Automated PR approval and merge
+
 - assign an agent the `pr-approval-and-merge` assignment with input:
   - pull_request: `$pull_request`  
 - wait until the agent completes the `pr-approval-and-merge` assignment
-- record output as `#implement-story.pr-approval-and-merge`                                    
+- record output as `#implement-story.pr-approval-and-merge`
 
 if `#implement-story.pr-approval-and-merge`.result is "merged":
-  - record merge as `#implement-story.pr-merged`
-  - log: "PR successfully merged"
+
+- record merge as `#implement-story.pr-merged`
+- log: "PR successfully merged"
 else if `#implement-story.pr-approval-and-merge`.result is "pending":
-  - log: "PR merge pending additional checks, requires manual intervention"
-  - post comment on `$pull_request`: "⚠️ Automated merge pending: waiting for additional status checks to complete. Manual merge may be required."
-  - STOP workflow with message: "Manual intervention required: PR merge is pending additional checks"
+- log: "PR merge pending additional checks, requires manual intervention"
+- post comment on `$pull_request`: "⚠️ Automated merge pending: waiting for additional status checks to complete. Manual merge may be required."
+- STOP workflow with message: "Manual intervention required: PR merge is pending additional checks"
 else:
-  - log: "PR auto-merge failed, requires manual intervention"
-  - post comment on `$pull_request`: "❌ Automated merge failed: branch protection rules not satisfied or merge conflicts present. Manual intervention required."
-  - STOP workflow with message: "Manual intervention required: PR could not be automatically merged"
+- log: "PR auto-merge failed, requires manual intervention"
+- post comment on `$pull_request`: "❌ Automated merge failed: branch protection rules not satisfied or merge conflicts present. Manual intervention required."
+- STOP workflow with message: "Manual intervention required: PR could not be automatically merged"
 
 # Step 7: Final story update and closure
+
 - update_story_progress($story_issue, "PR merged, story implementation complete")
 - close the story issue with completion summary
 - record completion as `#implement-story.complete`
@@ -165,19 +186,20 @@ This event runs when ANY assignment fails to recover from errors systematically.
 This event runs after EACH assignment completes to report progress and validate the work.
 
 `$progress_and_validation_assignments` = [
-                     `create-repository-summary`,     
+                     `create-repository-summary`,
                      `validate-assignment-completion`,
                      `report-progress`
                  ]
 
 For each `$pv_assignment_name` in `$progress_and_validation_assignments`, you will:
-   - assign the agent the `$pv_assignment_name` assignment
-   - wait until the agent finishes the task
-   - review the work and approve it
-     - if `$pv_assignment_name` is `validate-assignment-completion`:
-     - if validation failed, halt workflow and request manual intervention # Halt workflow to prevent further execution with invalid state
-     - if validation passed, proceed to next assignment in `$progress_and_validation_assignments`
-   - record output as `#events.post-assignment-complete.$pv_assignment_name`
+
+- assign the agent the `$pv_assignment_name` assignment
+- wait until the agent finishes the task
+- review the work and approve it
+  - if `$pv_assignment_name` is `validate-assignment-completion`:
+  - if validation failed, halt workflow and request manual intervention # Halt workflow to prevent further execution with invalid state
+  - if validation passed, proceed to next assignment in `$progress_and_validation_assignments`
+- record output as `#events.post-assignment-complete.$pv_assignment_name`
 
 #### `post-script-complete`
 

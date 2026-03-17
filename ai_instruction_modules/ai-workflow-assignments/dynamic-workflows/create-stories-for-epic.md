@@ -7,12 +7,15 @@
 This dynamic workflow creates story issues for a specific epic within an application development plan. It extracts the specified story bullets from an epic issue, then creates individual story issues for each story using the create-story-v2 assignment. The workflow now supports both serial and optional parallel execution so that multiple stories can be created at the same time when it is safe to do so.
 
 ### Parallel Execution and Workspace Management
+
 **Choosing an Execution Mode**
+
 - Use serial execution (default) when story sequencing matters, when story definitions depend on one another, or when you need to review each story before creating the next
 - Enable parallel execution by setting `$parallel_execution` to `true` when stories are independent and can be created simultaneously to speed up throughput
 - Each `create-story-v2` task runs inside its own assignment, so GitHub issue creation remains isolated per story
 
 **Coordination Details**
+
 - The orchestrator checks for existing linked story issues before creating new ones, ensuring idempotent behavior even in parallel mode
 - When running in parallel, the orchestrator waits for all story-creation assignments to finish before moving on to downstream work
 - Story issues are created in GitHub's issue tracker, so concurrent execution does not modify repository files or create merge conflicts
@@ -51,25 +54,30 @@ This dynamic workflow creates story issues for a specific epic within an applica
 ## Script
 
 ### Inputs
+
 - `$epic_issue_number` (required)
- - issue number of the epic to analyze
-  - if not provided, have agent find it
+- issue number of the epic to analyze
+- if not provided, have agent find it
 - `$repository` (optional)
   - git repo with epic issue to analyze
   - if not provided, use current workspace
 - `$parallel_execution` (optional, default: `false`)
-   - Set to `true` to allow parallel story creation when stories are independent
+  - Set to `true` to allow parallel story creation when stories are independent
 
 ### Declarations
 
 #### getepic($issue_number, $repository)
+
 Retrieves the epic issue from the specified repository.
+
 - **Input:** Issue number and repository path
 - **Returns:** Issue object containing the epic description and requirements
 - **Example:** `getepic(42, "myorg/myrepo")` returns issue #42 from myorg/myrepo
 
 #### getstories($epic)
+
 Extracts story items from an epic issue.
+
 - **Input:** Epic issue object
 - **Returns:** Array of story descriptions to be converted into story issues
 - **Example:** `getstories($epic)` returns `["Story 1: User login", "Story 2: Password reset", ...]`
@@ -82,7 +90,9 @@ Extracts story items from an epic issue.
 log: "Interpolated epic JSON length: {length($full_epic_json)} characters"
 
 if `$parallel_execution` is `true`:
-   # PARALLEL MODE: Create stories concurrently when safe
+
+# PARALLEL MODE: Create stories concurrently when safe
+
    For each `$story` in `$stories`, in parallel:
       `$story_prompt` = "Execute create-story-v2 with full epic JSON: {$full_epic_json} and story: {$story}"
       if ! (`$story` has already been created as a story issue linked to `$epic_issue`):
@@ -93,19 +103,21 @@ if `$parallel_execution` is `true`:
       else:
          - log: "Skipping story creation because {$story->title} is already linked"
 
-   - wait until all parallel story-creation assignments complete
-   - assign an available agent the `perform-task` assignment with input "github-expert: Query GitHub for linked stories to #{$epic_issue_number}. Return total count and list of missing stories."
-   - wait until the agent finishes the task
-   - record output as `#create-stories-for-epic.github-verification`
-   - if `#create-stories-for-epic.github-verification.result` does not equal length($stories):
-      - log: "Linked story count mismatch detected; initiating recovery workflow"
+- wait until all parallel story-creation assignments complete
+- assign an available agent the `perform-task` assignment with input "github-expert: Query GitHub for linked stories to #{$epic_issue_number}. Return total count and list of missing stories."
+- wait until the agent finishes the task
+- record output as `#create-stories-for-epic.github-verification`
+- if `#create-stories-for-epic.github-verification.result` does not equal length($stories):
+  - log: "Linked story count mismatch detected; initiating recovery workflow"
       `$epic_issue` = getepic($epic_issue_number, $repository)
-      - assign the agent the `recover-from-error` assignment with input "Story creation mismatch detected for epic #{$epic_issue_number}. Expected {length($stories)} stories; review verification output {#create-stories-for-epic.github-verification}. Re-fetch epic JSON and apply tiered retry protocol."
-      - stop workflow and request manual intervention
-   - record aggregated outputs as `#create-stories-for-epic.parallel-complete`
+  - assign the agent the `recover-from-error` assignment with input "Story creation mismatch detected for epic #{$epic_issue_number}. Expected {length($stories)} stories; review verification output {#create-stories-for-epic.github-verification}. Re-fetch epic JSON and apply tiered retry protocol."
+  - stop workflow and request manual intervention
+- record aggregated outputs as `#create-stories-for-epic.parallel-complete`
 
 else:
-   # SERIAL MODE: Create stories one at a time
+
+# SERIAL MODE: Create stories one at a time
+
    For each `$story` in `$stories`, you will:
       `$story_prompt` = "Execute create-story-v2 with full epic JSON: {$full_epic_json} and story: {$story}"
       if ! (`$story` has already been created as a story issue linked to `$epic_issue`):
@@ -117,14 +129,14 @@ else:
       - review the work and approve it
       - record output as `#create-stories-for-epic.create-story-v2`
 
-   - assign the agent the `perform-task` assignment with input "github-expert: Query GitHub for linked stories to #{$epic_issue_number}. Return total count and list of missing stories."
-   - wait until the agent finishes the task
-   - record output as `#create-stories-for-epic.github-verification`
-   - if `#create-stories-for-epic.github-verification.result` does not equal length($stories):
-      - log: "Linked story count mismatch detected in serial mode; initiating recovery workflow"
+- assign the agent the `perform-task` assignment with input "github-expert: Query GitHub for linked stories to #{$epic_issue_number}. Return total count and list of missing stories."
+- wait until the agent finishes the task
+- record output as `#create-stories-for-epic.github-verification`
+- if `#create-stories-for-epic.github-verification.result` does not equal length($stories):
+  - log: "Linked story count mismatch detected in serial mode; initiating recovery workflow"
       `$epic_issue` = getepic($epic_issue_number, $repository)
-      - assign the agent the `recover-from-error` assignment with input "Story creation mismatch detected for epic #{$epic_issue_number}. Expected {length($stories)} stories; review verification output {#create-stories-for-epic.github-verification}. Re-fetch epic JSON and apply tiered retry protocol."
-      - stop workflow and request manual intervention
+  - assign the agent the `recover-from-error` assignment with input "Story creation mismatch detected for epic #{$epic_issue_number}. Expected {length($stories)} stories; review verification output {#create-stories-for-epic.github-verification}. Re-fetch epic JSON and apply tiered retry protocol."
+  - stop workflow and request manual intervention
 
 ### Events
 
@@ -153,9 +165,9 @@ This event runs after EACH assignment completes to report progress and validate 
 - assign the agent the `validate-assignment-completion` assignment
 - wait until the agent finishes the task
 - review the work and approve it
-   - if `$pv_assignment_name` is `validate-assignment-completion`:
-   - if validation failed, halt workflow and request manual intervention # Halt workflow to prevent further execution with invalid state
-   - if validation passed, proceed to next assignment in `$progress_and_validation_assignments`
+  - if `$pv_assignment_name` is `validate-assignment-completion`:
+  - if validation failed, halt workflow and request manual intervention # Halt workflow to prevent further execution with invalid state
+  - if validation passed, proceed to next assignment in `$progress_and_validation_assignments`
 - record output as `#events.post-assignment-complete.$pv_assignment_name`
 
 #### `post-step-completion`
@@ -172,6 +184,6 @@ This event runs after EACH step completes to report progress and validate the wo
 - wait until the debriefing workflow completes
 - record output as `#events.post-script-complete.debrief-and-document`
 - assign an agent the `continuous-improvement` assignment with input:
-   - debrief_report: `#events.post-script-complete.debrief-and-document`
+  - debrief_report: `#events.post-script-complete.debrief-and-document`
 - wait until the continuous improvement workflow completes
 - record output as `#events.post-script-complete.continuous-improvement`

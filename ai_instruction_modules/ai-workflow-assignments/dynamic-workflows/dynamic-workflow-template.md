@@ -9,23 +9,24 @@ A minimal example dynamic workflow for exercising the DSL and orchestration end-
 ### Inputs
 
 - $workflow_name
-    - short id of the dynamic workflow assignment to validate
-    - string
-    - optional (iff $workflow_file is provided)
-    - e.g., `breakdown-plan`
+  - short id of the dynamic workflow assignment to validate
+  - string
+  - optional (iff $workflow_file is provided)
+  - e.g., `breakdown-plan`
   
- - $workflow_file
-    - path to the dynamic workflow file to validate
-    - string
-    - optional (iff $workflow_name is provided)    
-    - e.g., `dynamic-workflows/breakdown-plan.md`
+- $workflow_file
+  - path to the dynamic workflow file to validate
+  - string
+  - optional (iff $workflow_name is provided)
+  - e.g., `dynamic-workflows/breakdown-plan.md`
 
 ### Outputs
 
 - $results
-    - structured object containing results (unique to Workflow)
-    - object
-    - e.g., 
+  - structured object containing results (unique to Workflow)
+  - object
+  - e.g.,
+
     ```json
     {
       "plan-and-setup": { ... },
@@ -43,6 +44,7 @@ A minimal example dynamic workflow for exercising the DSL and orchestration end-
 `$assignments` = [`create-app-plan`, `create-project-structure`]
 
 For each `$assignment_name` in `$assignments`, you will:
+
 - assign the agent the `$assignment_name` assignment
 - wait until the agent finishes the task
 - review the work and approve it
@@ -63,12 +65,14 @@ For each `$assignment_name` in `$assignments`, you will:
 - wait until the agent finishes the task
 - review the work and approve it
 
-
 ### Events
 
 #### `pre-assignment-begin`
+
 - Triggered before each assignment begins
 - Can be used for logging, setup, or pre-processing tasks
+
 #### `post-assignment-completes`
+
 - Triggered after each assignment completes
 - Can be used for logging, cleanup, or post-processing tasks

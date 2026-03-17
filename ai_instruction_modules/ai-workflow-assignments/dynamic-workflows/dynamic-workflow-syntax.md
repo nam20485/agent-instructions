@@ -14,11 +14,11 @@ This file defines the canonical syntax for dynamic workflow files. All tools and
 
 ## Orchestrator Responsibilities
 
-  - Resolve each listed assignment to its `ai-workflow-assignments/<assignment>.md` file.
-  - Compile context for passing during delegtion or workflow assignments
-  - 
-  - Extract and enforce the assignment’s Acceptance Criteria as the Definition of Done.
-  - Print a resolution trace and produce a Run Report as defined in the orchestrator guardrails.
+- Resolve each listed assignment to its `ai-workflow-assignments/<assignment>.md` file.
+- Compile context for passing during delegtion or workflow assignments
+-
+- Extract and enforce the assignment’s Acceptance Criteria as the Definition of Done.
+- Print a resolution trace and produce a Run Report as defined in the orchestrator guardrails.
 
 ## Legend
 
@@ -40,7 +40,7 @@ This file defines the canonical syntax for dynamic workflow files. All tools and
 
 - `get-function-name(<parameters>)`: call a function with parameters
 - [ listItem1, listItem2, ... ]: define a list
-- `$object_variable->property`: access an object property 
+- `$object_variable->property`: access an object property
 
 ### Control Flow
 
@@ -52,6 +52,7 @@ This file defines the canonical syntax for dynamic workflow files. All tools and
 ### Orchestration Directives
 
 Standard pattern for delegating work to an agent:
+
 - `assign the agent the 'assignment-id' assignment with input $variable`
 - `wait until the agent finishes the task`
 - `review the work and approve it`
@@ -110,7 +111,8 @@ Events are declared as fourth-level headings under a third-level "Events" step:
    - Loop events can access the current iteration's `$assignment_name` and loop index
 
 3. **Execution Order**:
-   ```
+
+   ```js
    pre-script-begin
    → main-step-1
       → pre-assignment-begin (if loop)
@@ -169,7 +171,7 @@ For each `$assignment_name` in `$assignments`, you will:
 
 Document custom functions before the main script with this format:
 
-```
+```js
 ### Helper Functions
 
 #### function-name($param1, $param2)
@@ -183,7 +185,7 @@ Brief description of what the function does.
 
 Document workflow inputs at the start of the script section:
 
-```
+```js
 ### Inputs
 - `$parameter_name` (required/optional)
   - Description of parameter
@@ -238,8 +240,9 @@ if `$PARALLEL_MODE` is `false`:
 `$assignments` = [`create-app-plan`, `create-project-structure`]
 
 For each `$assignment_name` in `$assignments`, you will:
-  - assign the agent the `$assignment_name` assignment
-  - record output as `#plan-and-setup.$assignment_name`
+
+- assign the agent the `$assignment_name` assignment
+- record output as `#plan-and-setup.$assignment_name`
 
 ## Example: Complete Workflow with Events
 
@@ -295,6 +298,7 @@ For each `$assignment_name` in `$main_assignments`, you will:
 ```
 
 **Execution Flow**:
+
 1. `pre-script-begin` event executes (validates environment)
 2. `initialize-project` step begins
 3. For each assignment in loop:
