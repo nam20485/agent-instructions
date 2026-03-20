@@ -11,9 +11,10 @@ Perform a comprehensive debriefing session that captures key learnings, insights
 1. A detailed report is created following the structured template below
 2. The report is documented in .md file format
 3. All required sections are complete and comprehensive
-4. The report is reviewed and approved by all relevant stakeholders
-5. Report is committed and pushed to the project repo
-6. The execution trace of the assignment is documented and saved in the repository
+4. All deviations from the assignment are documented in the report
+5. The report is reviewed and approved by all relevant stakeholders
+6. Report is committed and pushed to the project repo
+7. The execution trace of the assignment document is saved in the repository
 
 ### Assignment
 
@@ -30,6 +31,7 @@ It is important to the final quality of our product for everyone to perform thei
    - Fill in all required sections
    - Provide specific, actionable information
    - Include evidence and examples where applicable
+   - Include all deviations from the assignment in the report
    - Create execution trace output document of all actions performed during the assignment, including commands run, files created/modified, and interactions with the user or orchestrator. The output from the terminal should be included. Save this as `debrief-and-document/trace.md` in the repository.
 
 2. **Review**
@@ -55,14 +57,17 @@ Your debriefing report MUST include these sections in this order:
 [Provide a high-level summary of the project/assignment, what was accomplished, and overall outcome]
 
 **Overall Status**:
+
 - ✅ Successful / ⚠️ Partial / ❌ Failed
 
 **Key Achievements**:
+
 - [Achievement 1]
 - [Achievement 2]
 - [Achievement 3]
 
 **Critical Issues**:
+
 - [Issue 1 or "None"]
 - [Issue 2]
 
@@ -81,6 +86,17 @@ Create a table with all assignments/tasks executed:
 **Total Time**: [X] hours [Y] minutes
 
 ---
+
+**Deviations from Assignment**:
+
+List *all* deviations from the assignment in the report. Include any failures to complete any assignemnts or assignmentr steps that were not completed, or any Acceptance Criteria that were not met.
+
+| Deviation | Explanation | Further action(s) needed |
+|-----------|-------------|-------------------------|
+
+- [Deviation 1] - [Explanation of why it was deviated from the assignment] - Further action(s) needed
+- [Deviation 2] - [Explanation of why it was deviated from the assignment] - Further action(s) needed
+- [Deviation 3] - [Explanation of why it was deviated from the assignment] - Further action(s) needed
 
 ## 3. Key Deliverables
 
@@ -117,12 +133,12 @@ Numbered list with explanations:
 
 Numbered list with explanations and suggestions:
 
-1. **[Item 1]**: 
+1. **[Item 1]**:
    - **Issue**: [What didn't work well]
    - **Impact**: [How it affected the project]
    - **Suggestion**: [How to improve it]
 
-2. **[Item 2]**: 
+2. **[Item 2]**:
    - **Issue**: [What didn't work well]
    - **Impact**: [How it affected the project]
    - **Suggestion**: [How to improve it]
