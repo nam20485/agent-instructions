@@ -45,11 +45,11 @@ The script will test all required permissions and can automatically attempt to f
 
 ### Acceptance Criteria
 
-0. PR and new branch created
-1. Git Project created for issue tracking
+0. PR and new branch created (must be first — all other work commits here)
+1. GitHub Project created for issue tracking (see manual step in Detailed Steps)
 2. Git Project linked to repository
 3. Project columns created: Not Started, In Progress, In Review, Done
-4. Labels imported for issue management
+4. Labels imported from `.github/.labels.json` for issue management
 5. Filenames changed to match project name
 
 ### Assignment
@@ -62,7 +62,29 @@ It is important to the final quality of our product for everyone to perform thei
 
 ### Detailed Steps
 
-1. **Create GitHub Project for Issue Tracking**
+1. **Create PR and New Branch**
+   - **This must be done first** — all subsequent steps commit to this branch.
+   - Create a new branch named after the invoking dynamic workflow assignment which called this workflow assignment, with the prefix `dynamic-workflow-`.
+   - For example, if the dynamic workflow assignment is `project-setup`, the branch should be named `dynamic-workflow-project-setup`.
+   - Create a PR from this branch to `main`. The PR will be left open until all subsequent assignments are complete and approved.
+   - If branch creation or PR creation fails, stop and report the error immediately — do not proceed with other steps.
+
+2. **Create GitHub Project for Issue Tracking**
+
+   > **IMPORTANT — Manual Step Required**
+   >
+   > Creating the GitHub Project **cannot** be done reliably during automated
+   > orchestration because the devcontainer image may not be built yet when
+   > this assignment runs. Instead, run the script **manually** after the first
+   > orchestrator run completes and images are available:
+   >
+   > ```powershell
+   > ./scripts/create-project.ps1 -Owner <org> -Repo <repo-name>
+   > ```
+   >
+   > The script creates a Board-template project named after the repo, links
+   > it, and prints the project URL. Requires `gh` CLI with `project` scope.
+
    - Create a new GitHub Project for issue tracking
    - Name the project the same as the repository
    - Set the project to `Board` template
@@ -74,20 +96,14 @@ It is important to the final quality of our product for everyone to perform thei
      - In Review
      - Done
 
-2. **Import Labels**
-   - Import the labels from the `.labels.json` file in the root of the repository
-   - Use the `import-labels.ps1` script to import the labels
+3. **Import Labels**
+   - Import the labels from the `.github/.labels.json` file (note: inside the `.github/` directory, not the repo root)
+   - This file is the single source of truth for the repository label set
+   - Use the `scripts/import-labels.ps1` script to import the labels
 
-3.  **Rename Workspace and Devcontainer Files**
+4. **Rename Workspace and Devcontainer Files**
    - Inside the `.devcontainer/devcontainer.json` file rename the `name` property to use the repository name as the prefix, preserving the "devcontainer" suffix. Template: `<repo-name>-devcontainer`
    - Rename the `ai-new-app-template.code-workspace` file to use the repository name as the prefix, preserving the ".code-workspace" extension. Template: `<repo-name>.code-workspace`
-
-4. **Create PR and New Branch**
-- Create a new branch named after the invoking dynamic workflow assignment which called this workflow assignment, with the prefix `dynamic-workflow-`.
-- For example, if the dynamic workflow assignment is `project-setup`, the branch should be named `dynamic-workflow-project-setup`.
-
-- Changes will most likely not be made until subsequent workflow assignments invoked after this one, so it will be left open until all subsequent assignments are complete and approved.
-- Later workflow assignments will commit and push changes to this branch.
 
 5. **Final Steps**
    - Nothing to do here, just proceed to the completion section below. 

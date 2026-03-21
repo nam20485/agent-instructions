@@ -15,9 +15,9 @@ Create the actual project structure and scaffolding for a new application based 
 
 ### Acceptance Criteria
 
-1. Solution structure created following established guidelines
+1. Solution/project structure created following the application plan's tech stack
 2. All required project files and directories established
-3. Initial configuration files created (global.json, Docker, etc.)
+3. Initial configuration files created (version pinning, Docker, etc.)
 4. Basic CI/CD pipeline structure established
 5. Documentation structure created (README, docs folder, etc.)
 6. Development environment properly configured and validated
@@ -35,22 +35,30 @@ It is important to the final quality of our product for everyone to perform thei
 
 ### Detailed Steps
 
-1. **Create Solution Structure**
-   1. Create .NET solution file with appropriate name
-   2. Set up global.json with specified .NET version
+> **Tech-stack selection:** Read the application plan (`plan_docs/`, `APP_PLAN.md`, or the
+> planning issue) to determine the target tech stack. The steps below use generic terms.
+> Adapt solution files, package managers, and project conventions to the actual stack
+> (e.g. `.sln`/`.csproj` for .NET, `pyproject.toml`/`uv` for Python, `package.json` for Node, etc.).
+
+1. **Create Solution / Project Structure**
+   1. Create the appropriate solution or workspace file for the chosen tech stack
+   2. Set up version pinning (e.g. `global.json` for .NET, `.python-version` for Python, `.nvmrc` for Node)
    3. Create project directories following established naming conventions
    4. Generate initial project files for each component
    5. Configure project references and dependencies
-   6. Configure projects settings and options 
-      a."Treat warnings as errors": true
-      b. "Create XML documentation files": true
+   6. Configure project-specific quality settings as appropriate for the tech stack (e.g. treat-warnings-as-errors, linting rules, type checking)
 
 2. **Establish Infrastructure Foundation**
    1. Create Dockerfile for each service/component
+      - **IMPORTANT:** When using `uv pip install -e .` or similar editable installs, ensure `COPY src/ ./src/` (or the equivalent source directory) appears **before** the install command. Copying only `pyproject.toml` first and then running the install will fail because the source tree is missing at install time.
    2. Create docker-compose.yml for local development
+      - **IMPORTANT:** Do NOT use `curl` in healthcheck commands — the base image may not have curl installed. Use Python's stdlib instead:
+        ```yaml
+        healthcheck:
+          test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+        ```
    3. Set up configuration files (appsettings.json templates)
    4. Create environment variable templates
-   <!-- 5. Set up logging and monitoring configuration -->
 
 3. **Create Development Environment**
    1. Create scripts for environment setup
@@ -99,12 +107,14 @@ It is important to the final quality of our product for everyone to perform thei
 2. Verify build and configuration
 3. Obtain approval
 
-### Example Project Structure (dotnet)
+### Example Project Structures
 
-Use this project structure for all .NET projects unless otherwise specified by the stakeholder. Adjust the structure as needed based on the specific requirements of the application and the guidelines provided in the application plan and template documents.
+Adapt the structure to the tech stack specified in the application plan. Below are reference examples — adjust as needed.
 
-```
-/ 
+#### .NET
+
+```text
+/
    SolutionName/
       ProjectName.API/
          Controllers/
@@ -114,14 +124,46 @@ Use this project structure for all .NET projects unless otherwise specified by t
       ProjectName.Application/
          Interfaces/
       ...
-      ProjectName.XYZ/
       Tests/
          TestProjectName/
             TestClasses.cs
             TestProjectName.csproj
-         ...
-         Tests.slnx
       SolutionName.slnx
+```
+
+#### Python (uv)
+
+```text
+/
+   src/
+      package_name/
+         __init__.py
+         main.py
+         api/
+         models/
+         services/
+   tests/
+      test_main.py
+   pyproject.toml
+   Dockerfile
+   docker-compose.yml
+```
+
+#### Node.js / TypeScript
+
+```text
+/
+   src/
+      index.ts
+      routes/
+      models/
+      services/
+   tests/
+      index.test.ts
+   package.json
+   tsconfig.json
+   Dockerfile
+   docker-compose.yml
 ```
 
 ### Completion
