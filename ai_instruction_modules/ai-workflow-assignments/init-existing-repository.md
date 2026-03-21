@@ -30,6 +30,7 @@ $env:GITHUB_AUTH_TOKEN = "<your-pat-token>"
 ```
 
 The script will test all required permissions and can automatically attempt to fix authentication issues when the `-AutoFixAuth` parameter is used. This includes:
+
 - Checking if GitHub CLI is installed and authenticated
 - Using the `scripts/gh-auth.ps1` helper script for authentication (supports both interactive OAuth and non-interactive PAT via `$env:GITHUB_AUTH_TOKEN`)
 - Verifying required authentication scopes (`repo`, `project`, `read:project`, `read:user`, `user:email`)
@@ -40,20 +41,20 @@ The script will test all required permissions and can automatically attempt to f
 - Testing milestone creation
 - Testing branch/PR creation workflow
 
-
 ### Inputs
 
 ### Acceptance Criteria
 
-0. PR and new branch created (must be first — all other work commits here)
-1. GitHub Project created for issue tracking (see manual step in Detailed Steps)
+0. New branch created (must be first — all other work commits here)
+1. GitHub Project created for issue tracking
 2. Git Project linked to repository
 3. Project columns created: Not Started, In Progress, In Review, Done
 4. Labels imported from `.github/.labels.json` for issue management
 5. Filenames changed to match project name
+6. PR created from the branch to `main` (after at least one commit is pushed)
 
 ### Assignment
- 
+
 Your assignment is to set up an existing repository for a project. This involves configuring the necessary settings. You will create a new issue-tracking project, import labels, and create milestones. You will rename workspace and devcontainer files to match the project name.
 
 **Always follow instructions exactly as listed here.**
@@ -62,34 +63,18 @@ It is important to the final quality of our product for everyone to perform thei
 
 ### Detailed Steps
 
-1. **Create PR and New Branch**
+1. **Create New Branch**
    - **This must be done first** — all subsequent steps commit to this branch.
    - Create a new branch named after the invoking dynamic workflow assignment which called this workflow assignment, with the prefix `dynamic-workflow-`.
    - For example, if the dynamic workflow assignment is `project-setup`, the branch should be named `dynamic-workflow-project-setup`.
-   - Create a PR from this branch to `main`. The PR will be left open until all subsequent assignments are complete and approved.
-   - If branch creation or PR creation fails, stop and report the error immediately — do not proceed with other steps.
+   - **Do NOT create a PR yet.** A PR requires at least one commit ahead of `main`. The PR will be created in step 4 after the first commits are pushed.
+   - If branch creation fails, stop and report the error immediately — do not proceed with other steps.
 
 2. **Create GitHub Project for Issue Tracking**
-
-   > **IMPORTANT — Manual Step Required**
-   >
-   > Creating the GitHub Project **cannot** be done reliably during automated
-   > orchestration because the devcontainer image may not be built yet when
-   > this assignment runs. Instead, run the script **manually** after the first
-   > orchestrator run completes and images are available:
-   >
-   > ```powershell
-   > ./scripts/create-project.ps1 -Owner <org> -Repo <repo-name>
-   > ```
-   >
-   > The script creates a Board-template project named after the repo, links
-   > it, and prints the project URL. Requires `gh` CLI with `project` scope.
-
    - Create a new GitHub Project for issue tracking
    - Name the project the same as the repository
    - Set the project to `Board` template
    - Link project to the repository
-   - Link the project to the PR created in step 1
    - Create the following columns in the project:
      - Not Started
      - In Progress
@@ -105,8 +90,15 @@ It is important to the final quality of our product for everyone to perform thei
    - Inside the `.devcontainer/devcontainer.json` file rename the `name` property to use the repository name as the prefix, preserving the "devcontainer" suffix. Template: `<repo-name>-devcontainer`
    - Rename the `ai-new-app-template.code-workspace` file to use the repository name as the prefix, preserving the ".code-workspace" extension. Template: `<repo-name>.code-workspace`
 
-5. **Final Steps**
-   - Nothing to do here, just proceed to the completion section below. 
+5. **Create PR**
+   - Now that commits have been pushed to the branch (from steps 3 and 4), create a PR from this branch to `main`.
+   - The PR will be left open until all subsequent assignments are complete and approved.
+   - If `gh pr create` fails, capture and display the exact error message. Common causes:
+     - "No commits between main and \<branch\>" → verify that at least one commit was pushed in the preceding steps.
+   - If PR creation fails, stop and report the error immediately — do not proceed.
+
+6. **Final Steps**
+   - Nothing to do here, just proceed to the completion section below.
 
 ## Completion
 
