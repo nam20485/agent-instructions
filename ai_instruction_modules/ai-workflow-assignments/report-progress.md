@@ -42,6 +42,8 @@ The assignment ensures that:
    - Key outputs with their values or locations
    - Overall workflow progress (completed steps/total steps with percentage)
    - Next step name (if available)
+   - **Deviations & Findings** (REQUIRED): Any deviations from the epic's plan or acceptance criteria (even minor ones, e.g., failed PR creation attempts, unexpected dependency issues, CI failures that required workarounds).
+   - **Plan-Impacting Discoveries** (REQUIRED): New findings about the tech stack, architecture, or dependencies that subsequent epics should account for. Include a brief assessment of whether the next 1-2 upcoming epics still make sense given what was learned.
 
 2. Format the progress report as:
    ```

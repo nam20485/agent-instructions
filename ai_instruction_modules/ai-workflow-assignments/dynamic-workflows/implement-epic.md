@@ -228,47 +228,23 @@ if `$parallel_execution` is `true` AND `$can_parallelize` is `true`:
         - wait until the agent completes the story implementation
         - record output as `#implement-epic.perform-task`
 
-          # Step 2: Create pull request for the story
+          # Step 2: Create pull request for the story (TERMINAL STEP)
           $pull_request = create_pull_request(#implement-epic.perform-task)
           - record PR as `#implement-epic.pull-request`
-          
-          # Step 3: Request automated reviews
-          - post comment on `$pull_request`: "@gemini review"
-          - post comment on `$pull_request`: "@claude review this PR"
-          # GH Copilot will automatically begin his review on his own (once he sees the PR created)
-          - wait until all three automated reviews complete
-          - record reviews as `#implement-epic.automated-reviews`
-          
-          # Step 4: Automated PR approval and merge
-          assign an agent the `pr-approval-and-merge` assignment with input:
-            - pull_request: `$pull_request`
-            # - automated_reviews: `#implement-epic.automated-reviews`
-          - wait until the agent completes the `pr-approval-and-merge` assignment
-          - record output as `#implement-epic.pr-approval-and-merge`                                    
-             
-          if `#implement-epic.pr-approval-and-merge`.result is "merged":
-            - record merge as `#implement-epic.pr-merged`
-            - log: "PR successfully merged"
-          else if `#implement-epic.pr-approval-and-merge`.result is "pending":
-            - log: "PR merge pending additional checks, requires manual intervention"
-            - post comment on `$pull_request`: "⚠️ Automated merge pending: waiting for additional status checks to complete. Manual merge may be required."
-            - STOP workflow with message: "Manual intervention required: PR merge is pending additional checks"
-          else:
-            - log: "PR auto-merge failed, requires manual intervention"
-            - post comment on `$pull_request`: "❌ Automated merge failed: branch protection rules not satisfied or merge conflicts present. Manual intervention required."
-            - STOP workflow with message: "Manual intervention required: PR could not be automatically merged"          
+          - log: "PR#{pull_request.number} opened for story#{story.number}. Handing off to orchestrator."
       
-      # Wait for all parallel stories to complete (all PRs merged)
-      - wait until all agents finish their assigned stories and PRs are merged
-      - collect all outputs as `#implement-epic.parallel-complete`
+      # Wait for all parallel stories to open their PRs
+      - wait until all agents finish their assigned stories and PRs are opened
+      - collect all PR objects as `#implement-epic.parallel-complete`
       
-      # Review epic integration
-      - review all completed work for integration issues
-      - resolve any merge conflicts that occurred during parallel merges
-      - validate the epic as a whole
-      - approve the epic
-      
-      # Step 6: Mark epic complete and update tracking
+      # ⚠️ HANDOFF: Implementation is complete. 
+      # The orchestrator's NEXT step is to invoke the `review-epic-prs` dynamic workflow
+      # (or invoke `pr-approval-and-merge` per PR) to handle CI verification, code review,
+      # comment resolution, and merging. This workflow does NOT monitor CI, review comments, or merge.
+      - log: "All story PRs opened. Implementation phase complete. Returning PR list to orchestrator."
+      - record output as `#implement-epic.handoff` containing all PR objects
+
+      # Step 3: Mark epic complete and update tracking
       - mark_milestone_complete($epic_issue)
       - update_project_progress($epic_issue, $repository)
       - close the epic issue with completion summary
@@ -283,41 +259,19 @@ else:
          - wait until the agent completes the story implementation
          - record output as `#implement-epic.perform-task`
 
-           # Step 2: Create pull request for the story
+           # Step 2: Create pull request for the story (TERMINAL STEP)
            $pull_request = create_pull_request(#implement-epic.perform-task)
            - record PR as `#implement-epic.pull-request`
-           
-           # Step 3: Request automated reviews
-           - post comment on `$pull_request`: "@gemini review"
-           - post comment on `$pull_request`: "@claude review this PR"
-           # GH Copilot will automatically begin his review on his own (once he sees the PR created)
-           - wait until all three automated reviews complete
-           - record reviews as `#implement-epic.automated-reviews`
-           
-           # Step 4: Automated PR approval and merge
-           assign an agent the `pr-approval-and-merge` assignment with input:
-             - pull_request: `$pull_request`
-             # - automated_reviews: `#implement-epic.automated-reviews`
-           - wait until the agent completes the `pr-approval-and-merge` assignment
-           - record output as `#implement-epic.pr-approval-and-merge`
-              
-           if `#implement-epic.pr-approval-and-merge`.result is "merged":
-             - record merge as `#implement-epic.pr-merged`
-             - log: "PR successfully merged"
-           else if `#implement-epic.pr-approval-and-merge`.result is "pending":
-             - log: "PR merge pending additional checks, requires manual intervention"
-             - post comment on `$pull_request`: "⚠️ Automated merge pending: waiting for additional status checks to complete. Manual merge may be required."
-             - STOP workflow with message: "Manual intervention required: PR merge is pending additional checks"
-           else:
-             - log: "PR auto-merge failed, requires manual intervention"
-             - post comment on `$pull_request`: "❌ Automated merge failed: branch protection rules not satisfied or merge conflicts present. Manual intervention required."
-             - STOP workflow with message: "Manual intervention required: PR could not be automatically merged"
-          
-          # Step 5: Review and continue
-          - review the merged story
-          - approve before moving to next story
+           - log: "PR#{pull_request.number} opened for story#{story.number}. Handing off to orchestrator."
       
-      # Step 6: Mark epic complete and update tracking
+      # ⚠️ HANDOFF: Implementation is complete.
+      # The orchestrator's NEXT step is to invoke the `review-epic-prs` dynamic workflow
+      # (or invoke `pr-approval-and-merge` per PR) to handle CI verification, code review,
+      # comment resolution, and merging. This workflow does NOT monitor CI, review comments, or merge.
+      - log: "All story PRs opened. Implementation phase complete. Returning PR list to orchestrator."
+      - record output as `#implement-epic.handoff` containing all PR objects
+
+      # Step 3: Mark epic complete and update tracking
       - mark_milestone_complete($epic_issue)
       - update_project_progress($epic_issue, $repository)
       - close the epic issue with completion summary

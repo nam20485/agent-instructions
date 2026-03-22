@@ -20,6 +20,8 @@ Perform a comprehensive debriefing session that captures key learnings, insights
 
 Create and document a comprehensive debriefing report following the structured template. Review with the user and any orchestrators or stakeholders. Commit to repo.
 
+> **Plan Adjustment Mandate:** The debrief MUST flag any plan-impacting findings explicitly as **ACTION ITEMS**. For each ACTION ITEM, recommend one of: (a) file a new issue for newly-discovered required work, or (b) update later phase/epic descriptions to account for new realities. Additionally, review upcoming steps in the current and next phase for continued validity given what was learned during this epic.
+
 **Always follow instructions exactly as listed here.**
 
 It is important to the final quality of our product for everyone to perform their assignment exactly as specified.

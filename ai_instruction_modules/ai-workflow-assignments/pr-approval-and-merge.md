@@ -21,6 +21,15 @@ Complete the full PR approval and merge process, including resolving all PR comm
 
 ### Acceptance Criteria (All Must Pass)
 
+**CI Verification**
+- [ ] All required CI/CD status checks pass before code review begins.
+- [ ] CI remediation loop executed (up to 3 attempts) if any check fails, with fix commits pushed and re-verified.
+- [ ] If CI cannot be fixed within 3 attempts, escalation to orchestrator is documented.
+
+**Code Review Delegation**
+- [ ] Code review delegated to `code-reviewer` subagent or designated reviewer (NOT self-review).
+- [ ] Auto-reviewer comments (Copilot, CodeQL, Gemini, etc.) waited for before beginning comment resolution.
+
 **Review Comment Resolution**
 - [ ] `ai-pr-comment-protocol.md` workflow executed and logged (`✓ Read ai-pr-comment-protocol.md`).
 - [ ] `pr-review-comments` acceptance criteria satisfied (unique replies, explicit resolution via GraphQL/UI, summary comment posted).
@@ -70,6 +79,41 @@ It is important to the final quality of our product for everyone to perform thei
 1. Confirm you have the correct PR number, branch permissions, and authentication (`gh auth status`).
 2. Execute the GraphQL snapshot command from the protocol and store `.pr-thread-snapshot.json`.
 3. Create or update a work log/issue (if required) capturing the current state of review threads and planned actions.
+
+#### Phase 0.5: CI Verification & Remediation Loop
+
+> This phase ensures all CI/CD checks pass **before** code review begins. Do not proceed to Phase 1 until all required status checks are green.
+
+1. **Poll CI status:** Wait 30-60 seconds for GitHub Actions to trigger on the PR, then check status:
+   ```
+   gh pr checks $pr_num --watch --fail-fast
+   ```
+   Alternatively, poll with `gh pr checks $pr_num` until all checks report a conclusion.
+
+2. **If any check fails — Remediation:**
+   - Fetch the failed run's logs:
+     ```
+     gh run view <run_id> --log-failed
+     ```
+   - Diagnose the failure category (lint, test, build, type-check, etc.).
+   - Implement the fix on the PR branch, commit, and push.
+   - Return to step 1 (re-poll CI status).
+
+3. **Max retries:** Cap the CI remediation loop at **3 attempts**. If CI still fails after 3 fix attempts, escalate to the orchestrator with a structured failure report including the run IDs and error summaries.
+
+4. **CI Green Gate:** Once all required checks pass, proceed to Phase 0.75.
+
+#### Phase 0.75: Code Review Delegation & Auto-Reviewer Wait
+
+> This phase ensures a proper code review is performed before comment resolution begins.
+
+1. **Delegate code review:** The orchestrator (or this agent, if self-executing) MUST request a review from the `code-reviewer` subagent or a designated human reviewer. Do NOT perform a self-review — the reviewer must be a separate agent or person.
+   - If operating under orchestrator delegation, report back that CI is green and request the orchestrator assign the `code-reviewer` subagent.
+   - If operating autonomously, request a GitHub review from the appropriate reviewer(s).
+
+2. **Wait for auto-reviewers:** After the review is requested (or after any new commits are pushed), wait briefly (60-120 seconds) for automated review bots (e.g., GitHub Copilot, CodeQL, Gemini, etc.) to post their own review comments. These auto-generated comments must be included in the comment resolution scope.
+
+3. **Proceed to Phase 1** once the code review is submitted and auto-reviewer comments have appeared (or the wait period has elapsed).
 
 #### Phase 1: Resolve Review Comments (Execute `pr-review-comments`)
 1. Follow the mandated workflow:
