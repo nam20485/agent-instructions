@@ -58,6 +58,7 @@
 
 ### CI/CD
 - **Required**: Build, tests, Docker push to GitHub registry
+- **Required Constraint**: All GitHub Actions must be pinned to the specific commit SHA of their latest release (not version tags).
 - **Optional**: Static analysis, releases, deployment
 
 ### Infrastructure & Scripting

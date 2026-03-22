@@ -99,7 +99,7 @@ Given the following, implement the application as per the filled-out development
    6. Configure for deployment to Google Cloud services
 
 9. **CI/CD Pipeline Setup**
-   1. Create GitHub Actions workflows for automated builds
+   1. Create GitHub Actions workflows for automated builds (Actions MUST be pinned to the specific commit SHA of their latest release)
    2. Set up automated testing on pull requests
    3. Configure Docker image building and pushing to GitHub registry
    4. Implement automated deployment to staging/production environments

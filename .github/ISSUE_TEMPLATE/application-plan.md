@@ -131,7 +131,8 @@ Provide a concise summary of the application, the problem it solves, the desired
 - [ ] Release pipeline
 
 ### Infrastructure & DevOps
-- [ ] CI/CD workflows (build/test/scan/publish)
+
+- [ ] CI/CD workflows (build/test/scan/publish) *(Note: All GitHub Actions must be pinned by SHA)*
 - [ ] Static analysis and security scanning
 - [ ] Performance benchmarking/monitoring
 

@@ -29,7 +29,7 @@ Works with various deployment approaches:
 5. Setup scripts work on clean environment
 6. DEPLOYMENT.md created with comprehensive documentation
 7. All automation is tested and working
-8. All GitHub Actions workflows have their actions pinned to specific commit SHAs
+8. All GitHub Actions workflows have their actions pinned to the specific commit SHA of their latest release
 
 ### Assignment
 

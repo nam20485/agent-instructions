@@ -41,6 +41,7 @@
 <ci_cd>
 ## Continuous Integration
 - Use GitHub Actions for CI/CD workflows.
+- All GitHub Actions workflows MUST have their actions pinned to the specific commit SHA of their latest release (e.g., `uses: actions/checkout@<full-commit-sha>`), instead of using major/minor version tags.
 - Include workflows for:
   - Automated builds
   - Automated tests

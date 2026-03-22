@@ -24,7 +24,7 @@ Create the actual project structure and scaffolding for a new application based 
 7. Initial commit made with complete project scaffolding
 8. Stakeholder/Delegating Agent approval obtained for the project structure
 9. Repository summary document is created.
-10. All GitHub Actions workflows have their actions pinned to specific commit SHAs.
+10. All GitHub Actions workflows have their actions pinned to the specific commit SHA of their latest release.
 
 ### Assignment
 
