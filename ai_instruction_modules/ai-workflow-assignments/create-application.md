@@ -60,7 +60,7 @@ It is important to the final quality of our product for everyone to perform thei
    3. Plan the project structure according to established guidelines
    4. Identify all necessary components, services, and dependencies
    5. Create a development timeline with milestones and deliverables
-   6. Get stakeholder approval for the plan before beginning implementation
+   6. Get stakeholder/Delegating Agent approval for the plan before beginning implementation
 
 3. **Project Structure and Initial Setup**
    1. Create the repository structure following established conventions

@@ -55,7 +55,7 @@ Your other instructions modules describe your software and libraries you will us
 
 ### Completion
 
-Ask the stake-holder if they want you to merge the PR or if they would like to do so themselves.
+Ask the delegating agent or stake-holder if they want you to merge the PR or if they would like to do so themselves.
 If so, then merge the PR, and close the issue and branch.
 Eat a cookie and have an espresso or a milkshake. You can have both if you want.
-Ask the stake-holder for your next assignment.
+Ask the delegating agent or stake-holder for your next assignment.

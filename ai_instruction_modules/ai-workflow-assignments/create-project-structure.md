@@ -22,8 +22,9 @@ Create the actual project structure and scaffolding for a new application based 
 5. Documentation structure created (README, docs folder, etc.)
 6. Development environment properly configured and validated
 7. Initial commit made with complete project scaffolding
-8. Stakeholder approval obtained for the project structure
+8. Stakeholder/Delegating Agent approval obtained for the project structure
 9. Repository summary document is created.
+10. All GitHub Actions workflows have their actions pinned to specific commit SHAs.
 
 ### Assignment
 
@@ -80,6 +81,7 @@ It is important to the final quality of our product for everyone to perform thei
    3. Configure quality gates templates
    4. Set up deployment workflow structure
    5. Create security scanning configurations
+   6. **IMPORTANT:** All actions in created/modified workflows MUST be pinned to their specific commit SHA for their latest release (e.g., `uses: actions/checkout@<full-commit-sha>`). Do not use major/minor version tags.
 
 6. **Quality Validation**
    1. Verify solution builds successfully
@@ -182,4 +184,4 @@ Adapt the structure to the tech stack specified in the application plan. Below a
    - Mark the project structure creation as complete once approved
    - Ensure all team members have access to the repository
    <!-- - After approval, assign a copilot the breakdown-issue.md assignment to each -->
-   - Ask the stakeholder for your next assignment 
+   - Ask the delegating agent or stakeholder for your next assignment 

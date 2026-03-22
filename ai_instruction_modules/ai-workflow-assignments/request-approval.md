@@ -4,7 +4,7 @@
 
 ### Goal
 
-Pause execution, present relevant produced material, and receive input to obtain approval from stakeholders for the proposed changes and updates. 
+Pause execution, present relevant produced material, and receive input to obtain approval from the delegating agent (or stakeholders) for the proposed changes and updates. 
 
 ### Inputs
 

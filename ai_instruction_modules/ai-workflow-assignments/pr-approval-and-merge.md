@@ -28,7 +28,7 @@ Complete the full PR approval and merge process, including resolving all PR comm
 - [ ] Evidence files and summary links attached to the run report and referenced in stakeholder communication.
 
 **Approval & Merge**
-- [ ] Stakeholder approval obtained after presenting resolution evidence.
+- [ ] Stakeholder/Delegating Agent approval obtained after presenting resolution evidence.
 - [ ] Merge performed (or blocked reason documented) using repository policies.
 - [ ] Merge result recorded (`result` output set to `merged`, `pending`, or `failed` per guidance).
 
@@ -113,7 +113,7 @@ The agent executing this assignment must follow these guidelines for different s
 
 **When to return `"merged"`:**
 - All PR comments have been resolved through the iterative process
-- Stakeholder approval has been obtained
+- Stakeholder/Delegating Agent approval has been obtained
 - Merge operation completes successfully without conflicts
 - Target branch now contains the merged changes
 
@@ -134,7 +134,7 @@ The agent executing this assignment must follow these guidelines for different s
 
 The completion process follows these steps:
 
-1. **PR Approval**: Present the resolution evidence, obtain explicit stakeholder approval, and log the approval link or review state.
+1. **PR Approval**: Present the resolution evidence, obtain explicit stakeholder/Delegating Agent approval, and log the approval link or review state.
 2. **Merge Attempt**: Attempt to merge the PR to the target branch using the repository’s preferred strategy.
 3. **Result Determination**: Based on the merge attempt outcome, determine the result value:
     - If merge succeeds immediately: result = "merged"

@@ -9,7 +9,7 @@ Your goal is to orchestrate the initiation of a new repository, creating the pro
 ### Acceptance Criteria
 
 1. Repository created and initialized with proper configuration
-2. Project plan created and approved by stakeholder
+2. Project plan created and approved by the delegating agent or stakeholder
 3. Project structure created following established guidelines
 4. All required project files and directories established
 5. Initial configuration files created (global.json, Docker, etc.)
@@ -17,7 +17,7 @@ Your goal is to orchestrate the initiation of a new repository, creating the pro
 7. Documentation structure created (README, docs folder, etc.)
 8. Development environment properly configured and validated
 9. Initial commit made with complete project scaffolding
-10. Stakeholder approval obtained for the project structure
+10. Stakeholder/Delegating Agent approval obtained for the project structure
 11. All phases of planning issue broken down into implementable sub-issues, by phase
 12. All sub-issues have clear acceptance criteria
 13. Technical approach is sound and consistent with project architecture
@@ -26,7 +26,7 @@ Your goal is to orchestrate the initiation of a new repository, creating the pro
 16. All sub-issues iteratively implemented and validated
 17. All sub-issues closed and merged
 18. Final product meets all acceptance criteria
-19. Stakeholder approval obtained for final product
+19. Stakeholder/Delegating Agent approval obtained for final product
 
 ### Assignment
 

@@ -11,7 +11,7 @@ Execute a specific task given to you by an orchestrator or stakeholder, using th
 
 ### Output
 - Task successfully completed according to acceptance criteria
-- All deliverables validated and approved by stakeholders
+- All deliverables validated and approved by the delegating agent or stakeholders
 - Work documented and integrated into the project
 - Returns the task completion status and deliverables for workflow tracking
 
@@ -27,7 +27,7 @@ Execute a specific task given to you by an orchestrator or stakeholder, using th
 
 ### Assignment
 
-Your assignment is to execute a specific task that has been assigned to you by following the established task-based workflow process. This involves systematic planning, stakeholder approval, careful execution, and thorough documentation to ensure successful task completion.
+Your assignment is to execute a specific task that has been assigned to you by following the established task-based workflow process. This involves systematic planning, stakeholder/Delegating Agent approval, careful execution, and thorough documentation to ensure successful task completion.
 
 **Note on Parallel Execution:**
 You may be assigned a task (such as a story) that is part of a larger epic being implemented by multiple agents in parallel. In such cases:

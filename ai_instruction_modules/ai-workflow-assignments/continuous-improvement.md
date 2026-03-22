@@ -112,7 +112,7 @@ Leverage the debrief report to identify improvement opportunities, prioritize th
    - The draft `continuous-improvement.md`
 3. Request feedback on scoring accuracy, prioritization logic, completeness, and implementation feasibility.
 4. Record reviewer feedback directly in the document (e.g., feedback log table) along with resolution status.
-5. Incorporate required changes, updating scores or plan details as needed. Document rationales for any feedback you choose not to adopt (requires stakeholder approval).
+5. Incorporate required changes, updating scores or plan details as needed. Document rationales for any feedback you choose not to adopt (requires stakeholder/Delegating Agent approval).
 
 #### 8. Implement Priority Improvements (Sections A & B)
 
@@ -132,7 +132,7 @@ Leverage the debrief report to identify improvement opportunities, prioritize th
    - Changes implemented, files/issues updated, validation results
    - Metrics improvements observed (if any)
 2. Present outstanding items (Section C and any deferred Section A/B items) with rationale and recommended next actions.
-3. Explicitly request stakeholder approval on which remaining items should proceed, be deferred, or be archived.
+3. Explicitly request stakeholder/Delegating Agent approval on which remaining items should proceed, be deferred, or be archived.
 4. Record approvals/decisions in the document and, if needed, create GitHub issues or tasks reflecting the agreed backlog.
 
 #### 10. Finalize Documentation and Handoff
@@ -140,7 +140,7 @@ Leverage the debrief report to identify improvement opportunities, prioritize th
 1. Complete the "Final Report" section of `continuous-improvement.md` with:
    - Summary of implemented improvements and validation evidence
    - Updated metrics or KPIs
-   - Stakeholder approvals and decisions
+   - Stakeholder/Delegating Agent approvals and decisions
    - Outstanding risks and next steps
 2. Ensure all tables, links, and references are accurate and up to date.
 3. Commit the finalized document (and related files) with a descriptive message (e.g., `docs: add continuous improvement plan and apply priority fixes`).

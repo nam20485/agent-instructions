@@ -132,13 +132,13 @@ For each assignment (in execution order), document:
 #### 5. Present Plan to Stakeholder and Iterate
 
 1. Post the completed workflow execution plan in the conversation.
-2. Ask the stakeholder:
+2. Ask the delegating agent or stakeholder:
    > "Does this workflow execution plan look correct? Are there any changes needed, or do you approve it?"
 3. If changes are requested:
    - Make the requested revisions to the plan.
    - Re-present the updated plan.
    - Repeat until the stakeholder explicitly approves the plan.
-4. Record stakeholder approval in the session context before proceeding.
+4. Record stakeholder/Delegating Agent approval in the session context before proceeding.
 
 #### 6. Commit the Approved Plan
 
@@ -158,7 +158,7 @@ For each assignment (in execution order), document:
    - The dynamic workflow has been fully read and all assignments traced.
    - All `plan_docs/` files have been read and summarized.
    - The workflow execution plan covers every assignment in execution order.
-   - The plan has been presented to and approved by the stakeholder.
+   - The plan has been presented to and approved by the delegating agent or the stakeholder.
    - `plan_docs/workflow-plan.md` has been committed and pushed.
 
 2. **Present to Stakeholder:**

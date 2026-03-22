@@ -29,6 +29,7 @@ Works with various deployment approaches:
 5. Setup scripts work on clean environment
 6. DEPLOYMENT.md created with comprehensive documentation
 7. All automation is tested and working
+8. All GitHub Actions workflows have their actions pinned to specific commit SHAs
 
 ### Assignment
 
@@ -104,6 +105,8 @@ It is important to the final quality of our product for everyone to perform thei
 #### 2. Create CI/CD Workflows
 
 Choose the appropriate CI/CD platform and create workflows:
+
+**Important**: If using GitHub Actions, all third-party actions MUST be pinned to the specific commit SHA of their latest release (e.g., `uses: actions/checkout@<full-commit-sha>`). Do not use major/minor version tags.
 
 **GitHub Actions** (.github/workflows/ci.yml):
 

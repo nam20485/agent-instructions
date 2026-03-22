@@ -35,7 +35,7 @@ Analyze an application development plan issue to:
 7. Gap analysis completed with prioritized recommendations.
 8. Roundtable discussion conducted with relevant expert delegates.
 9. Presentation of findings to stakeholder for review.
-10. Stakeholder approval obtained for the analysis and recommendations.
+10. Stakeholder/Delegating Agent approval obtained for the analysis and recommendations.
 
 ### Assignment
 

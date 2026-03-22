@@ -119,7 +119,7 @@ This event runs after the assignment completes to report progress.
 
 ### Completion
 
-- Ask the stakeholders if they approve the feature plan; if revisions are requested, iterate until approval is granted.
+- Ask the delegating agent or stakeholders if they approve the feature plan; if revisions are requested, iterate until approval is granted.
 - **DO NOT IMPLEMENT OR MODIFY APPLICATION CODE.** This assignment produces planning artifacts only.
 - Upon approval, transition to the next assignment as directed (e.g., feature implementation, epic/story creation).
 

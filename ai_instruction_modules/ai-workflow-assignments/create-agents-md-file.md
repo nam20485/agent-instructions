@@ -27,7 +27,7 @@ Create a comprehensive `AGENTS.md` file at the root of the repository that provi
 8. File is written in standard Markdown with clear, agent-focused language
 9. Commands listed in the file have been validated by running them
 10. File is committed and pushed to the working branch
-11. Stakeholder approval obtained
+11. Stakeholder/Delegating Agent approval obtained
 
 ### Assignment
 

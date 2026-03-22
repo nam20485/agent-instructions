@@ -116,13 +116,13 @@ This event runs after the assignment completes to report progress.
 
 ### Completion
 
-- Ask the stake-holder if they are happy with the plan and can approve it. If not then make the requested changes and iterate asking for approval and making changes until approval is gained.
+- Ask the delegating agent or stake-holder if they are happy with the plan and can approve it. If not then make the requested changes and iterate asking for approval and making changes until approval is gained.
 - **DO NOT IMPLEMENT OR WRITE ANY CODE.**
 - This assignment is planning only.
 
    **Finally, once everything is verified, apply the `implementation:ready` label to the epic issue to indicate it is ready for implementation by downstream workflows.**
 
-- Ask the stake-holder for your next assignment.
+- Ask the delegating agent or stake-holder for your next assignment.
 
 ## Appendix A: Application Plan Issue Template (Copy-Paste)
 
