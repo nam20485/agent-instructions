@@ -25,7 +25,6 @@ Your goal is to create a plan for application, using the template in Appendix A,
 15. Created issue has been added to the GitHub Project for tracking.
 16. Created issue has been assigned to the appropriate milestone (typically "Phase 1: Foundation").
 17. Appropriate labels have been applied to the issue (typically "planning", "documentation").
-18. `implementation:ready` label has been applied to the issue to indicate it is ready for implementation by downstream workflows.
 
 ### Assignment
 
@@ -83,7 +82,6 @@ All implementation happens in subsequent assignments (create-application-foundat
    - Link created issue to the GitHub Project for unified tracking
    - Assign issue to appropriate milestone (typically the first phase: "Phase 1: Foundation")
    - Apply appropriate labels to issue from the imported label set (typically: "planning", "documentation")
-   - Apply the `implementation:ready` label to the issue to indicate it is ready for implementation by downstream workflows.
 
 ### Events
 
@@ -120,7 +118,7 @@ This event runs after the assignment completes to report progress.
 - **DO NOT IMPLEMENT OR WRITE ANY CODE.**
 - This assignment is planning only.
 
-   **Finally, once everything is verified, apply the `implementation:ready` label to the epic issue to indicate it is ready for implementation by downstream workflows.**
+   **Note:** The `orchestration:plan-approved` label is applied by the `project-setup` workflow's `post-script-complete` event after all setup steps finish — not by this assignment. Do not apply any orchestration trigger labels here.
 
 - Ask the delegating agent or stake-holder for your next assignment.
 
