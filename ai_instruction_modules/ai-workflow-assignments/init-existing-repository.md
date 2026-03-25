@@ -47,7 +47,7 @@ The script will test all required permissions and can automatically attempt to f
 ### Acceptance Criteria
 
 0. New branch created (must be first — all other work commits here)
-1. Branch protection ruleset imported from `.github/protected branches - main - ruleset.json`
+1. Branch protection ruleset imported from `.github/protected-branches_ruleset.json`
 2. GitHub Project created for issue tracking
 3. Git Project linked to repository
 4. Project columns created: Not Started, In Progress, In Review, Done
