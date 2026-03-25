@@ -73,19 +73,19 @@ It is important to the final quality of our product for everyone to perform thei
    - If branch creation fails, stop and report the error immediately — do not proceed with other steps.
 
 2. **Import Branch Protection Ruleset**
-   - Import the branch protection ruleset from `.github/protected branches - main - ruleset.json`.
+   - Import the branch protection ruleset from `.github/protected-branches_ruleset.json`.
    - This file is bundled in the template and defines the `main` branch ruleset (required PR, linear history, no force-push, Copilot code review, etc.).
    - Before importing, check whether a ruleset with the same `name` already exists to make this step idempotent:
 
      ```bash
-     RULESET_NAME=$(gh api /repos/{owner}/{repo}/rulesets --jq '.[] | select(.name == "protected branches") | .id')
+     RULESET_NAME=$(gh api /repos/{owner}/{repo}/rulesets --jq '.[] | select(.name == "protected-branches") | .id')
      ```
 
    - If it already exists, skip and proceed.
    - If it does not exist, strip the non-importable fields and POST via the GitHub API:
 
      ```bash
-     jq 'del(.id, .source, .source_type)' ".github/protected branches - main - ruleset.json" \
+     jq 'del(.id, .source, .source_type)' ".github/protected-branches_ruleset.json" \
        | gh api --method POST /repos/{owner}/{repo}/rulesets --input -
      ```
 
