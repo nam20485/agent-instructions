@@ -96,7 +96,23 @@ The assignment ensures that:
    - Confirm checkpoint data is accessible for recovery
    - Test restore functionality if possible
 
-#### 5. Provide User Notification (Optional)
+#### 5. File Issues for Action Items (MANDATORY)
+
+Any item identified during the progress report — deviations, findings, future considerations, tech debt, or plan-impacting discoveries — **MUST be filed as a GitHub issue** before this assignment is considered complete. Do not leave action items as text-only notes.
+
+1. For each identified item:
+   - Create a GitHub issue in the current repository with a descriptive title
+   - Apply label `priority:low` and `needs-triage` (create them if they don't exist)
+   - Set the body to include: the finding, why it matters, and which upcoming epics it may affect
+   - Reference the current workflow step and progress report in the issue body
+
+2. Record each filed issue number and URL in the progress report under an **Action Items Filed** section.
+
+3. If no action items were identified, explicitly state `Action Items Filed: none` in the progress report.
+
+> ⚠️ **Non-negotiable:** Choosing not to file an issue because an item seems minor or non-urgent is NOT acceptable. If it was worth noting, it is worth filing. Issues cost nothing and prevent findings from being lost.
+
+#### 6. Provide User Notification (Optional)
 
 1. For long-running workflows, provide periodic updates to users:
    - Format notification with step completion information
