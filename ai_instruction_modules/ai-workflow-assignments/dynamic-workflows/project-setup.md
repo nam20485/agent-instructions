@@ -19,7 +19,8 @@ This dynamic workflow file specifies the workflow for initiating a new repo. It 
                     `create-app-plan`,
                     `create-project-structure`,
                     `create-agents-md-file`,
-                    `debrief-and-document`
+                    `debrief-and-document`,
+                    `pr-approval-and-merge`
                  ]
 
 For each `$assignment_name` in `$assignments`, you will:
@@ -28,6 +29,13 @@ For each `$assignment_name` in `$assignments`, you will:
 - wait until the agent finishes the task
 - review the work and approve it
 - record output as `#initiate-new-repository.$assignment_name`
+
+**Special handling for `pr-approval-and-merge`:**
+
+- Pass `$pr_num` extracted from `#initiate-new-repository.init-existing-repository` (the PR opened during repository initialization).
+- This is an automated setup PR — self-approval by the orchestrator is acceptable. No human stakeholder approval is required.
+- The CI remediation loop (Phase 0.5) MUST still be executed: if CI checks fail, attempt up to 3 fix cycles before escalating.
+- On successful merge, delete the setup branch and close any related setup issues.
 
 ### Events
 
@@ -70,4 +78,5 @@ pipeline (the `orchestration:plan-approved` clause in the orchestrator prompt).
 - The `create-workflow-plan` pre-script event is executed and output recorded.
 - The `$poc_assignments` are executed after each main assignment and outputs recorded.
 - The `post-script-complete` event applies `orchestration:plan-approved` to the plan issue.
+- The setup PR is merged, the setup branch is deleted, and related setup issues are closed.
 - **Any GitHub Actions workflows created or modified during the execution of this workflow must have all actions pinned to the specific commit SHA of their latest release.**
