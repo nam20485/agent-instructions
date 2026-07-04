@@ -93,7 +93,7 @@ See [dynamic-workflow-syntax.md](dynamic-workflows/dynamic-workflow-syntax.md#ev
 3. All specified assignments are completed according to the instructions in the dynamic workflow file.
 4. All acceptance criteria for each specified assignment are met.
 5. All directives in the Script section of the dynamic workflow file are executed.
-6. **All event handlerscripts (if present) are executed at their designated lifecycle points.**
+6. **All event handler scripts (if present) are executed at their designated lifecycle points.**
 7. Approval is obtained for the final product.
 8. No unresolved items remain at completion; results are documented and cross-linked as appropriate.
 
