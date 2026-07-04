@@ -173,6 +173,30 @@ St1 St2 St3  St4  St5 St6  St7 St8 St9  ← Bottom level: Story Issues (created 
      - Reference: <https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/creating-issue-dependencies>
    - Apply appropriate labels (e.g., `epic`, `plan`, `phase-name`, `line-item-epic`)
 
+   #### Linking — mandatory & verified (do not rely on the UI)
+
+   Execute these `gh` commands and **verify** before returning the epic object. The UI does NOT link the epic to the project/milestone for you — this is the recurring "epics created but unlinked" defect. Idempotent. If the project/milestone does not yet exist, create it first; never skip silently.
+
+   ```bash
+   OWNER=<owner>; REPO=<repo>; N=<the epic issue number you just created>
+
+   # 1) Add the epic to the GitHub Project V2 (resolve by title, fall back to first project)
+   PROJECT_NUM=$(gh project list --owner "$OWNER" --format json \
+     | jq -r '[.[] | select(.title | test("<PROJECT NAME>"; "i"))][0].number // .[0].number // empty')
+   [ -n "$PROJECT_NUM" ] \
+     && gh project item-add "$PROJECT_NUM" --owner "$OWNER" --url "https://github.com/$OWNER/$REPO/issues/$N" \
+     || echo "warn: no project found; project link skipped"
+
+   # 2) Assign the milestone matching this phase
+   gh issue edit "$N" -R "$OWNER/$REPO" --milestone "<PHASE MILESTONE TITLE>"
+
+   # 3) VERIFY (gate) — must pass before this assignment is "complete"
+   gh issue view "$N" -R "$OWNER/$REPO" --json milestone,projectItems
+   #   assert: milestone != null  AND  projectItems is non-empty
+   ```
+
+   If verification shows the epic is still unlinked after the attempt, the assignment has **failed** — report the exact `gh` output rather than claiming success. Sub-issue (`addSubIssue`) and "blocking" links are best-effort and non-gating (no stable CLI; use the GraphQL sub-issue API if available).
+
 7. **Quality Validation**
    - Verify all template sections are completed (no placeholders remain)
    - Ensure the checkbox-driven task list is properly preserved
