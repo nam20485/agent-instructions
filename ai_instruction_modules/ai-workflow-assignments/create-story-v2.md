@@ -151,6 +151,30 @@ Story1 2 3   Story4 5 6  Story7 8 9   ← **THIS LEVEL**: Stories (granular task
      - Reference: https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/creating-issue-dependencies
    - Apply labels consistent with the parent epic and story taxonomy (e.g., `story`, `feature`, `component-area`)
 
+   #### Linking — mandatory & verified (do not rely on the UI)
+
+   Execute these `gh` commands and **verify** before returning the story object. The UI does NOT link the story to the project/milestone for you — this is the recurring "issues created but unlinked" defect. Idempotent. If the project/milestone does not yet exist, create it first; never skip silently.
+
+   ```bash
+   OWNER=<owner>; REPO=<repo>; N=<the story issue number you just created>
+
+   # 1) Add the story to the GitHub Project V2 (resolve by title, fall back to first project)
+   PROJECT_NUM=$(gh project list --owner "$OWNER" --format json \
+     | jq -r '[.[] | select(.title | test("<PROJECT NAME>"; "i"))][0].number // .[0].number // empty')
+   [ -n "$PROJECT_NUM" ] \
+     && gh project item-add "$PROJECT_NUM" --owner "$OWNER" --url "https://github.com/$OWNER/$REPO/issues/$N" \
+     || echo "warn: no project found; project link skipped"
+
+   # 2) Assign the milestone inherited from the parent epic
+   gh issue edit "$N" -R "$OWNER/$REPO" --milestone "<EPIC MILESTONE TITLE>"
+
+   # 3) VERIFY (gate) — must pass before this assignment is "complete"
+   gh issue view "$N" -R "$OWNER/$REPO" --json milestone,projectItems
+   #   assert: milestone != null  AND  projectItems is non-empty
+   ```
+
+   If verification shows the story is still unlinked after the attempt, the assignment has **failed** — report the exact `gh` output rather than claiming success. Sub-issue (`addSubIssue`) and "blocking" links to the parent epic are best-effort and non-gating.
+
 6. **Quality Validation**
    - Verify every template section is complete with no placeholders or TBD entries
    - Confirm the expanded plan fully preserves and elaborates on the original story bullet content

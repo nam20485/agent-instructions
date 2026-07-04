@@ -158,12 +158,28 @@ Creates a pull request for the completed story implementation.
 - **Input:** Story object with completed implementation
 - **Returns:** Pull request object containing PR number, URL, and metadata
 - **Actions:**
-  - Creates PR from story's feature branch to target branch
-  - Links PR to story issue
-  - Sets PR title and description from story details
-  - Links to parent epic if provided
-  - Auto-assigns reviewers based on CODEOWNERS or repository settings
-  - Sets default reviewers for the PR
+  - Name the feature branch `issues/<story.number>-<slug>` so GitHub auto-creates the Development branch link to the story issue.
+  - Create the PR with a body that references the story issue so GitHub auto-links it (closing reference). The PR body MUST contain `Resolves #<story.number>` (or `Closes`/`Fixes`):
+    ```bash
+    gh pr create --head issues/<story.number>-<slug> --base <target> -R <owner>/<repo> \
+      --title "<title>" --body "Resolves #<story.number>
+
+    <description>"
+    ```
+  - If a PR already exists for the branch but its body lacks a `Resolves #<story.number>` (or `Closes`/`Fixes`) reference, append one so the link is established:
+    ```bash
+    gh pr edit <pr_number> -R <owner>/<repo> --body "Resolves #<story.number>
+
+    <existing body>"
+    ```
+  - Reference the parent epic in the body if a direct link is unavailable (best-effort).
+  - Auto-assign reviewers based on CODEOWNERS or repository settings.
+- **Verification (mandatory):** confirm the PR is linked to the story issue before returning — the UI does NOT auto-link a PR that has no closing reference in its body:
+  ```bash
+  gh pr view <pr_number> -R <owner>/<repo> --json closingIssuesReferences
+  # assert: closingIssuesReferences contains { number: <story.number> }
+  ```
+  If the reference is absent, the PR→issue link is NOT established — report it; do not claim the PR is linked.
 - **Example:** `create_pull_request($story)` returns PR object for story implementation
 
 #### request_automated_reviews($pull_request)
